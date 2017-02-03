@@ -7,7 +7,7 @@ export const Header = () => (
   <div>
     <h1>Book Buddy</h1>
     <Row style={{textAlign: 'left', fontSize: '18px'}}>
-      <Col sm='12'>
+      <Col sm={12}>
         <IndexLink to='/library' activeClassName='route--active'>
           My Books
         </IndexLink>
