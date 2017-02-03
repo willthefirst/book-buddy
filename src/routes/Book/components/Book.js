@@ -5,7 +5,7 @@ export const Book = (props) => (
   <div>
     <Row>
       <Col sm={3} >
-        <img src="http://placehold.it/200x300" className="img-responsive" style={{ marginBottom: '24px' }} />
+        <img src="http://placehold.it/200x300" className="img-responsive" style={{ marginBottom: '24px', width: '100%' }} />
       </Col>
       <Col sm={9}>
         <Tabs defaultActiveKey={1} bsStyle="pills" id="book-info">
