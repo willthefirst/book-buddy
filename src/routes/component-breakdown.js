@@ -36,8 +36,8 @@ Components breakdown:
         };
       }
     *
-
 * BookNotes
 * BookInfo
 * BookList
+
 * BookListMain

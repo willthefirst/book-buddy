@@ -4,8 +4,8 @@ import axios from 'axios'
 // Constants
 // ------------------------------------
 export const FETCH_BOOK = 'FETCH_BOOK'
-export const FETCH_BOOK = 'FETCH_BOOK_SUCCESS'
-export const FETCH_BOOK = 'FETCH_BOOK_ERROR'
+export const FETCH_BOOK_SUCCESS = 'FETCH_BOOK_SUCCESS'
+export const FETCH_BOOK_FAILURE = 'FETCH_BOOK_FAILURE'
 
 // ------------------------------------
 // Actions
@@ -33,9 +33,9 @@ export function fetchBookSuccess(book) {
   }
 }
 
-export function fetchBookError(error) {
+export function fetchBookFailure(error) {
   return {
-    type: FETCH_BOOK_ERROR,
+    type: FETCH_BOOK_FAILURE,
     payload: error
   }
 }
@@ -43,7 +43,7 @@ export function fetchBookError(error) {
 export const actions = {
   fetchBook,
   fetchBookSuccess,
-  fetchBookError
+  fetchBookFailure
 }
 
 // ------------------------------------
@@ -72,7 +72,7 @@ const ACTION_HANDLERS = {
 // ------------------------------------
 const initialState =  {
   activeBook: {
-    book: null
+    book: null,
     error: null,
     loading: false
   }

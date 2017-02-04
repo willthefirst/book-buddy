@@ -5,11 +5,70 @@ const webpack = require('webpack')
 const webpackConfig = require('../config/webpack.config')
 const project = require('../config/project.config')
 const compress = require('compression')
+const mongoose = require('mongoose')
 
 const app = express()
 
 // Apply gzip compression
 app.use(compress())
+
+// Database
+mongoose.connect('mongodb://localhost/book-buddy');
+const db = mongoose.connection
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+  // we're connected!
+  console.log('connected to database');
+});
+
+// Models and Schemas
+
+var bookSchema = mongoose.Schema({
+    title: String,
+    author: String
+});
+
+const Book = mongoose.model('Book', bookSchema)
+
+// Routes
+
+// '/api/books/'
+
+// GET: get all the books
+app.get('/api/books', function(req, res) {
+  console.log('BOOKS REQUESTED!');
+  Book.find(function (err, books) {
+    if (err) return console.error(err);
+    res.send(books);
+  })
+});
+
+// POST: add a new book
+app.post('/api/books', function(req, res) {
+  var sample = new Book({ title: 'Doing Good Better' });
+
+  sample.save(function (err, book) {
+    if (err) return console.error(err);
+    console.log('Book saved: ' + book.title);
+  });
+});
+
+// '/api/books/:id'
+
+// DELETE: delete the current book
+app.get('/api/books/:id', function(req, res) {
+
+});
+
+// PUT: update the current book
+app.put('/api/books/:id', function(req, res) {
+
+});
+
+// GET: get the current book
+app.delete('/api/books/:id', function(req, res) {
+
+});
 
 // ------------------------------------
 // Apply Webpack HMR Middleware

@@ -1,24 +1,30 @@
 import { connect } from 'react-redux'
-import { increment, doubleAsync } from '../modules/library'
+import { fetchBookList, fetchBookListSuccess, fetchBookListFailure } from '../modules/bookList'
 
 /*  This is a container component. Notice it does not contain any JSX,
     nor does it import React. This component is **only** responsible for
     wiring in the actions and state necessary to render a presentational
     component - in this case, the counter:   */
 
-import Library from '../components/Library'
+import BookList from '../components/BookList'
 
 /*  Object of action creators (can also be function that returns object).
     Keys will be passed as props to presentational components. Here we are
     implementing our wrapper around increment; the component doesn't care   */
 
-const mapDispatchToProps = {
-
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchBooks: () => {
+      dispatch(fetchBookList());
+    }
+  }
 }
 
-const mapStateToProps = (state) => ({
-  library : state.library
-})
+const mapStateToProps = (state) => {
+  return {
+    books: state.BookList.booksList.books
+  }
+}
 
 /*  Note: mapStateToProps is where you should use `reselect` to create selectors, ie:
 
@@ -34,4 +40,4 @@ const mapStateToProps = (state) => ({
     Selectors are composable. They can be used as input to other selectors.
     https://github.com/reactjs/reselect    */
 
-export default connect(mapStateToProps, mapDispatchToProps)(Library)
+export default connect(mapStateToProps, mapDispatchToProps)(BookList)

@@ -3,6 +3,7 @@ import { Button, Col, Row, Tabs, Tab, Form, FormGroup, ControlLabel, FormControl
 
 export const Book = (props) => (
   <div>
+    <h1>{props.book.title}</h1>
     <Row>
       <Col sm={3} >
         <img src="http://placehold.it/200x300" className="img-responsive" style={{ marginBottom: '24px', width: '100%' }} />
