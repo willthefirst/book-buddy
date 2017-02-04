@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { increment, doubleAsync } from '../modules/book'
+import { fetchBook, fetchBookSuccess, fetchBookError } from '../modules/book'
 
 /*  This is a container component. Notice it does not contain any JSX,
     nor does it import React. This component is **only** responsible for
@@ -13,11 +13,22 @@ import Book from '../components/Book'
     implementing our wrapper around increment; the component doesn't care   */
 
 const mapDispatchToProps = {
-
+  fetchBook: (id) => {
+    dispatch(fetchBook(id))
+    .then((result) => {
+      // Note: Error's "data" is in result.payload.response.data (inside "response")
+      // success's "data" is in result.payload.data
+      if (result.payload.response && result.payload.response.status !== 200) {
+        dispatch(fetchPostFailure(result.payload.response.data));
+      } else {
+        dispatch(fetchPostSuccess(result.payload.data))
+      }
+    })
+  }
 }
 
 const mapStateToProps = (state) => ({
-  book : state.book
+  book : state.activeBook
 })
 
 /*  Note: mapStateToProps is where you should use `reselect` to create selectors, ie:

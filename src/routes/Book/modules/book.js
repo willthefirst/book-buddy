@@ -1,54 +1,83 @@
+import axios from 'axios'
+
 // ------------------------------------
 // Constants
 // ------------------------------------
-export const COUNTER_INCREMENT = 'COUNTER_INCREMENT'
-export const COUNTER_DOUBLE_ASYNC = 'COUNTER_DOUBLE_ASYNC'
+export const FETCH_BOOK = 'FETCH_BOOK'
+export const FETCH_BOOK = 'FETCH_BOOK_SUCCESS'
+export const FETCH_BOOK = 'FETCH_BOOK_ERROR'
 
 // ------------------------------------
 // Actions
 // ------------------------------------
-export function increment (value = 1) {
+
+const ROOT_URL = location.href.indexOf('localhost') > 0 ? 'http://localhost:3000/api' : '/api';
+
+export function fetchBook(id) {
+  const request = axios({
+    method: 'get',
+    url: `${ROOT_URL}/${id}`,
+    headers: []
+  });
+
   return {
-    type    : COUNTER_INCREMENT,
-    payload : value
+    type: FETCH_BOOK,
+    payload: request
   }
 }
 
-/*  This is a thunk, meaning it is a function that immediately
-    returns a function for lazy evaluation. It is incredibly useful for
-    creating async actions, especially when combined with redux-thunk! */
+export function fetchBookSuccess(book) {
+  return {
+    type: FETCH_BOOK_SUCCESS,
+    payload: book
+  }
+}
 
-export const doubleAsync = () => {
-  return (dispatch, getState) => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        dispatch({
-          type    : COUNTER_DOUBLE_ASYNC,
-          payload : getState().counter
-        })
-        resolve()
-      }, 200)
-    })
+export function fetchBookError(error) {
+  return {
+    type: FETCH_BOOK_ERROR,
+    payload: error
   }
 }
 
 export const actions = {
-  increment,
-  doubleAsync
+  fetchBook,
+  fetchBookSuccess,
+  fetchBookError
 }
 
 // ------------------------------------
 // Action Handlers
 // ------------------------------------
 const ACTION_HANDLERS = {
-  [COUNTER_INCREMENT]    : (state, action) => state + action.payload,
-  [COUNTER_DOUBLE_ASYNC] : (state, action) => state * 2
+  [FETCH_BOOK] : (state, action) => {
+    return {
+      ...state, activeBook: { ...state.activeBook, loading: true }
+    }
+  },
+  [FETCH_BOOK_SUCCESS] : (state, action) => {
+    return {
+      ...state, activeBook: { book: action.payload, error: null, loading: false }
+    }
+  },
+  [FETCH_BOOK_FAILURE] : (state, action) => {
+    return {
+      ...state, activeBook: { book: null, error: action.payload, loading: false }
+    }
+  }
 }
 
 // ------------------------------------
 // Reducer
 // ------------------------------------
-const initialState = 0
+const initialState =  {
+  activeBook: {
+    book: null
+    error: null,
+    loading: false
+  }
+}
+
 export default function counterReducer (state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]
 
