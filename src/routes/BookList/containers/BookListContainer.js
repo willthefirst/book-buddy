@@ -1,5 +1,6 @@
 import { connect } from 'react-redux'
-import { fetchBookList, fetchBookListSuccess, fetchBookListFailure } from '../modules/bookList'
+import { fetchBookListRequest, fetchBookListSuccess, fetchBookListFailure } from '../modules/bookList'
+import axios from 'axios'
 
 /*  This is a container component. Notice it does not contain any JSX,
     nor does it import React. This component is **only** responsible for
@@ -8,21 +9,29 @@ import { fetchBookList, fetchBookListSuccess, fetchBookListFailure } from '../mo
 
 import BookList from '../components/BookList'
 
-/*  Object of action creators (can also be function that returns object).
-    Keys will be passed as props to presentational components. Here we are
-    implementing our wrapper around increment; the component doesn't care   */
-
 const mapDispatchToProps = (dispatch) => {
+  const ROOT_URL = location.href.indexOf('localhost') > 0 ? 'http://localhost:3000/api' : '/api';
+
   return {
     fetchBooks: () => {
-      dispatch(fetchBookList());
+      dispatch(fetchBookListRequest());
+
+      axios.get(`${ROOT_URL}/books`).then((result) => {
+        if (result.status !== 200) {
+          dispatch(fetchBookListFailure(result.data));
+        } else {
+          dispatch(fetchBookListSuccess(result.data))
+        }
+      });
     }
   }
 }
 
 const mapStateToProps = (state) => {
   return {
-    books: state.BookList.booksList.books
+    books: state.bookList.books,
+    isLoading: state.bookList.loading,
+    error: state.bookList.error
   }
 }
 

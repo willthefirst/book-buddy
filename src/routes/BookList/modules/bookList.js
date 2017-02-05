@@ -3,7 +3,7 @@ import axios from 'axios'
 // ------------------------------------
 // Constants
 // ------------------------------------
-export const FETCH_BOOKLIST_REQUEST = 'FETCH_BOOKLIST'
+export const FETCH_BOOKLIST_REQUEST = 'FETCH_BOOKLIST_REQUEST'
 export const FETCH_BOOKLIST_SUCCESS = 'FETCH_BOOKLIST_SUCCESS'
 export const FETCH_BOOKLIST_FAILURE = 'FETCH_BOOKLIST_FAILURE'
 
@@ -13,47 +13,10 @@ export const FETCH_BOOKLIST_FAILURE = 'FETCH_BOOKLIST_FAILURE'
 
 const ROOT_URL = location.href.indexOf('localhost') > 0 ? 'http://localhost:3000/api' : '/api';
 
-// Meet our first thunk action creator!
-// Though its insides are different, you would use it just like any other action creator:
-// store.dispatch(fetchPosts('reactjs'))
-
-export function fetchBookList() {
-
-  // Thunk middleware knows how to handle functions.
-  // It passes the dispatch method as an argument to the function,
-  // thus making it able to dispatch actions itself.
-
-  return function (dispatch) {
-
-    // First dispatch: the app state is updated to inform
-    // that the API call is starting.
-
-    dispatch(fetchBookListRequest());
-
-    // The function called by the thunk middleware can return a value,
-    // that is passed on as the return value of the dispatch method.
-
-    // In this case, we return a promise to wait for.
-    // This is not required by thunk middleware, but it is convenient for us.
-    return axios({
-      method: 'get',
-      url: `${ROOT_URL}/books`,
-      headers: []
-    }).then((result) => {
-      if (result.status !== 200) {
-        dispatch(fetchBookListFailure(result.data));
-      } else {
-        dispatch(fetchBookListSuccess(result.data))
-      }
-    });
-  }
-}
-
-
-export function fetchBookListRequest() {
+export function fetchBookListRequest(request) {
   return {
     type: FETCH_BOOKLIST_REQUEST,
-    payload: '' // #todo, need this for the action to fire? otherwise unecessary?
+    payload: request
   }
 }
 
@@ -72,7 +35,6 @@ export function fetchBookListFailure(error) {
 }
 
 export const actions = {
-  fetchBookList,
   fetchBookListRequest,
   fetchBookListSuccess,
   fetchBookListFailure
@@ -84,21 +46,18 @@ export const actions = {
 // ------------------------------------
 const ACTION_HANDLERS = {
   [FETCH_BOOKLIST_REQUEST] : (state, action) => {
-    console.log('requesting...');
     return {
-      ...state, booksList: { ...state.booksList, loading: true }
+        ...state, loading: true
     }
   },
   [FETCH_BOOKLIST_SUCCESS] : (state, action) => {
-    console.log('success');
     return {
-      ...state, booksList: { books: action.payload, error: null, loading: false }
+        books: action.payload, error: null, loading: false
     }
   },
   [FETCH_BOOKLIST_FAILURE] : (state, action) => {
-    console.log('failure');
     return {
-      ...state, booksList: { ...state.booksList, error: action.payload, loading: false }
+        ...state, error: action.payload, loading: false
     }
   }
 }
@@ -107,11 +66,11 @@ const ACTION_HANDLERS = {
 // Reducer
 // ------------------------------------
 const initialState =  {
-  booksList: {
+
     books: [],
     error: null,
     loading: false
-  }
+
 }
 
 export default function counterReducer (state = initialState, action) {
