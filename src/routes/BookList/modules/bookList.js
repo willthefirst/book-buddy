@@ -28,7 +28,7 @@ export function fetchBookList() {
     // First dispatch: the app state is updated to inform
     // that the API call is starting.
 
-    dispatch(fetchBookListRequest)
+    dispatch(fetchBookListRequest());
 
     // The function called by the thunk middleware can return a value,
     // that is passed on as the return value of the dispatch method.
@@ -41,7 +41,7 @@ export function fetchBookList() {
       headers: []
     }).then((result) => {
       if (result.status !== 200) {
-        dispatch(fetchBookListFailure(result.response.data));
+        dispatch(fetchBookListFailure(result.data));
       } else {
         dispatch(fetchBookListSuccess(result.data))
       }
@@ -52,7 +52,8 @@ export function fetchBookList() {
 
 export function fetchBookListRequest() {
   return {
-    type: FETCH_BOOKLIST_REQUEST
+    type: FETCH_BOOKLIST_REQUEST,
+    payload: '' // #todo, need this for the action to fire? otherwise unecessary?
   }
 }
 

@@ -13,7 +13,7 @@ const app = express()
 app.use(compress())
 
 // Database
-mongoose.connect('mongodb://localhost/book-buddy');
+mongoose.connect('mongodb://127.0.0.1/book-buddy');
 const db = mongoose.connection
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
