@@ -3,6 +3,7 @@ import { Button, Col, Row, Tabs, Tab, Form, FormGroup, ControlLabel, FormControl
 
 export const Book = (props) => (
   <div>
+    <div>{props.children}</div>
     <h1>{props.book.title}</h1>
     <Row>
       <Col sm={3} >

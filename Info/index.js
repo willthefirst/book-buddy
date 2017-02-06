@@ -1,8 +1,7 @@
 import { injectReducer } from '../../store/reducers'
-import InfoRoute from './routes/Info'
 
 export default (store) => ({
-  path : 'book',
+  path : 'info',
   /*  Async getComponent is only invoked when route matches   */
   getComponent (nextState, cb) {
     /*  Webpack - use 'require.ensure' to create a split point
@@ -20,9 +19,6 @@ export default (store) => ({
       cb(null, Book)
 
     /* Webpack named bundle   */
-    }, 'book')
-  },
-  childRoutes: [
-    InfoRoute(store) // <site>/settings/profile
-  ]
-});
+  }, 'book')
+  }
+})

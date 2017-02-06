@@ -15,7 +15,7 @@ export const Header = () => (
         <Nav pullRight>
           <NavItem eventKey={1} href="/books">My Books</NavItem>
           <NavItem eventKey={2} href="/new">Add A Book</NavItem>
-          <NavItem eventKey={3} href="/account">My Account</NavItem>
+          <NavItem eventKey={3} href="/#">My Account</NavItem>
         </Nav>
       </Navbar.Collapse>
     </Navbar>

@@ -1,8 +1,7 @@
-import { injectReducer } from '../../store/reducers'
-import InfoRoute from './routes/Info'
+// import { injectReducer } from '../../store/reducers'
 
 export default (store) => ({
-  path : 'book',
+  path : 'info',
   /*  Async getComponent is only invoked when route matches   */
   getComponent (nextState, cb) {
     /*  Webpack - use 'require.ensure' to create a split point
@@ -10,19 +9,16 @@ export default (store) => ({
     require.ensure([], (require) => {
       /*  Webpack - use require callback to define
           dependencies for bundling   */
-      const Book = require('./containers/BookContainer').default
-      const reducer = require('./modules/book').default
+      const Info = require('./containers/InfoContainer').default
+      const reducer = require('./modules/info').default
 
       /*  Add the reducer to the store on key 'counter'  */
-      injectReducer(store, { key: 'book', reducer })
+      // injectReducer(store, { key: 'info', reducer })
 
       /*  Return getComponent   */
-      cb(null, Book)
+      cb(null, Info)
 
     /* Webpack named bundle   */
-    }, 'book')
-  },
-  childRoutes: [
-    InfoRoute(store) // <site>/settings/profile
-  ]
+    }, 'info')
+  }
 });
