@@ -36,7 +36,6 @@ const Book = mongoose.model('Book', bookSchema)
 
 // GET: get all the books
 app.get('/api/books', function(req, res) {
-  console.log('BOOKS REQUESTED!');
   Book.find(function (err, books) {
     if (err) return console.error(err);
     res.send(books);
@@ -56,18 +55,21 @@ app.post('/api/books', function(req, res) {
 
 // '/api/books/:id'
 
-// DELETE: delete the current book
-app.get('/api/books/:id', function(req, res) {
-
+// GET: delete the current book
+app.get('/api/book/:id', function(req, res) {
+  Book.findById(req.params.id, function (err, book) {
+    if (err) return console.error(err);
+    res.send(book);
+  })
 });
 
 // PUT: update the current book
-app.put('/api/books/:id', function(req, res) {
+app.put('/api/book/:id', function(req, res) {
 
 });
 
-// GET: get the current book
-app.delete('/api/books/:id', function(req, res) {
+// DELETE: get the current book
+app.delete('/api/book/:id', function(req, res) {
 
 });
 

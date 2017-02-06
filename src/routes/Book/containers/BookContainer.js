@@ -1,5 +1,7 @@
 import { connect } from 'react-redux'
-import { fetchBook, fetchBookSuccess, fetchBookFailure } from '../modules/book'
+import { fetchBookRequest, fetchBookSuccess, fetchBookFailure } from '../modules/book'
+import axios from 'axios'
+
 
 /*  This is a container component. Notice it does not contain any JSX,
     nor does it import React. This component is **only** responsible for
@@ -12,26 +14,27 @@ import Book from '../components/Book'
     Keys will be passed as props to presentational components. Here we are
     implementing our wrapper around increment; the component doesn't care   */
 
-const mapDispatchToProps = (dipatch) => {
+const mapDispatchToProps = (dispatch) => {
+  // #todo: refactor the getting of the rooturk
+  const ROOT_URL = location.href.indexOf('localhost') > 0 ? 'http://localhost:3000/api' : '/api';
+
   return {
     fetchBook: (id) => {
-      dispatch(fetchBook(id))
-      .then((result) => {
-        // Note: Error's "data" is in result.payload.response.data (inside "response")
-        // success's "data" is in result.payload.data
-        if (result.payload.response && result.payload.response.status !== 200) {
-          dispatch(fetchBookFailure(result.payload.response.data));
+      dispatch(fetchBookRequest());
+      axios.get(`${ROOT_URL}/book/${id}`).then((result) => {
+        if (result.status !== 200) {
+          dispatch(fetchBookFailure(result.data));
         } else {
-          dispatch(fetchBookSuccess(result.payload.data))
+          dispatch(fetchBookSuccess(result.data))
         }
-      })
+      });
     }
   }
 }
 
 const mapStateToProps = (state) => {
   return {
-    book : {title: 'fixed title'}
+    title: state.book.activeBook.title
   }
 }
 

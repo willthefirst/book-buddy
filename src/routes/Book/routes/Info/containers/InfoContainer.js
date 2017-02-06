@@ -11,12 +11,33 @@ import Info from '../components/Info'
     Keys will be passed as props to presentational components. Here we are
     implementing our wrapper around increment; the component doesn't care   */
 
-const mapDispatchToProps = (dipatch) => {
-  return {}
+const mapDispatchToProps = (dispatch) => {
+  // #todo: refactor the getting of the rooturk
+  const ROOT_URL = location.href.indexOf('localhost') > 0 ? 'http://localhost:3000/api' : '/api';
+
+  return {
+    updateBook: (id) => {
+      console.log(id);
+      // dispatch(fetchBookRequest());
+      // axios.put(`${ROOT_URL}/book/${id}`).then((result) => {
+      //   if (result.status !== 200) {
+      //     dispatch(fetchBookFailure(result.data));
+      //   } else {
+      //     dispatch(fetchBookSuccess(result.data))
+      //   }
+      // });
+    }
+  }
 }
 
 const mapStateToProps = (state) => {
-  return {}
+  return {
+    id: state.book.activeBook._id,
+    title: state.book.activeBook.title,
+    author: state.book.activeBook.author,
+    status: state.book.activeBook.status,
+    totalPages: state.book.activeBook.status
+  }
 }
 
 /*  Note: mapStateToProps is where you should use `reselect` to create selectors, ie:

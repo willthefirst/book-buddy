@@ -1,5 +1,3 @@
-import axios from 'axios'
-
 // ------------------------------------
 // Constants
 // ------------------------------------
@@ -66,11 +64,9 @@ const ACTION_HANDLERS = {
 // Reducer
 // ------------------------------------
 const initialState =  {
-
-    books: [],
-    error: null,
-    loading: false
-
+  books: [],
+  error: null,
+  loading: false
 }
 
 export default function counterReducer (state = initialState, action) {

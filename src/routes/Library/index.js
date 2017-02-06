@@ -1,11 +1,7 @@
 import { injectReducer } from '../../store/reducers'
-import InfoRoute from './routes/Info'
-import ProgressRoute from './routes/Progress'
-import NotesRoute from './routes/Notes'
 
 export default (store) => ({
-  path : 'book/:id',
-  indexRoute  : ProgressRoute(store),
+  path : 'BookList',
   /*  Async getComponent is only invoked when route matches   */
   getComponent (nextState, cb) {
     /*  Webpack - use 'require.ensure' to create a split point
@@ -13,21 +9,16 @@ export default (store) => ({
     require.ensure([], (require) => {
       /*  Webpack - use require callback to define
           dependencies for bundling   */
-      const Book = require('./containers/BookContainer').default
-      const reducer = require('./modules/book').default
+      const BookList = require('./containers/BookListContainer').default
+      const reducer = require('./modules/BookList').default
 
       /*  Add the reducer to the store on key 'counter'  */
-      injectReducer(store, { key: 'book', reducer })
+      injectReducer(store, { key: 'BookList', reducer })
 
       /*  Return getComponent   */
-      cb(null, Book)
+      cb(null, BookList)
 
     /* Webpack named bundle   */
-    }, 'book')
-  },
-  childRoutes: [
-    InfoRoute(store), // <site>/book/info
-    ProgressRoute(store), // <site>/book/progress
-    NotesRoute(store) // <site>/book/notes
-  ]
-});
+  }, 'BookList')
+  }
+})

@@ -3,7 +3,7 @@ import axios from 'axios'
 // ------------------------------------
 // Constants
 // ------------------------------------
-export const FETCH_BOOK = 'FETCH_BOOK'
+export const FETCH_BOOK_REQUEST = 'FETCH_BOOK_REQUEST'
 export const FETCH_BOOK_SUCCESS = 'FETCH_BOOK_SUCCESS'
 export const FETCH_BOOK_FAILURE = 'FETCH_BOOK_FAILURE'
 
@@ -13,15 +13,9 @@ export const FETCH_BOOK_FAILURE = 'FETCH_BOOK_FAILURE'
 
 const ROOT_URL = location.href.indexOf('localhost') > 0 ? 'http://localhost:3000/api' : '/api';
 
-export function fetchBook(id) {
-  const request = axios({
-    method: 'get',
-    url: `${ROOT_URL}/${id}`,
-    headers: []
-  });
-
+export function fetchBookRequest(request) {
   return {
-    type: FETCH_BOOK,
+    type: FETCH_BOOK_REQUEST,
     payload: request
   }
 }
@@ -41,7 +35,7 @@ export function fetchBookFailure(error) {
 }
 
 export const actions = {
-  fetchBook,
+  fetchBookRequest,
   fetchBookSuccess,
   fetchBookFailure
 }
@@ -50,19 +44,19 @@ export const actions = {
 // Action Handlers
 // ------------------------------------
 const ACTION_HANDLERS = {
-  [FETCH_BOOK] : (state, action) => {
+  [FETCH_BOOK_REQUEST] : (state, action) => {
     return {
-      ...state, activeBook: { ...state.activeBook, loading: true }
+        ...state, loading: true
     }
   },
   [FETCH_BOOK_SUCCESS] : (state, action) => {
     return {
-      ...state, activeBook: { book: action.payload, error: null, loading: false }
+        activeBook: action.payload, error: null, loading: false
     }
   },
   [FETCH_BOOK_FAILURE] : (state, action) => {
     return {
-      ...state, activeBook: { book: null, error: action.payload, loading: false }
+        ...state, error: action.payload, loading: false
     }
   }
 }
@@ -80,6 +74,5 @@ const initialState =  {
 
 export default function counterReducer (state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]
-
   return handler ? handler(state, action) : state
 }

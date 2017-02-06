@@ -1,6 +1,9 @@
 import React from 'react'
 import { Col, Button, Form, FormGroup, ControlLabel, FormControl, Checkbox, Radio } from 'react-bootstrap'
 
+
+/* #todo Turn form controlled into controlled inputs that auto-update with server, not placeholder stuff.*/
+
 export const Info = (props) => (
   <Form horizontal>
     <FormGroup controlId="formHorizontalTitle">
@@ -8,7 +11,7 @@ export const Info = (props) => (
         Title
       </Col>
       <Col sm={10}>
-        <FormControl type="text" placeholder="Title" />
+        <FormControl type="text" placeholder={props.title || "Title"} />
       </Col>
     </FormGroup>
 
@@ -17,7 +20,7 @@ export const Info = (props) => (
         Author
       </Col>
       <Col sm={10}>
-        <FormControl type="text" placeholder="Author" />
+        <FormControl type="text" placeholder={ props.author || "Author"} />
       </Col>
     </FormGroup>
 
@@ -26,7 +29,7 @@ export const Info = (props) => (
         Status
       </Col>
       <Col sm={10}>
-        <FormControl componentClass="select" placeholder="Status">
+        <FormControl componentClass="select" placeholder={ props.status || "Status"}>
           <option value="current">Current</option>
           <option value="queue">Queue</option>
           <option value="finished">Finished</option>
@@ -39,18 +42,17 @@ export const Info = (props) => (
         Total Pages
       </Col>
       <Col sm={10}>
-        <FormControl type="number" placeholder="0" />
+        <FormControl type="number" placeholder={ props.totalPages || "0"} />
       </Col>
     </FormGroup>
 
     <FormGroup>
       <Col smOffset={2} sm={10}>
-        <Button type="submit">
+        <Button type="submit" onSubmit={ props.updateBook(props.id) }>
           Save
         </Button>
       </Col>
     </FormGroup>
-
   </Form>
 )
 

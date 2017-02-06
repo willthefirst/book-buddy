@@ -10,6 +10,7 @@ import axios from 'axios'
 import BookList from '../components/BookList'
 
 const mapDispatchToProps = (dispatch) => {
+  // #todo: refactor the getting of the rooturk
   const ROOT_URL = location.href.indexOf('localhost') > 0 ? 'http://localhost:3000/api' : '/api';
 
   return {
