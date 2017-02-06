@@ -14,7 +14,9 @@ export const Book = (props) => (
           <NavItem eventKey={2} title="Notes" href="/book/notes" >Notes</NavItem>
           <NavItem eventKey={3} title="Info" href="/book/info">Info</NavItem>
         </Nav>
-        <div>{props.children}</div>
+        <div className="core-layout__viewport">
+          {props.children}
+        </div>
       </Col>
     </Row>
   </div>
