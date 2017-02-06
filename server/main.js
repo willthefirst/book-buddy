@@ -45,6 +45,7 @@ app.get('/api/books', function(req, res) {
 
 // POST: add a new book
 app.post('/api/books', function(req, res) {
+  console.log(req);
   var sample = new Book({ title: 'Doing Good Better' });
 
   sample.save(function (err, book) {
