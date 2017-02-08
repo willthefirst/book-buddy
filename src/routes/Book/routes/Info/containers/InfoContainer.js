@@ -20,6 +20,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     load: (data) => {
       dispatch(loadAccount(data));
+    },
+    updateBook: (id) => {
+      console.log(id);
     }
   }
 }
