@@ -22,11 +22,8 @@ const Info = (props) => {
           <Field name="title" component="input" type="text" placeholder="Title" />
         </Col>
       </FormGroup>
-
-
-
-      </Form>
-    )
+    </Form>
+  )
 }
 
 Info.propTypes = {

@@ -26,7 +26,8 @@ const mapDispatchToProps = (dispatch) => {
 
 const mapStateToProps = (state) => {
   return {
-    bookData: state.book.data
+    initialValues: state.book.data,
+    enableReinitialize: true
     // id: state.book.activeBook._id,
     // title: state.book.activeBook.title,
     // author: state.book.activeBook.author,
