@@ -34,7 +34,7 @@ const mapDispatchToProps = (dispatch) => {
 
 const mapStateToProps = (state) => {
   return {
-    title: state.book.activeBook.title
+    title: state.book.data.title
   }
 }
 

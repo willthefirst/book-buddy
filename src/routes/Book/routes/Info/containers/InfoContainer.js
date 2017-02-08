@@ -1,4 +1,5 @@
 import { connect } from 'react-redux'
+import { loadAccount } from '../modules/info'
 
 /*  This is a container component. Notice it does not contain any JSX,
     nor does it import React. This component is **only** responsible for
@@ -10,33 +11,27 @@ import Info from '../components/Info'
 /*  Object of action creators (can also be function that returns object).
     Keys will be passed as props to presentational components. Here we are
     implementing our wrapper around increment; the component doesn't care   */
+// const loadAccount = data => ({ type: LOAD, data })
 
 const mapDispatchToProps = (dispatch) => {
   // #todo: refactor the getting of the rooturk
   const ROOT_URL = location.href.indexOf('localhost') > 0 ? 'http://localhost:3000/api' : '/api';
 
   return {
-    updateBook: (id) => {
-      console.log(id);
-      // dispatch(fetchBookRequest());
-      // axios.put(`${ROOT_URL}/book/${id}`).then((result) => {
-      //   if (result.status !== 200) {
-      //     dispatch(fetchBookFailure(result.data));
-      //   } else {
-      //     dispatch(fetchBookSuccess(result.data))
-      //   }
-      // });
+    load: (data) => {
+      dispatch(loadAccount(data));
     }
   }
 }
 
 const mapStateToProps = (state) => {
   return {
-    id: state.book.activeBook._id,
-    title: state.book.activeBook.title,
-    author: state.book.activeBook.author,
-    status: state.book.activeBook.status,
-    totalPages: state.book.activeBook.status
+    bookData: state.book.data
+    // id: state.book.activeBook._id,
+    // title: state.book.activeBook.title,
+    // author: state.book.activeBook.author,
+    // status: state.book.activeBook.status,
+    // totalPages: state.book.activeBook.status
   }
 }
 
@@ -53,5 +48,4 @@ const mapStateToProps = (state) => {
     Selectors are efficient. A selector is not recomputed unless one of its arguments change.
     Selectors are composable. They can be used as input to other selectors.
     https://github.com/reactjs/reselect    */
-
 export default connect(mapStateToProps, mapDispatchToProps)(Info)

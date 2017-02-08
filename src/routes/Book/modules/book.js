@@ -51,7 +51,7 @@ const ACTION_HANDLERS = {
   },
   [FETCH_BOOK_SUCCESS] : (state, action) => {
     return {
-        activeBook: action.payload, error: null, loading: false
+        data: action.payload, error: null, loading: false
     }
   },
   [FETCH_BOOK_FAILURE] : (state, action) => {
@@ -65,11 +65,9 @@ const ACTION_HANDLERS = {
 // Reducer
 // ------------------------------------
 const initialState =  {
-  activeBook: {
-    book: null,
-    error: null,
-    loading: false
-  }
+  data: {},
+  error: null,
+  loading: false
 }
 
 export default function counterReducer (state = initialState, action) {
