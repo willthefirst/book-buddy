@@ -1,5 +1,7 @@
 import { connect } from 'react-redux'
 import { loadAccount } from '../modules/info'
+import { updateBookRequest, updateBookSuccess, updateBookFailure } from '../../../modules/book'
+import axios from 'axios'
 
 /*  This is a container component. Notice it does not contain any JSX,
     nor does it import React. This component is **only** responsible for
@@ -18,11 +20,15 @@ const mapDispatchToProps = (dispatch) => {
   const ROOT_URL = location.href.indexOf('localhost') > 0 ? 'http://localhost:3000/api' : '/api';
 
   return {
-    load: (data) => {
-      dispatch(loadAccount(data));
-    },
-    updateBook: (id) => {
-      console.log(id);
+    updateBook: (book) => {
+      dispatch(updateBookRequest());
+      axios.put(`${ROOT_URL}/book/${book.id}`, book).then((result) => {
+        if (result.status !== 200) {
+          dispatch(updateBookFailure(result.data));
+        } else {
+          dispatch(updateBookSuccess(result.data))
+        }
+      });
     }
   }
 }

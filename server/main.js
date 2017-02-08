@@ -6,11 +6,17 @@ const webpackConfig = require('../config/webpack.config')
 const project = require('../config/project.config')
 const compress = require('compression')
 const mongoose = require('mongoose')
+const bodyParser = require('body-parser');
+
 
 const app = express()
 
+
 // Apply gzip compression
 app.use(compress())
+
+app.use(bodyParser.json()); // support json encoded bodies
+app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodie
 
 // Database
 mongoose.connect('mongodb://127.0.0.1/book-buddy');
@@ -65,7 +71,7 @@ app.get('/api/book/:id', function(req, res) {
 
 // PUT: update the current book
 app.put('/api/book/:id', function(req, res) {
-
+  console.log(req.body);
 });
 
 // DELETE: get the current book
