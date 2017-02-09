@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import { loadAccount } from '../modules/info'
-import { updateBookRequest, fetchBookSuccess, updateBookFailure } from '../../../modules/book'
+import { updateBookRequest, fetchBookSuccess, fetchBookFailure } from '../../../modules/book'
 import axios from 'axios'
 
 /*  This is a container component. Notice it does not contain any JSX,
@@ -24,7 +24,7 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(updateBookRequest());
       axios.put(`${ROOT_URL}/book/${book.id}`, book).then((result) => {
         if (result.status !== 200) {
-          dispatch(updateBookFailure(result.data));
+          dispatch(fetchBookFailure(result.data));
         } else {
           dispatch(fetchBookSuccess(result.data))
         }

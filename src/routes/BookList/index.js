@@ -1,4 +1,5 @@
-import { injectReducer } from '../../store/reducers'
+import { injectReducer } from 'store/reducers'
+import BookRoute from './routes/Book'
 
 export default (store) => ({
   path : 'books',
@@ -20,5 +21,7 @@ export default (store) => ({
 
       /* Webpack named bundle   */
     }, 'booklist')
-  }
+  }, childRoutes: [
+    BookRoute(store)
+  ]
 })

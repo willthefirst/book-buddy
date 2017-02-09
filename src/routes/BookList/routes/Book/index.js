@@ -1,11 +1,10 @@
-import { injectReducer } from '../../store/reducers'
+import { injectReducer } from 'store/reducers'
 import InfoRoute from './routes/Info'
 import ProgressRoute from './routes/Progress'
 import NotesRoute from './routes/Notes'
 
 export default (store) => ({
-  path : 'book/:id',
-  indexRoute  : ProgressRoute(store),
+  path : ':id',
   /*  Async getComponent is only invoked when route matches   */
   getComponent (nextState, cb) {
     /*  Webpack - use 'require.ensure' to create a split point

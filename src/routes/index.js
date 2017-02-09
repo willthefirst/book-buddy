@@ -2,7 +2,6 @@
 import CoreLayout from '../layouts/CoreLayout'
 import Home from './Home'
 import CounterRoute from './Counter'
-import BookRoute from './Book'
 import BookListRoute from './BookList'
 
 /*  Note: Instead of using JSX, we recommend using react-router
@@ -14,7 +13,6 @@ export const createRoutes = (store) => ({
   indexRoute  : Home,
   childRoutes : [
     CounterRoute(store),
-    BookRoute(store),
     BookListRoute(store)
   ]
 })
