@@ -44,9 +44,16 @@ export const BookInfo = (props) => (
 
     <FormGroup>
       <Col smOffset={2} sm={10}>
-        <Button type="submit">
+        <Button type="submit" bsStyle="primary">
           Save
         </Button>
+        {"  "}
+        {
+          props.makeDeleteable &&
+            <Button bsStyle="danger">
+              Delete
+            </Button>
+        }
       </Col>
     </FormGroup>
   </Form>

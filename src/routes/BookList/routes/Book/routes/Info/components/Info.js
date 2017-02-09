@@ -8,6 +8,7 @@ const Info = (props) => {
   return (
     <BookInfo
       onSubmit={ handleSubmit( (values)=>{ props.updateBook(values); } ) }
+      makeDeleteable
     />
   )
 }
