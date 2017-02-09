@@ -4,7 +4,7 @@ import ProgressRoute from './routes/Progress'
 import NotesRoute from './routes/Notes'
 
 export default (store) => ({
-  path : ':id',
+  path : 'id/:id',
   /*  Async getComponent is only invoked when route matches   */
   getComponent (nextState, cb) {
     /*  Webpack - use 'require.ensure' to create a split point

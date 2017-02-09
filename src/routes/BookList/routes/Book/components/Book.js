@@ -17,14 +17,14 @@ class Book extends Component {
           </Col>
           <Col sm={9}>
             <Nav bsStyle="tabs" id="book-info">
-              <LinkContainer to={{ pathname: `/books/${this.props.params.id}/progress` }}>
-                <NavItem eventKey={1} title="Progress" href={`/books/${this.props.params.id}/progress`}>Progress</NavItem>
+              <LinkContainer to={{ pathname: `/books/id/${this.props.params.id}/progress` }}>
+                <NavItem eventKey={1} title="Progress">Progress</NavItem>
               </LinkContainer>
-              <LinkContainer to={{ pathname: `/books/${this.props.params.id}/notes` }}>
-                <NavItem eventKey={2} title="Notes" href={`/books/${this.props.params.id}/notes`}>Notes</NavItem>
+              <LinkContainer to={{ pathname: `/books/id/${this.props.params.id}/notes` }}>
+                <NavItem eventKey={2} title="Notes">Notes</NavItem>
               </LinkContainer>
-              <LinkContainer to={{ pathname: `/books/${this.props.params.id}/info` }}>
-                <NavItem eventKey={3} title="Info" href={`/books/${this.props.params.id}/info`}>Info</NavItem>
+              <LinkContainer to={{ pathname: `/books/id/${this.props.params.id}/info` }}>
+                <NavItem eventKey={3} title="Info">Info</NavItem>
               </LinkContainer>
             </Nav>
             <div className="core-layout__viewport">

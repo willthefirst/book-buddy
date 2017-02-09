@@ -16,7 +16,7 @@ export const Header = () => (
         <LinkContainer to={{ pathname: '/books' }}>
           <NavItem eventKey={1}>My Books</NavItem>
         </LinkContainer>
-        <LinkContainer to={{ pathname: '#' }}>
+        <LinkContainer to={{ pathname: '/books/new' }}>
           <NavItem eventKey={2}>Add A Book</NavItem>
         </LinkContainer>
         <LinkContainer to={{ pathname: '#' }}>

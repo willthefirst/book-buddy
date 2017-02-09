@@ -8,9 +8,7 @@ const compress = require('compression')
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser');
 
-
 const app = express()
-
 
 // Apply gzip compression
 app.use(compress())
@@ -30,10 +28,10 @@ db.once('open', function() {
 // Models and Schemas
 
 var bookSchema = mongoose.Schema({
-    title: String,
-    author: String,
-    status: String,
-    totalPages: Number
+    title: { type: String, default: 'Title' },
+    author: { type: String, default: 'Author' },
+    status: { type: String, default: 'Current' },
+    totalPages: { type: Number, default: 42 }
 });
 
 const Book = mongoose.model('Book', bookSchema)
@@ -52,12 +50,18 @@ app.get('/api/books', function(req, res) {
 
 // POST: add a new book
 app.post('/api/books', function(req, res) {
-  console.log(req);
-  var sample = new Book({ title: 'Doing Good Better' });
+  console.log(req.body);
+  const book = {
+    title: req.body.title,
+    author: req.body.author,
+    totalPages: req.body.totalPages,
+    status: req.body.status
+  }
+  var sample = new Book(book);
 
   sample.save(function (err, book) {
     if (err) return console.error(err);
-    console.log('Book saved: ' + book.title);
+    res.send(book)
   });
 });
 
@@ -80,6 +84,7 @@ app.put('/api/book/:id', function(req, res) {
     totalPages: req.body.totalPages,
     status: req.body.status
   }
+
   Book.findByIdAndUpdate(req.body._id, { $set: update}, { new: true }, function (err, book) {
     if (err) return console.error(err);
     res.send(book);
