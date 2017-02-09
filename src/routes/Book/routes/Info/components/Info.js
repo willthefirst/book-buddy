@@ -41,7 +41,7 @@ const Info = (props) => {
           Total Pages
         </Col>
         <Col sm={10}>
-          <Field name="<totalPages></totalPages>" component="input" type="number" placeholder="0" />
+          <Field name="totalPages" component="input" type="number" placeholder="0" />
         </Col>
       </FormGroup>
 

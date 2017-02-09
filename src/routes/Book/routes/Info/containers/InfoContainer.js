@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import { loadAccount } from '../modules/info'
-import { updateBookRequest, updateBookSuccess, updateBookFailure } from '../../../modules/book'
+import { updateBookRequest, fetchBookSuccess, updateBookFailure } from '../../../modules/book'
 import axios from 'axios'
 
 /*  This is a container component. Notice it does not contain any JSX,
@@ -26,7 +26,7 @@ const mapDispatchToProps = (dispatch) => {
         if (result.status !== 200) {
           dispatch(updateBookFailure(result.data));
         } else {
-          dispatch(updateBookSuccess(result.data))
+          dispatch(fetchBookSuccess(result.data))
         }
       });
     }
@@ -37,11 +37,6 @@ const mapStateToProps = (state) => {
   return {
     initialValues: state.book.data,
     enableReinitialize: true
-    // id: state.book.activeBook._id,
-    // title: state.book.activeBook.title,
-    // author: state.book.activeBook.author,
-    // status: state.book.activeBook.status,
-    // totalPages: state.book.activeBook.status
   }
 }
 

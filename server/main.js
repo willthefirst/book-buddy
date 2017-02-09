@@ -31,7 +31,9 @@ db.once('open', function() {
 
 var bookSchema = mongoose.Schema({
     title: String,
-    author: String
+    author: String,
+    status: String,
+    totalPages: Number
 });
 
 const Book = mongoose.model('Book', bookSchema)
@@ -71,7 +73,17 @@ app.get('/api/book/:id', function(req, res) {
 
 // PUT: update the current book
 app.put('/api/book/:id', function(req, res) {
-  console.log(req.body);
+
+  const update = {
+    title: req.body.title,
+    author: req.body.author,
+    totalPages: req.body.totalPages,
+    status: req.body.status
+  }
+  Book.findByIdAndUpdate(req.body._id, { $set: update}, { new: true }, function (err, book) {
+    if (err) return console.error(err);
+    res.send(book);
+  });
 });
 
 // DELETE: get the current book
