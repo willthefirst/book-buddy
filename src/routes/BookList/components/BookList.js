@@ -29,7 +29,6 @@ class BookList extends Component {
             })
           }
         </Row>
-        { console.log(this.props) }
         {this.props.children}
       </div>
     )

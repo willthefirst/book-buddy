@@ -2,6 +2,7 @@ import { connect } from 'react-redux'
 import { loadAccount } from '../modules/info'
 import { updateBookRequest, fetchBookSuccess, fetchBookFailure } from '../../../modules/book'
 import axios from 'axios'
+import { browserHistory } from 'react-router';
 
 /*  This is a container component. Notice it does not contain any JSX,
     nor does it import React. This component is **only** responsible for
@@ -22,11 +23,22 @@ const mapDispatchToProps = (dispatch) => {
   return {
     updateBook: (book) => {
       dispatch(updateBookRequest());
-      axios.put(`${ROOT_URL}/book/${book.id}`, book).then((result) => {
+      axios.put(`${ROOT_URL}/book/${book._id}`, book).then((result) => {
         if (result.status !== 200) {
           dispatch(fetchBookFailure(result.data));
         } else {
           dispatch(fetchBookSuccess(result.data))
+        }
+      });
+    },
+    deleteBook: (book) => {
+      axios.delete(`${ROOT_URL}/book/${book._id}`, book).then((result) => {
+        if (result.status !== 200) {
+          console.log('Failed to delete book.', result.data);
+        } else {
+          // #todo: smooth notifications for book removed
+          console.info('Book removed:', result.data._id, result.data.title)
+          browserHistory.push(`/books`)
         }
       });
     }

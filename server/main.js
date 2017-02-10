@@ -93,7 +93,11 @@ app.put('/api/book/:id', function(req, res) {
 
 // DELETE: get the current book
 app.delete('/api/book/:id', function(req, res) {
-
+  console.log();
+  Book.findByIdAndRemove(req.params.id, function (err, deletedBook) {
+    if (err) return console.error(err);
+    res.send(deletedBook);
+  });
 });
 
 // ------------------------------------

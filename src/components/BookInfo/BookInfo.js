@@ -50,7 +50,7 @@ export const BookInfo = (props) => (
         {"  "}
         {
           props.makeDeleteable &&
-            <Button bsStyle="danger">
+            <Button onClick={props.handleDelete} bsStyle="danger">
               Delete
             </Button>
         }
