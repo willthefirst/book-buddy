@@ -13,17 +13,17 @@ class Book extends Component {
         <h1>{this.props.title}</h1>
         <Row>
           <Col sm={3} >
-            <img src="/placeholder.png" className="img-responsive" style={{ marginBottom: '24px', width: '100%' }} />
+            {/* <img src="http://placehold.it/200x300" className="img-responsive" style={{ marginBottom: '24px', width: '100%' }} /> */}
           </Col>
           <Col sm={9}>
             <Nav bsStyle="tabs" id="book-info">
-              <LinkContainer to={{ pathname: `/books/id/${this.props.params.id}/progress` }}>
+              <LinkContainer to={{ pathname: `/book/${this.props.params.id}/progress` }}>
                 <NavItem eventKey={1} title="Progress">Progress</NavItem>
               </LinkContainer>
-              <LinkContainer to={{ pathname: `/books/id/${this.props.params.id}/notes` }}>
+              <LinkContainer to={{ pathname: `/book/${this.props.params.id}/notes` }}>
                 <NavItem eventKey={2} title="Notes">Notes</NavItem>
               </LinkContainer>
-              <LinkContainer to={{ pathname: `/books/id/${this.props.params.id}/info` }}>
+              <LinkContainer to={{ pathname: `/book/${this.props.params.id}/info` }}>
                 <NavItem eventKey={3} title="Info">Info</NavItem>
               </LinkContainer>
             </Nav>

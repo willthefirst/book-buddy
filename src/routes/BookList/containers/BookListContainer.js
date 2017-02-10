@@ -15,6 +15,7 @@ const mapDispatchToProps = (dispatch) => {
 
   return {
     fetchBooks: () => {
+      console.log('fetching');
       dispatch(fetchBookListRequest());
 
       axios.get(`${ROOT_URL}/books`).then((result) => {

@@ -4,9 +4,10 @@ import ProgressRoute from './routes/Progress'
 import NotesRoute from './routes/Notes'
 
 export default (store) => ({
-  path : 'id/:id',
+  path : 'book/:id',
   /*  Async getComponent is only invoked when route matches   */
   getComponent (nextState, cb) {
+    console.log('here');
     /*  Webpack - use 'require.ensure' to create a split point
         and embed an async module loader (jsonp) when bundling   */
     require.ensure([], (require) => {

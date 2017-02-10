@@ -20,7 +20,7 @@ class BookList extends Component {
             this.props.books.map((book) => {
               return (
                 <Col xs={4} sm={2} key={book._id}>
-                  <Link to={`/books/id/${book._id}`}>
+                  <Link to={`/book/${book._id}`}>
                     <img src="/placeholder.png" className="img-responsive" style={{ marginBottom: '24px' }} />
                     <h4>{book.title}</h4>
                   </Link>
@@ -29,7 +29,6 @@ class BookList extends Component {
             })
           }
         </Row>
-        {this.props.children}
       </div>
     )
   }
