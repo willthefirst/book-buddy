@@ -16,13 +16,13 @@ export default (store) => ({
       const reducer = require('./modules/book').default
 
       /*  Add the reducer to the store on key 'counter'  */
-      injectReducer(store, { key: 'book', reducer })
+      injectReducer(store, { key: 'activeBook', reducer })
 
       /*  Return getComponent   */
       cb(null, Book)
 
     /* Webpack named bundle   */
-    }, 'book')
+  }, 'activeBook')
   },
   childRoutes: [
     InfoRoute(store), // <site>/book/info
