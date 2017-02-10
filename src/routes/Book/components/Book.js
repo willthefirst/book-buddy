@@ -13,7 +13,7 @@ class Book extends Component {
         <h1>{this.props.title}</h1>
         <Row>
           <Col sm={3} >
-            {/* <img src="http://placehold.it/200x300" className="img-responsive" style={{ marginBottom: '24px', width: '100%' }} /> */}
+            <img src="/placeholder.png" className="img-responsive" style={{ marginBottom: '24px', width: '100%' }} />
           </Col>
           <Col sm={9}>
             <Nav bsStyle="tabs" id="book-info">
