@@ -1,5 +1,4 @@
 import { injectReducer } from 'store/reducers'
-import NewRoute from './routes/New'
 
 export default (store) => ({
   path : 'books',

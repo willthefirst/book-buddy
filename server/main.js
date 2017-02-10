@@ -50,7 +50,6 @@ app.get('/api/books', function(req, res) {
 
 // POST: add a new book
 app.post('/api/books', function(req, res) {
-  console.log(req.body);
   const book = {
     title: req.body.title,
     author: req.body.author,
@@ -93,7 +92,6 @@ app.put('/api/book/:id', function(req, res) {
 
 // DELETE: get the current book
 app.delete('/api/book/:id', function(req, res) {
-  console.log();
   Book.findByIdAndRemove(req.params.id, function (err, deletedBook) {
     if (err) return console.error(err);
     res.send(deletedBook);
