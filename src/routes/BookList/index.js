@@ -21,7 +21,5 @@ export default (store) => ({
 
       /* Webpack named bundle   */
     }, 'booklist')
-  }, childRoutes: [
-    NewRoute(store)
-  ]
+  }
 })
