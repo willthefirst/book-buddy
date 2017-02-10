@@ -25,7 +25,7 @@ const mapDispatchToProps = (dispatch) => {
           console.error("Book not saved", result.data);
         } else {
           // #todo: should this update the state? like refresh the 'books' list entirely?
-          browserHistory.push(`/books/id/${result.data._id}/info`)
+          browserHistory.push(`/book/${result.data._id}/info`)
         }
       });
     }
