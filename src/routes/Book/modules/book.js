@@ -1,3 +1,4 @@
+import { EditorState, RawDraftContentState, ContentState, convertFromRaw } from 'draft-js'
 // ------------------------------------
 // Constants
 // ------------------------------------
@@ -6,8 +7,6 @@ export const FETCH_BOOK_SUCCESS = 'FETCH_BOOK_SUCCESS'
 export const FETCH_BOOK_FAILURE = 'FETCH_BOOK_FAILURE'
 
 export const UPDATE_BOOK_REQUEST = 'UPDATE_BOOK_REQUEST'
-export const UPDATE_BOOK_SUCCESS = 'UPDATE_BOOK_SUCCESS'
-export const UPDATE_BOOK_FAILURE = 'UPDATE_BOOK_FAILURE'
 // ------------------------------------
 // Actions
 // ------------------------------------
@@ -77,8 +76,17 @@ const ACTION_HANDLERS = {
     }
   },
   [FETCH_BOOK_SUCCESS] : (state, action) => {
+    let data = action.payload;
+
+    // Convert notes into an EditorState object
+    const raw = JSON.parse(data.notes)
+    const contentState = convertFromRaw(raw)
+    const editorState = EditorState.createWithContent(contentState)
+
+    data.notes = editorState
+
     return {
-        data: action.payload, error: null, loading: false
+        data: data, error: null, loading: false
     }
   },
   [FETCH_BOOK_FAILURE] : (state, action) => {
@@ -92,17 +100,18 @@ const ACTION_HANDLERS = {
     return {
         ...state, loading: true
     }
-  },
-  [UPDATE_BOOK_SUCCESS] : (state, action) => {
-    return {
-        data: action.payload, error: null, loading: false
-    }
-  },
-  [UPDATE_BOOK_FAILURE] : (state, action) => {
-    return {
-        ...state, error: action.payload, loading: false
-    }
   }
+  // ,
+  // [UPDATE_BOOK_SUCCESS] : (state, action) => {
+  //   return {
+  //       data: action.payload, error: null, loading: false
+  //   }
+  // },
+  // [UPDATE_BOOK_FAILURE] : (state, action) => {
+  //   return {
+  //       ...state, error: action.payload, loading: false
+  //   }
+  // }
 }
 
 // ------------------------------------

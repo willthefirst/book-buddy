@@ -31,7 +31,17 @@ var bookSchema = mongoose.Schema({
     title: { type: String, default: 'Title' },
     author: { type: String, default: 'Author' },
     status: { type: String, default: 'Current' },
-    totalPages: { type: Number, default: 42 }
+    totalPages: { type: Number, default: 42 },
+    notes: {
+      type: String,
+      default: ''
+    },
+    progress: {
+      type: Object,
+      default: {
+        default: 'progress'
+      }
+    }
 });
 
 const Book = mongoose.model('Book', bookSchema)
@@ -54,7 +64,9 @@ app.post('/api/books', function(req, res) {
     title: req.body.title,
     author: req.body.author,
     totalPages: req.body.totalPages,
-    status: req.body.status
+    status: req.body.status,
+    notes: {},
+    progress: {}
   }
   var sample = new Book(book);
 
@@ -66,7 +78,7 @@ app.post('/api/books', function(req, res) {
 
 // '/api/books/:id'
 
-// GET: delete the current book
+// GET: find the current book
 app.get('/api/book/:id', function(req, res) {
   Book.findById(req.params.id, function (err, book) {
     if (err) return console.error(err);
@@ -76,15 +88,16 @@ app.get('/api/book/:id', function(req, res) {
 
 // PUT: update the current book
 app.put('/api/book/:id', function(req, res) {
-
   const update = {
     title: req.body.title,
     author: req.body.author,
     totalPages: req.body.totalPages,
-    status: req.body.status
+    status: req.body.status,
+    notes: req.body.notes,
+    progress: req.body.progress
   }
 
-  Book.findByIdAndUpdate(req.body._id, { $set: update}, { new: true }, function (err, book) {
+  Book.findByIdAndUpdate(req.body._id, { $set: update }, { new: true }, function (err, book) {
     if (err) return console.error(err);
     res.send(book);
   });

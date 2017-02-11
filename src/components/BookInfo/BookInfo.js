@@ -57,6 +57,6 @@ export const BookInfo = (props) => (
       </Col>
     </FormGroup>
   </Form>
-  )
+)
 
 export default BookInfo

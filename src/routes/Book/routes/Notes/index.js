@@ -1,4 +1,4 @@
-// import { injectReducer } from '../../store/reducers'
+import { injectReducer } from 'store/reducers'
 
 export default (store) => ({
   path : 'notes',
@@ -12,13 +12,12 @@ export default (store) => ({
       const Notes = require('./containers/NotesContainer').default
       const reducer = require('./modules/notes').default
 
-      /*  Add the reducer to the store on key 'counter'  */
-      // injectReducer(store, { key: 'notes', reducer })
+      injectReducer(store, { key: 'editor', reducer })
 
       /*  Return getComponent   */
       cb(null, Notes)
 
     /* Webpack named bundle   */
-    }, 'notes')
+    }, 'editor')
   }
 });

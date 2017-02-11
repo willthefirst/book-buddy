@@ -1,4 +1,8 @@
 import { connect } from 'react-redux'
+import { EditorState, convertFromRaw, convertToRaw } from 'draft-js'
+import { updateEditorState, initializeEditorState } from '../modules/notes'
+import { updateBookRequest, fetchBookSuccess, fetchBookFailure } from '../../../modules/book'
+import axios from 'axios'
 
 /*  This is a container component. Notice it does not contain any JSX,
     nor does it import React. This component is **only** responsible for
@@ -11,12 +15,49 @@ import Notes from '../components/Notes'
     Keys will be passed as props to presentational components. Here we are
     implementing our wrapper around increment; the component doesn't care   */
 
-const mapDispatchToProps = (dipatch) => {
-  return {}
+const mapDispatchToProps = (dispatch) => {
+  return {
+    initializeEditorState: function(notes) {
+      // dispatch(initializeEditorState(notes));
+    },
+    // For the editor to manage it's own state
+    onEditorStateChange: function(editorState) {
+      dispatch(updateEditorState(editorState));
+    },
+
+    updateBookNotes: function(editorState, book) {
+      // Convert editor content to raw JS object (http://facebook.github.io/draft-js/docs/api-reference-data-conversion.html#content)
+      let rawContent = convertToRaw(editorState.getCurrentContent());
+
+      // Serialize because sever is acting like a douche with empty entityMap JSON object
+      rawContent = JSON.stringify(rawContent);
+
+      const updatedBook = {
+        ...book,
+        notes: rawContent
+      };
+
+      // #todo: refactor the getting of the rooturk
+      const ROOT_URL = location.href.indexOf('localhost') > 0 ? 'http://localhost:3000/api' : '/api';
+
+      dispatch(updateBookRequest())
+      // update server
+      axios.put(`${ROOT_URL}/book/${book._id}`, updatedBook).then((result) => {
+        if (result.status !== 200) {
+          dispatch(fetchBookFailure(result.data));
+        } else {
+          dispatch(fetchBookSuccess(result.data));
+        }
+      });
+    }
+  }
 }
 
 const mapStateToProps = (state) => {
-  return {}
+  return {
+    editorState: state.activeBook.data.notes,
+    data: state.activeBook.data
+  }
 }
 
 /*  Note: mapStateToProps is where you should use `reselect` to create selectors, ie:
