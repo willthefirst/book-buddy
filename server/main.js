@@ -65,7 +65,7 @@ app.post('/api/books', function(req, res) {
     author: req.body.author,
     totalPages: req.body.totalPages,
     status: req.body.status,
-    notes: {},
+    notes: '{}',
     progress: {}
   }
   var sample = new Book(book);
@@ -88,6 +88,7 @@ app.get('/api/book/:id', function(req, res) {
 
 // PUT: update the current book
 app.put('/api/book/:id', function(req, res) {
+  console.log(req.body);
   const update = {
     title: req.body.title,
     author: req.body.author,

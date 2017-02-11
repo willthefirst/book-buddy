@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { EditorState, convertFromRaw, convertToRaw } from 'draft-js'
-import { updateEditorState, initializeEditorState } from '../modules/notes'
-import { updateBookRequest, fetchBookSuccess, fetchBookFailure } from '../../../modules/book'
+// import { updateEditorState, initializeEditorState } from '../modules/notes'
+import { updateBookRequest, fetchBookSuccess, fetchBookFailure, updateEditorState } from '../../../modules/book'
 import axios from 'axios'
 
 /*  This is a container component. Notice it does not contain any JSX,
@@ -17,19 +17,16 @@ import Notes from '../components/Notes'
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    initializeEditorState: function(notes) {
-      // dispatch(initializeEditorState(notes));
-    },
     // For the editor to manage it's own state
     onEditorStateChange: function(editorState) {
       dispatch(updateEditorState(editorState));
     },
 
-    updateBookNotes: function(editorState, book) {
+    updateBookNotes: function(book) {
       // Convert editor content to raw JS object (http://facebook.github.io/draft-js/docs/api-reference-data-conversion.html#content)
-      let rawContent = convertToRaw(editorState.getCurrentContent());
+      let rawContent = convertToRaw(book.notes.getCurrentContent());
 
-      // Serialize because sever is acting like a douche with empty entityMap JSON object
+      // Serialize because server is acting like a douche with empty entityMap JSON object
       rawContent = JSON.stringify(rawContent);
 
       const updatedBook = {
@@ -55,7 +52,6 @@ const mapDispatchToProps = (dispatch) => {
 
 const mapStateToProps = (state) => {
   return {
-    editorState: state.activeBook.data.notes,
     data: state.activeBook.data
   }
 }

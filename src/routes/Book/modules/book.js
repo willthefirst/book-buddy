@@ -7,6 +7,7 @@ export const FETCH_BOOK_SUCCESS = 'FETCH_BOOK_SUCCESS'
 export const FETCH_BOOK_FAILURE = 'FETCH_BOOK_FAILURE'
 
 export const UPDATE_BOOK_REQUEST = 'UPDATE_BOOK_REQUEST'
+export const UPDATE_EDITOR_STATE = 'UPDATE_EDITOR_STATE'
 // ------------------------------------
 // Actions
 // ------------------------------------
@@ -42,17 +43,10 @@ export function updateBookRequest(request) {
   }
 }
 
-export function updateBookSuccess(book) {
+export function updateEditorState(state) {
   return {
-    type: UPDATE_BOOK_SUCCESS,
-    payload: book
-  }
-}
-
-export function updateBookFailure(error) {
-  return {
-    type: UPDATE_BOOK_FAILURE,
-    payload: error
+    type: UPDATE_EDITOR_STATE,
+    payload: state
   }
 }
 
@@ -62,8 +56,8 @@ export const actions = {
   fetchBookFailure,
 
   updateBookRequest,
-  updateBookSuccess,
-  updateBookFailure
+
+  updateEditorState
 }
 
 // ------------------------------------
@@ -78,12 +72,15 @@ const ACTION_HANDLERS = {
   [FETCH_BOOK_SUCCESS] : (state, action) => {
     let data = action.payload;
 
-    // Convert notes into an EditorState object
-    const raw = JSON.parse(data.notes)
-    const contentState = convertFromRaw(raw)
-    const editorState = EditorState.createWithContent(contentState)
-
-    data.notes = editorState
+    if (data.notes !== "{}") {
+      // Convert notes into an EditorState object
+      const raw = JSON.parse(data.notes)
+      const contentState = convertFromRaw(raw)
+      const editorState = EditorState.createWithContent(contentState)
+      data.notes = editorState
+    } else {
+      data.notes = EditorState.createEmpty()
+    }
 
     return {
         data: data, error: null, loading: false
@@ -94,24 +91,23 @@ const ACTION_HANDLERS = {
         ...state, error: action.payload, loading: false
     }
   },
-
   // #todo: this overlaps with fetchbook, refactor?
   [UPDATE_BOOK_REQUEST] : (state, action) => {
     return {
         ...state, loading: true
     }
+  },
+
+  [UPDATE_EDITOR_STATE] : (state, action) => {
+
+    return {
+      ...state,
+      data: {
+        ...state.data,
+        notes: action.payload
+      }
+    }
   }
-  // ,
-  // [UPDATE_BOOK_SUCCESS] : (state, action) => {
-  //   return {
-  //       data: action.payload, error: null, loading: false
-  //   }
-  // },
-  // [UPDATE_BOOK_FAILURE] : (state, action) => {
-  //   return {
-  //       ...state, error: action.payload, loading: false
-  //   }
-  // }
 }
 
 // ------------------------------------
