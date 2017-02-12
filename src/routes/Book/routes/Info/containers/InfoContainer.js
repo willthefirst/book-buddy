@@ -28,7 +28,6 @@ const mapDispatchToProps = (dispatch) => {
           dispatch(fetchBookFailure(result.data));
         } else {
           dispatch(fetchBookSuccess(result.data));
-
         }
       });
     },
