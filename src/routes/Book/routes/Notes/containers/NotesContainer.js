@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { EditorState, convertFromRaw, convertToRaw } from 'draft-js'
-// import { updateEditorState, initializeEditorState } from '../modules/notes'
-import { updateBookRequest, fetchBookSuccess, fetchBookFailure, updateEditorState } from '../../../modules/book'
+import { updateEditorState, initializeEditorState } from '../modules/notes'
+import { updateBookRequest, fetchBookSuccess, fetchBookFailure } from '../../../modules/book'
 import axios from 'axios'
 
 /*  This is a container component. Notice it does not contain any JSX,
@@ -52,7 +52,7 @@ const mapDispatchToProps = (dispatch) => {
 
 const mapStateToProps = (state) => {
   return {
-    data: state.activeBook.data
+    editorState: state.editor
   }
 }
 

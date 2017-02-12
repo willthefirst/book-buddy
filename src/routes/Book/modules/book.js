@@ -1,4 +1,3 @@
-import { EditorState, RawDraftContentState, ContentState, convertFromRaw } from 'draft-js'
 // ------------------------------------
 // Constants
 // ------------------------------------
@@ -7,7 +6,7 @@ export const FETCH_BOOK_SUCCESS = 'FETCH_BOOK_SUCCESS'
 export const FETCH_BOOK_FAILURE = 'FETCH_BOOK_FAILURE'
 
 export const UPDATE_BOOK_REQUEST = 'UPDATE_BOOK_REQUEST'
-export const UPDATE_EDITOR_STATE = 'UPDATE_EDITOR_STATE'
+
 // ------------------------------------
 // Actions
 // ------------------------------------
@@ -43,21 +42,12 @@ export function updateBookRequest(request) {
   }
 }
 
-export function updateEditorState(state) {
-  return {
-    type: UPDATE_EDITOR_STATE,
-    payload: state
-  }
-}
-
 export const actions = {
   fetchBookRequest,
   fetchBookSuccess,
   fetchBookFailure,
 
-  updateBookRequest,
-
-  updateEditorState
+  updateBookRequest
 }
 
 // ------------------------------------
@@ -70,20 +60,8 @@ const ACTION_HANDLERS = {
     }
   },
   [FETCH_BOOK_SUCCESS] : (state, action) => {
-    let data = action.payload;
-
-    if (data.notes !== "{}") {
-      // Convert notes into an EditorState object
-      const raw = JSON.parse(data.notes)
-      const contentState = convertFromRaw(raw)
-      const editorState = EditorState.createWithContent(contentState)
-      data.notes = editorState
-    } else {
-      data.notes = EditorState.createEmpty()
-    }
-
     return {
-        data: data, error: null, loading: false
+        data: action.payload, error: null, loading: false
     }
   },
   [FETCH_BOOK_FAILURE] : (state, action) => {
@@ -95,17 +73,6 @@ const ACTION_HANDLERS = {
   [UPDATE_BOOK_REQUEST] : (state, action) => {
     return {
         ...state, loading: true
-    }
-  },
-
-  [UPDATE_EDITOR_STATE] : (state, action) => {
-
-    return {
-      ...state,
-      data: {
-        ...state.data,
-        notes: action.payload
-      }
     }
   }
 }

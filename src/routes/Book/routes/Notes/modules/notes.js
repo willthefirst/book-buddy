@@ -43,11 +43,21 @@ const ACTION_HANDLERS = {
   }
 }
 
+// if (data.notes !== "{}") {
+//   // Convert notes into an EditorState object
+//   const raw = JSON.parse(data.notes)
+//   const contentState = convertFromRaw(raw)
+//   const editorState = EditorState.createWithContent(contentState)
+//   data.notes = editorState
+// } else {
+//   data.notes = EditorState.createEmpty()
+// }
+
+
 // ------------------------------------
 // Reducer
 // ------------------------------------
-const freshState = EditorState.createEmpty()
-const initialState = freshState
+const initialState = EditorState.createEmpty()
 
 export default function notesReducer (state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]

@@ -7,13 +7,8 @@ import { Button } from 'react-bootstrap'
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
 
 export class Notes extends Component {
-  // componentWillMount() {
-  //   console.log(this.props.data);
-  //   // this.props.initializeEditorState(this.props.data.notes);
-  // }
-
   render() {
-    const { updateBookNotes, onEditorState, onEditorStateChange, data } = this.props
+    const { updateBookNotes, onEditorState, onEditorStateChange, editorState } = this.props
 
     const toolbarOptions = {
       options: ['inline', 'blockType', ],
@@ -29,7 +24,7 @@ export class Notes extends Component {
           editorClassName="react-draft__editor"
           toolbarClassName="react-draft__toolbar"
           toolbar={toolbarOptions}
-          editorState={data.notes}
+          editorState={editorState}
           onEditorStateChange={onEditorStateChange}
           />
         <Button type="submit" bsStyle="primary" onClick={() => updateBookNotes(data)}>Save</Button>
