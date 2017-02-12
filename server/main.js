@@ -27,7 +27,10 @@ db.once('open', function() {
 
 // Models and Schemas
 
-var bookSchema = mongoose.Schema({
+// For books starting notes
+const emptyEditorState = '{"_immutable":{"allowUndo":true,"currentContent":{"entityMap":{},"blockMap":{"bgrup":{"key":"bgrup","type":"unstyled","text":"","characterList":[],"depth":0,"data":{}}},"selectionBefore":{"anchorKey":"bgrup","anchorOffset":0,"focusKey":"bgrup","focusOffset":0,"isBackward":false,"hasFocus":false},"selectionAfter":{"anchorKey":"bgrup","anchorOffset":0,"focusKey":"bgrup","focusOffset":0,"isBackward":false,"hasFocus":false}},"decorator":null,"directionMap":{"bgrup":"LTR"},"forceSelection":false,"inCompositionMode":false,"inlineStyleOverride":null,"lastChangeType":null,"nativelyRenderedContent":null,"redoStack":[],"selection":{"anchorKey":"bgrup","anchorOffset":0,"focusKey":"bgrup","focusOffset":0,"isBackward":false,"hasFocus":false},"treeMap":{"bgrup":[{"start":0,"end":0,"decoratorKey":null,"leaves":[{"start":0,"end":0}]}]},"undoStack":[]}}'
+
+const bookSchema = mongoose.Schema({
     title: { type: String, default: 'Title' },
     author: { type: String, default: 'Author' },
     status: { type: String, default: 'Current' },
@@ -39,7 +42,7 @@ var bookSchema = mongoose.Schema({
     progress: {
       type: Object,
       default: {
-        default: 'progress'
+        status: 'progress'
       }
     }
 });
@@ -64,9 +67,7 @@ app.post('/api/books', function(req, res) {
     title: req.body.title,
     author: req.body.author,
     totalPages: req.body.totalPages,
-    status: req.body.status,
-    notes: '{}',
-    progress: {}
+    status: req.body.status
   }
   var sample = new Book(book);
 
@@ -88,17 +89,19 @@ app.get('/api/book/:id', function(req, res) {
 
 // PUT: update the current book
 app.put('/api/book/:id', function(req, res) {
-  console.log(req.body);
-  const update = {
-    title: req.body.title,
-    author: req.body.author,
-    totalPages: req.body.totalPages,
-    status: req.body.status,
-    notes: req.body.notes,
-    progress: req.body.progress
-  }
 
-  Book.findByIdAndUpdate(req.body._id, { $set: update }, { new: true }, function (err, book) {
+  // #todo: would prefer to have the update be piecemeal instead of making a giant object every time.
+  // const update = {
+  //   title: req.body.title,
+  //   author: req.body.author,
+  //   totalPages: req.body.totalPages,
+  //   status: req.body.status,
+  //   notes: req.body.notes,
+  //   progress: req.body.progress
+  // }
+  const update = req.body
+
+  Book.findByIdAndUpdate(req.params.id, { $set: update }, { new: true }, function (err, book) {
     if (err) return console.error(err);
     res.send(book);
   });

@@ -22,15 +22,14 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(updateEditorState(editorState));
     },
 
-    updateBookNotes: function(book) {
+    updateBookNotes: function(editorState, bookID) {
       // Convert editor content to raw JS object (http://facebook.github.io/draft-js/docs/api-reference-data-conversion.html#content)
-      let rawContent = convertToRaw(book.notes.getCurrentContent());
+      let rawContent = convertToRaw(editorState.getCurrentContent());
 
       // Serialize because server is acting like a douche with empty entityMap JSON object
       rawContent = JSON.stringify(rawContent);
 
-      const updatedBook = {
-        ...book,
+      const updatedNotes = {
         notes: rawContent
       };
 
@@ -39,11 +38,12 @@ const mapDispatchToProps = (dispatch) => {
 
       dispatch(updateBookRequest())
       // update server
-      axios.put(`${ROOT_URL}/book/${book._id}`, updatedBook).then((result) => {
+      axios.put(`${ROOT_URL}/book/${bookID}`, updatedNotes).then((result) => {
         if (result.status !== 200) {
           dispatch(fetchBookFailure(result.data));
         } else {
           dispatch(fetchBookSuccess(result.data));
+          dispatch(initializeEditorState(result.data.notes))
         }
       });
     }
@@ -52,7 +52,8 @@ const mapDispatchToProps = (dispatch) => {
 
 const mapStateToProps = (state) => {
   return {
-    editorState: state.editor
+    editorState: state.editor,
+    bookID: state.activeBook.data._id
   }
 }
 

@@ -36,23 +36,18 @@ const ACTION_HANDLERS = {
     return action.payload
   },
   [INITIALIZE_EDITOR_STATE] : (state, action) => {
+    // If initializing with nothing, leave state alone
+    if (!action.payload) {
+      return state;
+    }
+
+    // Else, initialize editor with latest notes
     const raw = JSON.parse(action.payload)
     const contentState = convertFromRaw(raw)
     const editorState = EditorState.createWithContent(contentState)
     return editorState
   }
 }
-
-// if (data.notes !== "{}") {
-//   // Convert notes into an EditorState object
-//   const raw = JSON.parse(data.notes)
-//   const contentState = convertFromRaw(raw)
-//   const editorState = EditorState.createWithContent(contentState)
-//   data.notes = editorState
-// } else {
-//   data.notes = EditorState.createEmpty()
-// }
-
 
 // ------------------------------------
 // Reducer

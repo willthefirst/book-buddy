@@ -27,6 +27,7 @@ const mapDispatchToProps = (dispatch) => {
           dispatch(fetchBookFailure(result.data));
         } else {
           dispatch(fetchBookSuccess(result.data));
+          dispatch(initializeEditorState(result.data.notes))
         }
       });
     }
