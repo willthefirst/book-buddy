@@ -1,6 +1,6 @@
 import React, { Component} from 'react'
 import { Editor } from 'react-draft-wysiwyg'
-import { Button } from 'react-bootstrap'
+import { Button, Row } from 'react-bootstrap'
 
 // #todo: customize text editor: https://jpuri.github.io/react-draft-wysiwyg/#/docs
 // also https://github.com/jpuri/react-draft-wysiwyg/blob/master/docs/src/components/Demo/index.js

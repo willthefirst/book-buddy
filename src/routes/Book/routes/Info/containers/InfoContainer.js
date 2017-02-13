@@ -37,7 +37,6 @@ const mapDispatchToProps = (dispatch) => {
           console.log('Failed to delete book.', result.data);
         } else {
           // #todo: smooth notifications for book removed
-          console.info('Book removed:', result.data._id, result.data.title)
           browserHistory.push(`/books`)
         }
       });
