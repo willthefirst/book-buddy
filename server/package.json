@@ -1,0 +1,21 @@
+{
+  "name": "book-buddy server",
+  "version": "1.0.0",
+  "description": "Book buddy server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "crypto": "0.0.3",
+    "jsonwebtoken": "^7.3.0",
+    "mongoose": "^4.8.2",
+    "morgan": "^1.8.1",
+    "passport": "^0.3.2",
+    "passport-jwt": "^2.2.1",
+    "passport-local": "^1.0.0"
+  }
+}
