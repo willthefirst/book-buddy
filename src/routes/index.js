@@ -5,6 +5,7 @@ import CounterRoute from './Counter'
 import BookListRoute from './BookList'
 import BookRoute from './Book'
 import NewRoute from './New'
+import LoginRoute from './Login'
 
 /*  Note: Instead of using JSX, we recommend using react-router
     PlainRoute objects to build route definitions.   */
@@ -17,7 +18,8 @@ export const createRoutes = (store) => ({
     CounterRoute(store),
     BookListRoute(store),
     BookRoute(store),
-    NewRoute(store)
+    NewRoute(store),
+    LoginRoute(store)
   ]
 })
 

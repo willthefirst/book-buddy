@@ -1,4 +1,3 @@
-import React from 'react'
 import { Col, Button, Form, FormGroup, ControlLabel, FormControl, Checkbox, Radio } from 'react-bootstrap'
 import { Field, reduxForm } from 'redux-form'
 
