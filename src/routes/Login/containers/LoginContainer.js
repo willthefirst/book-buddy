@@ -1,31 +1,24 @@
 import { connect } from 'react-redux'
-import {} from '../modules/login'
-
-/*  This is a container component. Notice it does not contain any JSX,
-    nor does it import React. This component is **only** responsible for
-    wiring in the actions and state necessary to render a presentational
-    component - in this case, the counter:   */
-
+import { loginRequest, loginFailure, loginSuccess } from '../modules/login'
+import axios from 'axios'
 import Login from '../components/Login'
-
-/*  Object of action creators (can also be function that returns object).
-    Keys will be passed as props to presentational components. Here we are
-    implementing our wrapper around increment; the component doesn't care   */
 
 const mapDispatchToProps = (dispatch) => {
   // #todo: refactor the getting of the rooturk
   const ROOT_URL = location.href.indexOf('localhost') > 0 ? 'http://localhost:3000/api' : '/api';
 
   return {
-    dispatch(LoginRequest());
-    axios.post(`${ROOT_URL}/login`, ).then((result) => {
-      if (result.status !== 200) {
-        dispatch(LoginFailure(result.data));
-      } else {
-        dispatch(LoginSuccess(result.data));
-      }
-    });
-  },
+    handleLogin: (user) => {
+      dispatch(loginRequest());
+      console.log(user);
+      axios.post(`${ROOT_URL}/login`).then((result) => {
+        if (result.status !== 200) {
+          dispatch(LoginFailure(result.data));
+        } else {
+          dispatch(LoginSuccess(result.data));
+        }
+      });
+    }
   }
 }
 

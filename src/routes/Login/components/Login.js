@@ -4,30 +4,31 @@ import { Field, reduxForm } from 'redux-form'
 
 export const Login = (props) => {
   const { handleSubmit } = props
-  console.log(handleSubmit);
 
   return (
-    <Form onSubmit={ handleSubmit( (values) => { props.handleLogin(values) }) }>
-      <FormGroup controlId="formHorizontalEmail">
-        <Col componentClass={ControlLabel}>
-          Email
-        </Col>
-        <Col>
-          <Field name="email" component="input" type="text" placeholder="Email" />
-        </Col>
-      </FormGroup>
-      <FormGroup controlId="formHorizontalPassword">
-        <Col componentClass={ControlLabel}>
-          Password
-        </Col>
-        <Col>
-          <Field name="password" component="input" type="text" placeholder="Password" />
-        </Col>
-      </FormGroup>
-      <FormGroup>
-        <Button type="submit" bsStyle="primary">Save</Button>
-      </FormGroup>
-    </Form>
+    <div>
+      <Form onSubmit={ handleSubmit( (values) => { props.handleLogin(values) }) }>
+        <FormGroup controlId="formHorizontalEmail">
+          <Col componentClass={ControlLabel}>
+            Email
+          </Col>
+          <Col>
+            <Field name="email" component="input" type="text" placeholder="Email" />
+          </Col>
+        </FormGroup>
+        <FormGroup controlId="formHorizontalPassword">
+          <Col componentClass={ControlLabel}>
+            Password
+          </Col>
+          <Col>
+            <Field name="password" component="input" type="text" placeholder="Password" />
+          </Col>
+        </FormGroup>
+        <FormGroup>
+          <Button type="submit" bsStyle="primary">Save</Button>
+        </FormGroup>
+      </Form>
+    </div>
   )
 }
 
