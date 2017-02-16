@@ -4,11 +4,16 @@ const AuthenticationController = require('./controllers/authentication'),
       passportService = require('./config/passport'),
       passport = require('passport');
 
+
 // Middleware to require login/auth
 const requireAuth = passport.authenticate('jwt', { session: false });
-const requireLogin = passport.authenticate('local', { session: false });
+
+
+// (this.req, this.res, this.next);
 
 module.exports = function(app) {
+
+
   // Initializing route groups
   const apiRoutes = express.Router(),
         authRoutes = express.Router();
@@ -24,7 +29,7 @@ module.exports = function(app) {
   authRoutes.post('/register', AuthenticationController.register);
 
   // Login route /api/auth/login
-  authRoutes.post('/login', requireLogin, AuthenticationController.login);
+  authRoutes.post('/login', AuthenticationController.login);
 
   // Set url for API group routes
   app.use('/api', apiRoutes);

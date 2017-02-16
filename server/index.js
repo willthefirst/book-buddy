@@ -7,8 +7,21 @@ const webpackConfig = require('../config/webpack.config')
 const project = require('../config/project.config')
 const compress = require('compression')
 const mongoose = require('mongoose')
-const bodyParser = require('body-parser');
-const router = require('./router');
+const bodyParser = require('body-parser')
+const session = require('express-session')
+const cookieParser = require('cookie-parser')
+const flash = require('connect-flash')
+const router = require('./router')
+const passport = require('passport')
+
+// Necessary for passport to work
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});
+
+passport.deserializeUser(function(user, done) {
+  done(null, user);
+});
 
 const app = express()
 
@@ -20,9 +33,17 @@ const app = express()
 app.use(compress())
 app.use(logger('dev')); // Log requests to API using morgan
 
-// Apply bodyparse
+app.use(cookieParser(project.server_secret));
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodie
+app.use(require('express-session')({
+  secret: project.server_secret
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+
+// Routes
+router(app);
 
 // Database
 mongoose.connect(project.server_db);
@@ -32,9 +53,6 @@ db.once('open', function() {
   // we're connected!
   console.log('connected to database');
 });
-
-// Routes
-router(app);
 
 // ------------------------------------
 // Apply Webpack HMR Middleware

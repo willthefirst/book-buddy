@@ -21,11 +21,11 @@ export const Login = (props) => {
             Password
           </Col>
           <Col>
-            <Field name="password" component="input" type="text" placeholder="Password" />
+            <Field name="password" component="input" type="password" placeholder="Password" />
           </Col>
         </FormGroup>
         <FormGroup>
-          <Button type="submit" bsStyle="primary">Save</Button>
+          <Button type="submit" bsStyle="primary">Submit</Button>
         </FormGroup>
       </Form>
     </div>

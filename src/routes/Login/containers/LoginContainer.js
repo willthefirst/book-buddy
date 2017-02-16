@@ -4,20 +4,24 @@ import axios from 'axios'
 import Login from '../components/Login'
 
 const mapDispatchToProps = (dispatch) => {
-  // #todo: refactor the getting of the rooturk
-  const ROOT_URL = location.href.indexOf('localhost') > 0 ? 'http://localhost:3000/api' : '/api';
+  // #todo: ADMIN VERSION refactor the getting of the rooturk
+  const AUTH_ROOT_URL = location.href.indexOf('localhost') > 0 ? 'http://localhost:3000/api/auth' : '/api/auth';
 
   return {
     handleLogin: (user) => {
       dispatch(loginRequest());
-      console.log(user);
-      axios.post(`${ROOT_URL}/login`).then((result) => {
-        if (result.status !== 200) {
-          dispatch(LoginFailure(result.data));
-        } else {
-          dispatch(LoginSuccess(result.data));
-        }
-      });
+      axios.post(`${AUTH_ROOT_URL}/login`, user)
+        .then((result) => {
+          if (result.status !== 200) {
+            dispatch(loginFailure(result.data));
+            console.log('Error in result!', result);
+          } else {
+            dispatch(loginSuccess(result.data));
+            console.log('Success. User logged in:', result.data.user.email);
+          }
+        }).catch((error) => {
+          console.log('Error logging in!', error);
+        });
     }
   }
 }

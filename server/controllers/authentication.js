@@ -1,7 +1,9 @@
 const jwt = require('jsonwebtoken'),
       crypto = require('crypto'),
       User = require('../models/user'),
-      config = require('../../config/project.config')
+      config = require('../../config/project.config'),
+      passport = require('passport')
+
 
 function generateToken(user) {
   return jwt.sign(user, config.server_secret, {
@@ -20,16 +22,27 @@ function setUserInfo(request) {
 //========================================
 // Login Route
 //========================================
-exports.login = function(req, res, next) {
 
-  let userInfo = setUserInfo(req.user);
+exports.login = function (req, res, next) {
+  passport.authenticate('local', (err, user, info) => {
+    console.log('Error:', err);
+    console.log('User:', user);
+    console.log('Info:', info);
+    if (err) { return next(err); }
+    if (!user) {
+      return res.status(401).json(info);
+    }
+    req.logIn(user, function(err) {
+      if (err) { return next(err); }
 
-  res.status(200).json({
-    token: 'JWT ' + generateToken(userInfo),
-    user: userInfo
-  });
+      let userInfo = setUserInfo(req.user);
+      res.status(200).json({
+        token: 'JWT ' + generateToken(userInfo),
+        user: userInfo
+      });
+    });
+  })(req, res, next);
 }
-
 
 //========================================
 // Registration Route
