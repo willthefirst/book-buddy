@@ -24,15 +24,13 @@ function setUserInfo(request) {
 //========================================
 
 exports.login = function (req, res, next) {
-  passport.authenticate('local', (err, user, info) => {
-    console.log('Error:', err);
-    console.log('User:', user);
-    console.log('Info:', info);
+  passport.authenticate('local', (err, result, info) => {
+
     if (err) { return next(err); }
-    if (!user) {
+    if (!result) {
       return res.status(401).json(info);
     }
-    req.logIn(user, function(err) {
+    req.logIn(result, function(err) {
       if (err) { return next(err); }
 
       let userInfo = setUserInfo(req.user);

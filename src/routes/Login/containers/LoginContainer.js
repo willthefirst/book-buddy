@@ -12,15 +12,19 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(loginRequest());
       axios.post(`${AUTH_ROOT_URL}/login`, user)
         .then((result) => {
-          if (result.status !== 200) {
-            dispatch(loginFailure(result.data));
-            console.log('Error in result!', result);
-          } else {
-            dispatch(loginSuccess(result.data));
-            console.log('Success. User logged in:', result.data.user.email);
-          }
+          dispatch(loginSuccess(result.data));
+          console.log('Success. User logged in:', result.data.user.email);
         }).catch((error) => {
-          console.log('Error logging in!', error);
+          if (error.response) {
+            // The request was made, but the server responded with a status code
+            // that falls out of the range of 2xx
+            dispatch(loginFailure(error.response.data))
+            console.log('Login error:', error.response.data);
+          } else {
+            // Something happened in setting up the request that triggered an Error
+            dispatch(loginFailure(error.message))
+            console.error('Request error:', error.message);
+          }
         });
     }
   }
