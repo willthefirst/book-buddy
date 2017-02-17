@@ -25,7 +25,6 @@ function setUserInfo(request) {
 
 exports.login = function (req, res, next) {
   passport.authenticate('local', (err, result, info) => {
-
     if (err) { return next(err); }
     if (!result) {
       return res.status(401).json(info);

@@ -1,7 +1,22 @@
 import { connect } from 'react-redux'
-import { loginRequest, loginFailure, loginSuccess } from '../modules/login'
+import { authRequest, authFailure, authSuccess } from '../modules/login'
+import cookie from 'react-cookie'
 import axios from 'axios'
 import Login from '../components/Login'
+import { browserHistory } from 'react-router';
+
+
+export function errorHandler(dispatch, error, errorAction) {
+  if (error.response) {
+    // The request was made, but the server responded with a status code
+    // that falls out of the range of 2xx
+    dispatch(errorAction(error.response.data.message))
+  } else {
+    // Something happened in setting up the request that triggered an Error
+    dispatch(errorAction(error.message))
+  }
+}
+
 
 const mapDispatchToProps = (dispatch) => {
   // #todo: ADMIN VERSION refactor the getting of the rooturk
@@ -9,22 +24,14 @@ const mapDispatchToProps = (dispatch) => {
 
   return {
     handleLogin: (user) => {
-      dispatch(loginRequest());
+      dispatch(authRequest());
       axios.post(`${AUTH_ROOT_URL}/login`, user)
         .then((result) => {
-          dispatch(loginSuccess(result.data));
-          console.log('Success. User logged in:', result.data.user.email);
+          cookie.save('token', result.data.token, { path: '/' });
+          dispatch(authSuccess(result.data));
+          browserHistory.push(`/books`);
         }).catch((error) => {
-          if (error.response) {
-            // The request was made, but the server responded with a status code
-            // that falls out of the range of 2xx
-            dispatch(loginFailure(error.response.data))
-            console.log('Login error:', error.response.data);
-          } else {
-            // Something happened in setting up the request that triggered an Error
-            dispatch(loginFailure(error.message))
-            console.error('Request error:', error.message);
-          }
+          errorHandler(dispatch, error, authFailure);
         });
     }
   }
