@@ -1,8 +1,8 @@
 import { connect } from 'react-redux'
-import { authRequest, authFailure, authSuccess } from '../modules/login'
+import { authRequest, authFailure, authSuccess } from '../modules/auth'
 import cookie from 'react-cookie'
 import axios from 'axios'
-import Login from '../components/Login'
+import Auth from '../components/Auth'
 import { browserHistory } from 'react-router';
 
 
@@ -54,5 +54,4 @@ const mapStateToProps = (state) => ({
     Selectors are efficient. A selector is not recomputed unless one of its arguments change.
     Selectors are composable. They can be used as input to other selectors.
     https://github.com/reactjs/reselect    */
-
-export default connect(mapStateToProps, mapDispatchToProps)(Login)
+export default connect(mapStateToProps, mapDispatchToProps)(Auth)

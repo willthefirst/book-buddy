@@ -2,11 +2,12 @@ import React from 'react'
 import { Col, Button, Form, FormGroup, ControlLabel, FormControl } from 'react-bootstrap'
 import { Field, reduxForm } from 'redux-form'
 
-export const Login = (props) => {
+const Register = (props) => {
   const { handleSubmit } = props
 
   return (
     <div>
+      <h2>Register</h2>
       <Form onSubmit={ handleSubmit( (values) => { props.handleLogin(values) }) }>
         <FormGroup controlId="formHorizontalEmail">
           <Col componentClass={ControlLabel}>
@@ -32,10 +33,10 @@ export const Login = (props) => {
   )
 }
 
-Login.propTypes = {
+Register.propTypes = {
 
 }
 
 export default reduxForm({
-  form: 'login'  // a unique identifier for this form
-})(Login)
+  form: 'register'  // a unique identifier for this form
+})(Register)
