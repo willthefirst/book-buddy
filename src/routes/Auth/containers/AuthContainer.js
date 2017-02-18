@@ -1,10 +1,5 @@
 import { connect } from 'react-redux'
-import { authRequest, authFailure, authSuccess } from '../modules/auth'
-import cookie from 'react-cookie'
-import axios from 'axios'
 import Auth from '../components/Auth'
-import { browserHistory } from 'react-router';
-
 
 export function errorHandler(dispatch, error, errorAction) {
   if (error.response) {
@@ -16,42 +11,3 @@ export function errorHandler(dispatch, error, errorAction) {
     dispatch(errorAction(error.message))
   }
 }
-
-
-const mapDispatchToProps = (dispatch) => {
-  // #todo: ADMIN VERSION refactor the getting of the rooturk
-  const AUTH_ROOT_URL = location.href.indexOf('localhost') > 0 ? 'http://localhost:3000/api/auth' : '/api/auth';
-
-  return {
-    handleLogin: (user) => {
-      dispatch(authRequest());
-      axios.post(`${AUTH_ROOT_URL}/login`, user)
-        .then((result) => {
-          cookie.save('token', result.data.token, { path: '/' });
-          dispatch(authSuccess(result.data));
-          browserHistory.push(`/books`);
-        }).catch((error) => {
-          errorHandler(dispatch, error, authFailure);
-        });
-    }
-  }
-}
-
-const mapStateToProps = (state) => ({
-
-})
-
-/*  Note: mapStateToProps is where you should use `reselect` to create selectors, ie:
-
-    import { createSelector } from 'reselect'
-    const counter = (state) => state.counter
-    const tripleCount = createSelector(counter, (count) => count * 3)
-    const mapStateToProps = (state) => ({
-      counter: tripleCount(state)
-    })
-
-    Selectors can compute derived data, allowing Redux to store the minimal possible state.
-    Selectors are efficient. A selector is not recomputed unless one of its arguments change.
-    Selectors are composable. They can be used as input to other selectors.
-    https://github.com/reactjs/reselect    */
-export default connect(mapStateToProps, mapDispatchToProps)(Auth)

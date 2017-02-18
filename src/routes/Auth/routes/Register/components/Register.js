@@ -8,7 +8,7 @@ const Register = (props) => {
   return (
     <div>
       <h2>Register</h2>
-      <Form onSubmit={ handleSubmit( (values) => { props.handleLogin(values) }) }>
+      <Form onSubmit={ handleSubmit( (values) => { props.handleRegister(values) }) }>
         <FormGroup controlId="formHorizontalEmail">
           <Col componentClass={ControlLabel}>
             Email
@@ -26,7 +26,7 @@ const Register = (props) => {
           </Col>
         </FormGroup>
         <FormGroup>
-          <Button type="submit" bsStyle="primary">Submit</Button>
+          <Button type="submit" bsStyle="primary">Register</Button>
         </FormGroup>
       </Form>
     </div>
