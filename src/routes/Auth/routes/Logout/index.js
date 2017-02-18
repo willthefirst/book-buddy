@@ -1,5 +1,5 @@
 export default (store) => ({
-  path : 'login',
+  path : 'logout',
   /*  Async getComponent is only invoked when route matches   */
   getComponent (nextState, cb) {
     /*  Webpack - use 'require.ensure' to create a split point
@@ -7,10 +7,10 @@ export default (store) => ({
     require.ensure([], (require) => {
       /*  Webpack - use require callback to define
           dependencies for bundling   */
-      const Login = require('./containers/LoginContainer').default
+      const Login = require('./containers/LogoutContainer').default
       /*  Return getComponent   */
       cb(null, Login)
     /* Webpack named bundle   */
-    }, 'login')
+    }, 'logout')
   }
 });

@@ -1,6 +1,7 @@
 import { injectReducer } from 'store/reducers'
 import LoginRoute from './routes/Login'
 import RegisterRoute from './routes/Register'
+import LogoutRoute from './routes/Logout'
 
 export default (store) => ({
   path : 'auth',
@@ -22,6 +23,7 @@ export default (store) => ({
   },
   childRoutes: [
     LoginRoute(store),
-    RegisterRoute(store)
+    RegisterRoute(store),
+    LogoutRoute(store)
   ]
 })
