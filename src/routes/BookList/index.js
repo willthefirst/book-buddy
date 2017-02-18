@@ -1,4 +1,5 @@
 import { injectReducer } from 'store/reducers'
+import { requireAuth } from 'util/common'
 
 export default (store) => ({
   path : 'books',
@@ -20,5 +21,6 @@ export default (store) => ({
 
       /* Webpack named bundle   */
     }, 'booklist')
-  }
+  },
+  onEnter: requireAuth
 })

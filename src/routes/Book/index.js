@@ -2,6 +2,7 @@ import { injectReducer } from 'store/reducers'
 import InfoRoute from './routes/Info'
 import ProgressRoute from './routes/Progress'
 import NotesRoute from './routes/Notes'
+import { requireAuth } from 'util/common'
 
 export default (store) => ({
   path : 'book/id/:id',
@@ -22,8 +23,9 @@ export default (store) => ({
       cb(null, Book)
 
     /* Webpack named bundle   */
-  }, 'activeBook')
+    }, 'activeBook')
   },
+  onEnter: requireAuth,
   childRoutes: [
     InfoRoute(store), // <site>/book/info
     ProgressRoute(store), // <site>/book/progress
