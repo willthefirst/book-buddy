@@ -11,6 +11,10 @@ or for the server to use nodemon:
 
 Followed this tutorial during initial setup: http://blog.slatepeak.com/refactoring-a-basic-authenticated-api-with-node-express-and-mongo/
 
+## How-tos
+
+To make a route require auth, add it as a child route to `src/routes/EnsureLoggedIn/index.js`
+
 ## Common errrors
 
 `There is another module with an equal name when case is ignored.
