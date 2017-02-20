@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import BookInfo from 'components/BookInfo'
+import { reduxForm } from 'redux-form'
 
 const Info = (props) => {
   const { handleSubmit, pristine, reset, submitting } = props

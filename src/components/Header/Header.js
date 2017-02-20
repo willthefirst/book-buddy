@@ -26,10 +26,10 @@ class Header extends Component {
     if (!isLoggedIn) {
       navLinks = (
         <Nav pullRight>
-          <LinkContainer to={{ pathname: '/books' }}>
+          <LinkContainer to={{ pathname: '/auth/login' }}>
             <NavItem eventKey={1}>Login</NavItem>
           </LinkContainer>
-          <LinkContainer to={{ pathname: '#' }}>
+          <LinkContainer to={{ pathname: '/auth/register' }}>
             <NavItem eventKey={2}>Register</NavItem>
           </LinkContainer>
         </Nav>
