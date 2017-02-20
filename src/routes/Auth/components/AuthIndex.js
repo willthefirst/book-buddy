@@ -1,13 +1,13 @@
 import React from 'react'
 
-export const Auth = (props) => {
+const AuthIndex = (props) => {
   return (
     <div>{props.children}</div>
   )
 }
 
-Auth.propTypes = {
+AuthIndex.propTypes = {
 
 }
 
-export default Auth
+export default AuthIndex

@@ -7,7 +7,6 @@ class EnsureLoggedIn extends Component {
 
     console.log('EnsureLoggedIn mounted');
     if (!isLoggedIn) {
-      console.log('Not logged in');
       setRedirectUrl(currentUrl);
       browserHistory.push("/auth/login")
     }

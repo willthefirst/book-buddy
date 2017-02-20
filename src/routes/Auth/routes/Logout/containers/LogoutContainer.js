@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 import Logout from '../components/Logout'
 import { browserHistory } from 'react-router'
 import cookie from 'react-cookie'
-import { unauthUser } from 'routes/auth/modules/auth'
+import { unauthUser } from 'layouts/CoreLayout/modules/coreLayout'
 
 const mapDispatchToProps = (dispatch) => {
   // #todo: ADMIN VERSION refactor the getting of the rooturk

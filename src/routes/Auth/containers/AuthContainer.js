@@ -1,6 +1,3 @@
-import { connect } from 'react-redux'
-import Auth from '../components/Auth'
-
 export function errorHandler(dispatch, error, errorAction) {
   if (error.response) {
     // The request was made, but the server responded with a status code
