@@ -3,7 +3,7 @@ import { Col, Button, Form, FormGroup, ControlLabel, FormControl } from 'react-b
 import { Field, reduxForm } from 'redux-form'
 
 const Login = (props) => {
-  const { handleSubmit } = props
+  const { handleSubmit, redirectUrl } = props
 
   return (
     <div>

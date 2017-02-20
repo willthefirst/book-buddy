@@ -4,7 +4,7 @@ import { errorHandler } from 'routes/auth/containers/AuthContainer'
 import { browserHistory } from 'react-router';
 import cookie from 'react-cookie'
 import axios from 'axios'
-import { authRequest, authFailure, authSuccess } from 'routes/auth/modules/auth'
+import { authRequest, authFailure, authSuccess } from 'layouts/CoreLayout/modules/coreLayout'
 
 
 const mapDispatchToProps = (dispatch) => {
@@ -12,15 +12,12 @@ const mapDispatchToProps = (dispatch) => {
   const AUTH_ROOT_URL = location.href.indexOf('localhost') > 0 ? 'http://localhost:3000/api/auth' : '/api/auth';
 
   return {
-    handleLogin: (user) => {
+    handleLogin: (user, redirectUrl) => {
       dispatch(authRequest());
       axios.post(`${AUTH_ROOT_URL}/login`, user)
         .then((result) => {
           cookie.save('token', result.data.token, { path: '/' });
           dispatch(authSuccess(result.data));
-          
-
-          // browserHistory.push(`/books`);
         }).catch((error) => {
           errorHandler(dispatch, error, authFailure);
         });
@@ -29,7 +26,9 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 const mapStateToProps = (state) => {
-  return {}
+  return {
+    redirectUrl: state.auth.redirectUrl
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login)

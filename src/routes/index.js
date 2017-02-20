@@ -2,44 +2,35 @@
 import CoreLayout from '../layouts/CoreLayout'
 import Home from './Home'
 import CounterRoute from './Counter'
-import BookListRoute from './BookList'
-import BookRoute from './Book'
-import NewRoute from './New'
 import AuthRoute from './Auth'
+import EnsureLoggedInRoute from './EnsureLoggedIn'
+import { injectReducer } from 'store/reducers'
 
+export default (store) => ({
+  path : '/',
+  indexRoute: Home,
+  /*  Async getComponent is only invoked when route matches   */
+  getComponent (nextState, cb) {
+    /*  Webpack - use 'require.ensure' to create a split point
+        and embed an async module loader (jsonp) when bundling   */
+    require.ensure([], (require) => {
+      /*  Webpack - use require callback to define
+          dependencies for bundling   */
+      const CoreLayout = require('layouts/CoreLayout/containers/CoreLayoutContainer').default
+      const reducer = require('layouts/CoreLayout/modules/coreLayout').default
 
-/*  Note: Instead of using JSX, we recommend using react-router
-    PlainRoute objects to build route definitions.   */
+      /*  Add the reducer to the store on key 'counter'  */
+      injectReducer(store, { key: 'auth', reducer })
 
-export const createRoutes = (store) => ({
-  path        : '/',
-  component   : CoreLayout,
-  indexRoute  : Home,
-  childRoutes : [
+      /*  Return getComponent   */
+      cb(null, CoreLayout)
+
+    /* Webpack named bundle   */
+    }, 'coreLayout')
+  },
+  childRoutes: [
     CounterRoute(store),
-    BookListRoute(store),
-    BookRoute(store),
-    NewRoute(store),
-    AuthRoute(store)
+    AuthRoute(store),
+    EnsureLoggedInRoute(store)
   ]
-})
-
-/*  Note: childRoutes can be chunked or otherwise loaded programmatically
-    using getChildRoutes with the following signature:
-
-    getChildRoutes (location, cb) {
-      require.ensure([], (require) => {
-        cb(null, [
-          // Remove imports!
-          require('./Counter').default(store)
-        ])
-      })
-    }
-
-    However, this is not necessary for code-splitting! It simply provides
-    an API for async route definitions. Your code splitting should occur
-    inside the route `getComponent` function, since it is only invoked
-    when the route exists and matches.
-*/
-
-export default createRoutes
+});

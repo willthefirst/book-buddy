@@ -25,7 +25,6 @@ export default (store) => ({
     /* Webpack named bundle   */
     }, 'activeBook')
   },
-  onEnter: requireAuth,
   childRoutes: [
     InfoRoute(store), // <site>/book/info
     ProgressRoute(store), // <site>/book/progress
