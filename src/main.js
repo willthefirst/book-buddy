@@ -2,6 +2,8 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import createStore from './store/createStore'
 import AppContainer from './containers/AppContainer'
+import cookie from 'react-cookie';
+import { authSuccess } from 'layouts/CoreLayout/modules/coreLayout'
 
 // ========================================================
 // Store Instantiation
@@ -21,6 +23,13 @@ let render = () => {
     <AppContainer store={store} routes={routes} />,
     MOUNT_NODE
   )
+}
+
+// If we have a JWT token, update state to reflect authenticated user
+const token = cookie.load('token');
+
+if (token) {
+  store.dispatch(authSuccess(token));
 }
 
 // This code is excluded from production bundle

@@ -9,7 +9,7 @@ const mapDispatchToProps = (dispatch) => {
       const isLoggingIn = !prevProps.isLoggedIn && isLoggedIn
 
       if (isLoggingIn) {
-        dispatch(browserHistory.push(redirectUrl))
+        browserHistory.push(redirectUrl)
       } else if (isLoggingOut) {
         // do any kind of cleanup or post-logout redirection here
       }

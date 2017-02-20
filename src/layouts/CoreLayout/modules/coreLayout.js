@@ -71,6 +71,7 @@ const ACTION_HANDLERS = {
     return { ...state, error: '', message: '', content: action.payload, authenticated: true, loading: false }
   },
   [AUTH_FAILURE] : (state, action) => {
+    console.error(action.payload)
     return { ...state, error: action.payload, loading: false }
   },
   [UNAUTH_USER] : (state, action) => {

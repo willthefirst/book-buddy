@@ -5,7 +5,6 @@ class EnsureLoggedIn extends Component {
   componentDidMount() {
     const { setRedirectUrl, currentUrl, isLoggedIn } = this.props
 
-    console.log('EnsureLoggedIn mounted');
     if (!isLoggedIn) {
       setRedirectUrl(currentUrl);
       browserHistory.push("/auth/login")

@@ -19,6 +19,7 @@ const mapDispatchToProps = (dispatch) => {
           cookie.save('token', result.data.token, { path: '/' });
           dispatch(authSuccess(result.data));
         }).catch((error) => {
+          console.log(error);
           errorHandler(dispatch, error, authFailure);
         });
     }
