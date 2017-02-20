@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Navbar, Nav, NavItem } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
+import  { Link } from 'react-router'
 import './Header.scss'
 
 class Header extends Component {
@@ -40,7 +41,7 @@ class Header extends Component {
       <Navbar staticTop>
         <Navbar.Header>
           <Navbar.Brand>
-            <a href="/">Book Buddy</a>
+            <Link to="/">Book Buddy</Link>
           </Navbar.Brand>
           <Navbar.Toggle />
         </Navbar.Header>
