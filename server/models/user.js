@@ -2,22 +2,41 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const bcrypt = require('bcrypt-nodejs')
 
-/* Entry Schema */
 const EntrySchema = new Schema({
   date: {
     type: Date,
     required: true
   },
-  bookID: {
-    type: Number,
+  book_id: {
+    type: Schema.Types.ObjectId,
     required: true
   },
-  page: {
+  currentPage: {
     type: Number,
     required: true
   }
 }, {
   timestamps: true
+})
+
+const BookPersonalSchema = new Schema({
+  book_id: {
+    type: Schema.Types.ObjectId,
+    required: true
+  },
+  status: {
+    type: Array,
+    default: 'Queue',
+    enum: ['Queue', 'Current', 'Finished']
+  },
+  totalPages: {
+    type: Number,
+    default: 42
+  },
+  notes: {
+    type: String,
+    default: ''
+  }
 })
 
 /* User Schema */
@@ -38,7 +57,7 @@ const UserSchema = new Schema({
   },
   resetPasswordToken: { type: String },
   resetPasswordExpires: { type: Date },
-  books: { type: [Schema.Types.ObjectId] },
+  books: [BookPersonalSchema],
   progress:  [EntrySchema]
 }, {
   timestamps: true
