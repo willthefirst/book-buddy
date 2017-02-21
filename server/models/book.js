@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const BookSchema = mongoose.Schema({
+    // GENERAL
     title: {
       type: String,
       default: 'Title'
@@ -10,6 +11,11 @@ const BookSchema = mongoose.Schema({
       type: String,
       default: 'Author'
     },
+    gBooks_id: {
+      type: 'String'
+    }
+    
+    // USER-SPECIFIC
     status: {
       type: Array,
       default: 'Queue',
@@ -22,6 +28,9 @@ const BookSchema = mongoose.Schema({
     notes: {
       type: String,
       default: ''
+    },
+    users: {
+      type: [Schema.Types.ObjectId]
     }
 });
 

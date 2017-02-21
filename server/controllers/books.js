@@ -1,4 +1,10 @@
-const Book = require('../models/user')
+const Book = require('../models/book')
+const jwt = require('jsonwebtoken')
+config = require('../../config/project.config')
+
+function decodeToken(token) {
+  return jwt.verify(token, config.server_secret);
+}
 
 // Get all the books
 exports.getAllBooks = function(req, res) {
@@ -10,17 +16,14 @@ exports.getAllBooks = function(req, res) {
 
 // Add a new book
 exports.createBook = function(req, res) {
-  const book = {
-    title: req.body.title,
-    author: req.body.author,
-    totalPages: req.body.totalPages,
-    status: req.body.status
-  }
-  var sample = new Book(book);
+  let book = { title, author, totalPages, status } = req.body
+  book = new Book(book);
 
-  sample.save(function (err, book) {
+  console.log(req.user);
+
+  book.save(function (err, savedBook) {
     if (err) return console.error(err);
-    res.send(book)
+    res.send(savedBook)
   });
 };
 

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import Login from '../components/Login'
-import { errorHandler } from 'routes/Auth/containers/AuthContainer'
+import { errorHandler } from 'util/common'
 import { browserHistory } from 'react-router';
 import cookie from 'react-cookie'
 import axios from 'axios'

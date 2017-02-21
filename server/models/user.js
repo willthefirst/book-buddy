@@ -38,7 +38,7 @@ const UserSchema = new Schema({
   },
   resetPasswordToken: { type: String },
   resetPasswordExpires: { type: Date },
-  books: { type: Array },
+  books: { type: [Schema.Types.ObjectId] },
   progress:  [EntrySchema]
 }, {
   timestamps: true

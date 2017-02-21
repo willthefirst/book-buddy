@@ -8,11 +8,9 @@ const AuthenticationController = require('./controllers/authentication'),
 // Middleware to require login/auth
 const requireAuth = passport.authenticate('jwt', { session: false });
 
-
 // (this.req, this.res, this.next);
 
 module.exports = function(app) {
-
 
   // Initializing route groups
   const apiRoutes = express.Router(),
@@ -43,8 +41,8 @@ module.exports = function(app) {
   // Get all user books
   apiRoutes.get('/books', BooksController.getAllBooks)
 
-  // Create book route
-  apiRoutes.post('/books', BooksController.createBook)
+  // Create book
+  apiRoutes.post('/books', requireAuth, BooksController.createBook)
 
   // '/api/books/:id'
 
