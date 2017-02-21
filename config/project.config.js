@@ -79,7 +79,8 @@ Edit at Your Own Risk
 // N.B.: globals added here must _also_ be added to .eslintrc
 config.globals = {
   'process.env'  : {
-    'NODE_ENV' : JSON.stringify(config.env)
+    'NODE_ENV' : JSON.stringify(config.env),
+    'GBOOKS_API_KEY' : JSON.stringify('AIzaSyAzUuOWIhtbMnfX_vPyR_7QyEXXtdP5F_Q')
   },
   'NODE_ENV'     : config.env,
   '__DEV__'      : config.env === 'development',

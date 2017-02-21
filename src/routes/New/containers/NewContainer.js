@@ -2,18 +2,51 @@ import { connect } from 'react-redux'
 import axios from 'axios'
 import { browserHistory } from 'react-router'
 import { errorHandler } from 'util/common'
+import { fetchGBooksRequest, fetchGBooksSuccess, fetchGBooksFailure } from '../modules/gBooksResults'
 import cookie from 'react-cookie'
 import New from '../components/New'
+
+const gBookQuery = (query) => {
+  return `https://www.googleapis.com/books/v1/volumes?q=${query}&key=${process.env.GBOOKS_API_KEY}`
+}
 
 const mapDispatchToProps = (dispatch) => {
   // #todo: refactor the getting of the rooturk
   const ROOT_URL = location.href.indexOf('localhost') > 0 ? 'http://localhost:3000/api' : '/api';
 
   return {
+    queryGBooks: (keyword) => {
+      if (keyword.length > 2) {
+        dispatch(fetchGBooksRequest());
+        axios.get(gBookQuery(`${keyword}`))
+        .then((result) => {
+          // console.log(result);
+
+          const books = result.data.items.map((volume) => {
+            const info = volume.volumeInfo
+
+            const authors = info.authors.map((author) => {
+              return author
+            });
+
+            return {
+              title: info.title,
+              authors: authors,
+              thumbnailUrl: info.imageLinks.smallThumbnail,
+              totalPages: info.pageCount
+            }
+          });
+
+
+
+          dispatch(fetchGBooksSuccess(books));
+        }).catch((error) => {
+          errorHandler(dispatch, error, fetchGBooksFailure)
+        });
+      }
+    },
     createBook: (book) => {
       // dispatch(createBookRequest());
-      console.log( cookie.load('token') );
-
       const config = {
         headers: {'Authorization': cookie.load('token') }
       }
@@ -43,7 +76,9 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 const mapStateToProps = (state) => {
-  return {}
+  return {
+    gBooksResults : state.gBooksResults.books
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(New)

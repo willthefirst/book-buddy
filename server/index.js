@@ -1,3 +1,4 @@
+const dotenv = require('dotenv').config()
 const express = require('express')
 const logger = require('morgan')
 const debug = require('debug')('app:server')

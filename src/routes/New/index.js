@@ -1,4 +1,4 @@
-// import { injectReducer } from 'store/reducers'
+import { injectReducer } from 'store/reducers'
 
 export default (store) => ({
   path : 'book/new',
@@ -10,10 +10,10 @@ export default (store) => ({
       /*  Webpack - use require callback to define
           dependencies for bundling   */
       const New = require('./containers/NewContainer').default
-      // const reducer = require('./modules/book').default
+      const reducer = require('./modules/gBooksResults').default
 
       /*  Add the reducer to the store on key 'counter'  */
-      // injectReducer(store, { key: 'new', reducer })
+      injectReducer(store, { key: 'gBooksResults', reducer })
 
       /*  Return getComponent   */
       cb(null, New)
