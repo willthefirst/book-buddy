@@ -20,8 +20,6 @@ const mapDispatchToProps = (dispatch) => {
         dispatch(fetchGBooksRequest());
         axios.get(gBookQuery(`${keyword}`))
         .then((result) => {
-          // console.log(result);
-
           const books = result.data.items.map((volume) => {
             const info = volume.volumeInfo
 
@@ -36,9 +34,6 @@ const mapDispatchToProps = (dispatch) => {
               totalPages: info.pageCount
             }
           });
-
-
-
           dispatch(fetchGBooksSuccess(books));
         }).catch((error) => {
           errorHandler(dispatch, error, fetchGBooksFailure)

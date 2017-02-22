@@ -47,7 +47,6 @@ const ACTION_HANDLERS = {
     }
   },
   [FETCH_GBOOKS_SUCCESS] : (state, action) => {
-    console.log(action.payload);
     return {
         books: action.payload, error: null, loading: false
     }

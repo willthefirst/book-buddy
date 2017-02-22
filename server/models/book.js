@@ -7,14 +7,13 @@ const BookSchema = mongoose.Schema({
     type: String,
     default: 'Title'
   },
-  author: {
-    type: String,
-    default: 'Author'
+  authors: {
+    type: [String]
   },
   gBooks_id: {
     type: 'String'
   },
-  
+
   // USER-SPECIFIC
   users: {
     type: [Schema.Types.ObjectId]
