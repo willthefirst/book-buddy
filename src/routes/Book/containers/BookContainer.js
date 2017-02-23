@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
 import { fetchBookRequest, fetchBookSuccess, fetchBookFailure } from '../modules/book'
 import { initializeEditorState } from '../routes/Notes/modules/notes'
+import { authToken, errorHandler } from 'util/common'
 import axios from 'axios'
 
 
@@ -22,13 +23,11 @@ const mapDispatchToProps = (dispatch) => {
   return {
     fetchBook: (id) => {
       dispatch(fetchBookRequest());
-      axios.get(`${ROOT_URL}/book/${id}`).then((result) => {
-        if (result.status !== 200) {
-          dispatch(fetchBookFailure(result.data));
-        } else {
+      axios.get(`${ROOT_URL}/book/${id}`, authToken).then((result) => {
           dispatch(fetchBookSuccess(result.data));
           dispatch(initializeEditorState(result.data.notes))
-        }
+      }).catch((error) => {
+        errorHandler(dispatch, error, fetchBookFailure)
       });
     }
   }
