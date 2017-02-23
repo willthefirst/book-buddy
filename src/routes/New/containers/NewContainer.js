@@ -1,10 +1,9 @@
 import { connect } from 'react-redux'
 import axios from 'axios'
 import { browserHistory } from 'react-router'
-import { errorHandler } from 'util/common'
+import { errorHandler, authToken } from 'util/common'
 import { fetchGBooksRequest, fetchGBooksSuccess, fetchGBooksFailure } from '../modules/gBooksResults'
 import { createBookRequest, createBookSuccess, createBookFailure } from 'routes/Book/modules/book'
-import cookie from 'react-cookie'
 import New from '../components/New'
 
 const gBookQuery = (query) => {
@@ -47,14 +46,10 @@ const mapDispatchToProps = (dispatch) => {
     createBook: (book) => {
       dispatch(createBookRequest());
 
-      const config = {
-        headers: {'Authorization': cookie.load('token') }
-      }
-
       axios.post(
         `${ROOT_URL}/books`,
         book,
-        config)
+        authToken)
       .then((result) => {
         console.log('Book saved:', result.data);
         // #todo: this double fetches books. on success we load book to state, but then on navigate to the book route

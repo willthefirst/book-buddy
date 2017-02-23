@@ -24,3 +24,5 @@ export const errorHandler = (dispatch, error, errorAction) => {
     dispatch(errorAction(error.message))
   }
 }
+
+export const authToken = { headers: {'Authorization': cookie.load('token') } }

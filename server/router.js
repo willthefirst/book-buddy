@@ -39,7 +39,7 @@ module.exports = function(app) {
   // '/api/books/'
 
   // Get all user books
-  apiRoutes.get('/books', BooksController.getAllBooks)
+  apiRoutes.get('/books', requireAuth, BooksController.getAllBooks)
 
   // Create book
   apiRoutes.post('/books', requireAuth, BooksController.createBook)
@@ -47,11 +47,11 @@ module.exports = function(app) {
   // '/api/books/:id'
 
   // Single book route
-  apiRoutes.get('/book/:id', BooksController.getBook)
+  apiRoutes.get('/book/:id', requireAuth, BooksController.getBook)
 
   // PUT: update the current book
-  apiRoutes.put('/book/:id', BooksController.updateBook)
+  apiRoutes.put('/book/:id', requireAuth, BooksController.updateBook)
 
   // DELETE: get the current book
-  apiRoutes.delete('/book/:id', BooksController.deleteBook)
+  apiRoutes.delete('/book/:id', requireAuth, BooksController.deleteBook)
 };

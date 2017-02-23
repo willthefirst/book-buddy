@@ -1,14 +1,16 @@
 const Book = require('../models/book')
-const jwt = require('jsonwebtoken')
-config = require('../../config/project.config')
-
-function decodeToken(token) {
-  return jwt.verify(token, config.server_secret);
-}
+const config = require('../../config/project.config')
 
 // Get all the books
 exports.getAllBooks = function(req, res) {
-  Book.find(function (err, books) {
+  // Get all book ids belonging to user
+  const bookIds = req.user.books.map(function(book) {
+    return book.book_id
+  });
+
+  // Return all book documents
+  Book.find({'_id': { $in: bookIds }}, function (err, books) {
+    console.log('Books found:', books);
     if (err) return console.error(err);
     res.send(books);
   })
