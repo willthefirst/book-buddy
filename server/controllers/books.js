@@ -24,7 +24,7 @@ exports.createBook = function(req, res) {
       if (!book) {
         // If book doesn't already exists in our db, add it. Once added, return to next promise.
         console.log('Book does not exists yet, creating it...');
-        let newBook = { title, authors, thumbnailUrl, totalPages, gBooks_id } = req.body
+        let newBook = { title, authors, thumbnailUrl, gBooks_id } = req.body
         // this return is important to make then() wait before executing.
         return Book.create(newBook).then(function(book) {
           return book
@@ -34,48 +34,35 @@ exports.createBook = function(req, res) {
         return book
       }
     }).then(function (book) {
-      // Pair the user to the book and vice versa
-      // NEXT: update both users and books collections here using Promise.all, then move to the next.
-      // Add the current user to the books collections users array
+      // Save book to user
+      const bookPersonal = {
+        book_id: book._id,
+        totalPages: req.body.totalPages
+      }
+      req.user.books.push(bookPersonal);
+      const saveBookToUser= req.user.save().then(function(user) {
+        console.log(`1) Added book ${book.title} to user ${req.user.email}`);
+        return user
+      })
+
+      // Save user to book
       book.users.push(req.user._id);
-      return book.save().then(function() {
-        console.log(`Added user ${req.user.email} to book ${book.title}`);
+      const saveUserToBook = book.save().then(function(book) {
+        console.log(`2) Added user ${req.user.email} to book ${book.title}`);
         return book
       })
-    }).then(function (book) {
-      console.log('here');
+
+      return Promise.all([saveBookToUser, saveUserToBook]).then(function(results) {
+        return results
+      })
+    }).then(function (results) {
+      const updatedUser = results[0],
+            updatedBook = results[1]
+
+      res.send(updatedBook)
     }).catch(function(error) {
       console.log('Error creating book:', error)
     });
-
-
-  // let book = { title, authors, thumbnailUrl, totalPages, gBooks_id } = req.body
-  // book = new Book(book);
-
-  // console.log(req.user);
-
-  // Check if book exists in books collection
-    // If book does not exists
-      // add it to our books collection
-      // add userID to book models 'users' array
-    // If so, do nothing, return book id
-
-
-  // then:
-
-  // Check to see if this book already exists in our db
-    // Only real way to know: check agains gbooks_id
-      // if there's a book with the same gbooks_id
-        // don't add, instead just hold onto that books gbooks id.
-
-
-  // Add book id to req.users 'books' Array
-
-
-  // book.save(function (err, savedBook) {
-  //   if (err) return console.error(err);
-  //   res.send(savedBook)
-  // });
 };
 
 // Find the current book
