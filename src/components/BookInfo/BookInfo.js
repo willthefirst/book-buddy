@@ -6,23 +6,6 @@ class  BookInfo extends Component {
   render() {
     return (
       <Form onSubmit={this.props.onSubmit} horizontal>
-        <FormGroup controlId="formHorizontalTitle">
-          <Col componentClass={ControlLabel} sm={2}>
-            Title
-          </Col>
-          <Col sm={10}>
-            <Field name="title" component="input" type="text" placeholder="Title" />
-          </Col>
-        </FormGroup>
-        <FormGroup controlId="formHorizontalAuthor">
-          <Col componentClass={ControlLabel} sm={2}>
-            Author
-          </Col>
-          <Col sm={10}>
-            <Field name="author" component="input" type="text" placeholder="Author" />
-          </Col>
-        </FormGroup>
-
         <FormGroup controlId="formHorizontalStatus">
           <Col componentClass={ControlLabel} sm={2}>
             Status
@@ -63,5 +46,24 @@ class  BookInfo extends Component {
   }
 }
 
+// #todo: for now, we're not going to let users edit titles and authors, since we're
+// pulling from gBooks. if it becomes important to make these custom, we'll implement.
+
+// <FormGroup controlId="formHorizontalTitle">
+//   <Col componentClass={ControlLabel} sm={2}>
+//     Title
+//   </Col>
+//   <Col sm={10}>
+//     <Field name="title" component="input" type="text" placeholder="Title" />
+//   </Col>
+// </FormGroup>
+// <FormGroup controlId="formHorizontalAuthor">
+//   <Col componentClass={ControlLabel} sm={2}>
+//     Authors
+//   </Col>
+//   <Col sm={10}>
+//     <Field name="authors" component="input" type="text" placeholder="Authors" />
+//   </Col>
+// </FormGroup>
 
 export default BookInfo

@@ -13,6 +13,9 @@ const BookSchema = mongoose.Schema({
   gBooks_id: {
     type: 'String'
   },
+  thumbnailUrl: {
+    type: 'String'
+  },
 
   // USER-SPECIFIC
   users: {

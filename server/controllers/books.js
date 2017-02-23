@@ -16,10 +16,19 @@ exports.getAllBooks = function(req, res) {
 
 // Add a new book
 exports.createBook = function(req, res) {
-  let book = { title, author, totalPages, status } = req.body
+  let book = { title, authors, thumbnailUrl, totalPages, gBooks_id } = req.body
   book = new Book(book);
 
-  console.log(req.user);
+  // console.log(req.user);
+
+  // Check to see if this book already exists in our db
+    // Only real way to know: check agains gbooks_id
+      // if there's a book with the same gbooks_id
+        // don't add, instead just hold onto that books gbooks id.
+
+
+  // Add book id to req.users 'books' Array
+
 
   book.save(function (err, savedBook) {
     if (err) return console.error(err);

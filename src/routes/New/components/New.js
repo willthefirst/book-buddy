@@ -16,17 +16,17 @@ const New = (props) => {
       <GBooksSearchForm
         onChange={ (e) => { queryGBooks(e.target.value) } }
         />
-      <Row>2
+      <Row>
       {
         props.gBooksResults.map((book, key) => {
           return (
-            <Col xs={6} sm={3} md={2}>
+            <Col xs={6} sm={3} md={2} key={key}>
               <BookThumbnail
                 title={book.title}
                 authors={book.authors}
                 thumbnailUrl={book.thumbnailUrl}
-                key={key}>
-                <Button bsStyle="success">Add To Library</Button>
+                >
+                <Button bsStyle="success" onClick={() => createBook(book)}>Add To Library</Button>
               </BookThumbnail>
             </Col>
           )

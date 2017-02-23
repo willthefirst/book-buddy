@@ -35,8 +35,19 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 const mapStateToProps = (state) => {
+  const book = state.activeBook.data
+
+  // Convert authors array to a string
+  let authorsToString = ""
+  if (book.authors) {
+    authorsToString = book.authors.join(', ')
+  }
+
   return {
-    title: state.activeBook.data.title
+    title: book.title,
+    thumbnailUrl: book.thumbnailUrl,
+    authors: authorsToString,
+    _id: book._id
   }
 }
 

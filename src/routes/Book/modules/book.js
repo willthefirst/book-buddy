@@ -7,6 +7,10 @@ export const FETCH_BOOK_FAILURE = 'FETCH_BOOK_FAILURE'
 
 export const UPDATE_BOOK_REQUEST = 'UPDATE_BOOK_REQUEST'
 
+export const CREATE_BOOK_REQUEST = 'CREATE_BOOK_REQUEST'
+export const CREATE_BOOK_SUCCESS = 'CREATE_BOOK_SUCCESS'
+export const CREATE_BOOK_FAILURE = 'CREATE_BOOK_FAILURE'
+
 // ------------------------------------
 // Actions
 // ------------------------------------
@@ -42,12 +46,37 @@ export function updateBookRequest(request) {
   }
 }
 
+export function createBookRequest(request) {
+  return {
+    type: CREATE_BOOK_REQUEST,
+    payload: request
+  }
+}
+
+export function createBookSuccess(book) {
+  return {
+    type: CREATE_BOOK_SUCCESS,
+    payload: book
+  }
+}
+
+export function createBookFailure(error) {
+  return {
+    type: CREATE_BOOK_FAILURE,
+    payload: error
+  }
+}
+
 export const actions = {
   fetchBookRequest,
   fetchBookSuccess,
   fetchBookFailure,
 
-  updateBookRequest
+  updateBookRequest,
+
+  createBookRequest,
+  createBookSuccess,
+  createBookFailure
 }
 
 // ------------------------------------
@@ -69,12 +98,31 @@ const ACTION_HANDLERS = {
         ...state, error: action.payload, loading: false
     }
   },
+
   // #todo: this overlaps with fetchbook, refactor?
   [UPDATE_BOOK_REQUEST] : (state, action) => {
     return {
         ...state, loading: true
     }
-  }
+  },
+
+  [CREATE_BOOK_REQUEST] : (state, action) => {
+    return {
+        ...state, loading: true
+    }
+  },
+  [CREATE_BOOK_SUCCESS] : (state, action) => {
+    return {
+        data: action.payload, error: null, loading: false
+    }
+  },
+  [CREATE_BOOK_FAILURE] : (state, action) => {
+    return {
+        ...state, error: action.payload, loading: false
+    }
+  },
+
+
 }
 
 // ------------------------------------
