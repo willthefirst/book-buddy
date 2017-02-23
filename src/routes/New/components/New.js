@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
 import { reduxForm } from 'redux-form'
 import BookInfo from 'components/BookInfo'
-import BookGrid from 'components/BookGrid'
+import BookThumbnail from 'components/BookThumbnail'
 import GBooksSearchForm from 'components/GBooksSearchForm'
 import { Col, Row, Thumbnail, Button } from 'react-bootstrap';
-import { Link } from 'react-router'
 
 const New = (props) => {
   const { handleSubmit, change, pristine, reset, submitting, createBook, queryGBooks } = props
@@ -17,24 +16,19 @@ const New = (props) => {
       <GBooksSearchForm
         onChange={ (e) => { queryGBooks(e.target.value) } }
         />
-      <Row >
+      <Row>2
       {
         props.gBooksResults.map((book, key) => {
           return (
-              <Col xs={6} key={key}>
-                <Thumbnail>
-                  <Row>
-                    <Col xs={4}>
-                      <img src={book.thumbnailUrl} className="img-responsive" height={500} style={{ marginBottom: '24px' }} />
-                    </Col>
-                    <Col xs={8}>
-                      <h3>{book.title}</h3>
-                      <h4>{book.authors.join(', ')}</h4>
-                      <Button bsStyle="success">+ Add To Library</Button>
-                    </Col>
-                  </Row>
-                </Thumbnail>
-              </Col>
+            <Col xs={6} sm={3} md={2}>
+              <BookThumbnail
+                title={book.title}
+                authors={book.authors}
+                thumbnailUrl={book.thumbnailUrl}
+                key={key}>
+                <Button bsStyle="success">Add To Library</Button>
+              </BookThumbnail>
+            </Col>
           )
         })
       }
