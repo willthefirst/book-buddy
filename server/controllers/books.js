@@ -16,10 +16,52 @@ exports.getAllBooks = function(req, res) {
 
 // Add a new book
 exports.createBook = function(req, res) {
-  let book = { title, authors, thumbnailUrl, totalPages, gBooks_id } = req.body
-  book = new Book(book);
+  const query = Book.findOne({ gBooks_id: req.body.gBooks_id })
+  const promise = query.exec();
+
+  // Check to see books already exists in books collection
+  promise.then(function (book) {
+      if (!book) {
+        // If book doesn't already exists in our db, add it. Once added, return to next promise.
+        console.log('Book does not exists yet, creating it...');
+        let newBook = { title, authors, thumbnailUrl, totalPages, gBooks_id } = req.body
+        // this return is important to make then() wait before executing.
+        return Book.create(newBook).then(function(book) {
+          return book
+        })
+      } else {
+        // If it already exists, just return it.
+        return book
+      }
+    }).then(function (book) {
+      // Pair the user to the book and vice versa
+      // NEXT: update both users and books collections here using Promise.all, then move to the next.
+      // Add the current user to the books collections users array
+      book.users.push(req.user._id);
+      return book.save().then(function() {
+        console.log(`Added user ${req.user.email} to book ${book.title}`);
+        return book
+      })
+    }).then(function (book) {
+      console.log('here');
+    }).catch(function(error) {
+      console.log('Error creating book:', error)
+    });
+
+
+  // let book = { title, authors, thumbnailUrl, totalPages, gBooks_id } = req.body
+  // book = new Book(book);
 
   // console.log(req.user);
+
+  // Check if book exists in books collection
+    // If book does not exists
+      // add it to our books collection
+      // add userID to book models 'users' array
+    // If so, do nothing, return book id
+
+
+  // then:
 
   // Check to see if this book already exists in our db
     // Only real way to know: check agains gbooks_id
@@ -30,10 +72,10 @@ exports.createBook = function(req, res) {
   // Add book id to req.users 'books' Array
 
 
-  book.save(function (err, savedBook) {
-    if (err) return console.error(err);
-    res.send(savedBook)
-  });
+  // book.save(function (err, savedBook) {
+  //   if (err) return console.error(err);
+  //   res.send(savedBook)
+  // });
 };
 
 // Find the current book

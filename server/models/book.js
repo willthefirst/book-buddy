@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
+mongoose.Promise = global.Promise;
 
 const BookSchema = mongoose.Schema({
   // GENERAL

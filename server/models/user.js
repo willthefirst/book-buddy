@@ -2,6 +2,8 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const bcrypt = require('bcrypt-nodejs')
 
+mongoose.Promise = global.Promise;
+
 const EntrySchema = new Schema({
   date: {
     type: Date,
