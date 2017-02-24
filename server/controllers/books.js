@@ -1,4 +1,5 @@
 const Book = require('../models/book')
+const User = require('../models/user')
 const config = require('../../config/project.config')
 
 // Get all the books
@@ -77,7 +78,7 @@ exports.getBook = function(req, res) {
       return (item.book_id.toString() === req.params.id.toString())
     })
 
-    // Respond with a combined book object with all the info the client needs 
+    // Respond with a combined book object with all the info the client needs
     res.send({
       status: bookPersonal.status,
       totalPages: bookPersonal.totalPages,
@@ -88,7 +89,7 @@ exports.getBook = function(req, res) {
       title: bookGeneral.title
     })
   }).catch(function(error) {
-    console.log(error)
+    return console.error(err);
   })
 };
 
@@ -104,12 +105,34 @@ exports.updateBook = function(req, res) {
   //   notes: req.body.notes,
   //   progress: req.body.progress
   // }
-  const update = req.body
+  const update = {
+    'books.$.totalPages': req.body.totalPages,
+    'books.$.status': req.body.status
+  }
 
-  Book.findByIdAndUpdate(req.params.id, { $set: update }, { new: true }, function (err, book) {
+  const query =  {
+    '_id': req.user._id,
+    'books.book_id': req.body.book_id
+  }
+
+  console.log('query', query);
+  User.findOneAndUpdate(query, { $set: update }, { new: true }, function (err, updatedUser) {
     if (err) return console.error(err);
-    res.send(book);
+    const updatedBook = updatedUser.books.find((item) => {
+      return (item.book_id.toString() === req.body.book_id.toString())
+    })
+    const update = {
+      totalPages: updatedBook.totalPages,
+      status: updatedBook.status
+    }
+    console.log(update);
+    res.send(update);
   });
+
+  // Book.findByIdAndUpdate(req.params.id, { $set: update }, { new: true }, function (err, book) {
+  //   if (err) return console.error(err);
+  //   res.send(book);
+  // });
 };
 
 // Delete the current book

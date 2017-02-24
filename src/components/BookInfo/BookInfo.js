@@ -26,7 +26,6 @@ class  BookInfo extends Component {
             <Field name="totalPages" component="input" type="number" placeholder="0" />
           </Col>
         </FormGroup>
-
         <FormGroup>
           <Col smOffset={2} sm={10}>
             <Button type="submit" bsStyle="primary">

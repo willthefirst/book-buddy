@@ -1,7 +1,8 @@
 import { connect } from 'react-redux'
 import { loadAccount } from '../modules/info'
-import { updateBookRequest, fetchBookSuccess, fetchBookFailure } from '../../../modules/book'
+import { updateBookRequest, updateBookSuccess, updateBookFailure } from '../../../modules/book'
 import axios from 'axios'
+import { errorHandler, authToken } from 'util/common'
 import { browserHistory } from 'react-router';
 
 /*  This is a container component. Notice it does not contain any JSX,
@@ -22,14 +23,17 @@ const mapDispatchToProps = (dispatch) => {
 
   return {
     updateBook: (book) => {
+      const update = {
+        book_id: book._id,
+        status: book.status,
+        totalPages: book.totalPages
+      }
       dispatch(updateBookRequest());
-      axios.put(`${ROOT_URL}/book/${book._id}`, book).then((result) => {
-        if (result.status !== 200) {
-          dispatch(fetchBookFailure(result.data));
-        } else {
-          dispatch(fetchBookSuccess(result.data));
-        }
-      });
+      axios.put(`${ROOT_URL}/book/${book._id}`, update, authToken).then((result) => {
+        dispatch(updateBookSuccess(result.data));
+      }).catch((error) => {
+        errorHandler(dispatch, error, updateBookFailure)
+      });;
     },
     deleteBook: (book) => {
       axios.delete(`${ROOT_URL}/book/${book._id}`, book).then((result) => {

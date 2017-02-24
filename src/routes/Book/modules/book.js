@@ -6,6 +6,8 @@ export const FETCH_BOOK_SUCCESS = 'FETCH_BOOK_SUCCESS'
 export const FETCH_BOOK_FAILURE = 'FETCH_BOOK_FAILURE'
 
 export const UPDATE_BOOK_REQUEST = 'UPDATE_BOOK_REQUEST'
+export const UPDATE_BOOK_SUCCESS = 'UPDATE_BOOK_SUCCESS'
+export const UPDATE_BOOK_FAILURE = 'UPDATE_BOOK_FAILURE'
 
 export const CREATE_BOOK_REQUEST = 'CREATE_BOOK_REQUEST'
 export const CREATE_BOOK_SUCCESS = 'CREATE_BOOK_SUCCESS'
@@ -46,6 +48,20 @@ export function updateBookRequest(request) {
   }
 }
 
+export function updateBookSuccess(book) {
+  return {
+    type: UPDATE_BOOK_SUCCESS,
+    payload: book
+  }
+}
+
+export function updateBookFailure(error) {
+  return {
+    type: UPDATE_BOOK_FAILURE,
+    payload: error
+  }
+}
+
 export function createBookRequest(request) {
   return {
     type: CREATE_BOOK_REQUEST,
@@ -73,6 +89,8 @@ export const actions = {
   fetchBookFailure,
 
   updateBookRequest,
+  updateBookSuccess,
+  updateBookFailure,
 
   createBookRequest,
   createBookSuccess,
@@ -99,10 +117,22 @@ const ACTION_HANDLERS = {
     }
   },
 
-  // #todo: this overlaps with fetchbook, refactor?
   [UPDATE_BOOK_REQUEST] : (state, action) => {
     return {
         ...state, loading: true
+    }
+  },
+  [UPDATE_BOOK_SUCCESS] : (state, action) => {
+    // merge granular update into full activeBook store
+    return {
+        data: Object.assign(state.data, action.payloa),
+        error: null,
+        loading: false
+    }
+  },
+  [UPDATE_BOOK_FAILURE] : (state, action) => {
+    return {
+        ...state, error: action.payload, loading: false
     }
   },
 
@@ -120,9 +150,7 @@ const ACTION_HANDLERS = {
     return {
         ...state, error: action.payload, loading: false
     }
-  },
-
-
+  }
 }
 
 // ------------------------------------
