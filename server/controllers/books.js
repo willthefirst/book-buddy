@@ -93,46 +93,40 @@ exports.getBook = function(req, res) {
   })
 };
 
+// Dynamically construct update for books (which are hard to update as subdocs of a user)
+const createUpdate = (updateFromClient) => {
+  const update = {};
+  for (key in updateFromClient) {
+    update[`books.$.${key}`] = updateFromClient[key];
+  }
+  return update
+}
+
 // Update the current book
 exports.updateBook = function(req, res) {
 
-  // #todo: would prefer to have the update be piecemeal instead of making a giant object every time.
-  // const update = {
-  //   title: req.body.title,
-  //   author: req.body.author,
-  //   totalPages: req.body.totalPages,
-  //   status: req.body.status,
-  //   notes: req.body.notes,
-  //   progress: req.body.progress
-  // }
-  const update = {
-    'books.$.totalPages': req.body.totalPages,
-    'books.$.status': req.body.status
-  }
+  const update = createUpdate(req.body);
 
   const query =  {
     '_id': req.user._id,
-    'books.book_id': req.body.book_id
+    'books.book_id': req.params.id
   }
 
-  console.log('query', query);
   User.findOneAndUpdate(query, { $set: update }, { new: true }, function (err, updatedUser) {
     if (err) return console.error(err);
+
     const updatedBook = updatedUser.books.find((item) => {
-      return (item.book_id.toString() === req.body.book_id.toString())
+      return (item.book_id.toString() === req.params.id.toString())
     })
+
+    // Just send granular update rather than whole object
     const update = {
       totalPages: updatedBook.totalPages,
       status: updatedBook.status
     }
-    console.log(update);
+
     res.send(update);
   });
-
-  // Book.findByIdAndUpdate(req.params.id, { $set: update }, { new: true }, function (err, book) {
-  //   if (err) return console.error(err);
-  //   res.send(book);
-  // });
 };
 
 // Delete the current book

@@ -24,7 +24,6 @@ const mapDispatchToProps = (dispatch) => {
   return {
     updateBook: (book) => {
       const update = {
-        book_id: book._id,
         status: book.status,
         totalPages: book.totalPages
       }

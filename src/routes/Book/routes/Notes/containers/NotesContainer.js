@@ -1,7 +1,8 @@
 import { connect } from 'react-redux'
 import { EditorState, convertFromRaw, convertToRaw } from 'draft-js'
 import { updateEditorState, initializeEditorState } from '../modules/notes'
-import { updateBookRequest, fetchBookSuccess, fetchBookFailure } from '../../../modules/book'
+import { updateBookRequest, updateBookSuccess, updateBookFailure } from '../../../modules/book'
+import { errorHandler, authToken } from 'util/common'
 import axios from 'axios'
 
 /*  This is a container component. Notice it does not contain any JSX,
@@ -22,14 +23,15 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(updateEditorState(editorState));
     },
 
-    updateBookNotes: function(editorState, bookID) {
+    updateBookNotes: function(editorState, bookId) {
       // Convert editor content to raw JS object (http://facebook.github.io/draft-js/docs/api-reference-data-conversion.html#content)
       let rawContent = convertToRaw(editorState.getCurrentContent());
 
       // Serialize because server is acting like a douche with empty entityMap JSON object
       rawContent = JSON.stringify(rawContent);
 
-      const updatedNotes = {
+      const update = {
+        book_id: bookId,
         notes: rawContent
       };
 
@@ -37,14 +39,11 @@ const mapDispatchToProps = (dispatch) => {
       const ROOT_URL = location.href.indexOf('localhost') > 0 ? 'http://localhost:3000/api' : '/api';
 
       dispatch(updateBookRequest())
-      // update server
-      axios.put(`${ROOT_URL}/book/${bookID}`, updatedNotes).then((result) => {
-        if (result.status !== 200) {
-          dispatch(fetchBookFailure(result.data));
-        } else {
-          dispatch(fetchBookSuccess(result.data));
-          dispatch(initializeEditorState(result.data.notes))
-        }
+      axios.put(`${ROOT_URL}/book/${bookId}`, update, authToken).then((result) => {
+        dispatch(updateBookSuccess(result.data));
+        dispatch(initializeEditorState(result.data.notes));
+      }).catch((error) => {
+        errorHandler(dispatch, error, updateBookFailure(error))
       });
     }
   }

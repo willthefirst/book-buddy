@@ -12,9 +12,9 @@ class  BookInfo extends Component {
           </Col>
           <Col sm={10}>
             <Field name="status" component="select" placeholder="Status">
-              <option value="current">Current</option>
-              <option value="queue">Queue</option>
-              <option value="finished">Finished</option>
+              <option value={0}>Queue</option>
+              <option value={1}>Current</option>
+              <option value={2}>Finished</option>
             </Field>
           </Col>
         </FormGroup>
