@@ -93,46 +93,40 @@ exports.getBook = function(req, res) {
   })
 };
 
-// Dynamically construct update for books (which are hard to update as subdocs of a user)
-const createUpdate = (updateFromClient) => {
-  const update = {};
-  for (key in updateFromClient) {
-    update[`books.$.${key}`] = updateFromClient[key];
-  }
-  return update
-}
 
 // Update the current book
 exports.updateBook = function(req, res) {
+  const requestedUpdate = req.body
 
-  const update = createUpdate(req.body);
-
-  const query =  {
+  // Construct query
+  const query = {
     '_id': req.user._id,
     'books.book_id': req.params.id
   }
 
+  // Construct granular update of subdocs dynamically.
+  // Update the specified book with whatever parameters provided by request
+  const update = {}
+  for (key in requestedUpdate) {
+    update[`books.$.${key}`] = requestedUpdate[key];
+  }
+
+  // Apply the update and respond
   User.findOneAndUpdate(query, { $set: update }, { new: true }, function (err, updatedUser) {
     if (err) return console.error(err);
-
-    const updatedBook = updatedUser.books.find((item) => {
-      return (item.book_id.toString() === req.params.id.toString())
-    })
-
-    // Just send granular update rather than whole object
-    const update = {
-      totalPages: updatedBook.totalPages,
-      status: updatedBook.status
-    }
-
-    res.send(update);
+    res.send(requestedUpdate);
   });
 };
 
 // Delete the current book
 exports.deleteBook = function(req, res) {
-  Book.findByIdAndRemove(req.params.id, function (err, deletedBook) {
-    if (err) return console.error(err);
-    res.send(deletedBook);
+  const removeBookFromUser = User.findOneAndUpdate({'_id': req.user._id}, { '$pull': { books: { book_id: req.params.id } } })
+  const removeUserFromBook = Book.findOneAndUpdate({'_id': req.params.id}, { '$pull': { users: req.user._id } })
+
+  Promise.all([removeBookFromUser, removeUserFromBook]).then(function(results) {
+    res.send(results)
+  }).catch(function(error) {
+    console.log('Error deleting book:', error)
   });
+
 };

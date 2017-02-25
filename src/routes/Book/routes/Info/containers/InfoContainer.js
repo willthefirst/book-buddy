@@ -27,6 +27,7 @@ const mapDispatchToProps = (dispatch) => {
         status: book.status,
         totalPages: book.totalPages
       }
+
       dispatch(updateBookRequest());
       axios.put(`${ROOT_URL}/book/${book._id}`, update, authToken).then((result) => {
         dispatch(updateBookSuccess(result.data));
@@ -35,13 +36,11 @@ const mapDispatchToProps = (dispatch) => {
       });;
     },
     deleteBook: (book) => {
-      axios.delete(`${ROOT_URL}/book/${book._id}`, book).then((result) => {
-        if (result.status !== 200) {
-          console.log('Failed to delete book.', result.data);
-        } else {
-          // #todo: smooth notifications for book removed
-          browserHistory.push(`/books`)
-        }
+      axios.delete(`${ROOT_URL}/book/${book._id}`, authToken).then((result) => {
+        console.log(result);
+        browserHistory.push(`/books`)
+      }).catch((error) => {
+        console.error('Failed to delete book.', error);
       });
     }
   }
