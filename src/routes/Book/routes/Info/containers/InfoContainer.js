@@ -37,7 +37,6 @@ const mapDispatchToProps = (dispatch) => {
     },
     deleteBook: (book) => {
       axios.delete(`${ROOT_URL}/book/${book._id}`, authToken).then((result) => {
-        console.log(result);
         browserHistory.push(`/books`)
       }).catch((error) => {
         console.error('Failed to delete book.', error);

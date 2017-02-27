@@ -2,12 +2,28 @@ import { connect } from 'react-redux'
 import { setRedirectUrl } from 'layouts/CoreLayout/modules/coreLayout'
 import EnsureLoggedIn from '../components/EnsureLoggedIn'
 import { browserHistory } from 'react-router';
+import { errorHandler, authToken } from 'util/common'
+import { authRequest, authFailure, authSuccess } from 'layouts/CoreLayout/modules/coreLayout'
+import axios from 'axios'
 
 
 const mapDispatchToProps = (dispatch) => {
   return {
     setRedirectUrl: (currentUrl) => {
       dispatch(setRedirectUrl(currentUrl))
+    },
+    meFromToken: () => {
+      // #todo: ADMIN VERSION refactor the getting of the rooturk
+      const AUTH_ROOT_URL = location.href.indexOf('localhost') > 0 ? 'http://localhost:3000/api/auth' : '/api/auth';
+        dispatch(authRequest());
+        axios.get(`${AUTH_ROOT_URL}/meFromToken`, authToken)
+          .then((result) => {
+            console.log('refreshed from token');
+            dispatch(authSuccess(result.data));
+          }).catch((error) => {
+            errorHandler(dispatch, error, authFailure);
+          });
+
     }
   }
 }
