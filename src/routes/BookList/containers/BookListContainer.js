@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import { fetchBookListRequest, fetchBookListSuccess, fetchBookListFailure } from '../modules/bookList'
-import { errorHandler, authToken } from 'util/common'
+import { errorHandler, applyAuthToken } from 'util/common'
 import axios from 'axios'
 
 /*  This is a container component. Notice it does not contain any JSX,
@@ -17,7 +17,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     fetchBooks: () => {
       dispatch(fetchBookListRequest());
-      axios.get(`${ROOT_URL}/books`, authToken)
+      axios.get(`${ROOT_URL}/books`, applyAuthToken())
         .then((result) => {
           dispatch(fetchBookListSuccess(result.data));
         }).catch((error) => {

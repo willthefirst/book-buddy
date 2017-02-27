@@ -13,6 +13,8 @@ export const CREATE_BOOK_REQUEST = 'CREATE_BOOK_REQUEST'
 export const CREATE_BOOK_SUCCESS = 'CREATE_BOOK_SUCCESS'
 export const CREATE_BOOK_FAILURE = 'CREATE_BOOK_FAILURE'
 
+export const RESET_BOOK = 'RESET_BOOK'
+
 // ------------------------------------
 // Actions
 // ------------------------------------
@@ -83,6 +85,13 @@ export function createBookFailure(error) {
   }
 }
 
+export function resetBook() {
+  return {
+    type: RESET_BOOK,
+    payload: ''
+  }
+}
+
 export const actions = {
   fetchBookRequest,
   fetchBookSuccess,
@@ -94,12 +103,20 @@ export const actions = {
 
   createBookRequest,
   createBookSuccess,
-  createBookFailure
+  createBookFailure,
+
+  resetBook
 }
 
 // ------------------------------------
 // Action Handlers
 // ------------------------------------
+const initialState =  {
+  data: {},
+  error: null,
+  loading: false
+}
+
 const ACTION_HANDLERS = {
   [FETCH_BOOK_REQUEST] : (state, action) => {
     return {
@@ -150,17 +167,15 @@ const ACTION_HANDLERS = {
     return {
         ...state, error: action.payload, loading: false
     }
+  },
+  [RESET_BOOK] : (state, action) => {
+    return initialState
   }
 }
 
 // ------------------------------------
 // Reducer
 // ------------------------------------
-const initialState =  {
-  data: {},
-  error: null,
-  loading: false
-}
 
 export default function bookReducer (state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]

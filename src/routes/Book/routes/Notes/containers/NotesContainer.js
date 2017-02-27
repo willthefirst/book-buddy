@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 import { EditorState, convertFromRaw, convertToRaw } from 'draft-js'
 import { updateEditorState, initializeEditorState } from '../modules/notes'
 import { updateBookRequest, updateBookSuccess, updateBookFailure } from '../../../modules/book'
-import { errorHandler, authToken } from 'util/common'
+import { errorHandler, applyAuthToken } from 'util/common'
 import axios from 'axios'
 
 /*  This is a container component. Notice it does not contain any JSX,
@@ -39,7 +39,7 @@ const mapDispatchToProps = (dispatch) => {
       const ROOT_URL = location.href.indexOf('localhost') > 0 ? 'http://localhost:3000/api' : '/api';
 
       dispatch(updateBookRequest())
-      axios.put(`${ROOT_URL}/book/${bookId}`, update, authToken).then((result) => {
+      axios.put(`${ROOT_URL}/book/${bookId}`, update, applyAuthToken()).then((result) => {
         dispatch(updateBookSuccess(result.data));
         dispatch(initializeEditorState(result.data.notes));
       }).catch((error) => {

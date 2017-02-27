@@ -4,6 +4,7 @@ const config = require('../../config/project.config')
 
 // Get all the books
 exports.getAllBooks = function(req, res) {
+  console.log(req.user);
   // Get all book ids belonging to user
   const bookIds = req.user.books.map(function(book) {
     return book.book_id

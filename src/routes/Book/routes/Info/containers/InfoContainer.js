@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 import { loadAccount } from '../modules/info'
 import { updateBookRequest, updateBookSuccess, updateBookFailure } from '../../../modules/book'
 import axios from 'axios'
-import { errorHandler, authToken } from 'util/common'
+import { errorHandler, applyAuthToken } from 'util/common'
 import { browserHistory } from 'react-router';
 
 /*  This is a container component. Notice it does not contain any JSX,
@@ -29,14 +29,14 @@ const mapDispatchToProps = (dispatch) => {
       }
 
       dispatch(updateBookRequest());
-      axios.put(`${ROOT_URL}/book/${book._id}`, update, authToken).then((result) => {
+      axios.put(`${ROOT_URL}/book/${book._id}`, update, applyAuthToken()).then((result) => {
         dispatch(updateBookSuccess(result.data));
       }).catch((error) => {
         errorHandler(dispatch, error, updateBookFailure)
       });;
     },
     deleteBook: (book) => {
-      axios.delete(`${ROOT_URL}/book/${book._id}`, authToken).then((result) => {
+      axios.delete(`${ROOT_URL}/book/${book._id}`, applyAuthToken()).then((result) => {
         browserHistory.push(`/books`)
       }).catch((error) => {
         console.error('Failed to delete book.', error);

@@ -5,6 +5,8 @@ export const FETCH_BOOKLIST_REQUEST = 'FETCH_BOOKLIST_REQUEST'
 export const FETCH_BOOKLIST_SUCCESS = 'FETCH_BOOKLIST_SUCCESS'
 export const FETCH_BOOKLIST_FAILURE = 'FETCH_BOOKLIST_FAILURE'
 
+export const RESET_BOOKLIST = 'FETCH_BOOKLIST_FAILURE'
+
 // ------------------------------------
 // Actions
 // ------------------------------------
@@ -32,16 +34,31 @@ export function fetchBookListFailure(error) {
   }
 }
 
+export function resetBookList() {
+  return {
+    type: RESET_BOOKLIST,
+    payload: ''
+  }
+}
+
 export const actions = {
   fetchBookListRequest,
   fetchBookListSuccess,
-  fetchBookListFailure
+  fetchBookListFailure,
+
+  resetBookList
 }
 
 
 // ------------------------------------
 // Action Handlers
 // ------------------------------------
+const initialState =  {
+  books: [],
+  error: null,
+  loading: false
+}
+
 const ACTION_HANDLERS = {
   [FETCH_BOOKLIST_REQUEST] : (state, action) => {
     return {
@@ -57,17 +74,15 @@ const ACTION_HANDLERS = {
     return {
         ...state, error: action.payload, loading: false
     }
+  },
+  [RESET_BOOKLIST] : (state, action) => {
+    return initialState
   }
 }
 
 // ------------------------------------
 // Reducer
 // ------------------------------------
-const initialState =  {
-  books: [],
-  error: null,
-  loading: false
-}
 
 export default function bookListReducer (state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]
