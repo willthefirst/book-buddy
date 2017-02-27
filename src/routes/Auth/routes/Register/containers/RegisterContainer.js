@@ -16,6 +16,7 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(authRequest());
       axios.post(`${AUTH_ROOT_URL}/register`, user)
         .then((result) => {
+          console.log(result);
           cookie.save('token', result.data.token, { path: '/' });
           dispatch(authSuccess(result.data));
           browserHistory.push(`/books`);

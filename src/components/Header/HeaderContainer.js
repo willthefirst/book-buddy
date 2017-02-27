@@ -5,8 +5,17 @@ const mapDispatchToProps = (dispatch) => {
   return {}
 }
 
-const mapStateToProps = (state) => ({
-  isLoggedIn: state.auth.authenticated
-})
+const mapStateToProps = (state) => {
+  let userEmail = ''
+  if (state.auth.authenticated) {
+    // userEmail = 'asadasd'
+    userEmail = state.auth.content.user.email
+  }
+
+  return ({
+    isLoggedIn: state.auth.authenticated,
+    userEmail: userEmail
+  })
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header)

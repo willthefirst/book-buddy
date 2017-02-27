@@ -20,24 +20,26 @@ const mapDispatchToProps = (dispatch) => {
         dispatch(fetchGBooksRequest());
         axios.get(gBookQuery(`${keyword}`))
         .then((result) => {
-          // Create a clean JSON array of books
-          const books = result.data.items.map((volume) => {
-            const info = volume.volumeInfo
+          if (result.data.items > 0) {
+            // Create a clean JSON array of books
+            const books = result.data.items.map((volume) => {
+              const info = volume.volumeInfo
 
-            const authors = info.authors.map((author) => {
-              return author
+              const authors = info.authors.map((author) => {
+                return author
+              });
+
+              return {
+                title: info.title,
+                authors: authors,
+                thumbnailUrl: info.imageLinks.thumbnail,
+                totalPages: info.pageCount,
+                gBooks_id: volume.id
+              }
             });
-
-            return {
-              title: info.title,
-              authors: authors,
-              thumbnailUrl: info.imageLinks.thumbnail,
-              totalPages: info.pageCount,
-              gBooks_id: volume.id
-            }
-          });
-          // Update store with clean array of books
-          dispatch(fetchGBooksSuccess(books));
+            // Update store with clean array of books
+            dispatch(fetchGBooksSuccess(books));
+          }
         }).catch((error) => {
           errorHandler(dispatch, error, fetchGBooksFailure)
         });

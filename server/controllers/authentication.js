@@ -41,6 +41,15 @@ exports.login = function (req, res, next) {
   })(req, res, next);
 }
 
+// For refreshing info from a token (case when user is already logged in but refreshes)
+exports.meFromToken = function (req, res, next) {
+  let userInfo = setUserInfo(req.user);
+  res.status(200).json({
+    token: 'JWT ' + generateToken(userInfo),
+    user: userInfo
+  })
+}
+
 //========================================
 // Registration Route
 //========================================
@@ -70,7 +79,7 @@ exports.register = function(req, res, next) {
       // If email is unique and password was provided, create account
       let user = new User({
         email: email,
-        password: password,
+        password: password
       });
 
       user.save(function(err, user) {

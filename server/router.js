@@ -29,6 +29,9 @@ module.exports = function(app) {
   // Login route /api/auth/login
   authRoutes.post('/login', AuthenticationController.login);
 
+  // Refresh user details from already existing token.
+  authRoutes.get('/meFromToken', requireAuth, AuthenticationController.meFromToken);
+
   // Set url for API group routes
   app.use('/api', apiRoutes);
 
