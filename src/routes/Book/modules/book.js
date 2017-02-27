@@ -125,7 +125,7 @@ const ACTION_HANDLERS = {
   [UPDATE_BOOK_SUCCESS] : (state, action) => {
     // merge granular update into full activeBook store
     return {
-        data: Object.assign(state.data, action.payloa),
+        data: Object.assign(state.data, action.payload),
         error: null,
         loading: false
     }

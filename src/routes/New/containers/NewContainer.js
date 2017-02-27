@@ -20,7 +20,7 @@ const mapDispatchToProps = (dispatch) => {
         dispatch(fetchGBooksRequest());
         axios.get(gBookQuery(`${keyword}`))
         .then((result) => {
-          if (result.data.items > 0) {
+          if (result.data.items.length > 0) {
             // Create a clean JSON array of books
             const books = result.data.items.map((volume) => {
               const info = volume.volumeInfo

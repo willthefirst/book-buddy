@@ -80,7 +80,7 @@ exports.getBook = function(req, res) {
 
     // Respond with a combined book object with all the info the client needs
     res.send({
-      status: bookPersonal.status,
+      status: bookPersonal.status[0],
       totalPages: bookPersonal.totalPages,
       notes: bookPersonal.notes,
       _id: bookGeneral._id,

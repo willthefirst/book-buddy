@@ -2,9 +2,8 @@ import React, { Component } from 'react'
 import { browserHistory } from 'react-router';
 
 class EnsureLoggedIn extends Component {
-  componentDidMount() {
+  componentDidUpdate() {
     const { setRedirectUrl, currentUrl, isLoggedIn } = this.props
-
     if (!isLoggedIn) {
       setRedirectUrl(currentUrl);
       browserHistory.push("/auth/login")

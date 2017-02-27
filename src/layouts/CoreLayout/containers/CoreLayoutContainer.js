@@ -30,7 +30,6 @@ const mapDispatchToProps = (dispatch) => {
             errorHandler(dispatch, error, authFailure);
           });
       }
-
     }
   }
 }
