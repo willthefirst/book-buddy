@@ -15,7 +15,7 @@ const Info = (props) => {
 }
 
 Info.propTypes = {
-
+  
 }
 
 export default reduxForm({

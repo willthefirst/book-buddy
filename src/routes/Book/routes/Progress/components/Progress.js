@@ -1,14 +1,64 @@
 import React from 'react'
-import { Col, Button, Form, FormGroup, ControlLabel, FormControl, Checkbox, Radio } from 'react-bootstrap'
+import { reduxForm } from 'redux-form'
+import { Row, Col, Button, Form, FormGroup, ControlLabel, Table } from 'react-bootstrap'
+import { Field } from 'redux-form'
 
-export const Progress = (props) => (
-  <div>
-    <h1>PROGRESS SUB COMPONENT</h1>
-  </div>
-)
+export const Progress = (props) => {
+  const { handleSubmit } = props
+
+  return (
+    <div>
+      <Form horizontal onSubmit={ handleSubmit( (values)=>{  props.updateProgress(values, props.params.id); } ) }>
+        <FormGroup>
+          <Col componentClass={ControlLabel} sm={2}>
+            Date
+          </Col>
+          <Col sm={10}>
+            <Field name="date" component="input" type="date" required />
+            {'  '}
+          </Col>
+        </FormGroup>
+        <FormGroup>
+          <Col componentClass={ControlLabel} sm={2}>
+            Current page:
+          </Col>
+          <Col sm={10}>
+            <Field name="currentPage" component="input" type="number" placeholder="Current Page" required />
+            {'  '}
+          </Col>
+        </FormGroup>
+        <FormGroup>
+          <Col sm={12}>
+            <Button bsStyle="primary" type="submit">Add Progress</Button>
+          </Col>
+        </FormGroup>
+      </Form>
+      <Table responsive striped>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Page Number</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>2/23/17</td>
+            <td>68</td>
+          </tr>
+          <tr>
+            <td>2/22/17</td>
+            <td>43</td>
+          </tr>
+        </tbody>
+      </Table>
+    </div>
+  )
+}
 
 Progress.propTypes = {
 
 }
 
-export default Progress
+export default reduxForm({
+  form: 'progress'  // a unique identifier for this form
+})(Progress)

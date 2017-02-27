@@ -1,4 +1,7 @@
 import { connect } from 'react-redux'
+import { updateBookRequest, updateBookSuccess, updateBookFailure } from '../../../modules/book'
+import axios from 'axios'
+import { errorHandler, applyAuthToken } from 'util/common'
 
 /*  This is a container component. Notice it does not contain any JSX,
     nor does it import React. This component is **only** responsible for
@@ -12,11 +15,31 @@ import Progress from '../components/Progress'
     implementing our wrapper around increment; the component doesn't care   */
 
 const mapDispatchToProps = (dispatch) => {
-  return {}
+  // #todo: refactor the getting of the rooturk
+  const ROOT_URL = location.href.indexOf('localhost') > 0 ? 'http://localhost:3000/api' : '/api';
+
+  return {
+    updateProgress: (values, book_id) => {
+      const update = {
+        date: values.date,
+        book_id: book_id,
+        currentPage: values.currentPage
+      }
+
+      dispatch(updateBookRequest());
+      axios.put(`${ROOT_URL}/book/${book_id}/progress`, update, applyAuthToken()).then((result) => {
+        console.log(result.data);
+        dispatch(updateBookSuccess(result.data));
+      }).catch((error) => {
+        errorHandler(dispatch, error, updateBookFailure)
+      });;
+    }
+  }
 }
 
 const mapStateToProps = (state) => {
-  return {}
+  return {
+  }
 }
 
 /*  Note: mapStateToProps is where you should use `reselect` to create selectors, ie:

@@ -94,6 +94,23 @@ exports.getBook = function(req, res) {
   })
 };
 
+// Add a progress entry to a given book
+exports.updateProgress = function(req, res) {
+  const progressEntry = req.body
+
+  // Construct query
+  const query = {
+    '_id': req.user._id,
+    'books.book_id': req.params.id
+  }
+
+  // Apply the update and respond
+  User.findOneAndUpdate(query, { $push: { progress: progressEntry } }, { new: true }, function (err, updatedUser) {
+    if (err) return console.error(err);
+    console.log(updatedUser)
+    res.send(progressEntry);
+  });
+}
 
 // Update the current book
 exports.updateBook = function(req, res) {
