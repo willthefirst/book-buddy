@@ -1,7 +1,7 @@
 const Book = require('../models/book')
 const User = require('../models/user')
 const config = require('../../config/project.config')
-const moment = require('moment');
+const moment = require('moment')
 
 // Get all the books
 exports.getAllBooks = function(req, res) {
@@ -69,17 +69,31 @@ exports.createBook = function(req, res) {
   });
 };
 
-function extractProgress(progressArray, bookIdToUpdate) {
-  const slimProgress = [];
+function extractProgress(progressArray, book_id) {
+  let slimProgress = [];
 
+  // Get only entries that correspond to the book_id
   progressArray.forEach((entry) => {
-    if (entry.book_id.toString()  === bookIdToUpdate.toString()) {
-      const formattedDate = moment(entry.date).format('MM/DD/YYYY');
+    if (entry.book_id.toString()  === book_id.toString()) {
       slimProgress.push({
-        date: formattedDate,
+        date: entry.date,
         currentPage: entry.currentPage
       })
     }
+  })
+
+  // Sort entries by date #todo does this need to happen here?
+  slimProgress.sort(function(a,b) {
+    return b.date - a.date
+  })
+
+  // Reformat date once sorted
+  slimProgress = slimProgress.map((entry) => {
+    return {
+      currentPage: entry.currentPage,
+      date: moment(entry.date).format('MM/DD/YYYY')
+    }
+
   })
 
   return slimProgress
