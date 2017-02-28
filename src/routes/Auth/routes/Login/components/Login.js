@@ -14,7 +14,7 @@ const Login = (props) => {
             Email
           </Col>
           <Col>
-            <Field name="email" component="input" type="text" placeholder="Email" />
+            <Field name="email" className="form-control" component="input" type="text" placeholder="Email" />
           </Col>
         </FormGroup>
         <FormGroup controlId="formHorizontalPassword">
@@ -22,7 +22,7 @@ const Login = (props) => {
             Password
           </Col>
           <Col>
-            <Field name="password" component="input" type="password" placeholder="Password" />
+            <Field name="password" className="form-control" component="input" type="password" placeholder="Password" />
           </Col>
         </FormGroup>
         <FormGroup>

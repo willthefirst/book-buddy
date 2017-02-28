@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import BookGrid from 'components/BookGrid'
+import { Col, Row } from 'react-bootstrap'
+import BookThumbnail from 'components/BookThumbnail'
 
 class BookList extends Component {
   componentWillMount() {
@@ -13,7 +14,20 @@ class BookList extends Component {
     }
 
     return (
-      <BookGrid books={this.props.books} />
+        <Row>
+          {
+            this.props.books.map((book, key) => {
+              return (
+                <BookThumbnail
+                  title={ book.title }
+                  authors={ book.authors }
+                  thumbnailUrl={ book.thumbnailUrl }
+                  linkTo= { `/book/id/${book._id}/progress` }
+                  key={key} />
+              )
+            })
+          }
+        </Row>
     )
   }
 }
