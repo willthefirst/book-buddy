@@ -1,29 +1,26 @@
 import React from 'react'
 import { Col, Row, Button } from 'react-bootstrap'
-import Truncate from 'react-truncate'
 import { Link } from 'react-router'
 import './BookThumbnail.scss'
 
+String.prototype.trunc =
+     function( n, useWordBoundary ){
+         if (this.length <= n) { return this; }
+         var subString = this.substr(0, n-1);
+         return (useWordBoundary
+            ? subString.substr(0, subString.lastIndexOf(' '))
+            : subString) + "...";
+      };
+
 const BookThumbnail = (props) => {
-  let authors = [];
-
-  for (let i = 0; (i < props.authors.length && i <= 2); i++) {
-    authors.push(props.authors[i])
-  }
-
-  authors = authors.join(', ')
-  console.log(authors);
-
   const details = (
     <div>
       <img src={props.thumbnailUrl} className='book-thumb__img' />
       <h4>
-        <Truncate lines={2}>
-          {props.title}
-        </Truncate>
+        { props.title.trunc(50, true) }
         <br />
         <small>
-          {authors}
+          {props.authors.join(', ').trunc(50, true)}
         </small>
       </h4>
     </div>
