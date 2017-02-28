@@ -2,6 +2,7 @@ import { connect } from 'react-redux'
 import { updateBookRequest, updateBookSuccess, updateBookFailure } from '../../../modules/book'
 import axios from 'axios'
 import { errorHandler, applyAuthToken } from 'util/common'
+var moment = require('moment');
 
 /*  This is a container component. Notice it does not contain any JSX,
     nor does it import React. This component is **only** responsible for

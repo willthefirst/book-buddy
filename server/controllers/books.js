@@ -1,6 +1,7 @@
 const Book = require('../models/book')
 const User = require('../models/user')
 const config = require('../../config/project.config')
+const moment = require('moment');
 
 // Get all the books
 exports.getAllBooks = function(req, res) {
@@ -73,8 +74,9 @@ function extractProgress(progressArray, bookIdToUpdate) {
 
   progressArray.forEach((entry) => {
     if (entry.book_id.toString()  === bookIdToUpdate.toString()) {
-      slimProgress.push( {
-        date: entry.date,
+      const formattedDate = moment(entry.date).format('MM/DD/YYYY');
+      slimProgress.push({
+        date: formattedDate,
         currentPage: entry.currentPage
       })
     }
