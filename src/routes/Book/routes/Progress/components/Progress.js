@@ -14,7 +14,7 @@ export const Progress = (props) => {
             Date
           </Col>
           <Col sm={10}>
-            <Field name="date" component="input" type="date" required />
+            <Field name="date" component="input" className="form-control" type="date" required />
             {'  '}
           </Col>
         </FormGroup>
@@ -23,7 +23,7 @@ export const Progress = (props) => {
             Current page:
           </Col>
           <Col sm={10}>
-            <Field name="currentPage" component="input" type="number" placeholder="Current Page" required />
+            <Field name="currentPage" className="form-control" component="input" type="number" placeholder="Current Page" required />
             {'  '}
           </Col>
         </FormGroup>

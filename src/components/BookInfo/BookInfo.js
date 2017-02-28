@@ -11,7 +11,7 @@ class  BookInfo extends Component {
             Status
           </Col>
           <Col sm={10}>
-            <Field name="status" component="select" placeholder="Status">
+            <Field className="form-control" name="status" component="select" placeholder="Status">
               <option value="Queue">Queue</option>
               <option value="Current">Current</option>
               <option value="Finished">Finished</option>
@@ -23,7 +23,7 @@ class  BookInfo extends Component {
             Total Pages
           </Col>
           <Col sm={10}>
-            <Field name="totalPages" component="input" type="number" placeholder="0" />
+            <Field className="form-control" name="totalPages" component="input" type="number" placeholder="0" />
           </Col>
         </FormGroup>
         <FormGroup>

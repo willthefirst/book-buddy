@@ -11,7 +11,7 @@ class GBooksSearchForm extends Component {
             Title
           </Col>
           <Col sm={10}>
-            <Field name="title" component="input" type="text" onChange={this.props.onChange} placeholder="Title" />
+            <Field className="form-control" name="title" component="input" type="text" onChange={this.props.onChange} placeholder="Title" />
           </Col>
         </FormGroup>
       </Form>

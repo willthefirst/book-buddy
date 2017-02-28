@@ -5,7 +5,7 @@ import { Link } from 'react-router'
 const BookSingle = (props) => {
   return (
     <Col xs={4} sm={3} height="100">
-      <Link to={`/book/id/${props._id}`}>
+      <Link to={`/book/id/${props._id}/progress`}>
         <Thumbnail src={props.thumbnailUrl} alt="242x200">
           <h3>{props.title}</h3>
           <h4>{props.authors.join(', ')}</h4>
