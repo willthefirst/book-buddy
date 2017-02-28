@@ -62,13 +62,26 @@ exports.createBook = function(req, res) {
   }).then(function (results) {
     const updatedUser = results[0],
     updatedBook = results[1]
-
     res.send(updatedBook)
   }).catch(function(error) {
     console.log('Error creating book:', error)
   });
 };
 
+function extractProgress(progressArray, bookIdToUpdate) {
+  const slimProgress = [];
+
+  progressArray.forEach((entry) => {
+    if (entry.book_id.toString()  === bookIdToUpdate.toString()) {
+      slimProgress.push( {
+        date: entry.date,
+        currentPage: entry.currentPage
+      })
+    }
+  })
+
+  return slimProgress
+}
 
 // Find the current book
 exports.getBook = function(req, res) {
@@ -79,10 +92,13 @@ exports.getBook = function(req, res) {
       return (item.book_id.toString() === req.params.id.toString())
     })
 
+    const slimProgress = extractProgress(req.user.progress, req.params.id);
+
     // Respond with a combined book object with all the info the client needs
     res.send({
       status: bookPersonal.status[0],
       totalPages: bookPersonal.totalPages,
+      progress: slimProgress,
       notes: bookPersonal.notes,
       _id: bookGeneral._id,
       thumbnailUrl: bookGeneral.thumbnailUrl,
@@ -90,7 +106,7 @@ exports.getBook = function(req, res) {
       title: bookGeneral.title
     })
   }).catch(function(error) {
-    return console.error(err);
+    return console.error(error)
   })
 };
 
@@ -107,8 +123,8 @@ exports.updateProgress = function(req, res) {
   // Apply the update and respond
   User.findOneAndUpdate(query, { $push: { progress: progressEntry } }, { new: true }, function (err, updatedUser) {
     if (err) return console.error(err);
-    console.log(updatedUser)
-    res.send(progressEntry);
+    const newProgress = extractProgress(updatedUser.progress, req.params.id)
+    res.send(newProgress);
   });
 }
 

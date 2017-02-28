@@ -28,17 +28,20 @@ const mapDispatchToProps = (dispatch) => {
 
       dispatch(updateBookRequest());
       axios.put(`${ROOT_URL}/book/${book_id}/progress`, update, applyAuthToken()).then((result) => {
-        console.log(result.data);
-        dispatch(updateBookSuccess(result.data));
+        const update = {
+          progress: result.data
+        }
+        dispatch(updateBookSuccess(update));
       }).catch((error) => {
         errorHandler(dispatch, error, updateBookFailure)
-      });;
+      });
     }
   }
 }
 
 const mapStateToProps = (state) => {
   return {
+    progressEntries: state.activeBook.data.progress || []
   }
 }
 

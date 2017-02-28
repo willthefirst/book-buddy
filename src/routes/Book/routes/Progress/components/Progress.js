@@ -41,14 +41,16 @@ export const Progress = (props) => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>2/23/17</td>
-            <td>68</td>
-          </tr>
-          <tr>
-            <td>2/22/17</td>
-            <td>43</td>
-          </tr>
+          {
+            props.progressEntries.map((entry, index) => {
+              return (
+                <tr key={index}>
+                  <td>{entry.date}</td>
+                  <td>{entry.currentPage}</td>
+                </tr>
+              )
+            })
+          }
         </tbody>
       </Table>
     </div>
