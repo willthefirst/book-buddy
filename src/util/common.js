@@ -15,6 +15,7 @@ export const requireAuth =  (nextState, replace, callback) => {
 }
 
 export const errorHandler = (dispatch, error, errorAction) => {
+  console.log(error.response);
   if (error.response) {
     // The request was made, but the server responded with a status code
     // that falls out of the range of 2xx

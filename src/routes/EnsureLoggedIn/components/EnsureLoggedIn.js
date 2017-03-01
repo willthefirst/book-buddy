@@ -7,7 +7,7 @@ class EnsureLoggedIn extends Component {
     const { setRedirectUrl, currentUrl, isLoggedIn } = this.props
     if (!isLoggedIn) {
       setRedirectUrl(currentUrl);
-      if (applyAuthToken()) {
+      if (applyAuthToken().headers.Authorization) {
         // If we have a token stored, refresh users info from server, don't redirect
         this.props.meFromToken();
       } else {

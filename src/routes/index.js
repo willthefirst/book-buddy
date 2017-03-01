@@ -4,6 +4,7 @@ import Home from './Home'
 import CounterRoute from './Counter'
 import AuthRoute from './Auth'
 import EnsureLoggedInRoute from './EnsureLoggedIn'
+import ErrorRoute from './Error'
 import { injectReducer } from 'store/reducers'
 
 export default (store) => ({
@@ -31,6 +32,7 @@ export default (store) => ({
   childRoutes: [
     CounterRoute(store),
     AuthRoute(store),
-    EnsureLoggedInRoute(store)
+    EnsureLoggedInRoute(store),
+    ErrorRoute(store)
   ]
 });

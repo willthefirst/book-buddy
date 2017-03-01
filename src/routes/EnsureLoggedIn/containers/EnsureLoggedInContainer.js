@@ -18,7 +18,6 @@ const mapDispatchToProps = (dispatch) => {
         dispatch(authRequest());
         axios.get(`${AUTH_ROOT_URL}/meFromToken`, applyAuthToken())
           .then((result) => {
-            console.log('refreshed from token');
             dispatch(authSuccess(result.data));
           }).catch((error) => {
             errorHandler(dispatch, error, authFailure);

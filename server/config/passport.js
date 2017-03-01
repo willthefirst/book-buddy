@@ -32,6 +32,7 @@ const jwtOptions = {
 
 // Setting up JWT login strategy
 const jwtLogin = new JwtStrategy(jwtOptions, function(payload, done) {
+  console.log('here');
   User.findById(payload._id, function(err, user) {
     if (err) { return done(err, false); }
 
