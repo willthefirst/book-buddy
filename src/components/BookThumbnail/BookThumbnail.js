@@ -3,6 +3,7 @@ import { Col, Row, Button } from 'react-bootstrap'
 import { Link } from 'react-router'
 import './BookThumbnail.scss'
 
+// Source: http://stackoverflow.com/questions/1199352/smart-way-to-shorten-long-strings-with-javascript
 String.prototype.trunc =
      function( n, useWordBoundary ){
          if (this.length <= n) { return this; }

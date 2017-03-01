@@ -156,6 +156,7 @@ webpackConfig.module.loaders.push({
 })
 
 webpackConfig.sassLoader = {
+  data: '@import "variables";',
   includePaths : project.paths.client('styles')
 }
 

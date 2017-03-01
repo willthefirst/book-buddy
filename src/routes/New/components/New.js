@@ -20,15 +20,13 @@ const New = (props) => {
       {
         props.gBooksResults.map((book, key) => {
           return (
-            <Col xs={6} sm={3} md={2} >
-              <BookThumbnail
-                title={book.title}
-                authors={book.authors}
-                thumbnailUrl={book.thumbnailUrl}
-                key={key} >
-                <Button bsStyle="success" onClick={() => createBook(book)}>Add To Library</Button>
-              </BookThumbnail>
-            </Col>
+            <BookThumbnail
+              title={book.title}
+              authors={book.authors}
+              thumbnailUrl={book.thumbnailUrl}
+              key={key} >
+              <Button bsStyle="success" onClick={() => createBook(book)}>Add To Library</Button>
+            </BookThumbnail>
           )
         })
       }
