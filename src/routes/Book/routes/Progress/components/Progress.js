@@ -58,7 +58,8 @@ export const Progress = (props) => {
 }
 
 Progress.propTypes = {
-
+  updateProgress: React.PropTypes.func.isRequired,
+  progressEntries: React.PropTypes.array
 }
 
 export default reduxForm({

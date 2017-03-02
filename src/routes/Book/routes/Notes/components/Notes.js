@@ -8,7 +8,7 @@ import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
 
 export class Notes extends Component {
   render() {
-    const { updateBookNotes, onEditorState, onEditorStateChange, editorState, bookID } = this.props
+    const { updateBookNotes, onEditorState, onEditorStateChange, editorState, bookId } = this.props
 
     const toolbarOptions = {
       options: ['inline', 'blockType', ],
@@ -27,14 +27,15 @@ export class Notes extends Component {
           editorState={editorState}
           onEditorStateChange={onEditorStateChange}
           />
-        <Button type="submit" bsStyle="primary" onClick={() => updateBookNotes(editorState, bookID)}>Save</Button>
+        <Button type="submit" bsStyle="primary" onClick={() => updateBookNotes(editorState, bookId)}>Save</Button>
       </div>
     )
   }
 }
 
 Notes.propTypes = {
-
+  editorState: React.PropTypes.object.isRequired,
+  bookId: React.PropTypes.string
 }
 
 export default Notes

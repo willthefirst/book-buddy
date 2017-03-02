@@ -52,7 +52,7 @@ const mapDispatchToProps = (dispatch) => {
 const mapStateToProps = (state) => {
   return {
     editorState: state.editor,
-    bookID: state.activeBook.data._id
+    bookId: state.activeBook.data._id
   }
 }
 

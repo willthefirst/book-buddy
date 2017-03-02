@@ -8,11 +8,6 @@ class BookList extends Component {
   }
 
   render() {
-    // If not full view, load child route
-    if (this.props.children) {
-      return this.props.children
-    }
-
     return (
         <Row>
           {
@@ -33,7 +28,7 @@ class BookList extends Component {
 }
 
 BookList.propTypes = {
-
+  books: React.PropTypes.array
 }
 
 export default BookList

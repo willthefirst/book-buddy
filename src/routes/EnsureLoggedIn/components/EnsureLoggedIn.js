@@ -25,4 +25,10 @@ class EnsureLoggedIn extends Component {
   }
 }
 
+EnsureLoggedIn.propTypes = {
+  setRedirectUrl: React.PropTypes.func.isRequired,
+  currentUrl: React.PropTypes.string,
+  isLoggedIn: React.PropTypes.bool.isRequired
+}
+
 export default EnsureLoggedIn

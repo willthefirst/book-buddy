@@ -35,7 +35,6 @@ const New = (props) => {
       }
       </Row>
     </div>
-
   )
 }
 

@@ -34,7 +34,8 @@ const Login = (props) => {
 }
 
 Login.propTypes = {
-
+  handleLogin: React.PropTypes.func.isRequired,
+  redirectUrl: React.PropTypes.string.isRequired
 }
 
 export default reduxForm({
