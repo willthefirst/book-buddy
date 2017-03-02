@@ -32,6 +32,7 @@ export default (store) => ({
   childRoutes: [
     CounterRoute(store),
     AuthRoute(store),
-    EnsureLoggedInRoute(store)
+    EnsureLoggedInRoute(store),
+    ErrorRoute(store)
   ]
 });

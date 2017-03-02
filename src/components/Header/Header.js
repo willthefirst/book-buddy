@@ -13,10 +13,10 @@ class Header extends Component {
     let navLinks = (
       <Nav pullRight>
         <LinkContainer to={{ pathname: '/auth/login' }}>
-          <NavItem eventKey={1}>Login</NavItem>
+          <NavItem>Login</NavItem>
         </LinkContainer>
         <LinkContainer to={{ pathname: '/auth/register' }}>
-          <NavItem eventKey={2}>Register</NavItem>
+          <NavItem>Register</NavItem>
         </LinkContainer>
       </Nav>
     )
@@ -25,23 +25,26 @@ class Header extends Component {
       navLinks = (
         <Nav pullRight>
           <LinkContainer to={{ pathname: '/books' }}>
-            <NavItem eventKey={1}>My Books</NavItem>
+            <NavItem>My Books</NavItem>
           </LinkContainer>
-          <LinkContainer to={{ pathname: '/book/new' }}>
-            <NavItem eventKey={2}>Add A Book</NavItem>
+          <LinkContainer  to={{ pathname: '/book/new' }}>
+            <NavItem>Add A Book</NavItem>
           </LinkContainer>
-          <LinkContainer to={{ pathname: '#' }}>
-            <NavDropdown eventKey={3} title="Account" id="basic-nav-dropdown">
-              <MenuItem eventKey={3.1}>Email: {userEmail}</MenuItem>
+          <LinkContainer to={{ pathname: '/account' }}>
+            <NavDropdown title="Account" id="basic-nav-dropdown">
+              <MenuItem>Email: {userEmail}</MenuItem>
               <MenuItem divider />
               <LinkContainer to={{ pathname: '/auth/logout' }}>
-                <MenuItem eventKey={3.2}>Logout</MenuItem>
+                <MenuItem>Logout</MenuItem>
               </LinkContainer>
             </NavDropdown>
           </LinkContainer>
         </Nav>
       )
     }
+
+
+
 
     return (
       <Navbar staticTop>
