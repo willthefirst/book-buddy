@@ -43,11 +43,21 @@ exports.login = function (req, res, next) {
 
 // For refreshing info from a token (case when user is already logged in but refreshes)
 exports.meFromToken = function (req, res, next) {
-  let userInfo = setUserInfo(req.user);
-  res.status(200).json({
-    token: 'JWT ' + generateToken(userInfo),
-    user: userInfo
-  })
+  passport.authenticate('jwt', (err, result, info) => {
+    if (err) { return next(err); }
+    if (!result) {
+      return res.status(401).json(info);
+    }
+    req.logIn(result, function(err) {
+      if (err) { return next(err); }
+
+      let userInfo = setUserInfo(req.user);
+      res.status(200).json({
+        token: 'JWT ' + generateToken(userInfo),
+        user: userInfo
+      })
+    });
+  })(req, res, next);
 }
 
 //========================================

@@ -30,7 +30,7 @@ module.exports = function(app) {
   authRoutes.post('/login', AuthenticationController.login);
 
   // Refresh user details from already existing token.
-  authRoutes.get('/meFromToken', requireAuth, AuthenticationController.meFromToken);
+  authRoutes.get('/meFromToken', AuthenticationController.meFromToken);
 
   // Set url for API group routes
   app.use('/api', apiRoutes);

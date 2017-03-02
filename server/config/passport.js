@@ -10,6 +10,7 @@ const localOptions = { usernameField: 'email' };
 
 // Setting up local login strategy
 const localLogin = new LocalStrategy(localOptions, function(email, password, done) {
+  console.log('locallogin');
   User.findOne({ email: email }, function(err, user) {
     if(err) { return done(err); }
     if(!user) { return done(null, false, { message: "I couldn't find a user with that email address. Please try again." }); }
@@ -32,7 +33,7 @@ const jwtOptions = {
 
 // Setting up JWT login strategy
 const jwtLogin = new JwtStrategy(jwtOptions, function(payload, done) {
-  console.log('here');
+  console.log('here', payload);
   User.findById(payload._id, function(err, user) {
     if (err) { return done(err, false); }
 

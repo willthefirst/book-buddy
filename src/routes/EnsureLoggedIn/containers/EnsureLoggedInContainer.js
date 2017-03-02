@@ -21,6 +21,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(authSuccess(result.data));
           }).catch((error) => {
             errorHandler(dispatch, error, authFailure);
+            browserHistory.push('/auth/login');
           });
 
     }
