@@ -23,7 +23,6 @@ const mapDispatchToProps = (dispatch) => {
             errorHandler(dispatch, error, authFailure);
             browserHistory.push('/auth/login');
           });
-
     }
   }
 }
