@@ -122,7 +122,8 @@ exports.getBook = function(req, res) {
       title: bookGeneral.title
     })
   }).catch(function(error) {
-    return console.error(error)
+    console.error(error);
+    return res.status(404).send({ message: `You don't any books that match the id ${req.params.id}.` });
   })
 };
 

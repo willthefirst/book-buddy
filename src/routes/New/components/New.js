@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { Field, reduxForm } from 'redux-form'
 import BookThumbnail from 'components/BookThumbnail'
-import GBooksSearchForm from 'components/GBooksSearchForm'
 import { Col, Row, Thumbnail, Form, FormGroup, Button, ControlLabel } from 'react-bootstrap';
 
 const New = (props) => {
