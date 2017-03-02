@@ -20,26 +20,38 @@ const mapDispatchToProps = (dispatch) => {
         dispatch(fetchGBooksRequest());
         axios.get(gBookQuery(`${keyword}`))
         .then((result) => {
-          if (result.data.items.length > 0) {
+          let books;
+          if (result.data.totalItems < 1) {
+            books = [];
+          } else {
             // Create a clean JSON array of books
-            const books = result.data.items.map((volume) => {
+            books = result.data.items.map((volume) => {
               const info = volume.volumeInfo
 
-              const authors = info.authors.map((author) => {
-                return author
-              });
+              // Set authors
+              let authors = [];
+              if (info.authors) {
+                authors = info.authors.map((author) => {
+                  return author
+                });
+              }
 
+              // Set thumbnail
+              let thumbnailUrl = ''
+              if (info.imageLinks) {
+                thumbnailUrl = info.imageLinks.thumbnail
+              }
               return {
                 title: info.title,
                 authors: authors,
-                thumbnailUrl: info.imageLinks.thumbnail,
+                thumbnailUrl: thumbnailUrl,
                 totalPages: info.pageCount,
                 gBooks_id: volume.id
               }
             });
-            // Update store with clean array of books
-            dispatch(fetchGBooksSuccess(books));
           }
+          // Update store with clean array of books
+          dispatch(fetchGBooksSuccess(books));
         }).catch((error) => {
           errorHandler(dispatch, error, fetchGBooksFailure)
         });
@@ -53,7 +65,6 @@ const mapDispatchToProps = (dispatch) => {
         book,
         applyAuthToken())
       .then((result) => {
-        console.log('Book saved:', result.data);
         // #todo: this double fetches books. on success we load book to state, but then on navigate to the book route
         // we make another server call to reget the book...
         dispatch(createBookSuccess(result.data));

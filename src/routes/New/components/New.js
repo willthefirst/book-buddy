@@ -8,16 +8,13 @@ const New = (props) => {
   // #todo: understand the handleSubmit thing here
   return (
     <div>
-      <Form horizontal>
-        <FormGroup controlId="formHorizontalTitle">
-          <Col componentClass={ControlLabel} sm={2}>
-            Title
-          </Col>
-          <Col sm={10}>
-            <Field className="form-control" name="title" component="input" type="text" onChange={ (e) => { queryGBooks(e.target.value) } } placeholder="Title" />
-          </Col>
-        </FormGroup>
-      </Form>
+      <Row>
+        <Form>
+          <FormGroup bsSize="lg">
+            <Field className="form-control" name="title" component="input" type="text" onChange={ (e) => { queryGBooks(e.target.value) } } placeholder="Start typing the name of the book..." />
+          </FormGroup>
+        </Form>
+      </Row>
       <Row>
       {
         props.gBooksResults.map((book, key) => {
