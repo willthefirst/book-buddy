@@ -4,12 +4,12 @@ import '../CoreLayout.scss'
 import '../../../styles/core.scss'
 
 class CoreLayout extends Component {
-  componentDidUpdate(prevProps) {
+  componentDidUpdate (prevProps) {
     const { redirectUrl, isLoggedIn } = this.props
-    this.props.redirectAfterAuth(prevProps, redirectUrl, isLoggedIn);
+    this.props.redirectAfterAuth(prevProps, redirectUrl, isLoggedIn)
   }
 
-  render() {
+  render () {
     return (
       <div>
         <Header />

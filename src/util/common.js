@@ -1,9 +1,9 @@
 import { browserHistory } from 'react-router'
-import cookie from 'react-cookie';
+import cookie from 'react-cookie'
 
-export const requireAuth =  (nextState, replace, callback) => {
-  console.log(nextState);
-  const token = cookie.load('token');
+export const requireAuth = (nextState, replace, callback) => {
+  console.log(nextState)
+  const token = cookie.load('token')
   if (!token) {
     browserHistory.push(`/auth/login`)
   }
@@ -26,6 +26,6 @@ export const errorHandler = (dispatch, error, errorAction) => {
     dispatch(errorAction(error.message))
   }
 }
-export const applyAuthToken = function() {
-  return { headers: {'Authorization': cookie.load('token') } }
+export const applyAuthToken = function () {
+  return { headers: { 'Authorization': cookie.load('token') } }
 }

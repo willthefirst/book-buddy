@@ -8,25 +8,25 @@ const Register = (props) => {
   return (
     <div>
       <h2>Register</h2>
-      <Form onSubmit={ handleSubmit( (values) => { props.handleRegister(values) }) }>
-        <FormGroup controlId="formHorizontalEmail">
+      <Form onSubmit={handleSubmit((values) => { props.handleRegister(values) })}>
+        <FormGroup controlId='formHorizontalEmail'>
           <Col componentClass={ControlLabel}>
             Email
           </Col>
           <Col>
-            <Field name="email" className="form-control" component="input" type="text" placeholder="Email" />
+            <Field name='email' className='form-control' component='input' type='text' placeholder='Email' />
           </Col>
         </FormGroup>
-        <FormGroup controlId="formHorizontalPassword">
+        <FormGroup controlId='formHorizontalPassword'>
           <Col componentClass={ControlLabel}>
             Password
           </Col>
           <Col>
-            <Field name="password" className="form-control" component="input" type="password" placeholder="Password" />
+            <Field name='password' className='form-control' component='input' type='password' placeholder='Password' />
           </Col>
         </FormGroup>
         <FormGroup>
-          <Button type="submit" bsStyle="primary">Register</Button>
+          <Button type='submit' bsStyle='primary'>Register</Button>
         </FormGroup>
       </Form>
     </div>

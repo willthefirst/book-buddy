@@ -1,28 +1,27 @@
 import { connect } from 'react-redux'
 import Register from '../components/Register'
 import { errorHandler } from 'util/common'
-import { browserHistory } from 'react-router';
+import { browserHistory } from 'react-router'
 import cookie from 'react-cookie'
 import axios from 'axios'
 import { authRequest, authFailure, authSuccess } from 'layouts/CoreLayout/modules/coreLayout'
 
-
 const mapDispatchToProps = (dispatch) => {
   // #todo: ADMIN VERSION refactor the getting of the rooturk
-  const AUTH_ROOT_URL = location.href.indexOf('localhost') > 0 ? 'http://localhost:3000/api/auth' : '/api/auth';
+  const AUTH_ROOT_URL = location.href.indexOf('localhost') > 0 ? 'http://localhost:3000/api/auth' : '/api/auth'
 
   return {
     handleRegister: (user) => {
-      dispatch(authRequest());
+      dispatch(authRequest())
       axios.post(`${AUTH_ROOT_URL}/register`, user)
         .then((result) => {
-          console.log(result);
-          cookie.save('token', result.data.token, { path: '/' });
-          dispatch(authSuccess(result.data));
-          browserHistory.push(`/books`);
+          console.log(result)
+          cookie.save('token', result.data.token, { path: '/' })
+          dispatch(authSuccess(result.data))
+          browserHistory.push(`/books`)
         }).catch((error) => {
-          errorHandler(dispatch, error, authFailure);
-        });
+          errorHandler(dispatch, error, authFailure)
+        })
     }
   }
 }

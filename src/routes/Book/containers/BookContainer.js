@@ -8,17 +8,17 @@ import Book from '../components/Book'
 
 const mapDispatchToProps = (dispatch) => {
   // #todo: refactor the getting of the rooturk
-  const ROOT_URL = location.href.indexOf('localhost') > 0 ? 'http://localhost:3000/api' : '/api';
+  const ROOT_URL = location.href.indexOf('localhost') > 0 ? 'http://localhost:3000/api' : '/api'
 
   return {
     fetchBook: (id) => {
-      dispatch(fetchBookRequest());
+      dispatch(fetchBookRequest())
       axios.get(`${ROOT_URL}/book/${id}`, applyAuthToken()).then((result) => {
-        dispatch(fetchBookSuccess(result.data));
+        dispatch(fetchBookSuccess(result.data))
         dispatch(initializeEditorState(result.data.notes))
       }).catch((error) => {
         errorHandler(dispatch, error, fetchBookFailure)
-      });
+      })
     }
   }
 }
@@ -27,7 +27,7 @@ const mapStateToProps = (state) => {
   const book = state.activeBook.data
 
   // Convert authors array to a string
-  let authorsToString = ""
+  let authorsToString = ''
   if (book.authors) {
     authorsToString = book.authors.join(', ')
   }

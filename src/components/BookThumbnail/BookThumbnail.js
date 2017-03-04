@@ -5,13 +5,13 @@ import './BookThumbnail.scss'
 
 // Source: http://stackoverflow.com/questions/1199352/smart-way-to-shorten-long-strings-with-javascript
 String.prototype.trunc =
-     function( n, useWordBoundary ){
-         if (this.length <= n) { return this; }
-         var subString = this.substr(0, n-1);
-         return (useWordBoundary
+     function (n, useWordBoundary) {
+       if (this.length <= n) { return this }
+       var subString = this.substr(0, n - 1)
+       return (useWordBoundary
             ? subString.substr(0, subString.lastIndexOf(' '))
-            : subString) + "...";
-      };
+            : subString) + '...'
+     }
 
 const BookThumbnail = (props) => {
   const details = (

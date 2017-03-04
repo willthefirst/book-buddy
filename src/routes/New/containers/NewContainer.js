@@ -12,28 +12,28 @@ const gBookQuery = (query) => {
 
 const mapDispatchToProps = (dispatch) => {
   // #todo: refactor the getting of the rooturk
-  const ROOT_URL = location.href.indexOf('localhost') > 0 ? 'http://localhost:3000/api' : '/api';
+  const ROOT_URL = location.href.indexOf('localhost') > 0 ? 'http://localhost:3000/api' : '/api'
 
   return {
     queryGBooks: (keyword) => {
       if (keyword.length > 2) {
-        dispatch(fetchGBooksRequest());
+        dispatch(fetchGBooksRequest())
         axios.get(gBookQuery(`${keyword}`))
         .then((result) => {
-          let books;
+          let books
           if (result.data.totalItems < 1) {
-            books = [];
+            books = []
           } else {
             // Create a clean JSON array of books
             books = result.data.items.map((volume) => {
               const info = volume.volumeInfo
 
               // Set authors
-              let authors = [];
+              let authors = []
               if (info.authors) {
                 authors = info.authors.map((author) => {
                   return author
-                });
+                })
               }
 
               // Set thumbnail
@@ -48,17 +48,17 @@ const mapDispatchToProps = (dispatch) => {
                 totalPages: info.pageCount,
                 gBooks_id: volume.id
               }
-            });
+            })
           }
           // Update store with clean array of books
-          dispatch(fetchGBooksSuccess(books));
+          dispatch(fetchGBooksSuccess(books))
         }).catch((error) => {
           errorHandler(dispatch, error, fetchGBooksFailure)
-        });
+        })
       }
     },
     createBook: (book) => {
-      dispatch(createBookRequest());
+      dispatch(createBookRequest())
 
       axios.post(
         `${ROOT_URL}/books`,
@@ -67,11 +67,11 @@ const mapDispatchToProps = (dispatch) => {
       .then((result) => {
         // #todo: this double fetches books. on success we load book to state, but then on navigate to the book route
         // we make another server call to reget the book...
-        dispatch(createBookSuccess(result.data));
+        dispatch(createBookSuccess(result.data))
         browserHistory.push(`/book/id/${result.data._id}/info`)
       }).catch((error) => {
-        errorHandler(dispatch, error, createBookFailure);
-      });
+        errorHandler(dispatch, error, createBookFailure)
+      })
     }
   }
 }

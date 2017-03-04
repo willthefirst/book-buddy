@@ -20,7 +20,7 @@ const ACTION_HANDLERS = {
 // ------------------------------------
 // Reducer
 // ------------------------------------
-const initialState =  {
+const initialState = {
 
 }
 

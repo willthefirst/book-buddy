@@ -8,17 +8,17 @@ import { unauthUser, setRedirectUrl } from 'layouts/CoreLayout/modules/coreLayou
 
 const mapDispatchToProps = (dispatch) => {
   // #todo: ADMIN VERSION refactor the getting of the rooturk
-  const AUTH_ROOT_URL = location.href.indexOf('localhost') > 0 ? 'http://localhost:3000/api/auth' : '/api/auth';
+  const AUTH_ROOT_URL = location.href.indexOf('localhost') > 0 ? 'http://localhost:3000/api/auth' : '/api/auth'
 
   return {
     handleLogout: () => {
-      dispatch(unauthUser());
-      dispatch(resetBook());
-      dispatch(resetBookList());
-      
-      cookie.remove('token', { path: '/' });
-      setRedirectUrl('');
-      browserHistory.push(`/auth/login`);
+      dispatch(unauthUser())
+      dispatch(resetBook())
+      dispatch(resetBookList())
+
+      cookie.remove('token', { path: '/' })
+      setRedirectUrl('')
+      browserHistory.push(`/auth/login`)
     }
   }
 }

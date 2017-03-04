@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
-mongoose.Promise = global.Promise;
+mongoose.Promise = global.Promise
 
 const BookSchema = mongoose.Schema({
   // GENERAL
@@ -23,6 +23,6 @@ const BookSchema = mongoose.Schema({
     type: Schema.Types.ObjectId,
     ref: 'User'
   }]
-});
+})
 
-module.exports = mongoose.model('Book', BookSchema);
+module.exports = mongoose.model('Book', BookSchema)

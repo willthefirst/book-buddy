@@ -8,13 +8,13 @@ export const Progress = (props) => {
 
   return (
     <div>
-      <Form horizontal onSubmit={ handleSubmit( (values)=>{  props.updateProgress(values, props.params.id); } ) }>
+      <Form horizontal onSubmit={handleSubmit((values) => { props.updateProgress(values, props.params.id) })}>
         <FormGroup>
           <Col componentClass={ControlLabel} sm={2}>
             Date
           </Col>
           <Col sm={10}>
-            <Field name="date" component="input" className="form-control" type="date" required />
+            <Field name='date' component='input' className='form-control' type='date' required />
             {'  '}
           </Col>
         </FormGroup>
@@ -23,13 +23,13 @@ export const Progress = (props) => {
             Current page:
           </Col>
           <Col sm={10}>
-            <Field name="currentPage" className="form-control" component="input" type="number" placeholder="Current Page" required />
+            <Field name='currentPage' className='form-control' component='input' type='number' placeholder='Current Page' required />
             {'  '}
           </Col>
         </FormGroup>
         <FormGroup>
           <Col sm={12}>
-            <Button bsStyle="primary" type="submit">Add Progress</Button>
+            <Button bsStyle='primary' type='submit'>Add Progress</Button>
           </Col>
         </FormGroup>
       </Form>

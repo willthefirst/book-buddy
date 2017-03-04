@@ -44,7 +44,7 @@ export const unauthUser = () => {
   }
 }
 
-export function setRedirectUrl(url) {
+export function setRedirectUrl (url) {
   return {
     type    : SET_REDIRECT_URL,
     payload : url
@@ -65,7 +65,7 @@ export const actions = {
 // ------------------------------------
 const ACTION_HANDLERS = {
   [AUTH_REQUEST] : (state, action) => {
-    return { ...state, authenticated: false, loading: true  }
+    return { ...state, authenticated: false, loading: true }
   },
   [AUTH_SUCCESS] : (state, action) => {
     return { ...state, error: '', message: '', content: action.payload, authenticated: true, loading: false }
@@ -81,12 +81,11 @@ const ACTION_HANDLERS = {
   }
 }
 
-
 // ------------------------------------
 // Reducer
 // ------------------------------------
 
-const initialState = { error: '', message: '', content: '', authenticated: false, loading: false, redirectUrl: ''}
+const initialState = { error: '', message: '', content: '', authenticated: false, loading: false, redirectUrl: '' }
 
 export default function authReducer (state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]

@@ -9,14 +9,14 @@ export const INITIALIZE_EDITOR_STATE = 'INITIALIZE_EDITOR_STATE'
 // ------------------------------------
 // Actions
 // ------------------------------------
-export function updateEditorState(state) {
+export function updateEditorState (state) {
   return {
     type: UPDATE_EDITOR_STATE,
     payload: state
   }
 }
 
-export function initializeEditorState(notes) {
+export function initializeEditorState (notes) {
   return {
     type: INITIALIZE_EDITOR_STATE,
     payload: notes
@@ -38,7 +38,7 @@ const ACTION_HANDLERS = {
   [INITIALIZE_EDITOR_STATE] : (state, action) => {
     // If initializing with nothing, leave state alone
     if (!action.payload) {
-      return state;
+      return state
     }
 
     // Else, initialize editor with latest notes

@@ -1,4 +1,4 @@
-import React, { Component} from 'react'
+import React, { Component } from 'react'
 import { Editor } from 'react-draft-wysiwyg'
 import { Button, Row } from 'react-bootstrap'
 
@@ -7,27 +7,27 @@ import { Button, Row } from 'react-bootstrap'
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
 
 export class Notes extends Component {
-  render() {
+  render () {
     const { updateBookNotes, onEditorState, onEditorStateChange, editorState, bookId } = this.props
 
     const toolbarOptions = {
-      options: ['inline', 'blockType', ],
+      options: ['inline', 'blockType' ],
       inline: {
-        options: ['bold', 'italic', 'underline'],
-      },
+        options: ['bold', 'italic', 'underline']
+      }
     }
 
     return (
       <div>
         <Editor
-          wrapperClassName="react-draft__wrapper"
-          editorClassName="react-draft__editor"
-          toolbarClassName="react-draft__toolbar"
+          wrapperClassName='react-draft__wrapper'
+          editorClassName='react-draft__editor'
+          toolbarClassName='react-draft__toolbar'
           toolbar={toolbarOptions}
           editorState={editorState}
           onEditorStateChange={onEditorStateChange}
           />
-        <Button type="submit" bsStyle="primary" onClick={() => updateBookNotes(editorState, bookId)}>Save</Button>
+        <Button type='submit' bsStyle='primary' onClick={() => updateBookNotes(editorState, bookId)}>Save</Button>
       </div>
     )
   }

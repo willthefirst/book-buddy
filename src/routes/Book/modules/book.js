@@ -19,73 +19,72 @@ export const RESET_BOOK = 'RESET_BOOK'
 // Actions
 // ------------------------------------
 
-const ROOT_URL = location.href.indexOf('localhost') > 0 ? 'http://localhost:3000/api' : '/api';
+const ROOT_URL = location.href.indexOf('localhost') > 0 ? 'http://localhost:3000/api' : '/api'
 
-export function fetchBookRequest(request) {
+export function fetchBookRequest (request) {
   return {
     type: FETCH_BOOK_REQUEST,
     payload: request
   }
 }
 
-export function fetchBookSuccess(book) {
+export function fetchBookSuccess (book) {
   return {
     type: FETCH_BOOK_SUCCESS,
     payload: book
   }
 }
 
-export function fetchBookFailure(error) {
+export function fetchBookFailure (error) {
   return {
     type: FETCH_BOOK_FAILURE,
     payload: error
   }
 }
 
-
-export function updateBookRequest(request) {
+export function updateBookRequest (request) {
   return {
     type: UPDATE_BOOK_REQUEST,
     payload: request
   }
 }
 
-export function updateBookSuccess(book) {
+export function updateBookSuccess (book) {
   return {
     type: UPDATE_BOOK_SUCCESS,
     payload: book
   }
 }
 
-export function updateBookFailure(error) {
+export function updateBookFailure (error) {
   return {
     type: UPDATE_BOOK_FAILURE,
     payload: error
   }
 }
 
-export function createBookRequest(request) {
+export function createBookRequest (request) {
   return {
     type: CREATE_BOOK_REQUEST,
     payload: request
   }
 }
 
-export function createBookSuccess(book) {
+export function createBookSuccess (book) {
   return {
     type: CREATE_BOOK_SUCCESS,
     payload: book
   }
 }
 
-export function createBookFailure(error) {
+export function createBookFailure (error) {
   return {
     type: CREATE_BOOK_FAILURE,
     payload: error
   }
 }
 
-export function resetBook() {
+export function resetBook () {
   return {
     type: RESET_BOOK,
     payload: ''
@@ -111,7 +110,7 @@ export const actions = {
 // ------------------------------------
 // Action Handlers
 // ------------------------------------
-const initialState =  {
+const initialState = {
   data: {},
   error: null,
   loading: false
@@ -120,52 +119,52 @@ const initialState =  {
 const ACTION_HANDLERS = {
   [FETCH_BOOK_REQUEST] : (state, action) => {
     return {
-        ...state, loading: true
+      ...state, loading: true
     }
   },
   [FETCH_BOOK_SUCCESS] : (state, action) => {
     return {
-        data: action.payload, error: null, loading: false
+      data: action.payload, error: null, loading: false
     }
   },
   [FETCH_BOOK_FAILURE] : (state, action) => {
     return {
-        ...state, error: action.payload, loading: false
+      ...state, error: action.payload, loading: false
     }
   },
 
   [UPDATE_BOOK_REQUEST] : (state, action) => {
     return {
-        ...state, loading: true
+      ...state, loading: true
     }
   },
   [UPDATE_BOOK_SUCCESS] : (state, action) => {
     // merge granular update into full activeBook store
     return {
-        data: Object.assign(state.data, action.payload),
-        error: null,
-        loading: false
+      data: Object.assign(state.data, action.payload),
+      error: null,
+      loading: false
     }
   },
   [UPDATE_BOOK_FAILURE] : (state, action) => {
     return {
-        ...state, error: action.payload, loading: false
+      ...state, error: action.payload, loading: false
     }
   },
 
   [CREATE_BOOK_REQUEST] : (state, action) => {
     return {
-        ...state, loading: true
+      ...state, loading: true
     }
   },
   [CREATE_BOOK_SUCCESS] : (state, action) => {
     return {
-        data: action.payload, error: null, loading: false
+      data: action.payload, error: null, loading: false
     }
   },
   [CREATE_BOOK_FAILURE] : (state, action) => {
     return {
-        ...state, error: action.payload, loading: false
+      ...state, error: action.payload, loading: false
     }
   },
   [RESET_BOOK] : (state, action) => {

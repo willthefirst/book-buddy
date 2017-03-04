@@ -11,6 +11,6 @@ export default (store) => ({
       /*  Return getComponent   */
       cb(null, Register)
     /* Webpack named bundle   */
-  }, 'register')
+    }, 'register')
   }
-});
+})

@@ -41,5 +41,4 @@ describe('(Component) Login', () => {
       // // _spies.handleLogin.should.have.been.called
     })
   })
-
 })

@@ -1,13 +1,12 @@
 import React, { Component } from 'react'
 import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
-import  { Link } from 'react-router'
+import { Link } from 'react-router'
 import './Header.scss'
 
 class Header extends Component {
 
-
-  render() {
+  render () {
     const { isLoggedIn, userEmail } = this.props
 
     let navLinks = (
@@ -27,11 +26,11 @@ class Header extends Component {
           <LinkContainer to={{ pathname: '/books' }}>
             <NavItem>My Books</NavItem>
           </LinkContainer>
-          <LinkContainer  to={{ pathname: '/book/new' }}>
+          <LinkContainer to={{ pathname: '/book/new' }}>
             <NavItem>Add A Book</NavItem>
           </LinkContainer>
           <LinkContainer to={{ pathname: '/account' }}>
-            <NavDropdown title="Account" id="basic-nav-dropdown">
+            <NavDropdown title='Account' id='basic-nav-dropdown'>
               <MenuItem>Email: {userEmail}</MenuItem>
               <MenuItem divider />
               <LinkContainer to={{ pathname: '/auth/logout' }}>
@@ -43,19 +42,16 @@ class Header extends Component {
       )
     }
 
-
-
-
     return (
       <Navbar staticTop>
         <Navbar.Header>
           <Navbar.Brand>
-            <Link to="/">Book Buddy</Link>
+            <Link to='/'>Book Buddy</Link>
           </Navbar.Brand>
           <Navbar.Toggle />
         </Navbar.Header>
         <Navbar.Collapse>
-            { navLinks }
+          { navLinks }
         </Navbar.Collapse>
       </Navbar>
     )

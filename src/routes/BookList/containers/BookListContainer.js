@@ -7,17 +7,17 @@ import BookList from '../components/BookList'
 
 const mapDispatchToProps = (dispatch) => {
   // #todo: refactor the getting of the rooturk
-  const ROOT_URL = location.href.indexOf('localhost') > 0 ? 'http://localhost:3000/api' : '/api';
+  const ROOT_URL = location.href.indexOf('localhost') > 0 ? 'http://localhost:3000/api' : '/api'
 
   return {
     fetchBooks: () => {
-      dispatch(fetchBookListRequest());
+      dispatch(fetchBookListRequest())
       axios.get(`${ROOT_URL}/books`, applyAuthToken())
         .then((result) => {
-          dispatch(fetchBookListSuccess(result.data));
+          dispatch(fetchBookListSuccess(result.data))
         }).catch((error) => {
-          errorHandler(dispatch, error, fetchBookListFailure);
-        });
+          errorHandler(dispatch, error, fetchBookListFailure)
+        })
     }
   }
 }

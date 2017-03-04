@@ -16,13 +16,13 @@ const router = require('./router')
 const passport = require('passport')
 
 // Necessary for passport to work
-passport.serializeUser(function(user, done) {
-  done(null, user);
-});
+passport.serializeUser(function (user, done) {
+  done(null, user)
+})
 
-passport.deserializeUser(function(user, done) {
-  done(null, user);
-});
+passport.deserializeUser(function (user, done) {
+  done(null, user)
+})
 
 const app = express()
 
@@ -32,28 +32,28 @@ const app = express()
 
 // Apply gzip compression
 app.use(compress())
-app.use(logger('dev')); // Log requests to API using morgan
+app.use(logger('dev')) // Log requests to API using morgan
 
-app.use(cookieParser(project.server_secret));
-app.use(bodyParser.json()); // support json encoded bodies
-app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodie
+app.use(cookieParser(project.server_secret))
+app.use(bodyParser.json()) // support json encoded bodies
+app.use(bodyParser.urlencoded({ extended: true })) // support encoded bodie
 app.use(require('express-session')({
   secret: project.server_secret
-}));
-app.use(passport.initialize());
-app.use(passport.session());
+}))
+app.use(passport.initialize())
+app.use(passport.session())
 
 // Routes
-router(app);
+router(app)
 
 // Database
-mongoose.connect(project.server_db);
+mongoose.connect(project.server_db)
 const db = mongoose.connection
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function() {
+db.on('error', console.error.bind(console, 'connection error:'))
+db.once('open', function () {
   // we're connected!
-  console.log('connected to database');
-});
+  console.log('connected to database')
+})
 
 // ------------------------------------
 // Apply Webpack HMR Middleware

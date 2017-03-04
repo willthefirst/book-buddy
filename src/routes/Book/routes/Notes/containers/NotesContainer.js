@@ -19,32 +19,32 @@ import Notes from '../components/Notes'
 const mapDispatchToProps = (dispatch) => {
   return {
     // For the editor to manage it's own state
-    onEditorStateChange: function(editorState) {
-      dispatch(updateEditorState(editorState));
+    onEditorStateChange: function (editorState) {
+      dispatch(updateEditorState(editorState))
     },
 
-    updateBookNotes: function(editorState, bookId) {
+    updateBookNotes: function (editorState, bookId) {
       // Convert editor content to raw JS object (http://facebook.github.io/draft-js/docs/api-reference-data-conversion.html#content)
-      let rawContent = convertToRaw(editorState.getCurrentContent());
+      let rawContent = convertToRaw(editorState.getCurrentContent())
 
       // Serialize because server is acting like a douche with empty entityMap JSON object
-      rawContent = JSON.stringify(rawContent);
+      rawContent = JSON.stringify(rawContent)
 
       const update = {
         book_id: bookId,
         notes: rawContent
-      };
+      }
 
       // #todo: refactor the getting of the rooturk
-      const ROOT_URL = location.href.indexOf('localhost') > 0 ? 'http://localhost:3000/api' : '/api';
+      const ROOT_URL = location.href.indexOf('localhost') > 0 ? 'http://localhost:3000/api' : '/api'
 
       dispatch(updateBookRequest())
       axios.put(`${ROOT_URL}/book/${bookId}`, update, applyAuthToken()).then((result) => {
-        dispatch(updateBookSuccess(result.data));
-        dispatch(initializeEditorState(result.data.notes));
+        dispatch(updateBookSuccess(result.data))
+        dispatch(initializeEditorState(result.data.notes))
       }).catch((error) => {
         errorHandler(dispatch, error, updateBookFailure(error))
-      });
+      })
     }
   }
 }

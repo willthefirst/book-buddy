@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 import { updateBookRequest, updateBookSuccess, updateBookFailure } from '../../../modules/book'
 import axios from 'axios'
 import { errorHandler, applyAuthToken } from 'util/common'
-var moment = require('moment');
+var moment = require('moment')
 
 /*  This is a container component. Notice it does not contain any JSX,
     nor does it import React. This component is **only** responsible for
@@ -17,7 +17,7 @@ import Progress from '../components/Progress'
 
 const mapDispatchToProps = (dispatch) => {
   // #todo: refactor the getting of the rooturk
-  const ROOT_URL = location.href.indexOf('localhost') > 0 ? 'http://localhost:3000/api' : '/api';
+  const ROOT_URL = location.href.indexOf('localhost') > 0 ? 'http://localhost:3000/api' : '/api'
 
   return {
     updateProgress: (values, book_id) => {
@@ -27,15 +27,15 @@ const mapDispatchToProps = (dispatch) => {
         currentPage: values.currentPage
       }
 
-      dispatch(updateBookRequest());
+      dispatch(updateBookRequest())
       axios.put(`${ROOT_URL}/book/${book_id}/progress`, update, applyAuthToken()).then((result) => {
         const update = {
           progress: result.data
         }
-        dispatch(updateBookSuccess(update));
+        dispatch(updateBookSuccess(update))
       }).catch((error) => {
         errorHandler(dispatch, error, updateBookFailure)
-      });
+      })
     }
   }
 }

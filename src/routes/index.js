@@ -35,4 +35,4 @@ export default (store) => ({
     EnsureLoggedInRoute(store),
     ErrorRoute(store)
   ]
-});
+})

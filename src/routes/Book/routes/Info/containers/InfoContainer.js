@@ -3,7 +3,7 @@ import { loadAccount } from '../modules/info'
 import { updateBookRequest, updateBookSuccess, updateBookFailure } from '../../../modules/book'
 import axios from 'axios'
 import { errorHandler, applyAuthToken } from 'util/common'
-import { browserHistory } from 'react-router';
+import { browserHistory } from 'react-router'
 
 /*  This is a container component. Notice it does not contain any JSX,
     nor does it import React. This component is **only** responsible for
@@ -19,7 +19,7 @@ import Info from '../components/Info'
 
 const mapDispatchToProps = (dispatch) => {
   // #todo: refactor the getting of the rooturk
-  const ROOT_URL = location.href.indexOf('localhost') > 0 ? 'http://localhost:3000/api' : '/api';
+  const ROOT_URL = location.href.indexOf('localhost') > 0 ? 'http://localhost:3000/api' : '/api'
 
   return {
     updateBook: (book) => {
@@ -28,19 +28,19 @@ const mapDispatchToProps = (dispatch) => {
         totalPages: book.totalPages
       }
 
-      dispatch(updateBookRequest());
+      dispatch(updateBookRequest())
       axios.put(`${ROOT_URL}/book/${book._id}`, update, applyAuthToken()).then((result) => {
-        dispatch(updateBookSuccess(result.data));
+        dispatch(updateBookSuccess(result.data))
       }).catch((error) => {
         errorHandler(dispatch, error, updateBookFailure)
-      });;
+      })
     },
     deleteBook: (book) => {
       axios.delete(`${ROOT_URL}/book/${book._id}`, applyAuthToken()).then((result) => {
         browserHistory.push(`/books`)
       }).catch((error) => {
-        console.error('Failed to delete book.', error);
-      });
+        console.error('Failed to delete book.', error)
+      })
     }
   }
 }

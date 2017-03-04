@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 
 class Logout extends Component {
-  componentWillMount() {
-    this.props.handleLogout();
+  componentWillMount () {
+    this.props.handleLogout()
   }
 
-  render() {
+  render () {
     return (
       <div>You have been logged out. Go to /login to login again.</div>
     )
@@ -13,7 +13,7 @@ class Logout extends Component {
 }
 
 Logout.propTypes = {
-  
+
 }
 
 export default Logout

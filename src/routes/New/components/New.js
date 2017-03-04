@@ -1,22 +1,28 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 import BookThumbnail from 'components/BookThumbnail'
-import { Col, Row, Thumbnail, Form, FormGroup, Button, ControlLabel } from 'react-bootstrap';
+import { Row, Form, FormGroup, Button } from 'react-bootstrap'
 
 const New = (props) => {
-  const { handleSubmit, change, pristine, reset, submitting, createBook, queryGBooks } = props
+  const { createBook, queryGBooks } = props
   // #todo: understand the handleSubmit thing here
   return (
     <div>
       <Row>
         <Form>
-          <FormGroup bsSize="lg">
-            <Field className="form-control" name="title" component="input" type="text" onChange={ (e) => { queryGBooks(e.target.value) } } placeholder="Start typing the name of the book..." />
+          <FormGroup bsSize='lg'>
+            <Field
+              className='form-control'
+              name='title'
+              component='input'
+              type='text'
+              onChange={(e) => { queryGBooks(e.target.value) }}
+              placeholder='Start typing the name of the book...' />
           </FormGroup>
         </Form>
       </Row>
       <Row>
-      {
+        {
         props.gBooksResults.map((book, key) => {
           return (
             <BookThumbnail
@@ -24,7 +30,7 @@ const New = (props) => {
               authors={book.authors}
               thumbnailUrl={book.thumbnailUrl}
               key={key} >
-              <Button bsStyle="success" onClick={() => createBook(book)}>Add To Library</Button>
+              <Button bsStyle='success' onClick={() => createBook(book)}>Add To Library</Button>
             </BookThumbnail>
           )
         })
@@ -35,7 +41,9 @@ const New = (props) => {
 }
 
 New.propTypes = {
-  queryGBooks: React.PropTypes.func.isRequired
+  queryGBooks: React.PropTypes.func.isRequired,
+  gBooksResults: React.PropTypes.array.isRequired,
+  createBook: React.PropTypes.func.isRequired
 }
 
 export default reduxForm({

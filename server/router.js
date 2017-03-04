@@ -1,43 +1,41 @@
 const AuthenticationController = require('./controllers/authentication'),
-      BooksController = require('./controllers/books'),
-      express = require('express'),
-      passportService = require('./config/passport'),
-      passport = require('passport');
-
+  BooksController = require('./controllers/books'),
+  express = require('express'),
+  passportService = require('./config/passport'),
+  passport = require('passport')
 
 // Middleware to require login/auth
-const requireAuth = passport.authenticate('jwt', { session: false });
+const requireAuth = passport.authenticate('jwt', { session: false })
 
 // (this.req, this.res, this.next);
 
-module.exports = function(app) {
-
+module.exports = function (app) {
   // Initializing route groups
   const apiRoutes = express.Router(),
-        authRoutes = express.Router();
+    authRoutes = express.Router()
 
-  //=========================
+  // =========================
   // Auth Routes
-  //=========================
+  // =========================
 
   // Set auth routes as subgroup/middleware to apiRoutes
-  apiRoutes.use('/auth', authRoutes);
+  apiRoutes.use('/auth', authRoutes)
 
   // Registration route /api/auth/register
-  authRoutes.post('/register', AuthenticationController.register);
+  authRoutes.post('/register', AuthenticationController.register)
 
   // Login route /api/auth/login
-  authRoutes.post('/login', AuthenticationController.login);
+  authRoutes.post('/login', AuthenticationController.login)
 
   // Refresh user details from already existing token.
-  authRoutes.get('/meFromToken', AuthenticationController.meFromToken);
+  authRoutes.get('/meFromToken', AuthenticationController.meFromToken)
 
   // Set url for API group routes
-  app.use('/api', apiRoutes);
+  app.use('/api', apiRoutes)
 
-  //=========================
+  // =========================
   // API Routes
-  //=========================
+  // =========================
 
   // '/api/books/'
 
@@ -60,4 +58,4 @@ module.exports = function(app) {
 
   // DELETE: get the current book
   apiRoutes.delete('/book/:id', requireAuth, BooksController.deleteBook)
-};
+}

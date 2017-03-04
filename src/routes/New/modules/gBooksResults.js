@@ -9,21 +9,21 @@ export const FETCH_GBOOKS_FAILURE = 'FETCH_GBOOKS_FAILURE'
 // Actions
 // ------------------------------------
 
-export function fetchGBooksRequest(request) {
+export function fetchGBooksRequest (request) {
   return {
     type: FETCH_GBOOKS_REQUEST,
     payload: request
   }
 }
 
-export function fetchGBooksSuccess(books) {
+export function fetchGBooksSuccess (books) {
   return {
     type: FETCH_GBOOKS_SUCCESS,
     payload: books
   }
 }
 
-export function fetchGBooksFailure(error) {
+export function fetchGBooksFailure (error) {
   return {
     type: FETCH_GBOOKS_FAILURE,
     payload: error
@@ -36,24 +36,23 @@ export const actions = {
   fetchGBooksFailure
 }
 
-
 // ------------------------------------
 // Action Handlers
 // ------------------------------------
 const ACTION_HANDLERS = {
   [FETCH_GBOOKS_REQUEST] : (state, action) => {
     return {
-        ...state, loading: true
+      ...state, loading: true
     }
   },
   [FETCH_GBOOKS_SUCCESS] : (state, action) => {
     return {
-        books: action.payload, error: null, loading: false
+      books: action.payload, error: null, loading: false
     }
   },
   [FETCH_GBOOKS_FAILURE] : (state, action) => {
     return {
-        ...state, error: action.payload, loading: false
+      ...state, error: action.payload, loading: false
     }
   }
 }
@@ -61,7 +60,7 @@ const ACTION_HANDLERS = {
 // ------------------------------------
 // Reducer
 // ------------------------------------
-const initialState =  {
+const initialState = {
   books: [],
   error: null,
   loading: false

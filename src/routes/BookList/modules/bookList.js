@@ -11,30 +11,30 @@ export const RESET_BOOKLIST = 'FETCH_BOOKLIST_FAILURE'
 // Actions
 // ------------------------------------
 
-const ROOT_URL = location.href.indexOf('localhost') > 0 ? 'http://localhost:3000/api' : '/api';
+const ROOT_URL = location.href.indexOf('localhost') > 0 ? 'http://localhost:3000/api' : '/api'
 
-export function fetchBookListRequest(request) {
+export function fetchBookListRequest (request) {
   return {
     type: FETCH_BOOKLIST_REQUEST,
     payload: request
   }
 }
 
-export function fetchBookListSuccess(books) {
+export function fetchBookListSuccess (books) {
   return {
     type: FETCH_BOOKLIST_SUCCESS,
     payload: books
   }
 }
 
-export function fetchBookListFailure(error) {
+export function fetchBookListFailure (error) {
   return {
     type: FETCH_BOOKLIST_FAILURE,
     payload: error
   }
 }
 
-export function resetBookList() {
+export function resetBookList () {
   return {
     type: RESET_BOOKLIST,
     payload: ''
@@ -49,11 +49,10 @@ export const actions = {
   resetBookList
 }
 
-
 // ------------------------------------
 // Action Handlers
 // ------------------------------------
-const initialState =  {
+const initialState = {
   books: [],
   error: null,
   loading: false
@@ -62,17 +61,17 @@ const initialState =  {
 const ACTION_HANDLERS = {
   [FETCH_BOOKLIST_REQUEST] : (state, action) => {
     return {
-        ...state, loading: true
+      ...state, loading: true
     }
   },
   [FETCH_BOOKLIST_SUCCESS] : (state, action) => {
     return {
-        books: action.payload, error: null, loading: false
+      books: action.payload, error: null, loading: false
     }
   },
   [FETCH_BOOKLIST_FAILURE] : (state, action) => {
     return {
-        ...state, error: action.payload, loading: false
+      ...state, error: action.payload, loading: false
     }
   },
   [RESET_BOOKLIST] : (state, action) => {

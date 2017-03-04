@@ -30,4 +30,4 @@ export default (store) => ({
     ProgressRoute(store), // <site>/book/progress
     NotesRoute(store) // <site>/book/notes
   ]
-});
+})
