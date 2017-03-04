@@ -19,9 +19,10 @@ const BookSchema = mongoose.Schema({
   },
 
   // USER-SPECIFIC
-  users: {
-    type: [Schema.Types.ObjectId]
-  }
+  users: [{
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+  }]
 });
 
 module.exports = mongoose.model('Book', BookSchema);

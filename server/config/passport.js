@@ -10,6 +10,7 @@ const localOptions = { usernameField: 'email' };
 
 // Setting up local login strategy
 const localLogin = new LocalStrategy(localOptions, function(email, password, done) {
+  console.log(email, password);
   User.findOne({ email: email }, function(err, user) {
     if(err) { return done(err); }
     if(!user) { return done(null, false, { message: "I couldn't find a user with that email address. Please try again." }); }

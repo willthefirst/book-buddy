@@ -8,7 +8,6 @@ const mapDispatchToProps = (dispatch) => {
 const mapStateToProps = (state) => {
   let userEmail = ''
   if (state.auth.authenticated) {
-    // userEmail = 'asadasd'
     userEmail = state.auth.content.user.email
   }
 

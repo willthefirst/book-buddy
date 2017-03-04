@@ -11,12 +11,44 @@ exports.getAllBooks = function(req, res) {
     return book.book_id
   });
 
+  // // Return all book documents
+  // Book
+  //   .find({'_id': { $in: bookIds }})
+  //   .populate({
+  //     path: 'users',
+  //     select: 'books.status',
+  //     match: {
+  //       _id: req.user._id,
+  //       book_id:  // only get current user's entry
+  //     }})
+  //   .exec(function (err, books) {
+  //     console.log('Books found:', books);
+  //     if (err) return console.error(err);
+  //     res.send(books);
+    // })
   // Return all book documents
-  Book.find({'_id': { $in: bookIds }}, function (err, books) {
-    console.log('Books found:', books);
-    if (err) return console.error(err);
-    res.send(books);
-  })
+  User
+    .findOne({'_id': req.user._id}, 'books')
+    .populate({
+      path: 'books.book_id',
+      select: ['thumbnailUrl', 'title', 'authors']
+    })
+    .exec(function (err, user) {
+      // console.log('Books found:', user);
+      if (err) return console.error(err);
+      // #todo: could avoid this by writing the write mongodb/mongoose query
+      let results = user.books.map(function(book) {
+        console.log('Book', book)
+        return {
+          _id: book.book_id._id,
+          title: book.book_id.title,
+          authors: book.book_id.authors,
+          thumbnailUrl: book.book_id.thumbnailUrl,
+          status: book.status
+        }
+      })
+      res.send(results);
+    })
 }
 
 // Add a new book

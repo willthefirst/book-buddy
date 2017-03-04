@@ -21,13 +21,10 @@ const EntrySchema = new Schema({
   timestamps: true
 })
 
-EntrySchema.pre('findOneAndUpdate', function(next) {
-  console.log('here')
-})
-
 const BookPersonalSchema = new Schema({
   book_id: {
     type: Schema.Types.ObjectId,
+    ref: 'Book',
     required: true
   },
   status: {
