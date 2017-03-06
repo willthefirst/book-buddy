@@ -3,17 +3,14 @@ import { fetchBookRequest, fetchBookSuccess, fetchBookFailure } from '../modules
 import { initializeEditorState } from '../routes/Notes/modules/notes'
 import { applyAuthToken, errorHandler } from 'util/common'
 import axios from 'axios'
-
 import Book from '../components/Book'
+import APP_SETTINGS from 'config'
 
 const mapDispatchToProps = (dispatch) => {
-  // #todo: refactor the getting of the rooturk
-  const ROOT_URL = location.href.indexOf('localhost') > 0 ? 'http://localhost:8080/api' : '/api'
-
   return {
     fetchBook: (id) => {
       dispatch(fetchBookRequest())
-      axios.get(`${ROOT_URL}/book/${id}`, applyAuthToken()).then((result) => {
+      axios.get(`${APP_SETTINGS.API_BASE}/book/${id}`, applyAuthToken()).then((result) => {
         dispatch(fetchBookSuccess(result.data))
         dispatch(initializeEditorState(result.data.notes))
       }).catch((error) => {

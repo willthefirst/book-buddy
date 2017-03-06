@@ -4,15 +4,13 @@ import { errorHandler } from 'util/common'
 import cookie from 'react-cookie'
 import axios from 'axios'
 import { authRequest, authFailure, authSuccess } from 'layouts/CoreLayout/modules/coreLayout'
+import APP_SETTINGS from 'config'
 
 const mapDispatchToProps = (dispatch) => {
-  // #todo: ADMIN VERSION refactor the getting of the rooturk
-  const AUTH_ROOT_URL = location.href.indexOf('localhost') > 0 ? 'http://localhost:3000/api/auth' : '/api/auth'
-
   return {
     handleLogin: (user, redirectUrl) => {
       dispatch(authRequest())
-      axios.post(`${AUTH_ROOT_URL}/login`, user)
+      axios.post(`${APP_SETTINGS.API_BASE}/auth/login`, user)
         .then((result) => {
           cookie.save('token', result.data.token, { path: '/' })
           dispatch(authSuccess(result.data))

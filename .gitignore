@@ -9,3 +9,5 @@ dist
 coverage
 
 .idea/
+
+src/config.js

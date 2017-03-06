@@ -3,11 +3,9 @@ import { updateBookRequest, updateBookSuccess, updateBookFailure } from '../../.
 import axios from 'axios'
 import { errorHandler, applyAuthToken } from 'util/common'
 import Progress from '../components/Progress'
+import APP_SETTINGS from 'config'
 
 const mapDispatchToProps = (dispatch) => {
-  // #todo: refactor the getting of the rooturk
-  const ROOT_URL = location.href.indexOf('localhost') > 0 ? 'http://localhost:3000/api' : '/api'
-
   return {
     updateProgress: (values, bookId) => {
       const update = {
@@ -17,7 +15,7 @@ const mapDispatchToProps = (dispatch) => {
       }
 
       dispatch(updateBookRequest())
-      axios.put(`${ROOT_URL}/book/${bookId}/progress`, update, applyAuthToken()).then((result) => {
+      axios.put(`${APP_SETTINGS.API_BASE}/book/${bookId}/progress`, update, applyAuthToken()).then((result) => {
         const update = {
           progress: result.data
         }

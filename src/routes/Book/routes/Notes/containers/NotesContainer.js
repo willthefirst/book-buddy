@@ -4,6 +4,7 @@ import { updateEditorState, initializeEditorState } from '../modules/notes'
 import { updateBookRequest, updateBookSuccess, updateBookFailure } from '../../../modules/book'
 import { errorHandler, applyAuthToken } from 'util/common'
 import axios from 'axios'
+import APP_SETTINGS from 'config'
 
 /*  This is a container component. Notice it does not contain any JSX,
     nor does it import React. This component is **only** responsible for
@@ -36,11 +37,8 @@ const mapDispatchToProps = (dispatch) => {
         notes: rawContent
       }
 
-      // #todo: refactor the getting of the rooturk
-      const ROOT_URL = location.href.indexOf('localhost') > 0 ? 'http://localhost:8080/api' : '/api'
-
       dispatch(updateBookRequest())
-      axios.put(`${ROOT_URL}/book/${bookId}`, update, applyAuthToken()).then((result) => {
+      axios.put(`${APP_SETTINGS.API_BASE}/book/${bookId}`, update, applyAuthToken()).then((result) => {
         dispatch(updateBookSuccess(result.data))
         dispatch(initializeEditorState(result.data.notes))
       }).catch((error) => {

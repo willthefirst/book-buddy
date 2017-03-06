@@ -4,11 +4,9 @@ import axios from 'axios'
 import { errorHandler, applyAuthToken } from 'util/common'
 import { browserHistory } from 'react-router'
 import Info from '../components/Info'
+import APP_SETTINGS from 'config'
 
 const mapDispatchToProps = (dispatch) => {
-  // #todo: refactor the getting of the rooturk
-  const ROOT_URL = location.href.indexOf('localhost') > 0 ? 'http://localhost:8080/api' : '/api'
-
   return {
     updateBook: (book) => {
       const update = {
@@ -17,14 +15,14 @@ const mapDispatchToProps = (dispatch) => {
       }
 
       dispatch(updateBookRequest())
-      axios.put(`${ROOT_URL}/book/${book._id}`, update, applyAuthToken()).then((result) => {
+      axios.put(`${APP_SETTINGS.API_BASE}/book/${book._id}`, update, applyAuthToken()).then((result) => {
         dispatch(updateBookSuccess(result.data))
       }).catch((error) => {
         errorHandler(dispatch, error, updateBookFailure)
       })
     },
     deleteBook: (book) => {
-      axios.delete(`${ROOT_URL}/book/${book._id}`, applyAuthToken()).then((result) => {
+      axios.delete(`${APP_SETTINGS.API_BASE}/book/${book._id}`, applyAuthToken()).then((result) => {
         browserHistory.push(`/books`)
       }).catch((error) => {
         console.error('Failed to delete book.', error)

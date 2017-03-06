@@ -2,17 +2,14 @@ import { connect } from 'react-redux'
 import { fetchBookListRequest, fetchBookListSuccess, fetchBookListFailure } from '../modules/bookList'
 import { errorHandler, applyAuthToken } from 'util/common'
 import axios from 'axios'
-
+import APP_SETTINGS from 'config'
 import BookList from '../components/BookList'
 
 const mapDispatchToProps = (dispatch) => {
-  // #todo: refactor the getting of the rooturk
-  const ROOT_URL = location.href.indexOf('localhost') > 0 ? 'http://localhost:8080/api' : '/api'
-
   return {
     fetchBooks: () => {
       dispatch(fetchBookListRequest())
-      axios.get(`${ROOT_URL}/books`, applyAuthToken())
+      axios.get(`${APP_SETTINGS.API_BASE}/books`, applyAuthToken())
         .then((result) => {
           dispatch(fetchBookListSuccess(result.data))
         }).catch((error) => {

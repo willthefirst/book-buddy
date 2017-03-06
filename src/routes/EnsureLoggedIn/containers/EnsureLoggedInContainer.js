@@ -4,6 +4,7 @@ import { browserHistory } from 'react-router'
 import { errorHandler, applyAuthToken } from 'util/common'
 import { authRequest, authFailure, authSuccess, setRedirectUrl } from 'layouts/CoreLayout/modules/coreLayout'
 import axios from 'axios'
+import APP_SETTINGS from 'config'
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -11,10 +12,8 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(setRedirectUrl(currentUrl))
     },
     meFromToken: () => {
-      // #todo: ADMIN VERSION refactor the getting of the rooturk
-      const AUTH_ROOT_URL = location.href.indexOf('localhost') > 0 ? 'http://localhost:3000/api/auth' : '/api/auth'
       dispatch(authRequest())
-      axios.get(`${AUTH_ROOT_URL}/meFromToken`, applyAuthToken())
+      axios.get(`${APP_SETTINGS.API_BASE}/auth/meFromToken`, applyAuthToken())
           .then((result) => {
             dispatch(authSuccess(result.data))
           }).catch((error) => {

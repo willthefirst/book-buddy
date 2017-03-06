@@ -23,25 +23,6 @@ let render = () => {
   )
 }
 
-// If we have a JWT token, update state to reflect authenticated user
-// const token = cookie.load('token');
-//
-// if (token) {
-//
-//   store.dispatch(authSuccess(token));
-//
-//   handleLogin: (user, redirectUrl) => {
-//     dispatch(authRequest());
-//     axios.post(`${AUTH_ROOT_URL}/login`, user)
-//       .then((result) => {
-//         cookie.save('token', result.data.token, { path: '/' });
-//         dispatch(authSuccess(result.data));
-//       }).catch((error) => {
-//         errorHandler(dispatch, error, authFailure);
-//       });
-//   }
-// }
-
 // This code is excluded from production bundle
 if (__DEV__) {
   if (module.hot) {

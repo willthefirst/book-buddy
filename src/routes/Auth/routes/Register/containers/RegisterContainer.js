@@ -5,15 +5,13 @@ import { browserHistory } from 'react-router'
 import cookie from 'react-cookie'
 import axios from 'axios'
 import { authRequest, authFailure, authSuccess } from 'layouts/CoreLayout/modules/coreLayout'
+import APP_SETTINGS from 'config'
 
 const mapDispatchToProps = (dispatch) => {
-  // #todo: ADMIN VERSION refactor the getting of the rooturk
-  const AUTH_ROOT_URL = location.href.indexOf('localhost') > 0 ? 'http://localhost:3000/api/auth' : '/api/auth'
-
   return {
     handleRegister: (user) => {
       dispatch(authRequest())
-      axios.post(`${AUTH_ROOT_URL}/register`, user)
+      axios.post(`${APP_SETTINGS.API_BASE}/auth/register`, user)
         .then((result) => {
           console.log(result)
           cookie.save('token', result.data.token, { path: '/' })

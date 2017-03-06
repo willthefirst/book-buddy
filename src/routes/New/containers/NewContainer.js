@@ -5,15 +5,13 @@ import { errorHandler, applyAuthToken } from 'util/common'
 import { fetchGBooksRequest, fetchGBooksSuccess, fetchGBooksFailure } from '../modules/gBooksResults'
 import { createBookRequest, createBookSuccess, createBookFailure } from 'routes/Book/modules/book'
 import New from '../components/New'
+import APP_SETTINGS from 'config'
 
 const gBookQuery = (query) => {
   return `https://www.googleapis.com/books/v1/volumes?q=${query}&key=${process.env.GBOOKS_API_KEY}`
 }
 
 const mapDispatchToProps = (dispatch) => {
-  // #todo: refactor the getting of the rooturk
-  const ROOT_URL = location.href.indexOf('localhost') > 0 ? 'http://localhost:8080/api' : '/api'
-
   return {
     queryGBooks: (keyword) => {
       if (keyword.length > 2) {
@@ -61,7 +59,7 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(createBookRequest())
 
       axios.post(
-        `${ROOT_URL}/books`,
+        `${APP_SETTINGS.API_BASE}/books`,
         book,
         applyAuthToken())
       .then((result) => {

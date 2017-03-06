@@ -27,8 +27,7 @@ const config = {
   server_host : ip.address(), // use string 'localhost' to prevent exposure on local network
   server_port : process.env.PORT || 8080,
   server_db: process.env.MONGODB_URI || 'mongodb://127.0.0.1/book-buddy',
-  // Secret key for JWT signing and encryption
-  server_secret: 'super secret passphrase',
+
 
   // ----------------------------------
   // Compiler Configuration
