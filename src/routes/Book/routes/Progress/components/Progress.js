@@ -1,7 +1,6 @@
 import React from 'react'
-import { reduxForm } from 'redux-form'
-import { Row, Col, Button, Form, FormGroup, ControlLabel, Table } from 'react-bootstrap'
-import { Field } from 'redux-form'
+import { reduxForm, Field } from 'redux-form'
+import { Col, Button, Form, FormGroup, ControlLabel, Table } from 'react-bootstrap'
 
 export const Progress = (props) => {
   const { handleSubmit } = props
@@ -23,7 +22,12 @@ export const Progress = (props) => {
             Current page:
           </Col>
           <Col sm={10}>
-            <Field name='currentPage' className='form-control' component='input' type='number' placeholder='Current Page' required />
+            <Field
+              name='currentPage'
+              className='form-control'
+              component='input'
+              type='number'
+              placeholder='Current Page' required />
             {'  '}
           </Col>
         </FormGroup>
@@ -59,6 +63,7 @@ export const Progress = (props) => {
 
 Progress.propTypes = {
   updateProgress: React.PropTypes.func.isRequired,
+  handleSubmit: React.PropTypes.func.isRequired,
   progressEntries: React.PropTypes.array
 }
 

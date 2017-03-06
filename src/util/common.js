@@ -29,3 +29,12 @@ export const errorHandler = (dispatch, error, errorAction) => {
 export const applyAuthToken = function () {
   return { headers: { 'Authorization': cookie.load('token') } }
 }
+
+// Source: http://stackoverflow.com/questions/1199352/smart-way-to-shorten-long-strings-with-javascript
+export const truncate = (string, n, useWordBoundary) => {
+  if (string.length <= n) { return string }
+  var subString = string.substr(0, n - 1)
+  return (useWordBoundary
+       ? subString.substr(0, subString.lastIndexOf(' '))
+       : subString) + '...'
+}

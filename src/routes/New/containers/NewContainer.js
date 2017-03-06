@@ -7,6 +7,7 @@ import { createBookRequest, createBookSuccess, createBookFailure } from 'routes/
 import New from '../components/New'
 
 const gBookQuery = (query) => {
+  console.log(  process.env.GBOOKS_API_KEY);
   return `https://www.googleapis.com/books/v1/volumes?q=${query}&key=${process.env.GBOOKS_API_KEY}`
 }
 

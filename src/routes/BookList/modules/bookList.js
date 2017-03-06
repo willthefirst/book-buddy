@@ -10,9 +10,6 @@ export const RESET_BOOKLIST = 'FETCH_BOOKLIST_FAILURE'
 // ------------------------------------
 // Actions
 // ------------------------------------
-
-const ROOT_URL = location.href.indexOf('localhost') > 0 ? 'http://localhost:3000/api' : '/api'
-
 export function fetchBookListRequest (request) {
   return {
     type: FETCH_BOOKLIST_REQUEST,

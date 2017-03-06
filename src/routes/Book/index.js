@@ -2,7 +2,6 @@ import { injectReducer } from 'store/reducers'
 import InfoRoute from './routes/Info'
 import ProgressRoute from './routes/Progress'
 import NotesRoute from './routes/Notes'
-import { requireAuth } from 'util/common'
 
 export default (store) => ({
   path : 'book/id/:id',

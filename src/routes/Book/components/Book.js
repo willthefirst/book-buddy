@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Col, Row, Nav, NavItem } from 'react-bootstrap'
+import { Col, Row, Nav, NavItem } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 
 class Book extends Component {
@@ -22,7 +22,9 @@ class Book extends Component {
         </h1>
         <Row>
           <Col sm={2} >
-            <img src={this.props.thumbnailUrl} className='img-responsive' style={{ marginBottom: '24px', width: '100%' }} />
+            <img src={this.props.thumbnailUrl}
+              className='img-responsive'
+              style={{ marginBottom: '24px', width: '100%' }} />
           </Col>
           <Col sm={10}>
             <Nav bsStyle='tabs' id='book-info'>
@@ -49,7 +51,10 @@ class Book extends Component {
 Book.propTypes = {
   title: React.PropTypes.string,
   thumbnailUrl: React.PropTypes.string,
+  children: React.PropTypes.element,
+  fetchBook: React.PropTypes.func,
   authors: React.PropTypes.string,
+  params: React.PropTypes.object,
   _id: React.PropTypes.string
 }
 

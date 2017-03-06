@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Col, Button, Form, FormGroup, ControlLabel } from 'react-bootstrap'
 import { reduxForm, Field } from 'redux-form'
 
 const Info = (props) => {
-  const { handleSubmit, pristine, reset, submitting } = props
+  const { handleSubmit } = props
   // #todo: understand the handleSubmit thing here
   return (
     <Form onSubmit={handleSubmit((values) => { props.updateBook(values) })} horizontal>
@@ -43,7 +43,8 @@ const Info = (props) => {
 }
 
 Info.propTypes = {
-  updateBook : React.PropTypes.func,
+  updateBook : React.PropTypes.func.isRequired,
+  handleSubmit : React.PropTypes.func.isRequired,
   deleteBook : React.PropTypes.func
 }
 

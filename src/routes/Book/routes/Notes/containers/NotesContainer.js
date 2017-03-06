@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { EditorState, convertFromRaw, convertToRaw } from 'draft-js'
+import { convertToRaw } from 'draft-js'
 import { updateEditorState, initializeEditorState } from '../modules/notes'
 import { updateBookRequest, updateBookSuccess, updateBookFailure } from '../../../modules/book'
 import { errorHandler, applyAuthToken } from 'util/common'
@@ -24,7 +24,8 @@ const mapDispatchToProps = (dispatch) => {
     },
 
     updateBookNotes: function (editorState, bookId) {
-      // Convert editor content to raw JS object (http://facebook.github.io/draft-js/docs/api-reference-data-conversion.html#content)
+      // Convert editor content to raw JS object
+      // (http://facebook.github.io/draft-js/docs/api-reference-data-conversion.html#content)
       let rawContent = convertToRaw(editorState.getCurrentContent())
 
       // Serialize because server is acting like a douche with empty entityMap JSON object

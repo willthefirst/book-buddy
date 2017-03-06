@@ -1,8 +1,7 @@
-const jwt = require('jsonwebtoken'),
-  crypto = require('crypto'),
-  User = require('../models/user'),
-  config = require('../../config/project.config'),
-  passport = require('passport')
+const jwt = require('jsonwebtoken')
+const User = require('../models/user')
+const config = require('../../config/project.config')
+const passport = require('passport')
 
 function generateToken (user) {
   return jwt.sign(user, config.server_secret, {

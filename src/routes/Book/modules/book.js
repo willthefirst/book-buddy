@@ -18,9 +18,6 @@ export const RESET_BOOK = 'RESET_BOOK'
 // ------------------------------------
 // Actions
 // ------------------------------------
-
-const ROOT_URL = location.href.indexOf('localhost') > 0 ? 'http://localhost:3000/api' : '/api'
-
 export function fetchBookRequest (request) {
   return {
     type: FETCH_BOOK_REQUEST,

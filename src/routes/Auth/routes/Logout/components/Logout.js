@@ -13,7 +13,7 @@ class Logout extends Component {
 }
 
 Logout.propTypes = {
-
+  handleLogout: React.PropTypes.func
 }
 
 export default Logout

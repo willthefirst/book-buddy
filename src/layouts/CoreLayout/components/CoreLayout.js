@@ -24,7 +24,8 @@ class CoreLayout extends Component {
 CoreLayout.propTypes = {
   children : React.PropTypes.element.isRequired,
   isLoggedIn: React.PropTypes.bool.isRequired,
-  redirectUrl: React.PropTypes.string.isRequired
+  redirectUrl: React.PropTypes.string.isRequired,
+  redirectAfterAuth: React.PropTypes.func.isRequired
 }
 
 export default CoreLayout

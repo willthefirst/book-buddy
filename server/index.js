@@ -1,4 +1,3 @@
-const dotenv = require('dotenv').config()
 const express = require('express')
 const logger = require('morgan')
 const debug = require('debug')('app:server')
@@ -11,7 +10,6 @@ const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 const session = require('express-session')
 const cookieParser = require('cookie-parser')
-const flash = require('connect-flash')
 const router = require('./router')
 const passport = require('passport')
 
@@ -33,11 +31,10 @@ const app = express()
 // Apply gzip compression
 app.use(compress())
 app.use(logger('dev')) // Log requests to API using morgan
-
 app.use(cookieParser(project.server_secret))
 app.use(bodyParser.json()) // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })) // support encoded bodie
-app.use(require('express-session')({
+app.use(session({
   secret: project.server_secret
 }))
 app.use(passport.initialize())

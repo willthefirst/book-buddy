@@ -1,8 +1,8 @@
-const AuthenticationController = require('./controllers/authentication'),
-  BooksController = require('./controllers/books'),
-  express = require('express'),
-  passportService = require('./config/passport'),
-  passport = require('passport')
+const AuthenticationController = require('./controllers/authentication')
+const BooksController = require('./controllers/books')
+const express = require('express')
+require('./config/passport')
+const passport = require('passport')
 
 // Middleware to require login/auth
 const requireAuth = passport.authenticate('jwt', { session: false })
@@ -11,8 +11,8 @@ const requireAuth = passport.authenticate('jwt', { session: false })
 
 module.exports = function (app) {
   // Initializing route groups
-  const apiRoutes = express.Router(),
-    authRoutes = express.Router()
+  const apiRoutes = express.Router()
+  const authRoutes = express.Router()
 
   // =========================
   // Auth Routes

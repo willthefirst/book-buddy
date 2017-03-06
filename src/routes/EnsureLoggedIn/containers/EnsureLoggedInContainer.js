@@ -1,9 +1,8 @@
 import { connect } from 'react-redux'
-import { setRedirectUrl } from 'layouts/CoreLayout/modules/coreLayout'
 import EnsureLoggedIn from '../components/EnsureLoggedIn'
 import { browserHistory } from 'react-router'
 import { errorHandler, applyAuthToken } from 'util/common'
-import { authRequest, authFailure, authSuccess } from 'layouts/CoreLayout/modules/coreLayout'
+import { authRequest, authFailure, authSuccess, setRedirectUrl } from 'layouts/CoreLayout/modules/coreLayout'
 import axios from 'axios'
 
 const mapDispatchToProps = (dispatch) => {

@@ -7,7 +7,7 @@ const AuthIndex = (props) => {
 }
 
 AuthIndex.propTypes = {
-
+  children: React.PropTypes.element.isRequired
 }
 
 export default AuthIndex

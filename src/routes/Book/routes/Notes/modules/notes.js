@@ -1,4 +1,4 @@
-import { EditorState, RawDraftContentState, ContentState, convertFromRaw } from 'draft-js'
+import { EditorState, convertFromRaw } from 'draft-js'
 
 // ------------------------------------
 // Constants

@@ -1,32 +1,9 @@
 const Book = require('../models/book')
 const User = require('../models/user')
-const config = require('../../config/project.config')
 const moment = require('moment')
 
 // Get all the books
 exports.getAllBooks = function (req, res) {
-  console.log(req.user)
-  // Get all book ids belonging to user
-  const bookIds = req.user.books.map(function (book) {
-    return book.book_id
-  })
-
-  // // Return all book documents
-  // Book
-  //   .find({'_id': { $in: bookIds }})
-  //   .populate({
-  //     path: 'users',
-  //     select: 'books.status',
-  //     match: {
-  //       _id: req.user._id,
-  //       book_id:  // only get current user's entry
-  //     }})
-  //   .exec(function (err, books) {
-  //     console.log('Books found:', books);
-  //     if (err) return console.error(err);
-  //     res.send(books);
-    // })
-  // Return all book documents
   User
     .findOne({ '_id': req.user._id }, 'books')
     .populate({
@@ -61,7 +38,12 @@ exports.createBook = function (req, res) {
     if (!book) {
       // If book doesn't already exists in our db, add it. Once added, return to next promise.
       console.log('Book does not exists yet, creating it...')
-      let newBook = { title, authors, thumbnailUrl, gBooks_id } = req.body
+      let newBook = {
+        title: req.body.title,
+        authors: req.body.authors,
+        thumbnailUrl: req.body.thumbnailUrl,
+        gBooks_id: req.body.gBooks_id
+      }
       // this return is important to make then() wait before executing.
       return Book.create(newBook).then(function (book) {
         return book
@@ -93,20 +75,19 @@ exports.createBook = function (req, res) {
       return results
     })
   }).then(function (results) {
-    const updatedUser = results[0],
-      updatedBook = results[1]
+    const updatedBook = results[1]
     res.send(updatedBook)
   }).catch(function (error) {
     console.log('Error creating book:', error)
   })
 }
 
-function extractProgress (progressArray, book_id) {
+function extractProgress (progressArray, bookId) {
   let slimProgress = []
 
   // Get only entries that correspond to the book_id
   progressArray.forEach((entry) => {
-    if (entry.book_id.toString() === book_id.toString()) {
+    if (entry.book_id.toString() === bookId.toString()) {
       slimProgress.push({
         date: entry.date,
         currentPage: entry.currentPage
@@ -133,7 +114,7 @@ function extractProgress (progressArray, book_id) {
 // Find the current book
 exports.getBook = function (req, res) {
   // Get book-specific data
-  const bookInfo = Book.findById(req.params.id).then(function (bookGeneral) {
+  Book.findById(req.params.id).then(function (bookGeneral) {
     // Get user specific data
     const bookPersonal = req.user.books.find((item) => {
       return (item.book_id.toString() === req.params.id.toString())
@@ -189,7 +170,7 @@ exports.updateBook = function (req, res) {
   // Construct granular update of subdocs dynamically.
   // Update the specified book with whatever parameters provided by request
   const update = {}
-  for (key in requestedUpdate) {
+  for (let key in requestedUpdate) {
     update[`books.$.${key}`] = requestedUpdate[key]
   }
 
@@ -202,8 +183,18 @@ exports.updateBook = function (req, res) {
 
 // Delete the current book
 exports.deleteBook = function (req, res) {
-  const removeBookFromUser = User.findOneAndUpdate({ '_id': req.user._id }, { '$pull': { books: { book_id: req.params.id } } })
-  const removeUserFromBook = Book.findOneAndUpdate({ '_id': req.params.id }, { '$pull': { users: req.user._id } })
+  const removeBookFromUser = User.findOneAndUpdate(
+    { '_id': req.user._id },
+    {
+      '$pull': {
+        books: { book_id: req.params.id }
+      }
+    }
+  )
+  const removeUserFromBook = Book.findOneAndUpdate(
+    { '_id': req.params.id },
+    { '$pull': { users: req.user._id } }
+  )
 
   Promise.all([removeBookFromUser, removeUserFromBook]).then(function (results) {
     res.send(results)

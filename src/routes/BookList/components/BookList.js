@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Col, Row, Panel } from 'react-bootstrap'
+import { Row, Panel } from 'react-bootstrap'
 import BookThumbnail from 'components/BookThumbnail'
 
 class BookList extends Component {
@@ -86,7 +86,8 @@ class BookList extends Component {
 }
 
 BookList.propTypes = {
-  books: React.PropTypes.array
+  books: React.PropTypes.array,
+  fetchBooks: React.PropTypes.func.isRequired
 }
 
 export default BookList

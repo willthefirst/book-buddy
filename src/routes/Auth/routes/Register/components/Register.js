@@ -1,5 +1,5 @@
 import React from 'react'
-import { Col, Button, Form, FormGroup, ControlLabel, FormControl } from 'react-bootstrap'
+import { Col, Button, Form, FormGroup, ControlLabel } from 'react-bootstrap'
 import { Field, reduxForm } from 'redux-form'
 
 const Register = (props) => {
@@ -34,7 +34,8 @@ const Register = (props) => {
 }
 
 Register.propTypes = {
-  handleRegister: React.PropTypes.func.isRequired
+  handleRegister: React.PropTypes.func.isRequired,
+  handleSubmit: React.PropTypes.func
 }
 
 export default reduxForm({

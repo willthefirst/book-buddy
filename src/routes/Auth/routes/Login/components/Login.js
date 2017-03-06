@@ -1,9 +1,9 @@
 import React from 'react'
-import { Col, Button, Form, FormGroup, ControlLabel, FormControl } from 'react-bootstrap'
+import { Col, Button, Form, FormGroup, ControlLabel } from 'react-bootstrap'
 import { Field, reduxForm } from 'redux-form'
 
 const Login = (props) => {
-  const { handleSubmit, redirectUrl } = props
+  const { handleSubmit } = props
 
   return (
     <div>
@@ -35,7 +35,7 @@ const Login = (props) => {
 
 Login.propTypes = {
   handleLogin: React.PropTypes.func.isRequired,
-  redirectUrl: React.PropTypes.string.isRequired
+  handleSubmit: React.PropTypes.func.isRequired
 }
 
 export default reduxForm({

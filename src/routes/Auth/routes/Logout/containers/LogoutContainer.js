@@ -7,9 +7,6 @@ import { resetBookList } from 'routes/BookList/modules/bookList'
 import { unauthUser, setRedirectUrl } from 'layouts/CoreLayout/modules/coreLayout'
 
 const mapDispatchToProps = (dispatch) => {
-  // #todo: ADMIN VERSION refactor the getting of the rooturk
-  const AUTH_ROOT_URL = location.href.indexOf('localhost') > 0 ? 'http://localhost:3000/api/auth' : '/api/auth'
-
   return {
     handleLogout: () => {
       dispatch(unauthUser())

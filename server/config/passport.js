@@ -1,10 +1,10 @@
 // Importing Passport, strategies, and config
-const passport = require('passport'),
-  User = require('../models/user'),
-  config = require('../../config/project.config')
-JwtStrategy = require('passport-jwt').Strategy,
-      ExtractJwt = require('passport-jwt').ExtractJwt,
-      LocalStrategy = require('passport-local')
+const passport = require('passport')
+const User = require('../models/user')
+const config = require('../../config/project.config')
+const JwtStrategy = require('passport-jwt').Strategy
+const ExtractJwt = require('passport-jwt').ExtractJwt
+const LocalStrategy = require('passport-local')
 
 const localOptions = { usernameField: 'email' }
 
@@ -13,8 +13,15 @@ const localLogin = new LocalStrategy(localOptions, function (email, password, do
   console.log(email, password)
   User.findOne({ email: email }, function (err, user) {
     if (err) { return done(err) }
-    if (!user) { return done(null, false, { message: "I couldn't find a user with that email address. Please try again." }) }
-
+    if (!user) {
+      return done(
+        null,
+        false,
+        {
+          message: "I couldn't find a user with that email address. Please try again."
+        }
+      )
+    }
     user.comparePassword(password, function (err, isMatch) {
       if (err) { return done(err) }
       if (!isMatch) { return done(null, false, { message: "That's not the right password. Please try again." }) }

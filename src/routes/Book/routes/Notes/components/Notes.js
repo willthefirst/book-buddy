@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Editor } from 'react-draft-wysiwyg'
-import { Button, Row } from 'react-bootstrap'
+import { Button } from 'react-bootstrap'
 
 // #todo: customize text editor: https://jpuri.github.io/react-draft-wysiwyg/#/docs
 // also https://github.com/jpuri/react-draft-wysiwyg/blob/master/docs/src/components/Demo/index.js
@@ -8,10 +8,10 @@ import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
 
 export class Notes extends Component {
   render () {
-    const { updateBookNotes, onEditorState, onEditorStateChange, editorState, bookId } = this.props
+    const { updateBookNotes, onEditorStateChange, editorState, bookId } = this.props
 
     const toolbarOptions = {
-      options: ['inline', 'blockType' ],
+      options: ['inline', 'blockType'],
       inline: {
         options: ['bold', 'italic', 'underline']
       }
@@ -35,6 +35,8 @@ export class Notes extends Component {
 
 Notes.propTypes = {
   editorState: React.PropTypes.object.isRequired,
+  updateBookNotes: React.PropTypes.func.isRequired,
+  onEditorStateChange: React.PropTypes.func.isRequired,
   bookId: React.PropTypes.string
 }
 
