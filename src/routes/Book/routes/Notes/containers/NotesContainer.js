@@ -37,7 +37,7 @@ const mapDispatchToProps = (dispatch) => {
       }
 
       // #todo: refactor the getting of the rooturk
-      const ROOT_URL = location.href.indexOf('localhost') > 0 ? 'http://localhost:3000/api' : '/api'
+      const ROOT_URL = location.href.indexOf('localhost') > 0 ? 'http://localhost:8080/api' : '/api'
 
       dispatch(updateBookRequest())
       axios.put(`${ROOT_URL}/book/${bookId}`, update, applyAuthToken()).then((result) => {

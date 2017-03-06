@@ -1,56 +1,12 @@
 const express = require('express')
-const logger = require('morgan')
 const debug = require('debug')('app:server')
 const path = require('path')
 const webpack = require('webpack')
 const webpackConfig = require('../config/webpack.config')
 const project = require('../config/project.config')
 const compress = require('compression')
-const mongoose = require('mongoose')
-const bodyParser = require('body-parser')
-const session = require('express-session')
-const cookieParser = require('cookie-parser')
-const router = require('./router')
-const passport = require('passport')
-
-// Necessary for passport to work
-passport.serializeUser(function (user, done) {
-  done(null, user)
-})
-
-passport.deserializeUser(function (user, done) {
-  done(null, user)
-})
 
 const app = express()
-
-// ------------------------------------
-// Middleware
-// ------------------------------------
-
-// Apply gzip compression
-app.use(compress())
-app.use(logger('dev')) // Log requests to API using morgan
-app.use(cookieParser(project.server_secret))
-app.use(bodyParser.json()) // support json encoded bodies
-app.use(bodyParser.urlencoded({ extended: true })) // support encoded bodie
-app.use(session({
-  secret: project.server_secret
-}))
-app.use(passport.initialize())
-app.use(passport.session())
-
-// Routes
-router(app)
-
-// Database
-mongoose.connect(project.server_db)
-const db = mongoose.connection
-db.on('error', console.error.bind(console, 'connection error:'))
-db.once('open', function () {
-  // we're connected!
-  console.log('connected to database')
-})
 
 // ------------------------------------
 // Apply Webpack HMR Middleware
