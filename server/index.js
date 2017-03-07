@@ -4,7 +4,6 @@ const path = require('path')
 const webpack = require('webpack')
 const webpackConfig = require('../config/webpack.config')
 const project = require('../config/project.config')
-const compress = require('compression')
 
 const app = express()
 

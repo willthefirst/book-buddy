@@ -25,7 +25,9 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 const mapStateToProps = (state) => {
-  return {}
+  return {
+    loading: state.auth.loading
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Register)

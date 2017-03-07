@@ -1,6 +1,7 @@
 import React from 'react'
 import { reduxForm, Field } from 'redux-form'
 import { Col, Button, Form, FormGroup, ControlLabel, Table } from 'react-bootstrap'
+import LaddaButton, { L, SLIDE_DOWN } from 'react-ladda'
 
 export const Progress = (props) => {
   const { handleSubmit } = props
@@ -27,13 +28,21 @@ export const Progress = (props) => {
               className='form-control'
               component='input'
               type='number'
-              placeholder={ props.latestEntry } required />
+              placeholder={props.latestEntry} required />
             {'  '}
           </Col>
         </FormGroup>
         <FormGroup>
           <Col sm={12}>
-            <Button bsStyle='primary' type='submit'>Add Progress</Button>
+            <LaddaButton
+              loading={props.loading}
+              className='btn btn-primary'
+              data-size={L}
+              data-style={SLIDE_DOWN}
+              data-spinner-color='#ddd'
+              >
+              Add progress
+            </LaddaButton>
           </Col>
         </FormGroup>
       </Form>
@@ -64,7 +73,8 @@ export const Progress = (props) => {
 Progress.propTypes = {
   updateProgress: React.PropTypes.func.isRequired,
   handleSubmit: React.PropTypes.func.isRequired,
-  progressEntries: React.PropTypes.array
+  progressEntries: React.PropTypes.array,
+  latestEntry: React.PropTypes.number.isRequired
 }
 
 export default reduxForm({

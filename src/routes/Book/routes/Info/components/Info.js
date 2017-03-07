@@ -1,6 +1,7 @@
 import React from 'react'
 import { Col, Button, Form, FormGroup, ControlLabel } from 'react-bootstrap'
 import { reduxForm, Field } from 'redux-form'
+import LaddaButton, { L, SLIDE_DOWN } from 'react-ladda'
 
 const Info = (props) => {
   const { handleSubmit } = props
@@ -29,13 +30,25 @@ const Info = (props) => {
       </FormGroup>
       <FormGroup>
         <Col smOffset={2} sm={10}>
-          <Button type='submit' bsStyle='primary'>
+          <LaddaButton
+            loading={props.loading}
+            className='btn btn-primary'
+            data-size={L}
+            data-style={SLIDE_DOWN}
+            data-spinner-color='#ddd'
+            >
             Save
-          </Button>
+          </LaddaButton>
           {'  '}
-          <Button onClick={handleSubmit((values) => { props.deleteBook(values) })} bsStyle='danger'>
+          <LaddaButton
+            onClick={handleSubmit((values) => { props.deleteBook(values) })}
+            className='btn btn-danger'
+            data-size={L}
+            data-style={SLIDE_DOWN}
+            data-spinner-color='#ddd'
+            >
             Delete
-          </Button>
+          </LaddaButton>
         </Col>
       </FormGroup>
     </Form>

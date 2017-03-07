@@ -1,6 +1,7 @@
 import React from 'react'
-import { Col, Button, Form, FormGroup, ControlLabel } from 'react-bootstrap'
+import { Col, Form, FormGroup, ControlLabel } from 'react-bootstrap'
 import { Field, reduxForm } from 'redux-form'
+import LaddaButton, { L, SLIDE_DOWN } from 'react-ladda'
 
 const Login = (props) => {
   const { handleSubmit } = props
@@ -26,7 +27,15 @@ const Login = (props) => {
           </Col>
         </FormGroup>
         <FormGroup>
-          <Button type='submit' bsStyle='primary'>Submit</Button>
+          <LaddaButton
+            loading={props.loading}
+            className='btn btn-primary'
+            data-size={L}
+            data-style={SLIDE_DOWN}
+            data-spinner-color='#ddd'
+          >
+            Login
+          </LaddaButton>
         </FormGroup>
       </Form>
     </div>
@@ -35,7 +44,8 @@ const Login = (props) => {
 
 Login.propTypes = {
   handleLogin: React.PropTypes.func.isRequired,
-  handleSubmit: React.PropTypes.func.isRequired
+  handleSubmit: React.PropTypes.func.isRequired,
+  loading: React.PropTypes.bool.isRequired
 }
 
 export default reduxForm({

@@ -28,7 +28,6 @@ const config = {
   server_port : process.env.PORT || 8080,
   server_db: process.env.MONGODB_URI || 'mongodb://127.0.0.1/book-buddy',
 
-
   // ----------------------------------
   // Compiler Configuration
   // ----------------------------------

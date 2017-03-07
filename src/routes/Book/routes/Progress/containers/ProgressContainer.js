@@ -39,7 +39,8 @@ const mapStateToProps = (state) => {
     latestEntry: progress[0] ? progress[0].currentPage : 0,
     initialValues: {
       date: moment().format('YYYY-MM-DD')
-    }
+    },
+    loading: state.activeBook.loading
   }
 }
 

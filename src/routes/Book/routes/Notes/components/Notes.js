@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Editor } from 'react-draft-wysiwyg'
 import { Button } from 'react-bootstrap'
+import LaddaButton, { L, SLIDE_DOWN } from 'react-ladda'
 
 // #todo: customize text editor: https://jpuri.github.io/react-draft-wysiwyg/#/docs
 // also https://github.com/jpuri/react-draft-wysiwyg/blob/master/docs/src/components/Demo/index.js
@@ -27,7 +28,16 @@ export class Notes extends Component {
           editorState={editorState}
           onEditorStateChange={onEditorStateChange}
           />
-        <Button type='submit' bsStyle='primary' onClick={() => updateBookNotes(editorState, bookId)}>Save</Button>
+        <LaddaButton
+          onClick={() => updateBookNotes(editorState, bookId)}
+          loading={this.props.loading}
+          className='btn btn-primary'
+          data-size={L}
+          data-style={SLIDE_DOWN}
+          data-spinner-color='#ddd'
+          >
+          Save
+        </LaddaButton>
       </div>
     )
   }

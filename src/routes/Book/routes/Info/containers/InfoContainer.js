@@ -34,7 +34,8 @@ const mapDispatchToProps = (dispatch) => {
 const mapStateToProps = (state) => {
   return {
     initialValues: state.activeBook.data,
-    enableReinitialize: true
+    enableReinitialize: true,
+    loading: state.activeBook.loading
   }
 }
 
