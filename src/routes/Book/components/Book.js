@@ -4,12 +4,8 @@ import { LinkContainer } from 'react-router-bootstrap'
 
 class Book extends Component {
   componentWillMount () {
-    // Check to see if we have an active book in the store already.
-    // If it's not the correct one (ie. doesn't match current URL, fetch the right one.)
-    // Helpful to prevent client from making two requests to server when user creates a new book.
-    if (this.props._id !== this.props.params.id) {
-      this.props.fetchBook(this.props.params.id)
-    }
+    // Get book from server
+    this.props.fetchBook(this.props.params.id)
   }
 
   render () {

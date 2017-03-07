@@ -63,8 +63,6 @@ const mapDispatchToProps = (dispatch) => {
         book,
         applyAuthToken())
       .then((result) => {
-        // #todo: this double fetches books. on success we load book to state, but then on navigate to the book route
-        // we make another server call to reget the book...
         dispatch(createBookSuccess(result.data))
         browserHistory.push(`/book/id/${result.data._id}/info`)
       }).catch((error) => {

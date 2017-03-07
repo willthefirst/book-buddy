@@ -4,6 +4,7 @@ import axios from 'axios'
 import { errorHandler, applyAuthToken } from 'util/common'
 import Progress from '../components/Progress'
 import APP_SETTINGS from 'config'
+import moment from 'moment'
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -28,8 +29,17 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 const mapStateToProps = (state) => {
+  let progress = []
+  if (state.activeBook.data.progress) {
+    progress = state.activeBook.data.progress
+  }
+
   return {
-    progressEntries: state.activeBook.data.progress || []
+    progressEntries: progress,
+    latestEntry: progress[0] ? progress[0].currentPage : 0,
+    initialValues: {
+      date: moment().format('YYYY-MM-DD')
+    }
   }
 }
 

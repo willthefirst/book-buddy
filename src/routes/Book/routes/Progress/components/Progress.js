@@ -27,7 +27,7 @@ export const Progress = (props) => {
               className='form-control'
               component='input'
               type='number'
-              placeholder='Current Page' required />
+              placeholder={ props.latestEntry } required />
             {'  '}
           </Col>
         </FormGroup>
