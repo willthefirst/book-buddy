@@ -49,6 +49,7 @@ const Info = (props) => {
             >
             Delete
           </LaddaButton>
+          {"   "}<span className="text-warning">{props.errorMessage}</span>
         </Col>
       </FormGroup>
     </Form>

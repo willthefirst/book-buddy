@@ -35,7 +35,8 @@ const mapStateToProps = (state) => {
   return {
     initialValues: state.activeBook.data,
     enableReinitialize: true,
-    loading: state.activeBook.loading
+    loading: state.activeBook.loading,
+    errorMessage: state.activeBook.error
   }
 }
 

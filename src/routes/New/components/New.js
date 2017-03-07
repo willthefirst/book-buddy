@@ -20,6 +20,7 @@ const New = (props) => {
               placeholder='Start typing the name of the book...' />
           </FormGroup>
         </Form>
+        <span className="text-warning">{props.errorMessage}</span>
       </Row>
       <Row>
         {

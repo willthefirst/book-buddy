@@ -74,7 +74,8 @@ const mapDispatchToProps = (dispatch) => {
 
 const mapStateToProps = (state) => {
   return {
-    gBooksResults : state.gBooksResults.books
+    gBooksResults : state.gBooksResults.books,
+    errorMessage: state.gBooksResults.error
   }
 }
 

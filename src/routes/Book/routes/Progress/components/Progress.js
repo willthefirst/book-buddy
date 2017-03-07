@@ -43,6 +43,7 @@ export const Progress = (props) => {
               >
               Add progress
             </LaddaButton>
+            {"   "}<span className="text-warning">{props.errorMessage}</span>
           </Col>
         </FormGroup>
       </Form>

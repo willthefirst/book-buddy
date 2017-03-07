@@ -38,6 +38,7 @@ export class Notes extends Component {
           >
           Save
         </LaddaButton>
+        {"   "}<span className="text-warning">{this.props.errorMessage}</span>
       </div>
     )
   }

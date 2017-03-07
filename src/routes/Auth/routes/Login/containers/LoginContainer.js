@@ -24,7 +24,8 @@ const mapDispatchToProps = (dispatch) => {
 const mapStateToProps = (state) => {
   return {
     redirectUrl: state.auth.redirectUrl,
-    loading: state.auth.loading
+    loading: state.auth.loading,
+    errorMessage: state.auth.error
   }
 }
 

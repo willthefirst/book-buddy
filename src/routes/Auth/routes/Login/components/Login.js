@@ -1,5 +1,5 @@
 import React from 'react'
-import { Col, Form, FormGroup, ControlLabel } from 'react-bootstrap'
+import { Col, Form, FormGroup, ControlLabel, Well } from 'react-bootstrap'
 import { Field, reduxForm } from 'redux-form'
 import LaddaButton, { L, SLIDE_DOWN } from 'react-ladda'
 
@@ -36,6 +36,7 @@ const Login = (props) => {
           >
             Login
           </LaddaButton>
+          {"   "}<span className="text-warning">{props.errorMessage}</span>
         </FormGroup>
       </Form>
     </div>

@@ -40,7 +40,8 @@ const mapStateToProps = (state) => {
     initialValues: {
       date: moment().format('YYYY-MM-DD')
     },
-    loading: state.activeBook.loading
+    loading: state.activeBook.loading,
+    errorMessage: state.activeBook.error
   }
 }
 

@@ -36,6 +36,7 @@ const Register = (props) => {
           >
             Register
           </LaddaButton>
+          {"   "}<span className="text-warning">{props.errorMessage}</span>
         </FormGroup>
       </Form>
     </div>
