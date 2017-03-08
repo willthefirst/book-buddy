@@ -21,20 +21,20 @@ class Book extends Component {
             <img src={this.props.thumbnailUrl}
               className='img-responsive'
               style={{ marginBottom: '24px', width: '100%' }} />
+            <Nav bsStyle='tabs' id='book-info' stacked bsStyle="pills">
+                <LinkContainer to={{ pathname: `/book/id/${this.props.params.id}/progress` }}>
+                  <NavItem eventKey={1} title='Progress'>Progress</NavItem>
+                </LinkContainer>
+                <LinkContainer to={{ pathname: `/book/id/${this.props.params.id}/notes` }}>
+                  <NavItem eventKey={2} title='Notes'>Notes</NavItem>
+                </LinkContainer>
+                <LinkContainer to={{ pathname: `/book/id/${this.props.params.id}/info` }}>
+                  <NavItem eventKey={3} title='Info'>Info</NavItem>
+                </LinkContainer>
+              </Nav>
           </Col>
           <Col sm={10}>
-            <Nav bsStyle='tabs' id='book-info'>
-              <LinkContainer to={{ pathname: `/book/id/${this.props.params.id}/progress` }}>
-                <NavItem eventKey={1} title='Progress'>Progress</NavItem>
-              </LinkContainer>
-              <LinkContainer to={{ pathname: `/book/id/${this.props.params.id}/notes` }}>
-                <NavItem eventKey={2} title='Notes'>Notes</NavItem>
-              </LinkContainer>
-              <LinkContainer to={{ pathname: `/book/id/${this.props.params.id}/info` }}>
-                <NavItem eventKey={3} title='Info'>Info</NavItem>
-              </LinkContainer>
-            </Nav>
-            <div className='core-layout__viewport'>
+            <div>
               {this.props.children}
             </div>
           </Col>

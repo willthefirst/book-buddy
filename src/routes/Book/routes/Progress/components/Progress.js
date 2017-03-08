@@ -8,45 +8,33 @@ export const Progress = (props) => {
 
   return (
     <div>
-      <Form horizontal onSubmit={handleSubmit((values) => { props.updateProgress(values, props.params.id) })}>
-        <FormGroup>
-          <Col componentClass={ControlLabel} sm={2}>
-            Date
-          </Col>
-          <Col sm={10}>
-            <Field name='date' component='input' className='form-control' type='date' required />
-            {'  '}
-          </Col>
-        </FormGroup>
-        <FormGroup>
-          <Col componentClass={ControlLabel} sm={2}>
-            Current page:
-          </Col>
-          <Col sm={10}>
-            <Field
-              name='currentPage'
-              className='form-control'
-              component='input'
-              type='number'
-              placeholder={props.latestEntry} required />
-            {'  '}
-          </Col>
-        </FormGroup>
-        <FormGroup>
-          <Col sm={12}>
-            <LaddaButton
-              loading={props.loading}
-              className='btn btn-primary'
-              data-size={L}
-              data-style={SLIDE_DOWN}
-              data-spinner-color='#ddd'
-              >
-              Add progress
-            </LaddaButton>
-            {"   "}<span className="text-warning">{props.errorMessage}</span>
-          </Col>
-        </FormGroup>
+      <Form inline onSubmit={handleSubmit((values) => { props.updateProgress(values, props.params.id) })}>
+        I have read up to page
+        {'  '}
+        <Field
+          name='currentPage'
+          className='form-control'
+          component='input'
+          type='number'
+          placeholder={props.latestEntry} required
+          />
+        {'  '}
+        on
+        {'  '}
+        <Field name='date' component='input' className='form-control' type='date' required />
+        {'  '}
+        <LaddaButton
+          loading={props.loading}
+          className='btn btn-primary'
+          data-size={L}
+          data-style={SLIDE_DOWN}
+          data-spinner-color='#ddd'
+          >
+          Add progress
+        </LaddaButton>
+        <div className="text-warning">{props.errorMessage}</div>
       </Form>
+      <br/>
       <Table responsive striped>
         <thead>
           <tr>
