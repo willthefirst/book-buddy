@@ -16,9 +16,9 @@ const mapDispatchToProps = (dispatch) => {
       }
 
       dispatch(updateBookRequest())
-      axios.put(`${APP_SETTINGS.API_BASE}/book/${bookId}/progress`, update, applyAuthToken()).then((result) => {
+      axios.put(`${APP_SETTINGS.API_BASE}/book/${bookId}/dailies`, update, applyAuthToken()).then((result) => {
         const update = {
-          progress: result.data
+          dailies: result.data
         }
         dispatch(updateBookSuccess(update))
       }).catch((error) => {
@@ -29,14 +29,14 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 const mapStateToProps = (state) => {
-  let progress = []
-  if (state.activeBook.data.progress) {
-    progress = state.activeBook.data.progress
+  let dailies = []
+  if (state.activeBook.data.dailies) {
+    dailies = state.activeBook.data.dailies
   }
 
   return {
-    progressEntries: progress,
-    latestEntry: progress[0] ? progress[0].currentPage : 0,
+    dailies: dailies,
+    latestEntry: dailies[0] ? dailies[0].currentPage : 0,
     initialValues: {
       date: moment().format('YYYY-MM-DD')
     },

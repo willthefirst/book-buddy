@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import Today from '../components/Today'
+import Daily from '../components/Daily'
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -13,4 +13,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Today)
+export default connect(mapStateToProps, mapDispatchToProps)(Daily)

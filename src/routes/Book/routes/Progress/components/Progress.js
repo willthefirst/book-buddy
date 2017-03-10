@@ -44,7 +44,7 @@ export const Progress = (props) => {
         </thead>
         <tbody>
           {
-            props.progressEntries.map((entry, index) => {
+            props.dailies.map((entry, index) => {
               return (
                 <tr key={index}>
                   <td>{entry.date}</td>
@@ -62,7 +62,7 @@ export const Progress = (props) => {
 Progress.propTypes = {
   updateProgress: React.PropTypes.func.isRequired,
   handleSubmit: React.PropTypes.func.isRequired,
-  progressEntries: React.PropTypes.array,
+  dailies: React.PropTypes.array,
   latestEntry: React.PropTypes.number.isRequired
 }
 
