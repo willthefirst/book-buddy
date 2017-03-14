@@ -12,7 +12,8 @@ const mapDispatchToProps = (dispatch) => {
       const newDaily = {
         date: values.date,
         book_id: bookId,
-        currentPage: values.currentPage
+        currentPage: values.currentPage,
+        filterByThisBook: true // IMPORTANT for getting right kind of response
       }
 
       //  #todo dailies api calls
@@ -22,8 +23,11 @@ const mapDispatchToProps = (dispatch) => {
         // limit: number of entries returned, default to all
         // date-range: range to retrieve entries for
 
+
+      // here i need the all dailies back
       axios.post(`${APP_SETTINGS.API_BASE}/dailies`, newDaily, applyAuthToken())
         .then((result) => {
+          console.log(result);
           const update = {
             dailies: result.data
           }

@@ -9,7 +9,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     fetchBooksByDay: (date) => {
       dispatch(fetchDailiesRequest())
-      axios.get(`${APP_SETTINGS.API_BASE}/daily/${date}`, applyAuthToken())
+      axios.get(`${APP_SETTINGS.API_BASE}/dailies?date=${date}`, applyAuthToken())
         .then((result) => {
           dispatch(fetchDailiesSuccess(result.data, date))
         }).catch((error) => {
