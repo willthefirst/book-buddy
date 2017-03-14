@@ -36,6 +36,7 @@ class Daily extends Component {
   }
 
   render () {
+    // console.log(this.props);
     // 1) BOOKS PROGRESS ENTRY
     // dailies/:date
       // get all entries where entry.date matches params.date
@@ -54,36 +55,57 @@ class Daily extends Component {
     return (
       <div>
          <h2>{moment(new Date(this.props.params.date)).format('MMMM Do, YYYY')}</h2>
-         <Row>
-           {
-             this.props.dailiesMatch.map((daily, key) => {
-               return (
-                 <BookThumbnail
-                   title={daily.title}
-                   authors={daily.authors}
-                   thumbnailUrl={daily.thumbnailUrl}
-                   linkTo={`/book/id/${daily.book_id}/progress`}
-                   key={key}>
-                  <DailyForm
-                    initialValues={
-                      {
-                        date: this.props.params.date,
-                        dailyId: daily.daily_id,
-                        bookId: daily.book_id
+           <Row>
+             {
+               this.props.dailiesMatch.map((daily, key) => {
+                 return (
+                   <BookThumbnail
+                     title={daily.title}
+                     authors={daily.authors}
+                     thumbnailUrl={daily.thumbnailUrl}
+                     linkTo={`/book/id/${daily.book_id}/progress`}
+                     key={key}>
+                    <DailyForm
+                      initialValues={
+                        {
+                          date: this.props.params.date,
+                          dailyId: daily.daily_id,
+                          bookId: daily.book_id,
+                          currentPage: daily.currentPage
+                        }
                       }
-                    }
-                    onSubmit={this.props.handleSubmit}
-                    />
-                 </BookThumbnail>
-               )
-             })
-           }
-         </Row>
+                      form={daily.daily_id}
+                      onSubmit={this.props.handleSubmit}
+                      />
+                   </BookThumbnail>
+                 )
+               })
+             }
+           </Row>
+           <Row>
+             <ul>
+             {
+               this.props.dailiesRange.map((daily, key) => {
+                 return (
+                     <li key={key}>
+                       <span>{daily.currentPage} | </span>
+                       <span>{ daily.title } | </span>
+                       <span>{daily.date}</span>
+                     </li>
+                 )
+               })
+             }
+           </ul>
+           </Row>
        </div>
 
     )
   }
 }
+
+
+
+
 
 Daily.propTypes = {
   fetchBooksByDay: React.PropTypes.func.isRequired

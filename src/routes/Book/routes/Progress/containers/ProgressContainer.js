@@ -15,11 +15,21 @@ const mapDispatchToProps = (dispatch) => {
         currentPage: values.currentPage
       }
 
+      //  #todo dailies api calls
+      // /dailies?book-id=BOOK_ID_HERE&sort=-date
+        // book-id: default to all books of user
+        // sort: default to newer dates first
+        // limit: number of entries returned, default to all
+        // date-range: range to retrieve entries for
+
       axios.post(`${APP_SETTINGS.API_BASE}/dailies`, newDaily, applyAuthToken())
         .then((result) => {
-          console.log('Success', result);
+          const update = {
+            dailies: result.data
+          }
+          dispatch(updateBookSuccess(update))
         }).catch((error) => {
-          console.log(error);
+          errorHandler(dispatch, error, updateBookFailure)
         })
 
 

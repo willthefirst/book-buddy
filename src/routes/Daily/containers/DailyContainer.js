@@ -11,7 +11,7 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(fetchDailiesRequest())
       axios.get(`${APP_SETTINGS.API_BASE}/daily/${date}`, applyAuthToken())
         .then((result) => {
-          dispatch(fetchDailiesSuccess(result.data))
+          dispatch(fetchDailiesSuccess(result.data, date))
         }).catch((error) => {
           errorHandler(dispatch, error, fetchDailiesFailure)
         })

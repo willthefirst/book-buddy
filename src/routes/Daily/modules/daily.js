@@ -1,3 +1,5 @@
+import moment from 'moment'
+
 // ------------------------------------
 // Constants
 // ------------------------------------
@@ -19,10 +21,11 @@ export function fetchDailiesRequest (request) {
   }
 }
 
-export function fetchDailiesSuccess (dailies) {
+export function fetchDailiesSuccess (dailies, dateQuery) {
   return {
     type: FETCH_DAILIES_SUCCESS,
-    payload: dailies
+    payload: dailies,
+    dateQuery: dateQuery
   }
 }
 
@@ -68,14 +71,6 @@ export const actions = {
 // ------------------------------------
 // Action Handlers
 // ------------------------------------
-const initialState = {
-  dailiesRange: [],
-  dailiesMatch: [],
-  currentBooks: [],
-  error: null,
-  loading: false
-}
-
 const ACTION_HANDLERS = {
   [FETCH_DAILIES_REQUEST] : (state, action) => {
     return {
@@ -95,12 +90,52 @@ const ACTION_HANDLERS = {
     return {
       ...state, error: action.payload, loading: false
     }
+  },
+
+  [FETCH_DAILIES_REQUEST] : (state, action) => {
+    return {
+      ...state, loading: true
+    }
+  },
+  [FETCH_DAILIES_SUCCESS] : (state, action) => {
+    const dateQuery = moment.utc(new Date(action.dateQuery))
+
+    // From payload, define already existing entries or defaults to enter
+    let dailiesRange = action.payload
+    let dailiesMatch = dailiesRange.filter((daily) => {
+      const date = moment.utc(new Date(daily.date))
+
+      // If user has a daily that matches date query,
+      return date.isSame(dateQuery, 'day')
+    })
+
+    return {
+      dailiesRange: dailiesRange,
+      dailiesMatch: dailiesMatch,
+      currentBooks: [],
+      error: null,
+      loading: false
+    }
+  },
+  [FETCH_DAILIES_FAILURE] : (state, action) => {
+    return {
+      ...state, error: action.payload, loading: false
+    }
   }
 }
+
 
 // ------------------------------------
 // Reducer
 // ------------------------------------
+
+const initialState = {
+  dailiesRange: [],
+  dailiesMatch: [],
+  currentBooks: [],
+  error: null,
+  loading: false
+}
 
 export default function dailyReducer (state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]
