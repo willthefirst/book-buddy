@@ -19,11 +19,22 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
+const getBooksByStatus = (status, allBooks) => {
+  const books = allBooks.filter((book) => {
+    return book.status[0] === status
+  })
+
+  return books
+}
+
 const mapStateToProps = (state) => {
+  const bookList = state.bookList
   return {
-    books: state.bookList.books,
-    isLoading: state.bookList.loading,
-    error: state.bookList.error
+    booksCurrent: getBooksByStatus('Current', bookList.books),
+    booksQueue: getBooksByStatus('Queue', bookList.books),
+    booksFinished: getBooksByStatus('Finished', bookList.books),
+    isLoading: bookList.loading,
+    error: bookList.error
   }
 }
 

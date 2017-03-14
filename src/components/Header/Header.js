@@ -23,6 +23,9 @@ class Header extends Component {
     if (isLoggedIn) {
       navLinks = (
         <Nav pullRight>
+          <LinkContainer to={{ pathname: '/daily' }}>
+            <NavItem>Today</NavItem>
+          </LinkContainer>
           <LinkContainer to={{ pathname: '/books' }}>
             <NavItem>My Books</NavItem>
           </LinkContainer>

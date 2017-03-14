@@ -1,7 +1,7 @@
-// import { injectReducer } from 'store/reducers'
+import { injectReducer } from 'store/reducers'
 
 export default (store) => ({
-  path : 'Daily',
+  path : 'daily(/:date)',
   /*  Async getComponent is only invoked when route matches   */
   getComponent (nextState, cb) {
     /*  Webpack - use 'require.ensure' to create a split point
@@ -10,15 +10,15 @@ export default (store) => ({
       /*  Webpack - use require callback to define
           dependencies for bundling   */
       const Daily = require('./containers/DailyContainer').default
-      // const reducer = require('./modules/Daily').default
+      const reducer = require('./modules/daily').default
 
       /*  Add the reducer to the store on key 'counter'  */
-      // injectReducer(store, { key: 'Daily', reducer })
+      injectReducer(store, { key: 'daily', reducer })
 
       /*  Return getComponent   */
       cb(null, Daily)
 
       /* Webpack named bundle   */
-    }, 'Daily')
+    }, 'daily')
   }
 })

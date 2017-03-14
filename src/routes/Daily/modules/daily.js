@@ -1,19 +1,67 @@
 // ------------------------------------
 // Constants
 // ------------------------------------
-export const FETCH_BOOKLIST_REQUEST = 'FETCH_BOOKLIST_REQUEST'
+export const FETCH_DAILIES_REQUEST = 'FETCH_DAILIES_REQUEST'
+export const FETCH_DAILIES_SUCCESS = 'FETCH_DAILIES_SUCCESS'
+export const FETCH_DAILIES_FAILURE = 'FETCH_DAILIES_FAILURE'
+
+export const UPDATE_DAILY_REQUEST = 'UPDATE_DAILY_REQUEST'
+export const UPDATE_DAILY_SUCCESS = 'UPDATE_DAILY_SUCCESS'
+export const UPDATE_DAILY_FAILURE = 'UPDATE_DAILY_FAILURE'
 
 // ------------------------------------
 // Actions
 // ------------------------------------
-export function fetchBookListRequest (request) {
+export function fetchDailiesRequest (request) {
   return {
-    type: FETCH_BOOKLIST_REQUEST,
+    type: FETCH_DAILIES_REQUEST,
     payload: request
   }
 }
 
+export function fetchDailiesSuccess (dailies) {
+  return {
+    type: FETCH_DAILIES_SUCCESS,
+    payload: dailies
+  }
+}
+
+export function fetchDailiesFailure (error) {
+  return {
+    type: FETCH_DAILIES_FAILURE,
+    payload: error
+  }
+}
+
+export function updateDailyRequest (request) {
+  return {
+    type: UPDATE_DAILY_REQUEST,
+    payload: request
+  }
+}
+
+export function updateDailySuccess (dailies) {
+  return {
+    type: UPDATE_DAILY_SUCCESS,
+    payload: dailies
+  }
+}
+
+export function updateDailyFailure (error) {
+  return {
+    type: UPDATE_DAILY_FAILURE,
+    payload: error
+  }
+}
+
 export const actions = {
+  fetchDailiesRequest,
+  fetchDailiesSuccess,
+  fetchDailiesFailure,
+
+  updateDailyRequest,
+  updateDailySuccess,
+  updateDailyFailure
 
 }
 
@@ -21,18 +69,40 @@ export const actions = {
 // Action Handlers
 // ------------------------------------
 const initialState = {
-
+  dailiesRange: [],
+  dailiesMatch: [],
+  currentBooks: [],
+  error: null,
+  loading: false
 }
 
 const ACTION_HANDLERS = {
-
+  [FETCH_DAILIES_REQUEST] : (state, action) => {
+    return {
+      ...state, loading: true
+    }
+  },
+  [FETCH_DAILIES_SUCCESS] : (state, action) => {
+    return {
+      dailiesRange: action.payload.dailiesRange,
+      dailiesMatch: action.payload.dailiesMatch,
+      currentBooks: action.payload.currentBooks,
+      error: null,
+      loading: false
+    }
+  },
+  [FETCH_DAILIES_FAILURE] : (state, action) => {
+    return {
+      ...state, error: action.payload, loading: false
+    }
+  }
 }
 
 // ------------------------------------
 // Reducer
 // ------------------------------------
 
-export default function bookListReducer (state = initialState, action) {
+export default function dailyReducer (state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]
   return handler ? handler(state, action) : state
 }

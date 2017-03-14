@@ -1,7 +1,7 @@
 import BookListRoute from 'routes/BookList'
 import BookRoute from 'routes/Book'
 import NewRoute from 'routes/New'
-import TodayRoute from 'routes/Today'
+import DailyRoute from 'routes/Daily'
 import ErrorRoute from 'routes/Error'
 
 export default (store) => ({
@@ -15,7 +15,7 @@ export default (store) => ({
     BookListRoute(store),
     BookRoute(store),
     NewRoute(store),
-    TodayRoute(store),
+    DailyRoute(store),
     ErrorRoute(store)
   ]
 })

@@ -9,21 +9,35 @@ import moment from 'moment'
 const mapDispatchToProps = (dispatch) => {
   return {
     updateProgress: (values, bookId) => {
-      const update = {
+      const newDaily = {
         date: values.date,
         book_id: bookId,
         currentPage: values.currentPage
       }
 
-      dispatch(updateBookRequest())
-      axios.put(`${APP_SETTINGS.API_BASE}/book/${bookId}/dailies`, update, applyAuthToken()).then((result) => {
-        const update = {
-          dailies: result.data
-        }
-        dispatch(updateBookSuccess(update))
-      }).catch((error) => {
-        errorHandler(dispatch, error, updateBookFailure)
-      })
+      axios.post(`${APP_SETTINGS.API_BASE}/dailies`, newDaily, applyAuthToken())
+        .then((result) => {
+          console.log('Success', result);
+        }).catch((error) => {
+          console.log(error);
+        })
+
+
+        // const update = {
+        //   date: values.date,
+        //   book_id: bookId,
+        //   currentPage: values.currentPage
+        // }
+
+      // dispatch(updateBookRequest())
+      // axios.put(`${APP_SETTINGS.API_BASE}/book/${bookId}/dailies`, update, applyAuthToken()).then((result) => {
+      //   const update = {
+      //     dailies: result.data
+      //   }
+      //   dispatch(updateBookSuccess(update))
+      // }).catch((error) => {
+      //   errorHandler(dispatch, error, updateBookFailure)
+      // })
     }
   }
 }
