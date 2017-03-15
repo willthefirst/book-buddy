@@ -17,34 +17,44 @@ const mapDispatchToProps = (dispatch) => {
         })
     },
     handleSubmit: (values) => {
-      if (values.dailyId) {
-        // If daily already exists, update it.
-        const update = {
-          currentPage: values.currentPage
-        }
-        axios.put(
-          `${APP_SETTINGS.API_BASE}/dailies/${values.daily_id}`,
-          update,
-          applyAuthToken())
-          .then((result) => {
-            console.log(result);
-          }).catch((error) => {
-            console.log(error);
-          })
-      } else {
-        const newDaily = {
-          date: values.date,
-          book_id: bookId,
-          currentPage: values.currentPage
-        }
-        // If daily doesn't exists, create it
-        axios.post(`${APP_SETTINGS.API_BASE}/dailies`, newDaily, applyAuthToken())
-          .then((result) => {
-            console.log('Success', result);
-          }).catch((error) => {
-            console.log(error);
-          })
+      console.log(values);
+      const newDaily = {
+        date: values.date,
+        book_id: values.bookId,
+        currentPage: values.currentPage
       }
+      // If daily doesn't exists, create it
+      axios.post(`${APP_SETTINGS.API_BASE}/dailies`, newDaily, applyAuthToken())
+        .then((result) => {
+          dispatch(fetchDailiesSuccess(result.data, newDaily.date))
+        }).catch((error) => {
+          errorHandler(dispatch, error, fetchDailiesFailure)
+        })
+
+      // if (values.dailyId) {
+        // next: simplify this to just findOrCreate
+          // instaed of finding by id, just let user submit
+          // search users dailies for any entry with same book_id and date
+          // if match update, if not create.
+
+
+
+      //   // If daily already exists, update it.
+      //   const update = {
+      //     currentPage: values.currentPage
+      //   }
+      //   axios.put(
+      //     `${APP_SETTINGS.API_BASE}/dailies/${values.daily_id}`,
+      //     update,
+      //     applyAuthToken())
+      //     .then((result) => {
+      //       console.log(result);
+      //     }).catch((error) => {
+      //       console.log(error);
+      //     })
+      // } else {
+      //
+      // }
 
 
 
