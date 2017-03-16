@@ -23,8 +23,6 @@ const mapDispatchToProps = (dispatch) => {
         // limit: number of entries returned, default to all
         // date-range: range to retrieve entries for
 
-
-      // here i need the all dailies back
       axios.post(`${APP_SETTINGS.API_BASE}/dailies`, newDaily, applyAuthToken())
         .then((result) => {
           console.log(result);

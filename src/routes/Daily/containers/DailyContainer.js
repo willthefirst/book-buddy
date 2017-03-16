@@ -30,31 +30,6 @@ const mapDispatchToProps = (dispatch) => {
         }).catch((error) => {
           errorHandler(dispatch, error, fetchDailiesFailure)
         })
-
-      // if (values.dailyId) {
-        // next: simplify this to just findOrCreate
-          // instaed of finding by id, just let user submit
-          // search users dailies for any entry with same book_id and date
-          // if match update, if not create.
-
-
-
-      //   // If daily already exists, update it.
-      //   const update = {
-      //     currentPage: values.currentPage
-      //   }
-      //   axios.put(
-      //     `${APP_SETTINGS.API_BASE}/dailies/${values.daily_id}`,
-      //     update,
-      //     applyAuthToken())
-      //     .then((result) => {
-      //       console.log(result);
-      //     }).catch((error) => {
-      //       console.log(error);
-      //     })
-      // } else {
-      //
-      // }
     }
   }
 }

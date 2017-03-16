@@ -6,6 +6,7 @@ import { reduxForm, Field } from 'redux-form'
 import moment from 'moment'
 
 let DailyForm = (props) => {
+  // console.log(props.form, props.initialValues.currentPage);
   return (
     <Form onSubmit={props.handleSubmit}>
       <FormGroup>
@@ -27,19 +28,22 @@ let DailyForm = (props) => {
   )
 }
 
-DailyForm = reduxForm({
-  form: 'daily' // a unique identifier for this form
-})(DailyForm)
+DailyForm = reduxForm()(DailyForm)
 
 class Daily extends Component {
   componentWillMount () {
+    // Initial load
     this.props.fetchBooksByDay(this.props.date)
+  }
+  componentWillReceiveProps(nextProps) {
+    // If component current date changes, fetch again.
+    if (nextProps.routeParams.date !== this.props.routeParams.date) {
+      this.props.fetchBooksByDay(nextProps.date)
+    }
   }
 
   render () {
     // Next up:
-    // 1) utc/non utc dates are fucked up.
-    // understand how mongodb stores them, and figure out how to make this locale shit work once and for all.
     // 2) dailies:
     // from both /daily and /progress, user can CRUD dailies
     return (
@@ -47,14 +51,14 @@ class Daily extends Component {
          <h2>{moment.utc(this.props.date).format('MMMM Do, YYYY')}</h2>
            <Row>
              {
-               this.props.dailiesMatch.map((daily, key) => {
+               this.props.dailiesMatch.map((daily) => {
                  return (
                    <BookThumbnail
                      title={daily.title}
                      authors={daily.authors}
                      thumbnailUrl={daily.thumbnailUrl}
                      linkTo={`/book/id/${daily.book_id}/progress`}
-                     key={key}>
+                     key={daily.daily_id}>
                     <DailyForm
                       initialValues={
                         {
