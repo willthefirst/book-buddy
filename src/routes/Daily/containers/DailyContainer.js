@@ -4,6 +4,7 @@ import { fetchDailiesRequest, fetchDailiesSuccess, fetchDailiesFailure } from '.
 import { errorHandler, applyAuthToken } from 'util/common'
 import axios from 'axios'
 import APP_SETTINGS from 'config'
+import moment from 'moment'
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -17,7 +18,6 @@ const mapDispatchToProps = (dispatch) => {
         })
     },
     handleSubmit: (values) => {
-      console.log(values);
       const newDaily = {
         date: values.date,
         book_id: values.bookId,
@@ -55,18 +55,24 @@ const mapDispatchToProps = (dispatch) => {
       // } else {
       //
       // }
-
-
-
     }
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
+  let date = new Date()
+
+  if (ownProps.routeParams.date) {
+    date = ownProps.routeParams.date
+  }
+
+  moment(date).format('YYYY-MM-DD')
+
   return {
     dailiesRange: state.daily.dailiesRange,
     dailiesMatch: state.daily.dailiesMatch,
-    currentBooks: state.daily.currentBooks
+    currentBooks: state.daily.currentBooks,
+    date: date
   }
 }
 

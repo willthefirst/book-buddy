@@ -98,13 +98,13 @@ const ACTION_HANDLERS = {
     }
   },
   [FETCH_DAILIES_SUCCESS] : (state, action) => {
+    console.log(action.dateQuery);
     const dateQuery = moment.utc(new Date(action.dateQuery))
 
     // From payload, define already existing entries or defaults to enter
     let dailiesRange = action.payload
     let dailiesMatch = dailiesRange.filter((daily) => {
       const date = moment.utc(new Date(daily.date))
-
       // If user has a daily that matches date query,
       return date.isSame(dateQuery, 'day')
     })

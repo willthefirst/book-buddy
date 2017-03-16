@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import BookThumbnail from 'components/BookThumbnail'
 import { Row, Button, Form, FormGroup, InputGroup } from 'react-bootstrap'
+import { Link } from 'react-router'
 import { reduxForm, Field } from 'redux-form'
 import moment from 'moment'
 
@@ -32,29 +33,18 @@ DailyForm = reduxForm({
 
 class Daily extends Component {
   componentWillMount () {
-    this.props.fetchBooksByDay(this.props.params.date)
+    this.props.fetchBooksByDay(this.props.date)
   }
 
   render () {
-    // console.log(this.props);
-    // 1) BOOKS PROGRESS ENTRY
-    // dailies/:date
-      // get all entries where entry.date matches params.date
-        // if no entries (ie. date has not been logged)
-          // books = user.books.current
-        // if entries exists for params.date (ie. date has been logged previously)
-          // books = entries.forEach(book)
-      // (always provide option to add an outside book to today's entry...)
-
-
-
-    // 2) PROGRESS View
-      // load last 30 days of entries
-        // when user clicks on a day,
-          // push to dailies:/date
+    // Next up:
+    // 1) utc/non utc dates are fucked up.
+    // understand how mongodb stores them, and figure out how to make this locale shit work once and for all.
+    // 2) dailies:
+    // from both /daily and /progress, user can CRUD dailies
     return (
       <div>
-         <h2>{moment(new Date(this.props.params.date)).format('MMMM Do, YYYY')}</h2>
+         <h2>{moment.utc(this.props.date).format('MMMM Do, YYYY')}</h2>
            <Row>
              {
                this.props.dailiesMatch.map((daily, key) => {
@@ -68,7 +58,7 @@ class Daily extends Component {
                     <DailyForm
                       initialValues={
                         {
-                          date: this.props.params.date,
+                          date: this.props.date,
                           dailyId: daily.daily_id,
                           bookId: daily.book_id,
                           currentPage: daily.currentPage
@@ -86,11 +76,16 @@ class Daily extends Component {
              <ul>
              {
                this.props.dailiesRange.map((daily, key) => {
+                 const formattedDate = moment(daily.date).format('YYYY-MM-DD')
                  return (
                      <li key={key}>
-                       <span>{daily.currentPage} | </span>
-                       <span>{ daily.title } | </span>
-                       <span>{daily.date}</span>
+                       <span>
+                         <Link to={`/daily/${formattedDate}`}>{formattedDate}</Link>
+                       </span>
+                       <span>
+                           - <Link to={`/book/id/${daily.book_id}/progress`}>{daily.title}</Link>
+                       </span>
+                       <span> - {daily.currentPage}</span>
                      </li>
                  )
                })
@@ -98,14 +93,9 @@ class Daily extends Component {
            </ul>
            </Row>
        </div>
-
     )
   }
 }
-
-
-
-
 
 Daily.propTypes = {
   fetchBooksByDay: React.PropTypes.func.isRequired

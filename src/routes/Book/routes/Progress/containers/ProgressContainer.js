@@ -10,7 +10,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     updateProgress: (values, bookId) => {
       const newDaily = {
-        date: values.date,
+        date: moment(values.date).format('YYYY-MM-DD'),
         book_id: bookId,
         currentPage: values.currentPage,
         filterByThisBook: true // IMPORTANT for getting right kind of response
