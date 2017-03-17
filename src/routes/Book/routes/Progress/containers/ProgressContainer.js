@@ -25,7 +25,6 @@ const mapDispatchToProps = (dispatch) => {
 
       axios.post(`${APP_SETTINGS.API_BASE}/dailies`, newDaily, applyAuthToken())
         .then((result) => {
-          console.log(result);
           const update = {
             dailies: result.data
           }

@@ -14,9 +14,9 @@ const Info = (props) => {
         </Col>
         <Col sm={10}>
           <Field className='form-control' name='status' component='select' placeholder='Status'>
-            <option value='Queue'>Queue</option>
-            <option value='Current'>Current</option>
-            <option value='Finished'>Finished</option>
+            <option value='queue'>Queue</option>
+            <option value='current'>Current</option>
+            <option value='finished'>Finished</option>
           </Field>
         </Col>
       </FormGroup>

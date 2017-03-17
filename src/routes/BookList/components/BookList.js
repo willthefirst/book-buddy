@@ -14,7 +14,7 @@ class BookList extends Component {
           title={book.title}
           authors={book.authors}
           thumbnailUrl={book.thumbnailUrl}
-          linkTo={`/book/id/${book._id}/progress`}
+          linkTo={`/book/id/${book.book_id}/progress`}
           key={key} />
       )
     }

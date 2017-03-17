@@ -1,34 +1,12 @@
 import React, { Component } from 'react'
 import BookThumbnail from 'components/BookThumbnail'
-import { Row, Button, Form, FormGroup, InputGroup } from 'react-bootstrap'
+import Modal from 'components/Modal'
+import { Row, Col, Button, Form, FormGroup, InputGroup, Clearfix } from 'react-bootstrap'
 import { Link } from 'react-router'
 import { reduxForm, Field } from 'redux-form'
 import moment from 'moment'
-
-let DailyForm = (props) => {
-  // console.log(props.form, props.initialValues.currentPage);
-  return (
-    <Form onSubmit={props.handleSubmit}>
-      <FormGroup>
-        <InputGroup>
-          <span className="input-group-addon" id="basic-addon1">p.</span>
-            <Field
-              name='currentPage'
-              className='form-control'
-              component='input'
-              type='number'
-              aria-describedby="basic-addon1"
-              placeholder="0"
-              required
-              />
-        </InputGroup>
-      </FormGroup>
-      <Button type="submit" bsStyle="primary">Submit</Button>
-    </Form>
-  )
-}
-
-DailyForm = reduxForm()(DailyForm)
+import SearchInput from 'components/SearchForm'
+import DailySingle from './DailySingle'
 
 class Daily extends Component {
   componentWillMount () {
@@ -46,57 +24,75 @@ class Daily extends Component {
     // Next up:
     // 2) dailies:
     // from both /daily and /progress, user can CRUD dailies
+    // If any dailies exists
+      // render dailies
+    // else no dailies AT all
+      // render current, with most recent daily page as placeholder text
+    // always render + sign add ability.
+      // on click, user can
+
+
     return (
       <div>
-         <h2>{moment.utc(this.props.date).format('MMMM Do, YYYY')}</h2>
-           <Row>
-             {
-               this.props.dailiesMatch.map((daily) => {
-                 return (
-                   <BookThumbnail
-                     title={daily.title}
-                     authors={daily.authors}
-                     thumbnailUrl={daily.thumbnailUrl}
-                     linkTo={`/book/id/${daily.book_id}/progress`}
-                     key={daily.daily_id}>
-                    <DailyForm
-                      initialValues={
-                        {
-                          date: this.props.date,
-                          dailyId: daily.daily_id,
-                          bookId: daily.book_id,
-                          currentPage: daily.currentPage
-                        }
-                      }
-                      form={daily.daily_id}
-                      onSubmit={this.props.handleSubmit}
-                      />
-                   </BookThumbnail>
-                 )
-               })
-             }
-           </Row>
-           <Row>
-             <ul>
-             {
-               this.props.dailiesRange.map((daily, key) => {
-                 const formattedDate = moment(daily.date).format('YYYY-MM-DD')
-                 return (
-                     <li key={key}>
-                       <span>
-                         <Link to={`/daily/${formattedDate}`}>{formattedDate}</Link>
-                       </span>
-                       <span>
-                           - <Link to={`/book/id/${daily.book_id}/progress`}>{daily.title}</Link>
-                       </span>
-                       <span> - {daily.currentPage}</span>
-                     </li>
-                 )
-               })
-             }
-           </ul>
-           </Row>
-       </div>
+        <h2>{moment(this.props.date).format('MMMM Do, YYYY')}</h2>
+        <Row>
+          {
+            this.props.dailyForms.map((daily, key) => {
+              return (
+                <DailySingle
+                  bookId={daily.book_id}
+                  title={daily.title}
+                  authors={daily.authors}
+                  thumbnailUrl={daily.thumbnailUrl}
+                  key={key}
+                  date={this.props.date}
+                  currentPage={daily.currentPage}
+                  handleSubmit={this.props.handleSubmit}
+                />
+              )
+            })
+          }
+          <Modal btnText="Add another book...">
+            <SearchInput form="addToDailyForm" handleChange={this.props.handleAddDailySearch} />
+              {
+                this.props.queryResults.map((book) => {
+                  return (
+                    <BookThumbnail
+                      title={book.title}
+                      authors={book.authors}
+                      thumbnailUrl={book.thumbnailUrl}
+                      linkTo={`/book/id/${book.book_id}/progress`}
+                      key={book.book_id}>
+                      <Button bsStyle="primary" onClick={this.props.addBookToDaily}>Add To Daily</Button>
+                    </BookThumbnail>
+                  )
+                })
+              }
+              <Clearfix />
+              <span>Don't see your book? Then <Link to="/book/new">add it to your library...</Link></span>
+          </Modal>
+        </Row>
+        <Row>
+          <ul>
+            {
+              this.props.dailiesRange.map((daily, key) => {
+                const formattedDate = moment(daily.date).format('YYYY-MM-DD')
+                return (
+                  <li key={key}>
+                    <span>
+                      <Link to={`/daily/${formattedDate}`}>{formattedDate}</Link>
+                    </span>
+                    <span>
+                      - <Link to={`/book/id/${daily.book_id}/progress`}>{daily.title}</Link>
+                  </span>
+                  <span> - {daily.currentPage}</span>
+                </li>
+              )
+            })
+          }
+        </ul>
+      </Row>
+    </div>
     )
   }
 }

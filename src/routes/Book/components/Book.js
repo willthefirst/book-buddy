@@ -51,7 +51,7 @@ Book.propTypes = {
   fetchBook: React.PropTypes.func,
   authors: React.PropTypes.string,
   params: React.PropTypes.object,
-  _id: React.PropTypes.string
+  book_id: React.PropTypes.string
 }
 
 export default Book

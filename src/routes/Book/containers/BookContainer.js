@@ -33,7 +33,7 @@ const mapStateToProps = (state) => {
     title: book.title,
     thumbnailUrl: book.thumbnailUrl,
     authors: authorsToString,
-    _id: book._id
+    book_id: book.book_id
   }
 }
 
