@@ -48,8 +48,6 @@ const mapDispatchToProps = (dispatch) => {
         })
     },
     handleSubmit: (values) => {
-      console.log(values)
-      alert('haha')
       const newDaily = {
         date: values.date,
         book_id: values.bookId,

@@ -4,10 +4,9 @@ import { Button, Form, FormGroup, InputGroup } from 'react-bootstrap'
 import { reduxForm, Field } from 'redux-form'
 
 let DailySingleForm = (props) => {
-  const { handleSubmit } = props
 
   return (
-    <Form onSubmit={(e)=>{props.handleSubmit(e)}}>
+    <Form onSubmit={props.handleSubmit}>
       <FormGroup>
         <InputGroup>
           <span className="input-group-addon" id="basic-addon1">p.</span>
@@ -46,7 +45,7 @@ let DailySingle = (props) => {
         }
         form={props.bookId}
         enableReinitialize={true}
-        handleSubmit={props.handleSubmit}
+        onSubmit={props.handleSubmit}
       />
     </BookThumbnail>
   )
