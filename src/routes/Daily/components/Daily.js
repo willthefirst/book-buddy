@@ -11,12 +11,12 @@ import DailySingle from './DailySingle'
 class Daily extends Component {
   componentWillMount () {
     // Initial load
-    this.props.fetchBooksByDay(this.props.date)
+    this.props.fetchDailies(this.props.date)
   }
   componentWillReceiveProps(nextProps) {
     // If component current date changes, fetch again.
     if (nextProps.routeParams.date !== this.props.routeParams.date) {
-      this.props.fetchBooksByDay(nextProps.date)
+      this.props.fetchDailies(nextProps.date)
     }
   }
 
@@ -37,7 +37,7 @@ class Daily extends Component {
         <h2>{moment(this.props.date).format('MMMM Do, YYYY')}</h2>
         <Row>
           {
-            this.props.dailyForms.map((daily, key) => {
+            this.props.dailiesMatch.map((daily, key) => {
               return (
                 <DailySingle
                   bookId={daily.book_id}
@@ -55,16 +55,20 @@ class Daily extends Component {
           <Modal btnText="Add another book...">
             <SearchInput form="addToDailyForm" handleChange={this.props.handleAddDailySearch} />
               {
-                this.props.queryResults.map((book) => {
+                this.props.booksUserCanAdd.map((book, key) => {
+                  // set formId here so that form doesn't get conflated with dailiesmatch forms
                   return (
-                    <BookThumbnail
+                    <DailySingle
+                      bookId={book.book_id}
+                      formId={book.book_id + '_new'}
                       title={book.title}
                       authors={book.authors}
                       thumbnailUrl={book.thumbnailUrl}
-                      linkTo={`/book/id/${book.book_id}/progress`}
-                      key={book.book_id}>
-                      <Button bsStyle="primary" onClick={this.props.addBookToDaily}>Add To Daily</Button>
-                    </BookThumbnail>
+                      key={key}
+                      date={this.props.date}
+                      currentPage={book.currentPage}
+                      handleSubmit={this.props.handleSubmit}
+                    />
                   )
                 })
               }
@@ -98,7 +102,7 @@ class Daily extends Component {
 }
 
 Daily.propTypes = {
-  fetchBooksByDay: React.PropTypes.func.isRequired
+  fetchDailies: React.PropTypes.func.isRequired
 }
 
 export default Daily

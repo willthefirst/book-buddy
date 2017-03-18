@@ -24,7 +24,7 @@ const SearchModal = React.createClass({
           >
           {this.props.btnText}
         </Button>
-        <Modal show={this.state.showModal} onHide={this.close}>
+        <Modal bsSize="lg" show={this.state.showModal} onHide={this.close}>
           <Modal.Body>
             {this.props.children}
           </Modal.Body>

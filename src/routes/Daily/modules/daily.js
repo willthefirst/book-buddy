@@ -3,6 +3,8 @@ import moment from 'moment'
 // ------------------------------------
 // Constants
 // ------------------------------------
+export const SET_CURRENT_DATE = 'SET_CURRENT_DATE'
+
 export const FETCH_DAILIES_REQUEST = 'FETCH_DAILIES_REQUEST'
 export const FETCH_DAILIES_SUCCESS = 'FETCH_DAILIES_SUCCESS'
 export const FETCH_DAILIES_FAILURE = 'FETCH_DAILIES_FAILURE'
@@ -25,6 +27,13 @@ export const ADD_TO_DAILIES= 'ADD_TO_DAILIES'
 // ------------------------------------
 // Actions
 // ------------------------------------
+export function setCurrentDate (date) {
+  return {
+    type: SET_CURRENT_DATE,
+    payload: date
+  }
+}
+
 export function fetchDailiesRequest (request) {
   return {
     type: FETCH_DAILIES_REQUEST,
@@ -118,6 +127,8 @@ export function addToDailies (book) {
 }
 
 export const actions = {
+  setCurrentDate,
+
   fetchDailiesRequest,
   fetchDailiesSuccess,
   fetchDailiesFailure,
@@ -141,6 +152,12 @@ export const actions = {
 // Action Handlers
 // ------------------------------------
 const ACTION_HANDLERS = {
+  [SET_CURRENT_DATE] : (state, action) => {
+    return {
+      ...state, currentDate: action.payload
+    }
+  },
+
   [FETCH_DAILIES_REQUEST] : (state, action) => {
     return {
       ...state, loading: true
@@ -152,18 +169,9 @@ const ACTION_HANDLERS = {
     }
   },
   [FETCH_DAILIES_SUCCESS] : (state, action) => {
-    // From payload, define already existing entries or defaults to enter
-    let dailiesRange = action.payload
-    let dailiesMatch = dailiesRange.filter((daily) => {
-      // console.log(daily);
-      // If user has a daily that matches date query,
-      return daily.date === action.dateQuery
-    })
-
     return {
       ...state,
-      dailiesRange: dailiesRange,
-      dailiesMatch: dailiesMatch,
+      dailiesRange: action.payload,
       error: null,
       loading: false
     }
@@ -201,7 +209,7 @@ const ACTION_HANDLERS = {
   [QUERY_SUCCESS] : (state, action) => {
     return {
       ...state,
-      query: action.payload,
+      bookQueryResults: action.payload,
       error: null,
       loading: false
     }
@@ -220,10 +228,9 @@ const ACTION_HANDLERS = {
 // ------------------------------------
 
 const initialState = {
-  query: [],
+  currentDate: '',
+  bookQueryResults: [],
   dailiesRange: [],
-  dailiesMatch: [],
-  currentBooks: [],
   error: null,
   loading: false
 }

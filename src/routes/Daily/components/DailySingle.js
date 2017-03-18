@@ -43,8 +43,8 @@ let DailySingle = (props) => {
             currentPage: props.currentPage
           }
         }
-        form={props.bookId}
         enableReinitialize={true}
+        form={props.formId || props.bookId}
         onSubmit={props.handleSubmit}
       />
     </BookThumbnail>
