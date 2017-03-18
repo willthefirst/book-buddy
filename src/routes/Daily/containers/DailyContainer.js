@@ -8,7 +8,8 @@ import { fetchDailiesRequest,
   fetchCurrentFailure,
   queryRequest,
   querySuccess,
-  queryFailure } from '../modules/daily'
+  queryFailure,
+  addToDailies } from '../modules/daily'
 import { errorHandler, applyAuthToken } from 'util/common'
 import axios from 'axios'
 import APP_SETTINGS from 'config'
@@ -28,7 +29,7 @@ const mapDispatchToProps = (dispatch) => {
       }
     },
     addBookToDaily: (book) => {
-
+      dispatch(addToDailies(book))
     },
     fetchBooksByDay: (date) => {
       dispatch(fetchDailiesRequest())
@@ -73,22 +74,27 @@ const mapStateToProps = (state, ownProps) => {
 
   date = moment(date).format('YYYY-MM-DD')
 
-  let dailyForms
-
-  if (state.daily.dailiesMatch.length !== 0) {
-    dailyForms = state.daily.dailiesMatch
+  let queryResults
+  if (state.daily.query.length === 0) {
+    queryResults = state.daily.currentBooks
   } else {
-    dailyForms = state.daily.currentBooks
+    queryResults = state.daily.query
   }
 
-  // console.log(state.daily.currentBooks);
+  let dailyForms
+  if (state.daily.dailiesMatch.length === 0) {
+    dailyForms = state.daily.currentBooks
+  } else {
+    dailyForms = state.daily.dailiesMatch
+  }
 
   return {
     dailiesRange: state.daily.dailiesRange,
-    dailyForms: dailyForms,
-    queryResults: state.daily.query,
+    dailyForms:  dailyForms,
+    queryResults: queryResults,
     date: date
   }
 }
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(Daily)

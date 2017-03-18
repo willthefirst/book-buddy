@@ -19,6 +19,9 @@ export const QUERY_REQUEST = 'QUERY_REQUEST'
 export const QUERY_SUCCESS = 'QUERY_SUCCESS'
 export const QUERY_FAILURE = 'QUERY_FAILURE'
 
+export const ADD_TO_DAILIES= 'ADD_TO_DAILIES'
+
+
 // ------------------------------------
 // Actions
 // ------------------------------------
@@ -107,6 +110,13 @@ export function queryFailure (error) {
   }
 }
 
+export function addToDailies (book) {
+  return {
+    type: ADD_TO_DAILIES,
+    payload: book
+  }
+}
+
 export const actions = {
   fetchDailiesRequest,
   fetchDailiesSuccess,
@@ -122,7 +132,9 @@ export const actions = {
 
   queryRequest,
   querySuccess,
-  queryFailure
+  queryFailure,
+
+  addToDailies
 }
 
 // ------------------------------------
@@ -192,6 +204,12 @@ const ACTION_HANDLERS = {
       query: action.payload,
       error: null,
       loading: false
+    }
+  },
+  [ADD_TO_DAILIES] : (state, action) => {
+    return {
+      ...state,
+      dailiesMatch: [...state.dailiesMatch, action.payload]
     }
   }
 }
