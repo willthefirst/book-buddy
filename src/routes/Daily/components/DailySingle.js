@@ -2,8 +2,23 @@ import React, { Component } from 'react'
 import BookThumbnail from 'components/BookThumbnail'
 import { Button, Form, FormGroup, InputGroup } from 'react-bootstrap'
 import { reduxForm, Field } from 'redux-form'
+import LaddaButton, { L, SLIDE_DOWN } from 'react-ladda'
 
 let DailySingleForm = (props) => {
+  let deleteButton
+  if (props.handleDelete) {
+    deleteButton = (
+      <LaddaButton
+        onClick={props.handleSubmit((values) => { props.handleDelete(values) })}
+        className='btn btn-danger'
+        data-size={L}
+        data-style={SLIDE_DOWN}
+        data-spinner-color='#ddd'
+        >
+        Delete
+      </LaddaButton>
+    )
+  }
 
   return (
     <Form onSubmit={props.handleSubmit}>
@@ -21,7 +36,16 @@ let DailySingleForm = (props) => {
             />
         </InputGroup>
       </FormGroup>
-      <Button type="submit" bsStyle="primary">Submit</Button>
+      <LaddaButton
+        className='btn btn-primary'
+        data-size={L}
+        data-style={SLIDE_DOWN}
+        data-spinner-color='#ddd'
+        >
+        Save
+      </LaddaButton>
+      {'  '}
+      { deleteButton }
     </Form>
   )
 }
@@ -46,6 +70,7 @@ let DailySingle = (props) => {
         enableReinitialize={true}
         form={props.formId || props.bookId}
         onSubmit={props.handleSubmit}
+        handleDelete={props.handleDelete}
       />
     </BookThumbnail>
   )

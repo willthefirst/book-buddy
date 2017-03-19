@@ -48,6 +48,7 @@ class Daily extends Component {
                   date={this.props.date}
                   currentPage={daily.currentPage}
                   handleSubmit={this.props.handleSubmit}
+                  handleDelete={this.props.handleDelete}
                 />
               )
             })

@@ -28,10 +28,6 @@ const mapDispatchToProps = (dispatch) => {
         })
       }
     },
-    addBookToDaily: (book) => {
-      console.log(book);
-      dispatch(addToDailies(book))
-    },
     fetchDailies: (date) => {
       // Add current date to state so we can use it with reselect later
       dispatch(setCurrentDate(date))
@@ -44,14 +40,6 @@ const mapDispatchToProps = (dispatch) => {
       }).catch((error) => {
         errorHandler(dispatch, error, fetchDailiesFailure)
       })
-
-      // dispatch(fetchCurrentRequest())
-      // axios.get(`${APP_SETTINGS.API_BASE}/books?status=current`, applyAuthToken())
-      //   .then((result) => {
-      //     dispatch(fetchCurrentSuccess(result.data))
-      //   }).catch((error) => {
-      //     errorHandler(dispatch, error, fetchCurrentFailure)
-      //   })
     },
     handleSubmit: (values) => {
       const newDaily = {
@@ -63,6 +51,23 @@ const mapDispatchToProps = (dispatch) => {
       // If daily doesn't exists, create it
       axios.post(`${APP_SETTINGS.API_BASE}/dailies`, newDaily, applyAuthToken())
       .then((result) => {
+        dispatch(fetchDailiesSuccess(result.data))
+      }).catch((error) => {
+        errorHandler(dispatch, error, fetchDailiesFailure)
+      })
+    },
+    handleDelete: (values) => {
+      const dailyToDelete = {
+        book_id: values.bookId,
+        date: values.date
+      }
+
+      const config = {
+        data: dailyToDelete,
+        headers: applyAuthToken().headers
+      }
+
+      axios.delete(`${APP_SETTINGS.API_BASE}/dailies`, config).then((result) => {
         dispatch(fetchDailiesSuccess(result.data))
       }).catch((error) => {
         errorHandler(dispatch, error, fetchDailiesFailure)
@@ -95,7 +100,6 @@ const bookUserCanAdd = createSelector(dailiesMatch, getBookQueryResults, (curren
       canAdd.push(result)
     }
   })
-
   return canAdd
 })
 
@@ -109,19 +113,6 @@ const mapStateToProps = (state, ownProps) => {
 
   date = moment(date).format('YYYY-MM-DD')
 
-  // let queryResults
-  // if (state.daily.query.length === 0) {
-  //   queryResults = state.daily.currentBooks
-  // } else {
-  //   queryResults = state.daily.query
-  // }
-  //
-  // let dailyForms
-  // if (state.daily.dailiesMatch.length === 0) {
-  //   dailyForms = state.daily.currentBooks
-  // } else {
-  //   dailyForms = state.daily.dailiesMatch
-  // }
   return {
     dailiesRange: state.daily.dailiesRange,
     dailiesMatch: dailiesMatch(state),
@@ -129,8 +120,5 @@ const mapStateToProps = (state, ownProps) => {
     date: date
   }
 }
-
-
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(Daily)
