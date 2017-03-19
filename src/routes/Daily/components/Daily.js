@@ -7,6 +7,8 @@ import { reduxForm, Field } from 'redux-form'
 import moment from 'moment'
 import SearchInput from 'components/SearchForm'
 import DailySingle from './DailySingle'
+import Heatmap from './Heatmap'
+
 
 class Daily extends Component {
   componentWillMount () {
@@ -77,26 +79,9 @@ class Daily extends Component {
               <span>Don't see your book? Then <Link to="/book/new">add it to your library...</Link></span>
           </Modal>
         </Row>
-        <Row>
-          <ul>
-            {
-              this.props.dailiesRange.map((daily, key) => {
-                const formattedDate = moment(daily.date).format('YYYY-MM-DD')
-                return (
-                  <li key={key}>
-                    <span>
-                      <Link to={`/daily/${formattedDate}`}>{formattedDate}</Link>
-                    </span>
-                    <span>
-                      - <Link to={`/book/id/${daily.book_id}/progress`}>{daily.title}</Link>
-                  </span>
-                  <span> - {daily.currentPage}</span>
-                </li>
-              )
-            })
-          }
-        </ul>
-      </Row>
+        <Heatmap
+          dailiesRange={this.props.dailiesRange}
+          currentDate={this.props.date} />
     </div>
     )
   }
