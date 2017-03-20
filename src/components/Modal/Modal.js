@@ -21,6 +21,7 @@ const SearchModal = React.createClass({
       <div>
         <Button
           bsStyle="info"
+          bsSize="lg"
           onClick={this.open}
           >
           {this.props.btnText}
