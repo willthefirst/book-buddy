@@ -1,7 +1,8 @@
 import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 import BookThumbnail from 'components/BookThumbnail'
-import { Row, Form, FormGroup, Button } from 'react-bootstrap'
+import { Form, FormGroup, Button } from 'react-bootstrap'
+import { Row, Col } from 'react-flexbox-grid'
 
 const New = (props) => {
   const { createBook, queryGBooks } = props
@@ -9,18 +10,20 @@ const New = (props) => {
   return (
     <div>
       <Row>
-        <Form>
-          <FormGroup bsSize='lg'>
-            <Field
-              className='form-control'
-              name='title'
-              component='input'
-              type='text'
-              onChange={(e) => { queryGBooks(e.target.value) }}
-              placeholder='Start typing the name of the book...' />
-          </FormGroup>
-        </Form>
-        <span className="text-warning">{props.errorMessage}</span>
+        <Col xs={12}>          
+          <Form>
+            <FormGroup bsSize='lg'>
+              <Field
+                className='form-control'
+                name='title'
+                component='input'
+                type='text'
+                onChange={(e) => { queryGBooks(e.target.value) }}
+                placeholder='Start typing the name of the book...' />
+            </FormGroup>
+          </Form>
+          <span className="text-warning">{props.errorMessage}</span>
+        </Col>
       </Row>
       <Row>
         {

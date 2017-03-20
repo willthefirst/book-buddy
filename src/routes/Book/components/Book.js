@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { Col, Row, Nav, NavItem } from 'react-bootstrap'
+import { Nav, NavItem } from 'react-bootstrap'
+import { Col, Row } from 'react-flexbox-grid'
 import { LinkContainer } from 'react-router-bootstrap'
 
 class Book extends Component {

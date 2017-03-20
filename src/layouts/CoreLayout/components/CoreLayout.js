@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Header from 'components/Header'
+import { Grid } from 'react-flexbox-grid'
 import '../CoreLayout.scss'
 import '../../../styles/core.scss'
 

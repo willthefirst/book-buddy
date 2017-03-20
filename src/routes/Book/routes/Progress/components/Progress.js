@@ -1,6 +1,7 @@
 import React from 'react'
 import { reduxForm, Field } from 'redux-form'
-import { Col, Button, Form, FormGroup, ControlLabel, Table } from 'react-bootstrap'
+import { Button, Form, FormGroup, ControlLabel, Table } from 'react-bootstrap'
+import { Col } from 'react-flexbox-grid'
 import LaddaButton, { L, SLIDE_DOWN } from 'react-ladda'
 
 export const Progress = (props) => {

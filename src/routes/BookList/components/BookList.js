@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { Row, Panel } from 'react-bootstrap'
+import { Panel } from 'react-bootstrap'
+import { Row } from 'react-flexbox-grid'
 import BookThumbnail from 'components/BookThumbnail'
 
 class BookList extends Component {

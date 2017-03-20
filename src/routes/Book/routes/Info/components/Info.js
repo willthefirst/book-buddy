@@ -1,5 +1,6 @@
 import React from 'react'
-import { Col, Button, Form, FormGroup, ControlLabel } from 'react-bootstrap'
+import { Button, Form, FormGroup, ControlLabel } from 'react-bootstrap'
+import { Col } from 'react-flexbox-grid'
 import { reduxForm, Field } from 'redux-form'
 import LaddaButton, { L, SLIDE_DOWN } from 'react-ladda'
 

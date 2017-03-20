@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
-import { Button, Modal, Clearfix, Row } from 'react-bootstrap'
+import { Button, Modal, Clearfix } from 'react-bootstrap'
+import { Row } from 'react-flexbox-grid'
 import { Link } from 'react-router'
 
 const SearchModal = React.createClass({

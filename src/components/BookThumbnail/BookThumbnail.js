@@ -1,5 +1,5 @@
 import React from 'react'
-import { Col } from 'react-bootstrap'
+import { Col } from 'react-flexbox-grid'
 import { Link } from 'react-router'
 import './BookThumbnail.scss'
 import { truncate } from 'util/common'

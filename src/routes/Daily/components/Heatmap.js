@@ -69,38 +69,16 @@ const Heatmap = (props) => {
 
 
   return (
-    <div>
-      <Grid fluid>
-        <Row>
-          {
-            dates.map((day, key) => {
-              return (
-                <Day key={key} day={day}/>
-              )
-            })
-          }
-        </Row>
-      </Grid>
-      <ul>
-        {
-          props.dailiesRange.map((daily, key) => {
-            const formattedDate = moment(daily.date).format('YYYY-MM-DD')
-            return (
-              <li key={key}>
-                <span>
-                  <Link to={`/daily/${formattedDate}`}>{formattedDate}</Link>
-                </span>
-                <span>
-                  - <Link to={`/book/id/${daily.book_id}/progress`}>{daily.title}</Link>
-              </span>
-              <span> - {daily.currentPage}</span>
-            </li>
+    <Row>
+      {
+        dates.map((day, key) => {
+          return (
+            <Day key={key} day={day}/>
           )
         })
       }
-    </ul>
-  </div>
-)
+    </Row>
+  )
 }
 
 Heatmap.propTypes = {
