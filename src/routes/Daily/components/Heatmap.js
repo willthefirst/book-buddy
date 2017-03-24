@@ -2,13 +2,12 @@ import React from 'react'
 import moment from 'moment'
 import { Link } from 'react-router'
 import { Grid, Row, Col } from 'react-flexbox-grid';
+import { Panel } from 'react-bootstrap'
+import "./Heatmap.scss"
+import classNames from 'classnames'
 
 const Day = (props) => {
   const styles = {
-    col: {
-      textAlign: 'center',
-      overflow: 'scroll'
-    },
     main: {
       backgroundColor: '#e5f0ff',
       height: 200,
@@ -19,23 +18,23 @@ const Day = (props) => {
     }
   }
 
-  if (props.day.dailies.length !== 0) {
-    styles.main.backgroundColor = "#a9ff99"
-  }
+  let dayContainerClass = classNames({
+    'day__container': true,
+    'panel-default': (props.day.dailies.length === 0),
+    'panel-success': (props.day.dailies.length !== 0)
+  });
+
+  const panelHeader = <Link to={`/daily/${props.day.date.format('YYYY-MM-DD')}`}>{props.day.date.format('MM/DD')}</Link>
 
   return (
-    <Col xs={12} sm style={styles.col}>
-      <div style={styles.main}>
-        <h4>
-          <Link to={`/daily/${props.day.date.format('YYYY-MM-DD')}`}>{props.day.date.format('MM/DD')}</Link>
-        </h4>
+    <Col xs className="text-center">
+      <Panel className={dayContainerClass} header={panelHeader}>
         <Grid fluid>
           <Row>
             {
               props.day.dailies.map((daily, key) => {
                 return (
-                  <Col xs={6}>
-                    <small>p. {daily.currentPage}</small>
+                  <Col xs={6} key={key}>
                     <img style={styles.thumb} src={daily.thumbnailUrl} alt=""/>
                   </Col>
                 )
@@ -43,10 +42,13 @@ const Day = (props) => {
             }
           </Row>
         </Grid>
-      </div>
+      </Panel>
     </Col>
   )
 }
+
+// <small>p. {daily.currentPage}</small>
+
 
 const Heatmap = (props) => {
   let weeks = []
@@ -76,7 +78,6 @@ const Heatmap = (props) => {
     // Add the week array to main dates array
     weeks.push(weekArray)
   }
-  console.log(weeks);
 
   return (
     <div>

@@ -12,17 +12,17 @@ const Register = (props) => {
       <h2>Register</h2>
       <Form onSubmit={handleSubmit((values) => { props.handleRegister(values) })}>
         <FormGroup controlId='formHorizontalEmail'>
-          <Col componentClass={ControlLabel}>
+          <ControlLabel>
             Email
-          </Col>
+          </ControlLabel>
           <Col>
             <Field name='email' className='form-control' component='input' type='text' placeholder='Email' />
           </Col>
         </FormGroup>
         <FormGroup controlId='formHorizontalPassword'>
-          <Col componentClass={ControlLabel}>
+          <ControlLabel>
             Password
-          </Col>
+          </ControlLabel>
           <Col>
             <Field name='password' className='form-control' component='input' type='password' placeholder='Password' />
           </Col>
@@ -33,8 +33,7 @@ const Register = (props) => {
             className='btn btn-primary'
             data-size={L}
             data-style={SLIDE_DOWN}
-            data-spinner-color='#ddd'
-          >
+            data-spinner-color='#ddd'>
             Register
           </LaddaButton>
           {"   "}<span className="text-warning">{props.errorMessage}</span>

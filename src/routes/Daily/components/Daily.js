@@ -26,7 +26,11 @@ class Daily extends Component {
   render () {
     return (
       <div>
-        <h2>{moment(this.props.date).format('MMMM Do, YYYY')}</h2>
+        <Row>
+          <Col>
+            <h2>{moment(this.props.date).format('MMMM Do, YYYY')}</h2>
+          </Col>
+        </Row>
         <Well bsSize="large" className="add-daily-well">
           <Row center="xs" middle="xs">
               {

@@ -12,17 +12,17 @@ const Login = (props) => {
       <h2>Login</h2>
       <Form onSubmit={handleSubmit((values) => { props.handleLogin(values) })}>
         <FormGroup controlId='formHorizontalEmail'>
-          <Col componentClass={ControlLabel}>
+          <ControlLabel>
             Email
-          </Col>
+          </ControlLabel>
           <Col>
             <Field name='email' className='form-control' component='input' type='text' placeholder='Email' />
           </Col>
         </FormGroup>
         <FormGroup controlId='formHorizontalPassword'>
-          <Col componentClass={ControlLabel}>
+          <ControlLabel>
             Password
-          </Col>
+          </ControlLabel>
           <Col>
             <Field name='password' className='form-control' component='input' type='password' placeholder='Password' />
           </Col>

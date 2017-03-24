@@ -1,0 +1,18 @@
+.day__container {
+  background-color: $gray-lighter;
+  height: 100px;
+
+  &.complete {
+    background-color: $brand-success;
+  }
+
+  @media screen and (min-width: $screen-md-min) {
+    height: 200px;
+  }
+
+}
+
+.thumb {
+  width: '100%';
+  height: 'auto';
+}

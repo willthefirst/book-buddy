@@ -14,9 +14,9 @@ class CoreLayout extends Component {
     return (
       <div>
         <Header />
-        <div className='container core-layout__viewport'>
+        <Grid fluid className='core-layout__viewport'>
           {this.props.children}
-        </div>
+        </Grid>
       </div>
     )
   }

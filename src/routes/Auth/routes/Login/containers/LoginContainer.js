@@ -15,6 +15,11 @@ const mapDispatchToProps = (dispatch) => {
           cookie.save('token', result.data.token, { path: '/' })
           dispatch(authSuccess(result.data))
         }).catch((error) => {
+          if (error.response.data.message === "Missing credentials") {
+            error.response.data.message = "Make sure you type in both your email AND password."
+          } else if (error.response.data.message === "jwt expired") {
+            error.response.data.message = "Please log in again."
+          }
           errorHandler(dispatch, error, authFailure)
         })
     }

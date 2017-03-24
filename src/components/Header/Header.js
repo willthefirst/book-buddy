@@ -3,6 +3,7 @@ import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 import { Link } from 'react-router'
 import './Header.scss'
+import { Grid } from 'react-flexbox-grid'
 
 class Header extends Component {
 
@@ -46,7 +47,7 @@ class Header extends Component {
     }
 
     return (
-      <Navbar staticTop>
+      <Navbar staticTop fluid>
         <Navbar.Header>
           <Navbar.Brand>
             <Link to='/'>Book Buddy</Link>
