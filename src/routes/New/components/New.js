@@ -8,9 +8,9 @@ const New = (props) => {
   const { createBook, queryGBooks } = props
   // #todo: understand the handleSubmit thing here
   return (
-    <div>
+    <div className="full-width">
       <Row>
-        <Col xs={12}>          
+        <Col xs={12}>
           <Form>
             <FormGroup bsSize='lg'>
               <Field

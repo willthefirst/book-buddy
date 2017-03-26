@@ -22,17 +22,14 @@ class Daily extends Component {
       this.props.fetchDailies(nextProps.date)
     }
   }
+  // <h2>{moment(this.props.date).format('MMMM Do, YYYY')}</h2>
 
   render () {
     return (
-      <div>
-        <Row>
-          <Col>
-            <h2>{moment(this.props.date).format('MMMM Do, YYYY')}</h2>
-          </Col>
-        </Row>
-        <Well bsSize="large" className="add-daily-well">
-          <Row center="xs" middle="xs">
+      <div className="daily-container full-width">
+        <div className="daily-add">
+          <Well bsSize="large" className="add-daily-well">
+            <Row center="xs" middle="xs">
               {
                 this.props.dailiesMatch.map((daily, key) => {
                   return (
@@ -46,42 +43,50 @@ class Daily extends Component {
                       currentPage={daily.currentPage}
                       handleSubmit={this.props.handleSubmit}
                       handleDelete={this.props.handleDelete}
-                    />
+                      />
                   )
                 })
               }
               <Modal btnText="or add another book...">
                 <SearchInput form="addToDailyForm" handleChange={this.props.handleAddDailySearch} />
-                  {
-                    this.props.booksUserCanAdd.map((book, key) => {
-                      // set formId here so that form doesn't get conflated with dailiesmatch forms
-                      return (
-                        <DailySingle
-                          bookId={book.book_id}
-                          formId={book.book_id + '_new'}
-                          title={book.title}
-                          authors={book.authors}
-                          thumbnailUrl={book.thumbnailUrl}
-                          key={key}
-                          date={this.props.date}
-                          currentPage={book.currentPage}
-                          handleSubmit={this.props.handleSubmit}
+                {
+                  this.props.booksUserCanAdd.map((book, key) => {
+                    // set formId here so that form doesn't get conflated with dailiesmatch forms
+                    return (
+                      <DailySingle
+                        bookId={book.book_id}
+                        formId={book.book_id + '_new'}
+                        title={book.title}
+                        authors={book.authors}
+                        thumbnailUrl={book.thumbnailUrl}
+                        key={key}
+                        date={this.props.date}
+                        currentPage={book.currentPage}
+                        handleSubmit={this.props.handleSubmit}
                         />
-                      )
-                    })
-                  }
-                  <Clearfix />
-                  <span>Don't see your book? Then <Link to="/book/new">add it to your library...</Link></span>
+                    )
+                  })
+                }
+                <Clearfix />
+                <span>Don't see your book? Then <Link to="/book/new">add it to your library...</Link></span>
               </Modal>
-          </Row>
-        </Well>
-        <Heatmap
-          dailiesRange={this.props.dailiesRange}
-          currentDate={this.props.date} />
-    </div>
+            </Row>
+          </Well>
+        </div>
+        <div className="daily-show">
+
+          <Heatmap
+            dailiesRange={this.props.dailiesRange}
+            currentDate={this.props.date} />
+        </div>
+
+
+      </div>
     )
   }
 }
+
+
 
 Daily.propTypes = {
   fetchDailies: React.PropTypes.func.isRequired

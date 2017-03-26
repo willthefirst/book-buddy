@@ -12,9 +12,11 @@ class CoreLayout extends Component {
 
   render () {
     return (
-      <div>
-        <Header />
-        <Grid fluid className='core-layout__viewport'>
+      <div className="site-container">
+        <div className="header-container">
+          <Header />
+        </div>
+        <Grid fluid className='body-container core-layout__viewport'>
           {this.props.children}
         </Grid>
       </div>

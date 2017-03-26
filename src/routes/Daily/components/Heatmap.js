@@ -7,42 +7,34 @@ import "./Heatmap.scss"
 import classNames from 'classnames'
 
 const Day = (props) => {
-  const styles = {
-    main: {
-      backgroundColor: '#e5f0ff',
-      height: 200,
-    },
-    thumb: {
-      width: '100%',
-      height: 'auto'
-    }
-  }
-
   let dayContainerClass = classNames({
     'day__container': true,
     'panel-default': (props.day.dailies.length === 0),
     'panel-success': (props.day.dailies.length !== 0)
   });
 
-  const panelHeader = <Link to={`/daily/${props.day.date.format('YYYY-MM-DD')}`}>{props.day.date.format('MM/DD')}</Link>
-
   return (
-    <Col xs className="text-center">
-      <Panel className={dayContainerClass} header={panelHeader}>
-        <Grid fluid>
-          <Row>
-            {
-              props.day.dailies.map((daily, key) => {
-                return (
-                  <Col xs={6} key={key}>
-                    <img style={styles.thumb} src={daily.thumbnailUrl} alt=""/>
-                  </Col>
-                )
-              })
-            }
-          </Row>
-        </Grid>
-      </Panel>
+    <Col xs={12} sm className="text-center">
+        <div className={`panel ${dayContainerClass}`}>
+          <div className="panel-heading">
+            <Link className="panel-title" to={`/daily/${props.day.date.format('YYYY-MM-DD')}`}>{props.day.date.format('MM/DD')}</Link>
+          </div>
+          <div className="panel-body day__panel-body">
+            <Row style={{flexWrap: 'nowrap'}}>
+              {
+                props.day.dailies.map((daily, key) => {
+                  return (
+                    <Col className="day__book-container" xs sm={6} key={key}>
+                      <img className="day__thumb" src={daily.thumbnailUrl} alt=""/>
+                    </Col>
+                  )
+                })
+              }
+            </Row>
+          </div>
+
+        </div>
+
     </Col>
   )
 }
