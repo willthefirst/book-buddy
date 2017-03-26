@@ -6,7 +6,7 @@
 
 .day__panel-body {
   overflow-x: scroll;
-  @media screen and (min-width: $screen-md-min) {
+  @media screen and (min-width: $screen-sm-min) {
     height: 150px;
   }
 }

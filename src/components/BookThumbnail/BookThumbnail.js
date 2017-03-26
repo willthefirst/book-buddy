@@ -1,36 +1,48 @@
 import React from 'react'
-import { Col } from 'react-flexbox-grid'
+import { Col, Row } from 'react-flexbox-grid'
 import { Link } from 'react-router'
 import './BookThumbnail.scss'
 import { truncate } from 'util/common'
 
 const BookThumbnail = (props) => {
-  const details = (
-    <div>
-      <img src={props.thumbnailUrl} className='book-thumb__img' />
-      <h4>
-        { truncate(props.title, 50, true) }
-        <br />
-        <small>
-          { truncate(props.authors.join(', '), 50, true)}
-        </small>
-      </h4>
-    </div>
+  let info = (
+    <h4>
+      { truncate(props.title, 50, true) }
+      <br />
+      <small>
+        { truncate(props.authors.join(', '), 50, true)}
+      </small>
+    </h4>
   )
 
   if (props.linkTo) {
+    info = (
+      <Link to={props.linkTo}>
+        { info }
+      </Link>
+    )
+  }
+
+  if (props.horizontal) {
     return (
-      <Col xs={4} sm={3} md={2} className='book-thumb__container'>
-        <Link to={props.linkTo}>
-          { details }
-        </Link>
-        { props.children }
+      <Col xs={10} sm={4} style={{marginRight:40}}>
+        <Row style={{height: '100%'}} middle='xs'>
+          <Col xs={4}>
+            <img src={props.thumbnailUrl} className='book-thumb__img' height={150}/>
+          </Col>
+          <Col xs={8} >
+            { props.children }
+          </Col>
+        </Row>
       </Col>
     )
   } else {
     return (
       <Col xs={4} sm={3} md={2} className='book-thumb__container'>
-        { details }
+        <div>
+          <img src={props.thumbnailUrl} className='book-thumb__img' />
+          { info }
+        </div>
         { props.children }
       </Col>
     )

@@ -6,6 +6,15 @@
   // #todo: honestly should use flexbox for this instead cuz of silly fixed height thing
 }
 
+.book-thumb__container-horizontal {
+  width: 400px;
+  float: left;
+  margin-right: 30px;
+  // #todo: honestly should use flexbox for this instead cuz of silly fixed height thing
+}
+
+
 .book-thumb__img {
-  height: 200px;
+  max-width: 100%;
+  width: auto;
 }

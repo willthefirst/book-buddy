@@ -22,14 +22,14 @@ class Daily extends Component {
       this.props.fetchDailies(nextProps.date)
     }
   }
-  // <h2>{moment(this.props.date).format('MMMM Do, YYYY')}</h2>
 
   render () {
     return (
       <div className="daily-container full-width">
+        <h3>{moment(this.props.date).format('MMMM Do, YYYY')}</h3>
         <div className="daily-add">
-          <Well bsSize="large" className="add-daily-well">
-            <Row center="xs" middle="xs">
+          <Well className="add-daily-well">
+            <Row middle='xs' style={{height: "100%", flexWrap:"nowrap", overflowX:"scroll"}}>
               {
                 this.props.dailiesMatch.map((daily, key) => {
                   return (
@@ -47,40 +47,39 @@ class Daily extends Component {
                   )
                 })
               }
-              <Modal btnText="or add another book...">
-                <SearchInput form="addToDailyForm" handleChange={this.props.handleAddDailySearch} />
-                {
-                  this.props.booksUserCanAdd.map((book, key) => {
-                    // set formId here so that form doesn't get conflated with dailiesmatch forms
-                    return (
-                      <DailySingle
-                        bookId={book.book_id}
-                        formId={book.book_id + '_new'}
-                        title={book.title}
-                        authors={book.authors}
-                        thumbnailUrl={book.thumbnailUrl}
-                        key={key}
-                        date={this.props.date}
-                        currentPage={book.currentPage}
-                        handleSubmit={this.props.handleSubmit}
-                        />
-                    )
-                  })
-                }
-                <Clearfix />
-                <span>Don't see your book? Then <Link to="/book/new">add it to your library...</Link></span>
-              </Modal>
+              <Col xs={8}>
+                <Modal btnText="+ Add another book">
+                  <SearchInput form="addToDailyForm" handleChange={this.props.handleAddDailySearch} />
+                  {
+                    this.props.booksUserCanAdd.map((book, key) => {
+                      // set formId here so that form doesn't get conflated with dailiesmatch forms
+                      return (
+                        <DailySingle
+                          bookId={book.book_id}
+                          formId={book.book_id + '_new'}
+                          title={book.title}
+                          authors={book.authors}
+                          thumbnailUrl={book.thumbnailUrl}
+                          key={key}
+                          date={this.props.date}
+                          currentPage={book.currentPage}
+                          handleSubmit={this.props.handleSubmit}
+                          />
+                      )
+                    })
+                  }
+                  <Clearfix />
+                  <span>Don't see your book? Then <Link to="/book/new">add it to your library...</Link></span>
+                </Modal>
+              </Col>
             </Row>
           </Well>
         </div>
         <div className="daily-show">
-
           <Heatmap
             dailiesRange={this.props.dailiesRange}
             currentDate={this.props.date} />
         </div>
-
-
       </div>
     )
   }

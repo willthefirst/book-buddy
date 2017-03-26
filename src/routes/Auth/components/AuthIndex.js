@@ -2,7 +2,7 @@ import React from 'react'
 
 const AuthIndex = (props) => {
   return (
-    <div>{props.children}</div>
+    <div className="full-width">{props.children}</div>
   )
 }
 
