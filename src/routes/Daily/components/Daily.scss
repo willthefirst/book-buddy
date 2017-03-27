@@ -1,18 +1,11 @@
-.add-daily-well {
-  height: 100%;
-}
-
-
 .daily-container {
   display: flex;
   flex-direction: column;
   align-items: stretch;
 }
 
-.daily-add {
-  flex: 1 0 80px;
-  margin-bottom: 18px;
-
+.add-daily-well {
+  height: 180px;
 }
 
 .daily-show {

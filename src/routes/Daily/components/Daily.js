@@ -29,7 +29,7 @@ class Daily extends Component {
         <h3>{moment(this.props.date).format('MMMM Do, YYYY')}</h3>
         <div className="daily-add">
           <Well className="add-daily-well">
-            <Row middle='xs' style={{height: "100%", flexWrap:"nowrap", overflowX:"scroll"}}>
+            <Row middle='xs' style={{height: "100%", flexWrap:"nowrap", overflowY: 'hidden', overflowX:"scroll"}}>
               {
                 this.props.dailiesMatch.map((daily, key) => {
                   return (
@@ -47,8 +47,8 @@ class Daily extends Component {
                   )
                 })
               }
-              <Col xs={8}>
-                <Modal btnText="+ Add another book">
+              <div>
+                <Modal btnText="Add another book">
                   <SearchInput form="addToDailyForm" handleChange={this.props.handleAddDailySearch} />
                   {
                     this.props.booksUserCanAdd.map((book, key) => {
@@ -71,7 +71,7 @@ class Daily extends Component {
                   <Clearfix />
                   <span>Don't see your book? Then <Link to="/book/new">add it to your library...</Link></span>
                 </Modal>
-              </Col>
+              </div>
             </Row>
           </Well>
         </div>

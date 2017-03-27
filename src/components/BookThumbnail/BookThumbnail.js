@@ -28,9 +28,9 @@ const BookThumbnail = (props) => {
       <Col xs={10} sm={4} style={{marginRight:40}}>
         <Row style={{height: '100%'}} middle='xs'>
           <Col xs={4}>
-            <img src={props.thumbnailUrl} className='book-thumb__img' height={150}/>
+            <img src={props.thumbnailUrl} className='book-thumb__img'/>
           </Col>
-          <Col xs={8} >
+          <Col xs={8}>
             { props.children }
           </Col>
         </Row>
