@@ -4,6 +4,8 @@ import { LinkContainer } from 'react-router-bootstrap'
 import { Link } from 'react-router'
 import './Header.scss'
 import { Grid } from 'react-flexbox-grid'
+import Logo from './assets/logo_1.svg'
+import Isvg from 'react-inlinesvg'
 
 class Header extends Component {
 
@@ -49,8 +51,12 @@ class Header extends Component {
     return (
       <Navbar staticTop fluid>
         <Navbar.Header>
-          <Navbar.Brand>
-            <Link to='/'>Book Buddy</Link>
+          <Navbar.Brand className="brand">
+            <Link to='/'>
+              <Isvg src={ Logo } alt="logo" className="logo-img"></Isvg>
+              {' '}
+              Book Buddy
+            </Link>
           </Navbar.Brand>
           <Navbar.Toggle />
         </Navbar.Header>

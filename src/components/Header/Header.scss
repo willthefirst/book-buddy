@@ -8,4 +8,18 @@
     display: block;
     margin-top: 0;  // remove the gap so it doesn't close
   }
- }
+}
+
+.logo-img {
+  svg {
+    color: red;
+    height: 23px;
+    width: auto;
+    vertical-align: top;
+    margin-top: -2px
+  }
+}
+
+.logo-path {
+  fill: $gray;
+}

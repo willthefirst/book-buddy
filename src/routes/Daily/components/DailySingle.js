@@ -59,7 +59,7 @@ let DailySingle = (props) => {
       authors={props.authors}
       thumbnailUrl={props.thumbnailUrl}
       linkTo={`/book/id/${props.bookId}/progress`}
-      horizontal>
+      horizontal={props.horizontal}>
       <DailySingleForm
         initialValues={
           {

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button, Form, FormGroup, ControlLabel } from 'react-bootstrap'
-import { Col } from 'react-flexbox-grid'
+import { Col, Row } from 'react-flexbox-grid'
 import { reduxForm, Field } from 'redux-form'
 import LaddaButton, { L, SLIDE_DOWN } from 'react-ladda'
 
@@ -9,28 +9,28 @@ const Info = (props) => {
   // #todo: understand the handleSubmit thing here
   return (
     <Form onSubmit={handleSubmit((values) => { props.updateBook(values) })} horizontal>
-      <FormGroup controlId='formHorizontalStatus'>
-        <Col componentClass={ControlLabel} sm={2}>
+      <Row style={{marginBottom: 12}}>
+        <Col className='control-label' xs={12} sm={2}>
           Status
         </Col>
-        <Col sm={10}>
+        <Col xs={12} sm={10}>
           <Field className='form-control' name='status' component='select' placeholder='Status'>
             <option value='queue'>Queue</option>
             <option value='current'>Current</option>
             <option value='finished'>Finished</option>
           </Field>
         </Col>
-      </FormGroup>
-      <FormGroup controlId='formHorizontalTotalPages'>
-        <Col componentClass={ControlLabel} sm={2}>
+      </Row>
+      <Row style={{marginBottom: 12}}>
+        <Col className='control-label' xs={12} sm={2}>
           Total Pages
         </Col>
-        <Col sm={10}>
+        <Col xs={12} sm={10}>
           <Field className='form-control' name='totalPages' component='input' type='number' placeholder='0' />
         </Col>
-      </FormGroup>
-      <FormGroup>
-        <Col smOffset={2} sm={10}>
+      </Row>
+      <Row>
+        <Col smOffset={2} xs={12} sm={10}>
           <LaddaButton
             loading={props.loading}
             className='btn btn-primary'
@@ -52,7 +52,7 @@ const Info = (props) => {
           </LaddaButton>
           {"   "}<span className="text-warning">{props.errorMessage}</span>
         </Col>
-      </FormGroup>
+      </Row>
     </Form>
   )
 }

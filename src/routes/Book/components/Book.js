@@ -11,14 +11,14 @@ class Book extends Component {
 
   render () {
     return (
-      <div>
+      <div className="full-width">
         <h1>
           {this.props.title}
           <br />
           <small>{this.props.authors}</small>
         </h1>
         <Row>
-          <Col sm={2} >
+          <Col xs={12} sm={2} >
             <img src={this.props.thumbnailUrl}
               className='img-responsive'
               style={{ marginBottom: '24px', width: '100%' }} />
@@ -34,10 +34,8 @@ class Book extends Component {
                 </LinkContainer>
               </Nav>
           </Col>
-          <Col sm={10}>
-            <div>
-              {this.props.children}
-            </div>
+          <Col xs={12} sm={10}>
+            {this.props.children}
           </Col>
         </Row>
       </div>

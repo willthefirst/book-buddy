@@ -15,20 +15,32 @@ const BookThumbnail = (props) => {
     </h4>
   )
 
+  let thumbnail = (
+    <img src={props.thumbnailUrl} className='book-thumb__img'/>
+  )
+
   if (props.linkTo) {
     info = (
       <Link to={props.linkTo}>
         { info }
       </Link>
     )
+
+    thumbnail = (
+      <Link to={props.linkTo}>
+        { thumbnail }
+      </Link>
+    )
   }
+
+
 
   if (props.horizontal) {
     return (
       <Col xs={10} sm={4} style={{marginRight:40}}>
         <Row style={{height: '100%'}} middle='xs'>
           <Col xs={4}>
-            <img src={props.thumbnailUrl} className='book-thumb__img'/>
+            { thumbnail }
           </Col>
           <Col xs={8}>
             { props.children }
@@ -40,7 +52,7 @@ const BookThumbnail = (props) => {
     return (
       <Col xs={4} sm={3} md={2} className='book-thumb__container'>
         <div>
-          <img src={props.thumbnailUrl} className='book-thumb__img' />
+          { thumbnail }
           { info }
         </div>
         { props.children }

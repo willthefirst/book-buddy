@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="74px" height="112px" viewBox="0 0 74 112" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <title>logo_1</title>
+    <description>Created with Sketch (http://www.bohemiancoding.com/sketch)</description>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g class="logo-path" id="logo" sketch:type="MSLayerGroup" fill="#000000">
+            <path d="M21.6723564,0 L0,7.74032 L0,81.6648 L53.4384722,112 L58.0083227,110.36704 L58.0083227,107.4304 L69.4312693,103.34912 L69.4312693,106.28688 L74,104.65504 L74,29.73712 L21.6723564,0 L21.6723564,0 Z M70,98.901855 L58.4818558,103 L58.4807265,35.575784 L11,8.70104229 L21.3990775,5 L70,32.5103311 L70,98.901855 L70,98.901855 Z" id="Shape" sketch:type="MSShapeGroup"></path>
+        </g>
+    </g>
+</svg>

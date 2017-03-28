@@ -43,6 +43,7 @@ class Daily extends Component {
                       currentPage={daily.currentPage}
                       handleSubmit={this.props.handleSubmit}
                       handleDelete={this.props.handleDelete}
+                      horizontal
                       />
                   )
                 })
@@ -50,6 +51,7 @@ class Daily extends Component {
               <div>
                 <Modal btnText="Add another book">
                   <SearchInput form="addToDailyForm" handleChange={this.props.handleAddDailySearch} />
+                  <Row>
                   {
                     this.props.booksUserCanAdd.map((book, key) => {
                       // set formId here so that form doesn't get conflated with dailiesmatch forms
@@ -68,7 +70,7 @@ class Daily extends Component {
                       )
                     })
                   }
-                  <Clearfix />
+                  </Row>
                   <span>Don't see your book? Then <Link to="/book/new">add it to your library...</Link></span>
                 </Modal>
               </div>
