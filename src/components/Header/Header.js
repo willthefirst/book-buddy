@@ -4,7 +4,7 @@ import { LinkContainer } from 'react-router-bootstrap'
 import { Link } from 'react-router'
 import './Header.scss'
 import { Grid } from 'react-flexbox-grid'
-import Logo from './assets/logo_1.svg'
+import Logo from 'assets/logo_1.svg'
 import Isvg from 'react-inlinesvg'
 
 class Header extends Component {
