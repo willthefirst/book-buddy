@@ -1,3 +1,5 @@
+import { injectReducer } from 'store/reducers'
+
 export default (store) => ({
   path : 'verify-email/:token',
   /*  Async getComponent is only invoked when route matches   */
@@ -8,9 +10,13 @@ export default (store) => ({
       /*  Webpack - use require callback to define
           dependencies for bundling   */
       const VerifyEmail = require('./containers/VerifyEmailContainer').default
+      const reducer = require('./modules/verifyEmail').default
+
+      injectReducer(store, { key: 'verify', reducer })
+
       /*  Return getComponent   */
       cb(null, VerifyEmail)
     /* Webpack named bundle   */
-    }, 'verify-email')
+    }, 'verifyEmail')
   }
 })
