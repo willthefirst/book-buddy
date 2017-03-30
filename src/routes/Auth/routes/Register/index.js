@@ -1,3 +1,5 @@
+import { injectReducer } from 'store/reducers'
+
 export default (store) => ({
   path : 'register',
   /*  Async getComponent is only invoked when route matches   */
@@ -8,6 +10,10 @@ export default (store) => ({
       /*  Webpack - use require callback to define
           dependencies for bundling   */
       const Register = require('./containers/RegisterContainer').default
+      const reducer = require('./modules/register').default
+      
+      injectReducer(store, { key: 'register', reducer })
+
       /*  Return getComponent   */
       cb(null, Register)
     /* Webpack named bundle   */

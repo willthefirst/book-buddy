@@ -4,28 +4,28 @@ import { errorHandler } from 'util/common'
 import { browserHistory } from 'react-router'
 import cookie from 'react-cookie'
 import axios from 'axios'
-import { authRequest, authFailure, authSuccess } from 'layouts/CoreLayout/modules/coreLayout'
+import { registerRequest, registerFailure, registerSuccess } from '../modules/register'
 import APP_SETTINGS from 'config'
 
 const mapDispatchToProps = (dispatch) => {
   return {
     handleRegister: (user) => {
-      dispatch(authRequest())
+      dispatch(registerRequest())
       axios.post(`${APP_SETTINGS.API_BASE}/auth/register`, user)
-        .then((result) => {
-          alert(result.data.message);
-          browserHistory.push(`/`)
-        }).catch((error) => {
-          errorHandler(dispatch, error, authFailure)
-        })
+      .then((result) => {
+        dispatch(registerSuccess(result.data.message))
+      }).catch((error) => {
+        errorHandler(dispatch, error, registerFailure)
+      })
     }
   }
 }
 
 const mapStateToProps = (state) => {
   return {
-    loading: state.auth.loading,
-    errorMessage: state.auth.error
+    loading: state.register.loading,
+    errorMessage: state.register.error,
+    isRegistered: state.register.isRegistered
   }
 }
 
