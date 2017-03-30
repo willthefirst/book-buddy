@@ -2,6 +2,9 @@ import AuthIndex from './components/AuthIndex'
 import LoginRoute from './routes/Login'
 import RegisterRoute from './routes/Register'
 import LogoutRoute from './routes/Logout'
+import ForgotPasswordRoute from './routes/ForgotPassword'
+import ResetPasswordRoute from './routes/ResetPassword'
+import VerifyEmailRoute from './routes/VerifyEmail'
 
 export default (store) => ({
   path : 'auth',
@@ -10,6 +13,9 @@ export default (store) => ({
   childRoutes: [
     LoginRoute(store),
     RegisterRoute(store),
-    LogoutRoute(store)
+    LogoutRoute(store),
+    ForgotPasswordRoute(store),
+    ResetPasswordRoute(store),
+    VerifyEmailRoute(store)
   ]
 })

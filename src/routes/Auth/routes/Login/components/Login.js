@@ -2,6 +2,7 @@ import React from 'react'
 import { Form, FormGroup, ControlLabel, Well } from 'react-bootstrap'
 import { Col } from 'react-flexbox-grid'
 import { Field, reduxForm } from 'redux-form'
+import { Link } from 'react-router'
 import LaddaButton, { L, SLIDE_DOWN } from 'react-ladda'
 
 const Login = (props) => {
@@ -40,6 +41,7 @@ const Login = (props) => {
           {"   "}<span className="text-warning">{props.errorMessage}</span>
         </FormGroup>
       </Form>
+      <Link to="/auth/forgot-password">Forgot your password?</Link>
     </div>
   )
 }

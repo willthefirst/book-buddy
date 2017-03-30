@@ -1,20 +1,19 @@
 import { connect } from 'react-redux'
-import Register from '../components/Register'
+import ResetPassword from '../components/ResetPassword'
 import { errorHandler } from 'util/common'
 import { browserHistory } from 'react-router'
 import cookie from 'react-cookie'
 import axios from 'axios'
-import { authRequest, authFailure, authSuccess } from 'layouts/CoreLayout/modules/coreLayout'
+import { authFailure } from 'layouts/CoreLayout/modules/coreLayout'
 import APP_SETTINGS from 'config'
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    handleRegister: (user) => {
-      dispatch(authRequest())
-      axios.post(`${APP_SETTINGS.API_BASE}/auth/register`, user)
+    handleResetPassword: (values, token) => {
+      axios.post(`${APP_SETTINGS.API_BASE}/auth/reset-password/${token}`, values)
         .then((result) => {
-          alert(result.data.message);
-          browserHistory.push(`/`)
+          alert(result.data.message)
+          browserHistory.push(`/daily`)
         }).catch((error) => {
           errorHandler(dispatch, error, authFailure)
         })
@@ -29,4 +28,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Register)
+export default connect(mapStateToProps, mapDispatchToProps)(ResetPassword)

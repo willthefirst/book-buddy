@@ -26,7 +26,6 @@ export const HomeView = () => (
     <br/>
     <span>
       Already a user? <Link to="/auth/login">Log in here.</Link>
-
     </span>
   </div>
 )
