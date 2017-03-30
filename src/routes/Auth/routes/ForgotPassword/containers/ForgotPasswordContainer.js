@@ -3,19 +3,18 @@ import ForgotPassword from '../components/ForgotPassword'
 import { errorHandler } from 'util/common'
 import { browserHistory } from 'react-router'
 import axios from 'axios'
-import { authFailure } from 'layouts/CoreLayout/modules/coreLayout'
+import { forgotRequest, forgotFailure, forgotSuccess } from '../modules/forgotPassword'
 import APP_SETTINGS from 'config'
 
 const mapDispatchToProps = (dispatch) => {
   return {
     handleForgotPassword: (user) => {
+      dispatch(forgotRequest())
       axios.post(`${APP_SETTINGS.API_BASE}/auth/forgot-password`, user)
         .then((result) => {
-          // #todo make this slicker.
-          alert(result.data.message);
-          browserHistory.push('/');
+          dispatch(forgotSuccess())
         }).catch((error) => {
-          errorHandler(dispatch, error, authFailure)
+          errorHandler(dispatch, error, forgotFailure)
         })
     }
   }
@@ -23,8 +22,9 @@ const mapDispatchToProps = (dispatch) => {
 
 const mapStateToProps = (state) => {
   return {
-    loading: state.auth.loading,
-    errorMessage: state.auth.error
+    loading: state.forgotPassword.loading,
+    errorMessage: state.forgotPassword.error,
+    emailSent: state.forgotPassword.emailSent
   }
 }
 

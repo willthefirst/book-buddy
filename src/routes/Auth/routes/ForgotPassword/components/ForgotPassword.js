@@ -10,30 +10,39 @@ const ForgotPassword = (props) => {
   return (
     <div>
       <h2>Forgot Password</h2>
-      <p>I can reset your password, I'll just need your email.</p>
-      <Form onSubmit={handleSubmit((values) => { props.handleForgotPassword(values) })}>
-        <FormGroup controlId='formHorizontalEmail'>
-          <ControlLabel>
-            Email
-          </ControlLabel>
-          <Col>
-            <Field name='email' className='form-control' component='input' type='email' placeholder='Email' required/>
-          </Col>
-        </FormGroup>
-        <FormGroup>
-          <LaddaButton
-            loading={props.loading}
-            className='btn btn-primary'
-            data-size={L}
-            data-style={SLIDE_DOWN}
-            data-spinner-color='#ddd'>
-            Reset my password
-          </LaddaButton>
-          {"   "}<span className="text-warning">{props.errorMessage}</span>
-        </FormGroup>
-      </Form>
-    </div>
-  )
+      { props.emailSent ? (
+        <div className="text-center">
+          <h3 className="text-success">Success! Check your email.</h3>
+          <p>I just sent you an email that will help you reset your password.</p>
+        </div>
+      ) : (
+        <div>
+          <p>I can reset your password, I'll just need your email.</p>
+          <Form onSubmit={handleSubmit((values) => { props.handleForgotPassword(values) })}>
+            <FormGroup controlId='formHorizontalEmail'>
+              <ControlLabel>
+                Email
+              </ControlLabel>
+              <Col>
+                <Field name='email' className='form-control' component='input' type='email' placeholder='Email' required/>
+              </Col>
+            </FormGroup>
+            <FormGroup>
+              <LaddaButton
+                loading={props.loading}
+                className='btn btn-primary'
+                data-size={L}
+                data-style={SLIDE_DOWN}
+                data-spinner-color='#ddd'>
+                Reset my password
+              </LaddaButton>
+              {"   "}<span className="text-warning">{props.errorMessage}</span>
+          </FormGroup>
+        </Form>
+      </div>
+    )}
+  </div>
+)
 }
 
 ForgotPassword.propTypes = {
