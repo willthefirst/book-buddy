@@ -1,3 +1,5 @@
+import { injectReducer } from 'store/reducers'
+
 export default (store) => ({
   path : 'reset-password/:token',
   /*  Async getComponent is only invoked when route matches   */
@@ -8,6 +10,10 @@ export default (store) => ({
       /*  Webpack - use require callback to define
           dependencies for bundling   */
       const ResetPassword = require('./containers/ResetPasswordContainer').default
+
+      const reducer = require('./modules/resetPassword').default
+      injectReducer(store, { key: 'resetPassword', reducer })
+
       /*  Return getComponent   */
       cb(null, ResetPassword)
     /* Webpack named bundle   */
