@@ -12,7 +12,7 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(verifyRequest(token))
       axios.post(`${APP_SETTINGS.API_BASE}/auth/verify-email/${token}`)
         .then((result) => {
-          dispatch(verifySuccess(results.data.message))
+          dispatch(verifySuccess(result.data.message))
           // browserHistory.push(`/auth/login`)
         }).catch((error) => {
           errorHandler(dispatch, error, verifyFailure)
