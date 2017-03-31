@@ -8,7 +8,6 @@ import APP_SETTINGS from 'config'
 const mapDispatchToProps = (dispatch) => {
   return {
     handleResetPassword: (values, token) => {
-      console.log('here');
       dispatch(resetPasswordRequest())
       axios.post(`${APP_SETTINGS.API_BASE}/auth/reset-password/${token}`, values)
         .then((result) => {

@@ -5,7 +5,7 @@
 `yarn start `
 
 or for the server to use nodemon:
-`npm run dev`
+`nodemon`
 
 ## /server
 

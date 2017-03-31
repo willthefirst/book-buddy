@@ -11,7 +11,6 @@ export default (store) => ({
           dependencies for bundling   */
       const Register = require('./containers/RegisterContainer').default
       const reducer = require('./modules/register').default
-      
       injectReducer(store, { key: 'register', reducer })
 
       /*  Return getComponent   */

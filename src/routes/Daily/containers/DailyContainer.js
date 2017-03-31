@@ -7,8 +7,8 @@ import {
   fetchDailiesFailure,
   queryRequest,
   querySuccess,
-  queryFailure,
-  addToDailies } from '../modules/daily'
+  queryFailure
+ } from '../modules/daily'
 import { errorHandler, applyAuthToken } from 'util/common'
 import axios from 'axios'
 import APP_SETTINGS from 'config'

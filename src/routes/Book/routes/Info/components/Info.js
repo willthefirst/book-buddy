@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Form, FormGroup, ControlLabel } from 'react-bootstrap'
+import { Form } from 'react-bootstrap'
 import { Col, Row } from 'react-flexbox-grid'
 import { reduxForm, Field } from 'redux-form'
 import LaddaButton, { L, SLIDE_DOWN } from 'react-ladda'
@@ -9,7 +9,7 @@ const Info = (props) => {
   // #todo: understand the handleSubmit thing here
   return (
     <Form onSubmit={handleSubmit((values) => { props.updateBook(values) })} horizontal>
-      <Row style={{marginBottom: 12}}>
+      <Row style={{ marginBottom: 12 }}>
         <Col className='control-label' xs={12} sm={2}>
           Status
         </Col>
@@ -21,7 +21,7 @@ const Info = (props) => {
           </Field>
         </Col>
       </Row>
-      <Row style={{marginBottom: 12}}>
+      <Row style={{ marginBottom: 12 }}>
         <Col className='control-label' xs={12} sm={2}>
           Total Pages
         </Col>
@@ -50,7 +50,7 @@ const Info = (props) => {
             >
             Delete
           </LaddaButton>
-          {"   "}<span className="text-warning">{props.errorMessage}</span>
+          {'   '}<span className='text-warning'>{props.errorMessage}</span>
         </Col>
       </Row>
     </Form>
@@ -58,9 +58,11 @@ const Info = (props) => {
 }
 
 Info.propTypes = {
-  updateBook : React.PropTypes.func.isRequired,
-  handleSubmit : React.PropTypes.func.isRequired,
-  deleteBook : React.PropTypes.func
+  updateBook: React.PropTypes.func.isRequired,
+  handleSubmit: React.PropTypes.func.isRequired,
+  deleteBook: React.PropTypes.func,
+  errorMessage: React.PropTypes.string,
+  loading: React.PropTypes.bool
 }
 
 export default reduxForm({

@@ -23,7 +23,7 @@ class BookList extends Component {
 
   render () {
     return (
-      <div className="full-width">
+      <div className='full-width'>
         <Panel header={<h2>Current</h2>} bsStyle='primary'>
           <Row>
             { this.props.booksCurrent.map(this.renderBookThumbnail()) }

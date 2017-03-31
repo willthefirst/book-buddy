@@ -22,8 +22,9 @@ SearchInput = reduxForm({
   form: 'SearchInput'
 })(SearchInput)
 
-SearchInput.propTypes ={
-  form: React.PropTypes.string.isRequired
+SearchInput.propTypes = {
+  form: React.PropTypes.string.isRequired,
+  handleChange: React.PropTypes.func
 }
 
 export default SearchInput

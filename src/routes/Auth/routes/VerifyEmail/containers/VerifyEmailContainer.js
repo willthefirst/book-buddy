@@ -4,7 +4,6 @@ import { errorHandler } from 'util/common'
 import axios from 'axios'
 import { verifyRequest, verifyFailure, verifySuccess } from '../modules/verifyEmail'
 import APP_SETTINGS from 'config'
-import { browserHistory } from 'react-router'
 
 const mapDispatchToProps = (dispatch) => {
   return {

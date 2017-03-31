@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Editor } from 'react-draft-wysiwyg'
-import { Button } from 'react-bootstrap'
 import LaddaButton, { L, SLIDE_DOWN } from 'react-ladda'
 
 // #todo: customize text editor: https://jpuri.github.io/react-draft-wysiwyg/#/docs
@@ -38,7 +37,7 @@ export class Notes extends Component {
           >
           Save
         </LaddaButton>
-        {"   "}<span className="text-warning">{this.props.errorMessage}</span>
+        {'   '}<span className='text-warning'>{this.props.errorMessage}</span>
       </div>
     )
   }
@@ -48,7 +47,9 @@ Notes.propTypes = {
   editorState: React.PropTypes.object.isRequired,
   updateBookNotes: React.PropTypes.func.isRequired,
   onEditorStateChange: React.PropTypes.func.isRequired,
-  bookId: React.PropTypes.string
+  bookId: React.PropTypes.string,
+  loading: React.PropTypes.bool,
+  errorMessage: React.PropTypes.string
 }
 
 export default Notes

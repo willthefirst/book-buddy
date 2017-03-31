@@ -16,7 +16,7 @@ const BookThumbnail = (props) => {
   )
 
   let thumbnail = (
-    <img src={props.thumbnailUrl} className='book-thumb__img'/>
+    <img src={props.thumbnailUrl} className='book-thumb__img' />
   )
 
   if (props.linkTo) {
@@ -33,12 +33,10 @@ const BookThumbnail = (props) => {
     )
   }
 
-
-
   if (props.horizontal) {
     return (
-      <Col xs={10} sm={4} style={{marginRight:40}}>
-        <Row style={{height: '100%'}} middle='xs'>
+      <Col xs={10} sm={4} style={{ marginRight:40 }}>
+        <Row style={{ height: '100%' }} middle='xs'>
           <Col xs={4}>
             { thumbnail }
           </Col>
@@ -66,7 +64,8 @@ BookThumbnail.propTypes = {
   authors : React.PropTypes.array.isRequired,
   thumbnailUrl : React.PropTypes.string,
   children : React.PropTypes.element,
-  linkTo: React.PropTypes.string
+  linkTo: React.PropTypes.string,
+  horizontal: React.PropTypes.bool
 }
 
 export default BookThumbnail

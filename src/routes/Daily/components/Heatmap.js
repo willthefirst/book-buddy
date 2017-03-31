@@ -1,9 +1,8 @@
 import React from 'react'
 import moment from 'moment'
 import { Link } from 'react-router'
-import { Grid, Row, Col } from 'react-flexbox-grid';
-import { Panel } from 'react-bootstrap'
-import "./Heatmap.scss"
+import { Row, Col } from 'react-flexbox-grid'
+import './Heatmap.scss'
 import classNames from 'classnames'
 
 const Day = (props) => {
@@ -11,47 +10,50 @@ const Day = (props) => {
     'day__container': true,
     'panel-default': (props.day.dailies.length === 0),
     'panel-success': (props.day.dailies.length !== 0)
-  });
+  })
 
   return (
-    <Col xs={12} sm className="text-center">
-        <div className={`panel ${dayContainerClass}`}>
-          <div className="panel-heading">
-            <Link className="panel-title" to={`/daily/${props.day.date.format('YYYY-MM-DD')}`}>{props.day.date.format('MM/DD')}</Link>
-          </div>
-          <div className="panel-body day__panel-body">
-            <Row style={{flexWrap: 'nowrap'}}>
-              {
-                props.day.dailies.map((daily, key) => {
-                  return (
-                    <Col className="day__book-container" xs sm={6} key={key}>
-                      <img className="day__thumb" src={daily.thumbnailUrl} alt=""/>
-                    </Col>
-                  )
-                })
-              }
-            </Row>
-          </div>
-
+    <Col xs={12} sm className='text-center'>
+      <div className={`panel ${dayContainerClass}`}>
+        <div className='panel-heading'>
+          <Link
+            className='panel-title'
+            to={`/daily/${props.day.date.format('YYYY-MM-DD')}`}>
+            {props.day.date.format('MM/DD')}
+          </Link>
         </div>
-
+        <div className='panel-body day__panel-body'>
+          <Row style={{ flexWrap: 'nowrap' }}>
+            {
+              props.day.dailies.map((daily, key) => {
+                return (
+                  <Col className='day__book-container' xs sm={6} key={key}>
+                    <img className='day__thumb' src={daily.thumbnailUrl} alt='' />
+                  </Col>
+                )
+              })
+            }
+          </Row>
+        </div>
+      </div>
     </Col>
   )
 }
 
-// <small>p. {daily.currentPage}</small>
-
+Day.propTypes = {
+  day: React.PropTypes.object.isRequired
+}
 
 const Heatmap = (props) => {
   let weeks = []
   let numWeeks = 5 // number of weeks to render
 
-  const today =  moment(props.currentDate)
+  const today = moment(props.currentDate)
 
   // Creates 'weeks' starting back from Monday of today's week
   for (let i = 0; i < numWeeks; i++) {
     // Set monday as first day of given week
-    let monday = moment(today).add(-i, 'weeks').day("Monday");
+    let monday = moment(today).add(-i, 'weeks').day('Monday')
     let weekArray = []
 
     // Starting from Monday, push days to week, adding dailies when they exist
@@ -79,7 +81,7 @@ const Heatmap = (props) => {
             <Row key={key}>
               {
                 week.map((day, key) => {
-                  return(
+                  return (
                     <Day day={day} key={key} />
                   )
                 })
@@ -93,7 +95,8 @@ const Heatmap = (props) => {
 }
 
 Heatmap.propTypes = {
-  dailiesRange: React.PropTypes.array.isRequired
+  dailiesRange: React.PropTypes.array.isRequired,
+  currentDate: React.PropTypes.string
 }
 
 export default Heatmap

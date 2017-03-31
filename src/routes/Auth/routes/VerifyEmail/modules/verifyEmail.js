@@ -38,10 +38,10 @@ export const actions = {
 // ------------------------------------
 const ACTION_HANDLERS = {
   [VERIFY_REQUEST] : (state, action) => {
-    return {...state, loading: true}
+    return { ...state, loading: true }
   },
   [VERIFY_SUCCESS] : (state, action) => {
-    return { ...state, error: '', loading: false, isVerified: true}
+    return { ...state, error: '', loading: false, isVerified: true }
   },
   [VERIFY_FAILURE] : (state, action) => {
     return { ...state, error: action.payload, loading: false }

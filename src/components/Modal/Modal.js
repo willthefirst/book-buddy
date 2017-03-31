@@ -1,32 +1,29 @@
-import React, {Component} from 'react'
-import { Button, Modal, Clearfix } from 'react-bootstrap'
-import { Row } from 'react-flexbox-grid'
-import { Link } from 'react-router'
+import React from 'react'
+import { Button, Modal } from 'react-bootstrap'
 
-const SearchModal = React.createClass({
-  getInitialState() {
-    return { showModal: false };
+let SearchModal = React.createClass({
+  getInitialState () {
+    return { showModal: false }
   },
 
-  close() {
-    this.setState({ showModal: false });
+  close () {
+    this.setState({ showModal: false })
   },
 
-  open() {
-    this.setState({ showModal: true });
+  open () {
+    this.setState({ showModal: true })
   },
 
-  render() {
+  render () {
     return (
       <div>
         <Button
-          bsStyle="info"
-          bsSize="lg"
-          onClick={this.open}
-          >
+          bsStyle='info'
+          bsSize='lg'
+          onClick={this.open}>
           {this.props.btnText}
         </Button>
-        <Modal bsSize="lg" show={this.state.showModal} onHide={this.close}>
+        <Modal bsSize='lg' show={this.state.showModal} onHide={this.close}>
           <Modal.Body>
             {this.props.children}
           </Modal.Body>
@@ -37,7 +34,8 @@ const SearchModal = React.createClass({
 })
 
 SearchModal.propTypes = {
-  btnText: React.PropTypes.string.isRequired
+  btnText: React.PropTypes.string.isRequired,
+  children: React.PropTypes.array
 }
 
 export default SearchModal

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Form, FormGroup, ControlLabel } from 'react-bootstrap'
+import { Form, FormGroup, ControlLabel } from 'react-bootstrap'
 import { Col } from 'react-flexbox-grid'
 import { Field, reduxForm } from 'redux-form'
 import LaddaButton, { L, SLIDE_DOWN } from 'react-ladda'
@@ -34,14 +34,14 @@ const Register = (props) => {
           data-spinner-color='#ddd'>
           Register
         </LaddaButton>
-        {"   "}<span className="text-warning">{props.errorMessage}</span>
+        {'   '}<span className='text-warning'>{props.errorMessage}</span>
       </FormGroup>
     </Form>
   )
 
   const successMessage = (
-    <div className="text-center">
-      <h3 className="text-success">
+    <div className='text-center'>
+      <h3 className='text-success'>
         Success!
       </h3>
       <p>Now, check your email for a confirmation message.</p>
@@ -61,7 +61,9 @@ const Register = (props) => {
 Register.propTypes = {
   handleRegister: React.PropTypes.func.isRequired,
   handleSubmit: React.PropTypes.func,
-  isRegistered: React.PropTypes.bool.isRequired
+  isRegistered: React.PropTypes.bool.isRequired,
+  loading: React.PropTypes.bool,
+  errorMessage: React.PropTypes.string
 }
 
 export default reduxForm({

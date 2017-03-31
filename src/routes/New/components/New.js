@@ -8,7 +8,7 @@ const New = (props) => {
   const { createBook, queryGBooks } = props
   // #todo: understand the handleSubmit thing here
   return (
-    <div className="full-width">
+    <div className='full-width'>
       <Row>
         <Col xs={12}>
           <Form>
@@ -22,7 +22,7 @@ const New = (props) => {
                 placeholder='Start typing the name of the book...' />
             </FormGroup>
           </Form>
-          <span className="text-warning">{props.errorMessage}</span>
+          <span className='text-warning'>{props.errorMessage}</span>
         </Col>
       </Row>
       <Row>
@@ -47,7 +47,8 @@ const New = (props) => {
 New.propTypes = {
   queryGBooks: React.PropTypes.func.isRequired,
   gBooksResults: React.PropTypes.array.isRequired,
-  createBook: React.PropTypes.func.isRequired
+  createBook: React.PropTypes.func.isRequired,
+  errorMessage: React.PropTypes.string
 }
 
 export default reduxForm({

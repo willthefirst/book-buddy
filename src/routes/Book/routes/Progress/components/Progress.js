@@ -1,7 +1,6 @@
 import React from 'react'
 import { reduxForm, Field } from 'redux-form'
-import { Button, Form, FormGroup, ControlLabel, Table } from 'react-bootstrap'
-import { Col } from 'react-flexbox-grid'
+import { Form, Table } from 'react-bootstrap'
 import LaddaButton, { L, SLIDE_DOWN } from 'react-ladda'
 
 export const Progress = (props) => {
@@ -33,9 +32,9 @@ export const Progress = (props) => {
           >
           Add progress
         </LaddaButton>
-        <div className="text-warning">{props.errorMessage}</div>
+        <div className='text-warning'>{props.errorMessage}</div>
       </Form>
-      <br/>
+      <br />
       <Table responsive striped>
         <thead>
           <tr>
@@ -64,7 +63,9 @@ Progress.propTypes = {
   updateProgress: React.PropTypes.func.isRequired,
   handleSubmit: React.PropTypes.func.isRequired,
   dailies: React.PropTypes.array,
-  latestEntry: React.PropTypes.number.isRequired
+  latestEntry: React.PropTypes.number.isRequired,
+  loading: React.PropTypes.bool.isRequired,
+  errorMessage: React.PropTypes.string
 }
 
 export default reduxForm({

@@ -11,7 +11,7 @@ class Book extends Component {
 
   render () {
     return (
-      <div className="full-width">
+      <div className='full-width'>
         <h1>
           {this.props.title}
           <br />
@@ -22,17 +22,17 @@ class Book extends Component {
             <img src={this.props.thumbnailUrl}
               className='img-responsive'
               style={{ marginBottom: '24px', width: '100%' }} />
-            <Nav bsStyle='tabs' id='book-info' stacked bsStyle="pills">
-                <LinkContainer to={{ pathname: `/book/id/${this.props.params.id}/progress` }}>
-                  <NavItem eventKey={1} title='Progress'>Progress</NavItem>
-                </LinkContainer>
-                <LinkContainer to={{ pathname: `/book/id/${this.props.params.id}/notes` }}>
-                  <NavItem eventKey={2} title='Notes'>Notes</NavItem>
-                </LinkContainer>
-                <LinkContainer to={{ pathname: `/book/id/${this.props.params.id}/info` }}>
-                  <NavItem eventKey={3} title='Info'>Info</NavItem>
-                </LinkContainer>
-              </Nav>
+            <Nav bsStyle='pills' id='book-info' stacked>
+              <LinkContainer to={{ pathname: `/book/id/${this.props.params.id}/progress` }}>
+                <NavItem eventKey={1} title='Progress'>Progress</NavItem>
+              </LinkContainer>
+              <LinkContainer to={{ pathname: `/book/id/${this.props.params.id}/notes` }}>
+                <NavItem eventKey={2} title='Notes'>Notes</NavItem>
+              </LinkContainer>
+              <LinkContainer to={{ pathname: `/book/id/${this.props.params.id}/info` }}>
+                <NavItem eventKey={3} title='Info'>Info</NavItem>
+              </LinkContainer>
+            </Nav>
           </Col>
           <Col xs={12} sm={10}>
             {this.props.children}

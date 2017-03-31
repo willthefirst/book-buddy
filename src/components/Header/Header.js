@@ -3,7 +3,6 @@ import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 import { Link } from 'react-router'
 import './Header.scss'
-import { Grid } from 'react-flexbox-grid'
 import Logo from 'assets/logo_1.svg'
 import Isvg from 'react-inlinesvg'
 
@@ -51,9 +50,9 @@ class Header extends Component {
     return (
       <Navbar staticTop fluid>
         <Navbar.Header>
-          <Navbar.Brand className="brand">
+          <Navbar.Brand className='brand'>
             <Link to='/'>
-              <Isvg src={ Logo } alt="logo" className="logo-img"></Isvg>
+              <Isvg src={Logo} alt='logo' className='logo-img' />
               {' '}
               Book Buddy
             </Link>

@@ -1,33 +1,31 @@
 import React, { Component } from 'react'
-import { Col } from 'react-flexbox-grid'
 import { Button } from 'react-bootstrap'
 import { Link } from 'react-router'
 
-
 class VerifyEmail extends Component {
-  componentDidMount() {
+  componentDidMount () {
     this.props.verifyEmail(this.props.params.token)
   }
 
-  render() {
+  render () {
     return (
-      <div className="text-center">
+      <div className='text-center'>
         {
           this.props.loading ? (
             <h2>Verifying your email...</h2>
           ) : (
             this.props.isVerified ? (
               <div>
-                <h3 className="text-success">Success!</h3>
+                <h3 className='text-success'>Success!</h3>
                 <p>I've succesfully verified your email.</p>
                 <Link to='/auth/login'>
-                  <Button bsSize="lg" bsStyle="success">Log in to your new account</Button>
+                  <Button bsSize='lg' bsStyle='success'>Log in to your new account</Button>
                 </Link>
               </div>
             ) : (
               <div>
-                <h3 className="text-danger">Something went wrong with verifying your email :(</h3>
-                <p>{this.props.error}</p>
+                <h3 className='text-danger'>Something went wrong with verifying your email :(</h3>
+                <p>{ this.props.error }</p>
               </div>
             )
           )
@@ -39,7 +37,10 @@ class VerifyEmail extends Component {
 
 VerifyEmail.propTypes = {
   verifyEmail: React.PropTypes.func.isRequired,
-  isVerified: React.PropTypes.bool.isRequired
+  isVerified: React.PropTypes.bool.isRequired,
+  error: React.PropTypes.string,
+  loading: React.PropTypes.bool,
+  params: React.PropTypes.bool
 }
 
 export default VerifyEmail

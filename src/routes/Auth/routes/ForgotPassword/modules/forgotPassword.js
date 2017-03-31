@@ -38,10 +38,10 @@ export const actions = {
 // ------------------------------------
 const ACTION_HANDLERS = {
   [FORGOT_REQUEST] : (state, action) => {
-    return {...state, loading: true}
+    return { ...state, loading: true }
   },
   [FORGOT_SUCCESS] : (state, action) => {
-    return { ...state, error: '', loading: false, emailSent: true}
+    return { ...state, error: '', loading: false, emailSent: true }
   },
   [FORGOT_FAILURE] : (state, action) => {
     return { ...state, error: action.payload, loading: false }

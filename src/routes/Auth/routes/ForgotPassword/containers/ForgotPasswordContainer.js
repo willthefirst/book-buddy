@@ -1,7 +1,6 @@
 import { connect } from 'react-redux'
 import ForgotPassword from '../components/ForgotPassword'
 import { errorHandler } from 'util/common'
-import { browserHistory } from 'react-router'
 import axios from 'axios'
 import { forgotRequest, forgotFailure, forgotSuccess } from '../modules/forgotPassword'
 import APP_SETTINGS from 'config'

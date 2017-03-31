@@ -38,10 +38,10 @@ export const actions = {
 // ------------------------------------
 const ACTION_HANDLERS = {
   [RESET_PASSWORD_REQUEST] : (state, action) => {
-    return {...state, loading: true}
+    return { ...state, loading: true }
   },
   [RESET_PASSWORD_SUCCESS] : (state, action) => {
-    return { ...state, error: '', loading: false, isReset: true}
+    return { ...state, error: '', loading: false, isReset: true }
   },
   [RESET_PASSWORD_FAILURE] : (state, action) => {
     return { ...state, error: action.payload, loading: false }

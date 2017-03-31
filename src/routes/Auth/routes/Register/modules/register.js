@@ -38,10 +38,10 @@ export const actions = {
 // ------------------------------------
 const ACTION_HANDLERS = {
   [REGISTER_REQUEST] : (state, action) => {
-    return {...state, loading: true}
+    return { ...state, loading: true }
   },
   [REGISTER_SUCCESS] : (state, action) => {
-    return { ...state, error: '', loading: false, isRegistered: true}
+    return { ...state, error: '', loading: false, isRegistered: true }
   },
   [REGISTER_FAILURE] : (state, action) => {
     return { ...state, error: action.payload, loading: false }

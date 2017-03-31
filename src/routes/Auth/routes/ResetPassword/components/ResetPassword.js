@@ -15,9 +15,9 @@ const ResetPassword = (props) => {
         (props.isReset) ? (
           <div className='text-center'>
             <h3 className='text-success'>Your password has been reset.</h3>
-              <Link to='/auth/login'>
-                <Button bsSize="lg" bsStyle="success">Log in with your new password</Button>
-              </Link>
+            <Link to='/auth/login'>
+              <Button bsSize='lg' bsStyle='success'>Log in with your new password</Button>
+            </Link>
           </div>
         ) : (
           <Form onSubmit={handleSubmit((values) => { props.handleResetPassword(values, props.params.token) })}>
@@ -26,7 +26,13 @@ const ResetPassword = (props) => {
                 New Password
               </ControlLabel>
               <Col>
-                <Field name='password' className='form-control' component='input' type='password' placeholder='New Password' required />
+                <Field
+                  name='password'
+                  className='form-control'
+                  component='input'
+                  type='password'
+                  placeholder='New Password'
+                  required />
               </Col>
             </FormGroup>
             <FormGroup controlId='formHorizontalConfirmPassword'>
@@ -34,7 +40,13 @@ const ResetPassword = (props) => {
                 Retype New Password
               </ControlLabel>
               <Col>
-                <Field name='confirmPassword' className='form-control' component='input' type='password' placeholder='Confirm Password' required />
+                <Field
+                  name='confirmPassword'
+                  className='form-control'
+                  component='input'
+                  type='password'
+                  placeholder='Confirm Password'
+                  required />
               </Col>
             </FormGroup>
             <FormGroup>
@@ -46,7 +58,7 @@ const ResetPassword = (props) => {
                 data-spinner-color='#ddd'>
                 Reset my password
               </LaddaButton>
-              {"   "}<span className="text-warning">{props.errorMessage}</span>
+              {'   '}<span className='text-warning'>{props.errorMessage}</span>
             </FormGroup>
           </Form>
         )
@@ -58,7 +70,10 @@ const ResetPassword = (props) => {
 ResetPassword.propTypes = {
   handleResetPassword: React.PropTypes.func.isRequired,
   handleSubmit: React.PropTypes.func,
-  isReset: React.PropTypes.bool.isRequired
+  isReset: React.PropTypes.bool,
+  loading: React.PropTypes.bool,
+  errorMessage: React.PropTypes.string,
+  params: React.PropTypes.obj.isRequired
 }
 
 export default reduxForm({

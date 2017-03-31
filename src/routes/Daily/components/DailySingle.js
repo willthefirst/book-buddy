@@ -1,11 +1,12 @@
-import React, { Component } from 'react'
+import React from 'react'
 import BookThumbnail from 'components/BookThumbnail'
-import { Button, Form, FormGroup, InputGroup } from 'react-bootstrap'
+import { Form, FormGroup, InputGroup } from 'react-bootstrap'
 import { reduxForm, Field } from 'redux-form'
 import LaddaButton, { L, SLIDE_DOWN } from 'react-ladda'
 
 let DailySingleForm = (props) => {
   let deleteButton
+
   if (props.handleDelete) {
     deleteButton = (
       <LaddaButton
@@ -24,14 +25,14 @@ let DailySingleForm = (props) => {
     <Form onSubmit={props.handleSubmit}>
       <FormGroup>
         <InputGroup>
-          <span className="input-group-addon" id="basic-addon1">p.</span>
+          <span className='input-group-addon' id='basic-addon1'>p.</span>
           <Field
             name='currentPage'
             className='form-control'
             component='input'
             type='number'
-            aria-describedby="basic-addon1"
-            placeholder="0"
+            aria-describedby='basic-addon1'
+            placeholder='0'
             required
             />
         </InputGroup>
@@ -50,6 +51,11 @@ let DailySingleForm = (props) => {
   )
 }
 
+DailySingleForm.propTypes = {
+  handleSubmit: React.PropTypes.func,
+  handleDelete: React.PropTypes.func
+}
+
 DailySingleForm = reduxForm()(DailySingleForm)
 
 let DailySingle = (props) => {
@@ -61,18 +67,16 @@ let DailySingle = (props) => {
       linkTo={`/book/id/${props.bookId}/progress`}
       horizontal={props.horizontal}>
       <DailySingleForm
-        initialValues={
-          {
-            date: props.date,
-            bookId: props.bookId,
-            currentPage: props.currentPage
-          }
-        }
-        enableReinitialize={true}
+        initialValues={{
+          date: props.date,
+          bookId: props.bookId,
+          currentPage: props.currentPage
+        }}
+        enableReinitialize
         form={props.formId || props.bookId}
         onSubmit={props.handleSubmit}
         handleDelete={props.handleDelete}
-      />
+        />
     </BookThumbnail>
   )
 }
@@ -82,9 +86,12 @@ DailySingle.propTypes = {
   authors: React.PropTypes.array.isRequired,
   thumbnailUrl: React.PropTypes.string.isRequired,
   bookId: React.PropTypes.string.isRequired,
+  formId: React.PropTypes.string,
   currentPage: React.PropTypes.number,
   handleSubmit: React.PropTypes.func.isRequired,
-  date: React.PropTypes.string.isRequired
+  date: React.PropTypes.string.isRequired,
+  horizontal: React.PropTypes.bool,
+  handleDelete: React.PropTypes.func
 }
 
 export default DailySingle

@@ -1,5 +1,3 @@
-import moment from 'moment'
-
 // ------------------------------------
 // Constants
 // ------------------------------------
@@ -21,8 +19,7 @@ export const QUERY_REQUEST = 'QUERY_REQUEST'
 export const QUERY_SUCCESS = 'QUERY_SUCCESS'
 export const QUERY_FAILURE = 'QUERY_FAILURE'
 
-export const ADD_TO_DAILIES= 'ADD_TO_DAILIES'
-
+export const ADD_TO_DAILIES = 'ADD_TO_DAILIES'
 
 // ------------------------------------
 // Actions
@@ -221,7 +218,6 @@ const ACTION_HANDLERS = {
     }
   }
 }
-
 
 // ------------------------------------
 // Reducer

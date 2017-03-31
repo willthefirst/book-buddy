@@ -1,8 +1,6 @@
 import { connect } from 'react-redux'
 import Register from '../components/Register'
 import { errorHandler } from 'util/common'
-import { browserHistory } from 'react-router'
-import cookie from 'react-cookie'
 import axios from 'axios'
 import { registerRequest, registerFailure, registerSuccess } from '../modules/register'
 import APP_SETTINGS from 'config'

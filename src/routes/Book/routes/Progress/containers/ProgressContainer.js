@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { updateBookRequest, updateBookSuccess, updateBookFailure } from '../../../modules/book'
+import { updateBookSuccess, updateBookFailure } from '../../../modules/book'
 import axios from 'axios'
 import { errorHandler, applyAuthToken } from 'util/common'
 import Progress from '../components/Progress'
@@ -32,23 +32,6 @@ const mapDispatchToProps = (dispatch) => {
         }).catch((error) => {
           errorHandler(dispatch, error, updateBookFailure)
         })
-
-
-        // const update = {
-        //   date: values.date,
-        //   book_id: bookId,
-        //   currentPage: values.currentPage
-        // }
-
-      // dispatch(updateBookRequest())
-      // axios.put(`${APP_SETTINGS.API_BASE}/book/${bookId}/dailies`, update, applyAuthToken()).then((result) => {
-      //   const update = {
-      //     dailies: result.data
-      //   }
-      //   dispatch(updateBookSuccess(update))
-      // }).catch((error) => {
-      //   errorHandler(dispatch, error, updateBookFailure)
-      // })
     }
   }
 }

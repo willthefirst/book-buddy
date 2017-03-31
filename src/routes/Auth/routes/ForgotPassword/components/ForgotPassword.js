@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Form, FormGroup, ControlLabel } from 'react-bootstrap'
+import { Form, FormGroup, ControlLabel } from 'react-bootstrap'
 import { Col } from 'react-flexbox-grid'
 import { Field, reduxForm } from 'redux-form'
 import LaddaButton, { L, SLIDE_DOWN } from 'react-ladda'
@@ -11,8 +11,8 @@ const ForgotPassword = (props) => {
     <div>
       <h2>Forgot Password</h2>
       { props.emailSent ? (
-        <div className="text-center">
-          <h3 className="text-success">Success! Check your email.</h3>
+        <div className='text-center'>
+          <h3 className='text-success'>Success! Check your email.</h3>
           <p>I just sent you an email that will help you reset your password.</p>
         </div>
       ) : (
@@ -24,7 +24,13 @@ const ForgotPassword = (props) => {
                 Email
               </ControlLabel>
               <Col>
-                <Field name='email' className='form-control' component='input' type='email' placeholder='Email' required/>
+                <Field
+                  name='email'
+                  className='form-control'
+                  component='input'
+                  type='email'
+                  placeholder='Email'
+                  required />
               </Col>
             </FormGroup>
             <FormGroup>
@@ -36,18 +42,21 @@ const ForgotPassword = (props) => {
                 data-spinner-color='#ddd'>
                 Reset my password
               </LaddaButton>
-              {"   "}<span className="text-warning">{props.errorMessage}</span>
-          </FormGroup>
-        </Form>
-      </div>
-    )}
-  </div>
-)
+              {'   '}<span className='text-warning'>{props.errorMessage}</span>
+            </FormGroup>
+          </Form>
+        </div>
+      )}
+    </div>
+  )
 }
 
 ForgotPassword.propTypes = {
   handleForgotPassword: React.PropTypes.func.isRequired,
-  handleSubmit: React.PropTypes.func
+  handleSubmit: React.PropTypes.func,
+  emailSent: React.PropTypes.bool,
+  loading: React.PropTypes.bool,
+  errorMessage: React.PropTypes.string
 }
 
 export default reduxForm({

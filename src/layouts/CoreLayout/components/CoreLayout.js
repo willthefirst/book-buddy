@@ -12,8 +12,8 @@ class CoreLayout extends Component {
 
   render () {
     return (
-      <div className="site-container">
-        <div className="header-container">
+      <div className='site-container'>
+        <div className='header-container'>
           <Header />
         </div>
         <Grid fluid className='body-container core-layout__viewport'>
