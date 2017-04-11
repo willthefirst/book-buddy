@@ -2,6 +2,7 @@ import { connect } from 'react-redux'
 import Login from '../components/Login'
 import { errorHandler } from 'util/common'
 import cookie from 'react-cookie'
+import { browserHistory } from 'react-router'
 import axios from 'axios'
 import { authRequest, authFailure, authSuccess } from 'layouts/CoreLayout/modules/coreLayout'
 import APP_SETTINGS from 'config'
@@ -14,6 +15,7 @@ const mapDispatchToProps = (dispatch) => {
         .then((result) => {
           cookie.save('token', result.data.token, { path: '/' })
           dispatch(authSuccess(result.data))
+          browserHistory.push(`/daily`)
         }).catch((error) => {
           if (error.response.data.message === 'Missing credentials') {
             error.response.data.message = 'Make sure you type in both your email AND password.'

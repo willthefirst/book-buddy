@@ -73,7 +73,7 @@ ResetPassword.propTypes = {
   isReset: React.PropTypes.bool,
   loading: React.PropTypes.bool,
   errorMessage: React.PropTypes.string,
-  params: React.PropTypes.obj.isRequired
+  params: React.PropTypes.object.isRequired
 }
 
 export default reduxForm({

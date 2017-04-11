@@ -1,5 +1,4 @@
 import Home from './Home'
-import CounterRoute from './Counter'
 import AuthRoute from './Auth'
 import EnsureLoggedInRoute from './EnsureLoggedIn'
 import ErrorRoute from './Error'
@@ -18,7 +17,7 @@ export default (store) => ({
       const CoreLayout = require('layouts/CoreLayout/containers/CoreLayoutContainer').default
       const reducer = require('layouts/CoreLayout/modules/coreLayout').default
 
-      /*  Add the reducer to the store on key 'counter'  */
+      /*  Add the reducer to the store on key 'auth'  */
       injectReducer(store, { key: 'auth', reducer })
 
       /*  Return getComponent   */
@@ -28,7 +27,6 @@ export default (store) => ({
     }, 'coreLayout')
   },
   childRoutes: [
-    CounterRoute(store),
     AuthRoute(store),
     EnsureLoggedInRoute(store),
     ErrorRoute(store)

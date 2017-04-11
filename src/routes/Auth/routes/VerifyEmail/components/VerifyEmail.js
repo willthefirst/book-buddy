@@ -24,7 +24,7 @@ class VerifyEmail extends Component {
               </div>
             ) : (
               <div>
-                <h3 className='text-danger'>Something went wrong with verifying your email :(</h3>
+                <h3 className='text-danger'>Something went wrong with verifying your email.</h3>
                 <p>{ this.props.error }</p>
               </div>
             )
@@ -40,7 +40,7 @@ VerifyEmail.propTypes = {
   isVerified: React.PropTypes.bool.isRequired,
   error: React.PropTypes.string,
   loading: React.PropTypes.bool,
-  params: React.PropTypes.bool
+  params: React.PropTypes.object
 }
 
 export default VerifyEmail
