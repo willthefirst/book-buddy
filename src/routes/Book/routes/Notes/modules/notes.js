@@ -5,6 +5,7 @@ import { EditorState, convertFromRaw } from 'draft-js'
 // ------------------------------------
 export const UPDATE_EDITOR_STATE = 'UPDATE_EDITOR_STATE'
 export const INITIALIZE_EDITOR_STATE = 'INITIALIZE_EDITOR_STATE'
+export const RESET_EDITOR_STATE = 'RESET_EDITOR_STATE'
 
 // ------------------------------------
 // Actions
@@ -23,6 +24,12 @@ export function initializeEditorState (notes) {
   }
 }
 
+export function resetEditorState () {
+  return {
+    type: RESET_EDITOR_STATE
+  }
+}
+
 export const actions = {
   updateEditorState,
   initializeEditorState
@@ -37,8 +44,8 @@ const ACTION_HANDLERS = {
   },
   [INITIALIZE_EDITOR_STATE] : (state, action) => {
     // If initializing with nothing, leave state alone
-    if (!action.payload) {
-      return state
+    if (!action.payload || action.payload === '' ) {
+      return EditorState.createEmpty()
     }
 
     // Else, initialize editor with latest notes

@@ -38,6 +38,7 @@ const mapDispatchToProps = (dispatch) => {
       }
 
       dispatch(updateBookRequest())
+
       axios.put(`${APP_SETTINGS.API_BASE}/book/${bookId}`, update, applyAuthToken()).then((result) => {
         dispatch(updateBookSuccess(result.data))
         dispatch(initializeEditorState(result.data.notes))
