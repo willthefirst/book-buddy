@@ -9,10 +9,6 @@ export const UNAUTH_USER = 'UNAUTH_USER'
 
 export const SET_REDIRECT_URL = 'SET_REDIRECT_URL'
 
-//  FORGOT_PASSWORD_REQUEST = 'forgot_password_request',
-//  RESET_PASSWORD_REQUEST = 'reset_password_request',
-//  PROTECTED_TEST = 'protected_test';
-
 // ------------------------------------
 // Actions
 // ------------------------------------

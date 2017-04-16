@@ -1,12 +1,15 @@
-import Home from './Home'
+import WelcomeRoute from './Welcome'
+import DailyRoute from './Daily'
 import AuthRoute from './Auth'
 import EnsureLoggedInRoute from './EnsureLoggedIn'
 import ErrorRoute from './Error'
 import { injectReducer } from 'store/reducers'
 
 export default (store) => ({
-  path : '/',
-  indexRoute: Home,
+  path: '/',
+  indexRoute: {
+    onEnter: (nextState, replace) => replace('/daily')
+  },
   /*  Async getComponent is only invoked when route matches   */
   getComponent (nextState, cb) {
     /*  Webpack - use 'require.ensure' to create a split point
@@ -27,6 +30,7 @@ export default (store) => ({
     }, 'coreLayout')
   },
   childRoutes: [
+    WelcomeRoute(store),
     AuthRoute(store),
     EnsureLoggedInRoute(store),
     ErrorRoute(store)

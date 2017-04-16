@@ -4,14 +4,21 @@ import { applyAuthToken } from 'util/common'
 
 class EnsureLoggedIn extends Component {
   componentWillMount () {
-    const { setRedirectUrl, currentUrl, isLoggedIn } = this.props
+    const { setRedirectUrl, isLoggedIn } = this.props
+    let { currentUrl } = this.props
+
     if (!isLoggedIn) {
+      // If user goes to home page while not logged in, redirect them to daily
+      if (currentUrl === '/') {
+        currentUrl = 'daily'
+      }
       setRedirectUrl(currentUrl)
+
       if (applyAuthToken().headers.Authorization) {
         // If we have a token stored, refresh users info from server, don't redirect
-        this.props.meFromToken()
+        this.props.meFromToken(currentUrl)
       } else {
-        browserHistory.push('/auth/login')
+        browserHistory.push('/welcome')
       }
     }
   }
