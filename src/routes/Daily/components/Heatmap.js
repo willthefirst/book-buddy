@@ -2,43 +2,39 @@ import React from 'react'
 import moment from 'moment'
 import { Link } from 'react-router'
 import { Row, Col } from 'react-flexbox-grid'
+import { Table } from 'react-bootstrap'
+import Modal from 'components/Modal'
 import './Heatmap.scss'
 import classNames from 'classnames'
 
 const Day = (props) => {
   let dayContainerClass = classNames({
     'day__container': true,
-    'panel-default': (props.day.dailies.length === 0),
-    'panel-success': (props.day.dailies.length !== 0)
+    'complete': (props.day.dailies.length !== 0)
   })
 
   return (
-    <Col xs={12} sm className='text-center'>
-      <div className={`panel ${dayContainerClass}`}>
-        <div className='panel-heading'>
-          <Link
-            className='panel-title'
-            to={`/daily/${props.day.date.format('YYYY-MM-DD')}`}>
-            {props.day.date.format('MM/DD')}
-          </Link>
+    <td className={`${dayContainerClass}`}>
+      <Link
+        to={`/daily/${props.day.date.format('YYYY-MM-DD')}`}>
+        <div className="content">
+          <span className='day__num'>{props.day.date.format('DD')}</span>
+          {
+            props.day.dailies.map((daily, key) => {
+              return (
+                <img className='day__thumb' key={key} src={daily.thumbnailUrl} alt='' />
+              )
+            })
+          }
         </div>
-        <div className='panel-body day__panel-body'>
-          <Row style={{ flexWrap: 'nowrap' }}>
-            {
-              props.day.dailies.map((daily, key) => {
-                return (
-                  <Col className='day__book-container' xs sm={6} key={key}>
-                    <img className='day__thumb' src={daily.thumbnailUrl} alt='' />
-                  </Col>
-                )
-              })
-            }
-          </Row>
-        </div>
-      </div>
-    </Col>
+      </Link>
+
+    </td>
   )
 }
+
+
+
 
 Day.propTypes = {
   day: React.PropTypes.object.isRequired
@@ -74,23 +70,39 @@ const Heatmap = (props) => {
   }
 
   return (
-    <div>
-      {
-        weeks.map((week, key) => {
-          return (
-            <Row key={key}>
-              {
-                week.map((day, key) => {
-                  return (
-                    <Day day={day} key={key} />
-                  )
-                })
-              }
-            </Row>
-          )
-        })
-      }
-    </div>
+    <table className='heatmap'>
+      <thead>
+        <tr>
+          <th colSpan={7}>_MONTH_ 2017</th>
+        </tr>
+        <tr>
+          <th>Mon</th>
+          <th>Tues</th>
+          <th>Wed</th>
+          <th>Thur</th>
+          <th>Fri</th>
+          <th>Sat</th>
+          <th>Sun</th>
+        </tr>
+      </thead>
+      <tbody>
+        {
+          weeks.map((week, key) => {
+            return (
+              <tr key={key}>
+                {
+                  week.map((day, key) => {
+                    return (
+                      <Day day={day} key={key} />
+                    )
+                  })
+                }
+              </tr>
+            )
+          })
+        }
+      </tbody>
+    </table>
   )
 }
 

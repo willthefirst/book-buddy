@@ -18,13 +18,13 @@ For example:
 // Reset and dependencies
 @import "../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/normalize";
 @import "../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/print";
-// Not importing bs grid since we're using flexbox grid instead.
 // @import "../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/glyphicons";
 
 // Core CSS
 @import "../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/scaffolding";
 @import "../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/type";
 @import "../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/code";
+// Not importing bs grid since we're using flexbox grid instead.
 // @import "../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/grid";
 @import "../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/tables";
 @import "../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/forms";

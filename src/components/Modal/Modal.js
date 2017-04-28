@@ -3,7 +3,7 @@ import { Button, Modal } from 'react-bootstrap'
 
 let SearchModal = React.createClass({
   getInitialState () {
-    return { showModal: false }
+    return { showModal: this.props.showModal || false }
   },
 
   close () {
@@ -35,7 +35,8 @@ let SearchModal = React.createClass({
 
 SearchModal.propTypes = {
   btnText: React.PropTypes.string.isRequired,
-  children: React.PropTypes.array
+  children: React.PropTypes.array,
+  showModal: React.PropTypes.bool
 }
 
 export default SearchModal

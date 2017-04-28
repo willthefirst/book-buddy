@@ -1,6 +1,8 @@
 import React from 'react'
 import BookThumbnail from 'components/BookThumbnail'
-import { Form, FormGroup, InputGroup } from 'react-bootstrap'
+import { Link } from 'react-router'
+import { Row, Col } from 'react-flexbox-grid'
+import { Form, FormGroup, InputGroup, Image } from 'react-bootstrap'
 import { reduxForm, Field } from 'redux-form'
 import LaddaButton, { L, SLIDE_DOWN } from 'react-ladda'
 
@@ -16,37 +18,38 @@ let DailySingleForm = (props) => {
         data-style={SLIDE_DOWN}
         data-spinner-color='#ddd'
         >
-        Delete
+        <i className="fa fa-trash" aria-hidden="true"></i>
       </LaddaButton>
     )
   }
 
   return (
     <Form onSubmit={props.handleSubmit}>
-      <FormGroup>
-        <InputGroup>
-          <span className='input-group-addon' id='basic-addon1'>p.</span>
-          <Field
-            name='currentPage'
-            className='form-control'
-            component='input'
-            type='number'
-            aria-describedby='basic-addon1'
-            placeholder='0'
-            required
-            />
-        </InputGroup>
-      </FormGroup>
-      <LaddaButton
-        className='btn btn-primary'
-        data-size={L}
-        data-style={SLIDE_DOWN}
-        data-spinner-color='#ddd'
-        >
-        Save
-      </LaddaButton>
-      {'  '}
-      { deleteButton }
+
+          <InputGroup style={{float:'left', width: 80, marginRight: 6}}>
+            <span className='input-group-addon' id='basic-addon1'>p.</span>
+            <Field
+              name='currentPage'
+              className='form-control'
+              component='input'
+              type='number'
+              aria-describedby='basic-addon1'
+              placeholder='0'
+              style={{'width': 100}}
+              required
+              />
+          </InputGroup>
+          <LaddaButton
+            className='btn btn-primary'
+            data-size={L}
+            data-style={SLIDE_DOWN}
+            data-spinner-color='#ddd'
+            >
+            <i className="fa fa-check-circle" aria-hidden="true"></i>
+          </LaddaButton>
+          {'  '}
+          { deleteButton }
+
     </Form>
   )
 }
@@ -60,24 +63,23 @@ DailySingleForm = reduxForm()(DailySingleForm)
 
 let DailySingle = (props) => {
   return (
-    <BookThumbnail
-      title={props.title}
-      authors={props.authors}
-      thumbnailUrl={props.thumbnailUrl}
-      linkTo={`/book/id/${props.bookId}/progress`}
-      horizontal={props.horizontal}>
-      <DailySingleForm
-        initialValues={{
-          date: props.date,
-          bookId: props.bookId,
-          currentPage: props.currentPage
-        }}
-        enableReinitialize
-        form={props.formId || props.bookId}
-        onSubmit={props.handleSubmit}
-        handleDelete={props.handleDelete}
-        />
-    </BookThumbnail>
+      <Row middle='xs' style={{marginBottom:'8px'}}>
+        <Link to={`/book/id/${props.bookId}/progress`} style={{float:'left', marginRight: 6}}>
+          <Image src={props.thumbnailUrl} style={{maxHeight: 80}} responsive />
+        </Link>
+        {'  '}
+        <DailySingleForm
+          initialValues={{
+            date: props.date,
+            bookId: props.bookId,
+            currentPage: props.currentPage
+          }}
+          enableReinitialize
+          form={props.formId || props.bookId}
+          onSubmit={props.handleSubmit}
+          handleDelete={props.handleDelete}
+          />
+      </Row>
   )
 }
 
