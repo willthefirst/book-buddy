@@ -10,7 +10,8 @@ import classNames from 'classnames'
 const Day = (props) => {
   let dayContainerClass = classNames({
     'day__container': true,
-    'complete': (props.day.dailies.length !== 0)
+    'complete': (props.day.dailies.length !== 0),
+    'current': props.day.current
   })
 
   return (
@@ -62,6 +63,11 @@ const Heatmap = (props) => {
       dateObj.dailies = props.dailiesRange.filter((daily) => {
         return daily.date === curr.format('YYYY-MM-DD')
       })
+
+      if (today.format('YYYY-MM-DD') === dateObj.date.format('YYYY-MM-DD')) {
+        dateObj.current = true
+      }
+
       weekArray.push(dateObj)
     }
 

@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import Modal from 'components/Modal'
-import { Well } from 'react-bootstrap'
 import { Row, Col } from 'react-flexbox-grid'
 import { Link } from 'react-router'
 import moment from 'moment'
@@ -26,57 +25,62 @@ class Daily extends Component {
     return (
       <Row className='daily-container full-width'>
         <Col xs={12} sm={6}>
+          <h1>Books read on {moment(this.props.date).format('dddd, MMMM Do')}</h1>
+            {
+              this.props.dailiesMatch.map((daily, key) => {
+                return (
+                  <DailySingle
+                    bookId={daily.book_id}
+                    title={daily.title}
+                    authors={daily.authors}
+                    thumbnailUrl={daily.thumbnailUrl}
+                    key={key}
+                    date={this.props.date}
+                    currentPage={daily.currentPage}
+                    handleSubmit={this.props.handleSubmit}
+                    handleDelete={this.props.handleDelete}
+                    horizontal
+                    />
+                )
+              })
+            }
+            <Row>
+              <Modal btnText={
+                  <span>
+                    <i className="fa fa-plus" aria-hidden="true"></i>
+                    {'  '}Add a book
+                  </span>
+                }>
+                <SearchInput form='addToDailyForm' handleChange={this.props.handleAddDailySearch} />
+                <Row>
+                  {
+                    this.props.booksUserCanAdd.map((book, key) => {
+                      // set formId here so that form doesn't get conflated with dailiesmatch forms
+                      return (
+                        <DailySingle
+                          bookId={book.book_id}
+                          formId={book.book_id + '_new'}
+                          title={book.title}
+                          authors={book.authors}
+                          thumbnailUrl={book.thumbnailUrl}
+                          key={key}
+                          date={this.props.date}
+                          currentPage={book.currentPage}
+                          handleSubmit={this.props.handleSubmit}
+                          />
+                      )
+                    })
+                  }
+                </Row>
+                <span>Don't see your book? Then <Link to='/book/new'>add it to your library...</Link></span>
+              </Modal>
+            </Row>
+        </Col>
+        <Col xs={12} sm={6}>
           <Heatmap
             dailiesMatch={this.props.dailiesMatch}
             dailiesRange={this.props.dailiesRange}
             currentDate={this.props.date} />
-        </Col>
-        <Col xs={12} sm={6}>
-          <h2>Books Read</h2>
-          {
-            this.props.dailiesMatch.map((daily, key) => {
-              return (
-                <DailySingle
-                  bookId={daily.book_id}
-                  title={daily.title}
-                  authors={daily.authors}
-                  thumbnailUrl={daily.thumbnailUrl}
-                  key={key}
-                  date={this.props.date}
-                  currentPage={daily.currentPage}
-                  handleSubmit={this.props.handleSubmit}
-                  handleDelete={this.props.handleDelete}
-                  horizontal
-                  />
-              )
-            })
-          }
-          <Row>
-            <Modal btnText='Add another book'>
-              <SearchInput form='addToDailyForm' handleChange={this.props.handleAddDailySearch} />
-              <Row>
-                {
-                  this.props.booksUserCanAdd.map((book, key) => {
-                    // set formId here so that form doesn't get conflated with dailiesmatch forms
-                    return (
-                      <DailySingle
-                        bookId={book.book_id}
-                        formId={book.book_id + '_new'}
-                        title={book.title}
-                        authors={book.authors}
-                        thumbnailUrl={book.thumbnailUrl}
-                        key={key}
-                        date={this.props.date}
-                        currentPage={book.currentPage}
-                        handleSubmit={this.props.handleSubmit}
-                        />
-                    )
-                  })
-                }
-              </Row>
-              <span>Don't see your book? Then <Link to='/book/new'>add it to your library...</Link></span>
-            </Modal>
-          </Row>
         </Col>
       </Row>
     )

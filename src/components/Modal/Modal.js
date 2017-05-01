@@ -34,7 +34,7 @@ let SearchModal = React.createClass({
 })
 
 SearchModal.propTypes = {
-  btnText: React.PropTypes.string.isRequired,
+  btnText: React.PropTypes.element.isRequired,
   children: React.PropTypes.array,
   showModal: React.PropTypes.bool
 }

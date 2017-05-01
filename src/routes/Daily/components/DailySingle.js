@@ -63,7 +63,11 @@ DailySingleForm = reduxForm()(DailySingleForm)
 
 let DailySingle = (props) => {
   return (
-      <Row middle='xs' style={{marginBottom:'8px'}}>
+      <Row middle='xs' style={{
+          paddingBottom:'16px',
+          marginBottom: '16px',
+          borderBottom:'1px solid #efefef'
+        }}>
         <Link to={`/book/id/${props.bookId}/progress`} style={{float:'left', marginRight: 6}}>
           <Image src={props.thumbnailUrl} style={{maxHeight: 80}} responsive />
         </Link>

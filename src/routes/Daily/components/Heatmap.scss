@@ -20,6 +20,10 @@
   &.complete {
     background-color: $brand-success;
   }
+
+  &.current, &:hover {
+    outline: 2px solid $gray-light;
+  }
 }
 
 .heatmap {
@@ -61,7 +65,8 @@
 }
 
 .day__thumb {
-  max-height: 100px;
+  float: left;
   width: auto;
-  max-width: 100%;
+  max-width: 20%;
+  margin: 4px;
 }
