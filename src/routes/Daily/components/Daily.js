@@ -12,6 +12,7 @@ class Daily extends Component {
   componentWillMount () {
     // Initial load
     this.props.fetchDailies(this.props.date)
+    this.props.fetchCurrent()
   }
 
   componentWillReceiveProps (nextProps) {
@@ -25,12 +26,13 @@ class Daily extends Component {
     return (
       <Row className='daily-container full-width'>
         <Col xs={12} sm={6}>
-          <h1>Books read on {moment(this.props.date).format('dddd, MMMM Do')}</h1>
+          <h2><small>{moment(this.props.date).format('dddd, MMMM Do')} Progress</small></h2>
             {
               this.props.dailiesMatch.map((daily, key) => {
                 return (
                   <DailySingle
                     bookId={daily.book_id}
+                    formId={`daily_${daily.book_id}`}
                     title={daily.title}
                     authors={daily.authors}
                     thumbnailUrl={daily.thumbnailUrl}
@@ -44,8 +46,26 @@ class Daily extends Component {
                 )
               })
             }
-            <Row>
-              <Modal btnText={
+            {
+              this.props.currentMatch.map((book, key) => {
+                return (
+                  <DailySingle
+                    bookId={book.book_id}
+                    formId={`curr_${book.book_id}`}
+                    title={book.title}
+                    authors={book.authors}
+                    thumbnailUrl={book.thumbnailUrl}
+                    key={key}
+                    date={this.props.date}
+                    handleSubmit={this.props.handleSubmit}
+                    horizontal
+                    className='suggested'
+                    />
+                )
+              })
+            }
+
+              <Modal className='daily__add' btnText={
                   <span>
                     <i className="fa fa-plus" aria-hidden="true"></i>
                     {'  '}Add a book
@@ -74,7 +94,6 @@ class Daily extends Component {
                 </Row>
                 <span>Don't see your book? Then <Link to='/book/new'>add it to your library...</Link></span>
               </Modal>
-            </Row>
         </Col>
         <Col xs={12} sm={6}>
           <Heatmap

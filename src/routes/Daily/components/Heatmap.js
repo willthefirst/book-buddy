@@ -29,7 +29,6 @@ const Day = (props) => {
           }
         </div>
       </Link>
-
     </td>
   )
 }
@@ -78,9 +77,6 @@ const Heatmap = (props) => {
   return (
     <table className='heatmap'>
       <thead>
-        <tr>
-          <th colSpan={7}>_MONTH_ 2017</th>
-        </tr>
         <tr>
           <th>Mon</th>
           <th>Tues</th>

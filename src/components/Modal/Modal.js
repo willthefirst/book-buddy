@@ -16,7 +16,7 @@ let SearchModal = React.createClass({
 
   render () {
     return (
-      <div>
+      <div className={this.props.className}>
         <Button
           bsStyle='info'
           bsSize='lg'

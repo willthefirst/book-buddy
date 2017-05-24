@@ -1,0 +1,13 @@
+.daily__single {
+  padding: 8px;
+  display: flex;
+  align-items: center;
+
+  &.suggested {
+    background-color: $gray-lighter;
+  }
+}
+
+.daily__add {
+  margin-top: 8px;
+}

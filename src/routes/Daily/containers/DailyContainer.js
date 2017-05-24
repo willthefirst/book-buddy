@@ -5,6 +5,9 @@ import {
   fetchDailiesRequest,
   fetchDailiesSuccess,
   fetchDailiesFailure,
+  fetchCurrentRequest,
+  fetchCurrentSuccess,
+  fetchCurrentFailure,
   queryRequest,
   querySuccess,
   queryFailure
@@ -39,6 +42,14 @@ const mapDispatchToProps = (dispatch) => {
         dispatch(fetchDailiesSuccess(result.data))
       }).catch((error) => {
         errorHandler(dispatch, error, fetchDailiesFailure)
+      })
+    },
+    fetchCurrent: () => {
+      dispatch(fetchCurrentRequest())
+      axios.get(`${APP_SETTINGS.API_BASE}/books?status=current`, applyAuthToken()).then((result) => {
+        dispatch(fetchCurrentSuccess(result.data))
+      }).catch((error) => {
+        errorHandler(dispatch, error, fetchCurrentFailure)
       })
     },
     handleSubmit: (values) => {
@@ -80,15 +91,33 @@ const mapDispatchToProps = (dispatch) => {
 const getDailiesRange = (state) => state.daily.dailiesRange
 const getCurrentDate = (state) => state.daily.currentDate
 
-const dailiesMatch = createSelector([getDailiesRange, getCurrentDate], (dailiesRange, currentDate) => {
+const getDailiesMatch = createSelector([getDailiesRange, getCurrentDate], (dailiesRange, currentDate) => {
   return dailiesRange.filter((daily) => {
     return daily.date === currentDate
   })
 })
 
+// Selector:   returns currentBooks not already inside of dailiesMatch
+const getCurrent = (state) => state.daily.currentBooks
+
+const currentMatch = createSelector([getCurrent, getDailiesMatch], (currentBooks, dailiesMatch) => {
+  // Necessary to create a dummy variable so that we don't mutate orginal array
+  let currBooks = currentBooks.slice();
+
+  for (let i = 0; i < dailiesMatch.length; i++) {
+    for (let j = 0; j < currBooks.length; j++ ) {
+      if (dailiesMatch[i].book_id === currBooks[j].book_id) {
+        currBooks.splice(j, 1)
+      }
+    }
+  }
+
+  return currBooks
+})
+
 // Selector: returns books that user can add to daily (that don't already exist as dailies)
 const getBookQueryResults = (state) => state.daily.bookQueryResults
-const bookUserCanAdd = createSelector(dailiesMatch, getBookQueryResults, (currentDailies, bookResults) => {
+const bookUserCanAdd = createSelector(getDailiesMatch, getBookQueryResults, (currentDailies, bookResults) => {
   const canAdd = []
 
   bookResults.forEach((result) => {
@@ -115,7 +144,8 @@ const mapStateToProps = (state, ownProps) => {
 
   return {
     dailiesRange: state.daily.dailiesRange,
-    dailiesMatch: dailiesMatch(state),
+    dailiesMatch: getDailiesMatch(state),
+    currentMatch: currentMatch(state),
     booksUserCanAdd: bookUserCanAdd(state),
     date: date
   }

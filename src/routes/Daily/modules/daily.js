@@ -7,13 +7,13 @@ export const FETCH_DAILIES_REQUEST = 'FETCH_DAILIES_REQUEST'
 export const FETCH_DAILIES_SUCCESS = 'FETCH_DAILIES_SUCCESS'
 export const FETCH_DAILIES_FAILURE = 'FETCH_DAILIES_FAILURE'
 
-export const UPDATE_DAILY_REQUEST = 'UPDATE_DAILY_REQUEST'
-export const UPDATE_DAILY_SUCCESS = 'UPDATE_DAILY_SUCCESS'
-export const UPDATE_DAILY_FAILURE = 'UPDATE_DAILY_FAILURE'
-
 export const FETCH_CURRENT_REQUEST = 'FETCH_CURRENT_REQUEST'
 export const FETCH_CURRENT_SUCCESS = 'FETCH_CURRENT_SUCCESS'
 export const FETCH_CURRENT_FAILURE = 'FETCH_CURRENT_FAILURE'
+
+export const UPDATE_DAILY_REQUEST = 'UPDATE_DAILY_REQUEST'
+export const UPDATE_DAILY_SUCCESS = 'UPDATE_DAILY_SUCCESS'
+export const UPDATE_DAILY_FAILURE = 'UPDATE_DAILY_FAILURE'
 
 export const QUERY_REQUEST = 'QUERY_REQUEST'
 export const QUERY_SUCCESS = 'QUERY_SUCCESS'
@@ -60,10 +60,11 @@ export function fetchCurrentRequest (request) {
   }
 }
 
-export function fetchCurrentSuccess (books) {
+export function fetchCurrentSuccess (dailies, dateQuery) {
   return {
     type: FETCH_CURRENT_SUCCESS,
-    payload: books
+    payload: dailies,
+    dateQuery: dateQuery
   }
 }
 
@@ -175,9 +176,7 @@ const ACTION_HANDLERS = {
   },
 
   [FETCH_CURRENT_REQUEST] : (state, action) => {
-    return {
-      ...state, loading: true
-    }
+    return state
   },
   [FETCH_CURRENT_FAILURE] : (state, action) => {
     return {
@@ -226,6 +225,7 @@ const ACTION_HANDLERS = {
 const initialState = {
   currentDate: '',
   bookQueryResults: [],
+  currentBooks: [],
   dailiesRange: [],
   error: null,
   loading: false
