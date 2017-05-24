@@ -26,7 +26,7 @@ class Daily extends Component {
     return (
       <Row className='daily-container full-width'>
         <Col xs={12} sm={6}>
-          <h2><small>{moment(this.props.date).format('dddd, MMMM Do')} Progress</small></h2>
+          <h3 style={{marginTop:0}}>{moment(this.props.date).format('dddd, MMMM Do')} Progress</h3>
             {
               this.props.dailiesMatch.map((daily, key) => {
                 return (

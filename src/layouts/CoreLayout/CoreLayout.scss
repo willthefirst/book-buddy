@@ -1,5 +1,5 @@
 .core-layout__viewport {
-  height: 100%;
+  min-height: 100%;
 }
 
 .site-container {
@@ -13,4 +13,13 @@
   flex: 1 0 0%;
   display: flex;
   width: 100%;
+}
+
+.footer-container {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding: 8px 0;
+  background-color: #b1f3b1;
+  text-align: center;
 }
