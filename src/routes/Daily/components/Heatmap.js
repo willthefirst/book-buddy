@@ -23,7 +23,7 @@ const Day = (props) => {
           {
             props.day.dailies.map((daily, key) => {
               return (
-                <img className='day__thumb' key={key} src={daily.thumbnailUrl} alt='' />
+                <img className='day__thumb book-thumb--shadow' key={key} src={daily.thumbnailUrl} alt='' />
               )
             })
           }

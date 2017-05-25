@@ -20,7 +20,7 @@ class Book extends Component {
         <Row>
           <Col xs={12} sm={2} >
             <img src={this.props.thumbnailUrl}
-              className='img-responsive'
+              className='img-responsive book-thumb--shadow'
               style={{ marginBottom: '24px', width: '100%' }} />
             <Nav bsStyle='pills' id='book-info' stacked>
               <LinkContainer to={{ pathname: `/book/id/${this.props.params.id}/progress` }}>

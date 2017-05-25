@@ -1,5 +1,4 @@
 import React from 'react'
-import BookThumbnail from 'components/BookThumbnail'
 import { Link } from 'react-router'
 import { Row, Col } from 'react-flexbox-grid'
 import { Form, FormGroup, InputGroup, Image } from 'react-bootstrap'
@@ -66,7 +65,7 @@ let DailySingle = (props) => {
       <Link
         to={`/book/id/${props.bookId}/progress`}
         style={{float:'left', marginRight: 6, width: 70}}>
-        <Image src={props.thumbnailUrl} style={{maxHeight: 80}} responsive />
+        <Image src={props.thumbnailUrl} style={{maxHeight: 80}} className='book-thumb--shadow' responsive />
       </Link>
       {'  '}
       <DailySingleForm

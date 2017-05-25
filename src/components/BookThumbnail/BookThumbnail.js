@@ -6,17 +6,17 @@ import { truncate } from 'util/common'
 
 const BookThumbnail = (props) => {
   let info = (
-    <h4>
+    <h5>
       { truncate(props.title, 50, true) }
       <br />
       <small>
-        { truncate(props.authors.join(', '), 50, true)}
+        { truncate(props.authors.join(', '), 46, true)}
       </small>
-    </h4>
+    </h5>
   )
 
   let thumbnail = (
-    <img src={props.thumbnailUrl} className='book-thumb__img' />
+    <img src={props.thumbnailUrl} className="book-thumb__img"/>
   )
 
   if (props.linkTo) {
@@ -33,30 +33,15 @@ const BookThumbnail = (props) => {
     )
   }
 
-  if (props.horizontal) {
-    return (
-      <Col xs={10} sm={4} style={{ marginRight:40 }}>
-        <Row style={{ height: '100%' }} middle='xs'>
-          <Col xs={4}>
-            { thumbnail }
-          </Col>
-          <Col xs={8}>
-            { props.children }
-          </Col>
-        </Row>
-      </Col>
-    )
-  } else {
-    return (
-      <Col xs={4} sm={3} md={2} className='book-thumb__container'>
-        <div>
-          { thumbnail }
-          { info }
-        </div>
+  return (
+    <Col xs={4} sm={2}>
+      <div className='book-thumb__container'>
+        { thumbnail }
+        { info }
         { props.children }
-      </Col>
-    )
-  }
+      </div>
+    </Col>
+  )
 }
 
 BookThumbnail.propTypes = {
@@ -64,8 +49,7 @@ BookThumbnail.propTypes = {
   authors : React.PropTypes.array.isRequired,
   thumbnailUrl : React.PropTypes.string,
   children : React.PropTypes.element,
-  linkTo: React.PropTypes.string,
-  horizontal: React.PropTypes.bool
+  linkTo: React.PropTypes.string
 }
 
 export default BookThumbnail
