@@ -54,7 +54,7 @@ class Header extends Component {
             <Link to='/'>
               <Isvg src={Logo} alt='logo' className='logo-img' />
               {' '}
-              Book Buddy
+              BookBuddy
             </Link>
           </Navbar.Brand>
           <Navbar.Toggle />
