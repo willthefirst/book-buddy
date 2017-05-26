@@ -14,6 +14,10 @@ body {
   height: 100%;
 }
 
+body {
+  font-family: 'Noto Sans', sans-serif;
+}
+
 *,
 *:before,
 *:after {
@@ -41,4 +45,11 @@ body {
 
 .book-thumb--shadow {
   box-shadow: 1px 1px 1px 0px #909090;
+}
+
+// Navbar
+
+.navbar-default {
+  background-color: #fff;
+  border-style: dashed;
 }
