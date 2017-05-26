@@ -34,7 +34,7 @@ const BookThumbnail = (props) => {
   }
 
   return (
-    <Col xs={4} sm={2}>
+    <Col xs={3} sm={2} md={1}>
       <div className='book-thumb__container'>
         { thumbnail }
         { info }

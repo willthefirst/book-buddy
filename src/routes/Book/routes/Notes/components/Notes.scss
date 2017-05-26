@@ -1,0 +1,20 @@
+// WYSIWIG Editor
+.react-draft__editor {
+  border: none;
+  min-height: 100px;
+  margin-bottom: 22px;
+  border-bottom: 1px dashed $gray-lighter;
+}
+
+.rdw-editor-toolbar {
+  border: none;
+  padding: 0;
+}
+
+.rdw-option-wrapper {
+  height: inherit;
+
+  &:first-child {
+    margin-left: 0;
+  }
+}

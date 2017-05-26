@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react'
 import { Nav, NavItem } from 'react-bootstrap'
 import { Col, Row } from 'react-flexbox-grid'
@@ -12,17 +13,25 @@ class Book extends Component {
   render () {
     return (
       <div className='full-width'>
-        <h1>
-          {this.props.title}
-          <br />
-          <small>{this.props.authors}</small>
-        </h1>
         <Row>
-          <Col xs={12} sm={2} >
-            <img src={this.props.thumbnailUrl}
-              className='img-responsive book-thumb--shadow'
-              style={{ marginBottom: '24px', width: '100%' }} />
-            <Nav bsStyle='pills' id='book-info' stacked>
+          <Col xs={12} sm={2}  style={{marginBottom: 22}}>
+            <Row>
+              <Col xs={3} sm={12}>
+                <img src={this.props.thumbnailUrl}
+                  className='img-responsive book-thumb--shadow'
+                  style={{}} />
+              </Col>
+              <Col xs={9} sm={12}>
+                <h3>
+                  {this.props.title}
+                  <br />
+                  <small>{this.props.authors}</small>
+                </h3>
+              </Col>
+            </Row>
+          </Col>
+          <Col xs={12} sm={10}>
+            <Nav bsStyle='tabs' id='book-info' style={{marginBottom: 22}}>
               <LinkContainer to={{ pathname: `/book/id/${this.props.params.id}/progress` }}>
                 <NavItem eventKey={1} title='Progress'>Progress</NavItem>
               </LinkContainer>
@@ -33,9 +42,16 @@ class Book extends Component {
                 <NavItem eventKey={3} title='Info'>Info</NavItem>
               </LinkContainer>
             </Nav>
+            {this.props.children}
+
+          </Col>
+        </Row>
+        <Row>
+          <Col xs={12} sm={2} >
+
           </Col>
           <Col xs={12} sm={10}>
-            {this.props.children}
+
           </Col>
         </Row>
       </div>
