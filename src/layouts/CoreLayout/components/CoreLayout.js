@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Header from 'components/Header'
+import Footer from 'components/Footer'
 import { Grid, Row, Col } from 'react-flexbox-grid'
 import '../CoreLayout.scss'
 import '../../../styles/core.scss'
@@ -12,20 +13,12 @@ class CoreLayout extends Component {
 
   render () {
     return (
-      <div className='site-container'>
-        <div className='header-container'>
-          <Header />
-        </div>
+      <div>
+        <Header />
         <Grid fluid className='body-container core-layout__viewport'>
           {this.props.children}
         </Grid>
-        <div className="footer-container">
-          <Row>
-            <Col xs={12}>
-              BookBuddy is in beta. For bugs and questions, contact <a href="mailto:will@mg.bookbuddy.me">will@mg.bookbuddy.me</a>.
-            </Col>
-          </Row>
-        </div>
+        <Footer />
       </div>
     )
   }

@@ -48,7 +48,7 @@ class Header extends Component {
     }
 
     return (
-      <Navbar staticTop fluid>
+      <Navbar staticTop fluid collapseOnSelect>
         <Navbar.Header>
           <Navbar.Brand className='brand'>
             <Link to='/'>
