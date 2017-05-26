@@ -4,7 +4,9 @@
   align-items: center;
 
   &.suggested {
-    background-color: $gray-lighter;
+    img {
+      opacity: .4
+    }
   }
 }
 
