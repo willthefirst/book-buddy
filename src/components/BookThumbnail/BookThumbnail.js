@@ -16,7 +16,7 @@ const BookThumbnail = (props) => {
   )
 
   let thumbnail = (
-    <img src={props.thumbnailUrl} className="book-thumb__img"/>
+    <img src={props.thumbnailUrl} className="book-thumb__img book-thumb--shadow"/>
   )
 
   if (props.linkTo) {

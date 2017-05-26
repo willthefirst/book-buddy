@@ -9,11 +9,6 @@
 }
 
 .book-thumb__img {
-  @extend .book-thumb--shadow;
   width: 100%;
   height: auto;
-}
-
-.book-thumb--shadow {
-  box-shadow: 1px 1px 1px 0px #909090;
 }
