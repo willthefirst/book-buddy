@@ -19,10 +19,7 @@ const ForgotPassword = (props) => {
         <div>
           <p>I can reset your password, I'll just need your email.</p>
           <Form onSubmit={handleSubmit((values) => { props.handleForgotPassword(values) })}>
-            <FormGroup controlId='formHorizontalEmail'>
-              <ControlLabel>
-                Email
-              </ControlLabel>
+            <FormGroup bsSize='lg' controlId='formHorizontalEmail'>
               <Col>
                 <Field
                   name='email'
@@ -33,7 +30,7 @@ const ForgotPassword = (props) => {
                   required />
               </Col>
             </FormGroup>
-            <FormGroup>
+            <FormGroup bsSize='lg'>
               <LaddaButton
                 loading={props.loading}
                 className='btn btn-primary'

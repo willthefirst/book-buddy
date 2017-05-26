@@ -21,10 +21,7 @@ const ResetPassword = (props) => {
           </div>
         ) : (
           <Form onSubmit={handleSubmit((values) => { props.handleResetPassword(values, props.params.token) })}>
-            <FormGroup controlId='formHorizontalPassowrd'>
-              <ControlLabel>
-                New Password
-              </ControlLabel>
+            <FormGroup bsSize='lg' controlId='formHorizontalPassowrd'>
               <Col>
                 <Field
                   name='password'
@@ -35,10 +32,7 @@ const ResetPassword = (props) => {
                   required />
               </Col>
             </FormGroup>
-            <FormGroup controlId='formHorizontalConfirmPassword'>
-              <ControlLabel>
-                Retype New Password
-              </ControlLabel>
+            <FormGroup bsSize='lg' controlId='formHorizontalConfirmPassword'>
               <Col>
                 <Field
                   name='confirmPassword'
@@ -49,7 +43,7 @@ const ResetPassword = (props) => {
                   required />
               </Col>
             </FormGroup>
-            <FormGroup>
+            <FormGroup bsSize='lg'>
               <LaddaButton
                 loading={props.loading}
                 className='btn btn-primary'

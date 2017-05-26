@@ -35,7 +35,7 @@ body {
   width: 100%;
 }
 
-// Book stykles
+// Book thumbnail
 
 .book-thumb--shadow {
   box-shadow: 1px 1px 1px 0px #909090;
@@ -46,4 +46,26 @@ body {
 .navbar-default {
   background-color: #fff;
   border-style: dashed;
+}
+
+// Forms
+
+.form-control, .input-group-addon, .form-group-lg, .form-group-lg .form-control {
+  border-radius: 0;
+}
+
+.form-control, .input-group-addon {
+  border: none;
+  box-shadow: none;
+  background: none;
+  font-size: 18px;
+
+  &:focus {
+    box-shadow: none;
+    border-bottom: 1px dashed $gray;
+  }
+}
+
+.form-control {
+  border-bottom: 1px dashed $gray-lighter;
 }
