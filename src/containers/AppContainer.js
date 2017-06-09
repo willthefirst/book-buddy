@@ -8,6 +8,10 @@ class AppContainer extends Component {
     store  : PropTypes.object.isRequired
   }
 
+  componentDidMount() {
+    this.context.mixpanel.track('App did mount.');
+  }
+
   shouldComponentUpdate () {
     return false
   }
@@ -23,6 +27,10 @@ class AppContainer extends Component {
       </Provider>
     )
   }
+}
+
+AppContainer.contextTypes = {
+  mixpanel: PropTypes.object.isRequired
 }
 
 export default AppContainer

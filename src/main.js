@@ -2,12 +2,19 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import createStore from './store/createStore'
 import AppContainer from './containers/AppContainer'
+import mixpanel from 'mixpanel-browser';
+import MixpanelProvider from 'react-mixpanel';
 
 // ========================================================
 // Store Instantiation
 // ========================================================
 const initialState = window.___INITIAL_STATE__
 const store = createStore(initialState)
+
+// Mixpanel Initialization
+console.log(process.env);
+console.log(process.env.MIXPANEL_TOKEN)
+mixpanel.init(process.env.MIXPANEL_TOKEN);
 
 // ========================================================
 // Render Setup
@@ -18,7 +25,9 @@ let render = () => {
   const routes = require('./routes/index').default(store)
 
   ReactDOM.render(
-    <AppContainer store={store} routes={routes} />,
+    <MixpanelProvider mixpanel={mixpanel}>
+      <AppContainer store={store} routes={routes} />
+    </MixpanelProvider>,
     MOUNT_NODE
   )
 }

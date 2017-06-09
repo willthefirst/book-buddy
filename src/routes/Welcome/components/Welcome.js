@@ -8,7 +8,6 @@ import { browserHistory } from "react-router";
 
 class Welcome extends Component {
   componentWillMount() {
-    console.log(this.props.isLoggedIn);
     if (this.props.isLoggedIn) {
       browserHistory.push('/daily')
     }
