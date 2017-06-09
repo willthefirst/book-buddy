@@ -4,6 +4,7 @@ import { errorHandler } from 'util/common'
 import axios from 'axios'
 import { registerRequest, registerFailure, registerSuccess } from '../modules/register'
 import APP_SETTINGS from 'config'
+import mixpanel from 'mixpanel-browser';
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -12,6 +13,11 @@ const mapDispatchToProps = (dispatch) => {
       axios.post(`${APP_SETTINGS.API_BASE}/auth/register`, user)
       .then((result) => {
         dispatch(registerSuccess(result.data.message))
+        mixpanel.identify(result.data._id)
+        mixpanel.track(
+          'Registered new account (not yet verified)'
+        )
+        mixpanel.people.set({ "$email": result.data.email });
       }).catch((error) => {
         errorHandler(dispatch, error, registerFailure)
       })

@@ -6,6 +6,7 @@ import { browserHistory } from 'react-router'
 import axios from 'axios'
 import { authRequest, authFailure, authSuccess } from 'layouts/CoreLayout/modules/coreLayout'
 import APP_SETTINGS from 'config'
+import mixpanel from 'mixpanel-browser';
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -15,6 +16,8 @@ const mapDispatchToProps = (dispatch) => {
         .then((result) => {
           cookie.save('token', result.data.token, { path: '/' })
           dispatch(authSuccess(result.data))
+          mixpanel.identify(result.data.user._id)
+          mixpanel.people.set({ "$email": result.data.user.email });
           browserHistory.push(`/daily`)
         }).catch((error) => {
           if (error.response.data.message === 'Missing credentials') {

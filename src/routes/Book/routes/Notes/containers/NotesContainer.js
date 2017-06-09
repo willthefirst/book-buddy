@@ -5,17 +5,8 @@ import { updateBookRequest, updateBookSuccess, updateBookFailure } from '../../.
 import { errorHandler, applyAuthToken } from 'util/common'
 import axios from 'axios'
 import APP_SETTINGS from 'config'
-
-/*  This is a container component. Notice it does not contain any JSX,
-    nor does it import React. This component is **only** responsible for
-    wiring in the actions and state necessary to render a presentational
-    component - in this case, the counter:   */
-
+import mixpanel from 'mixpanel-browser';
 import Notes from '../components/Notes'
-
-/*  Object of action creators (can also be function that returns object).
-    Keys will be passed as props to presentational components. Here we are
-    implementing our wrapper around increment; the component doesn't care   */
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -38,10 +29,10 @@ const mapDispatchToProps = (dispatch) => {
       }
 
       dispatch(updateBookRequest())
-
       axios.put(`${APP_SETTINGS.API_BASE}/book/${bookId}`, update, applyAuthToken()).then((result) => {
         dispatch(updateBookSuccess(result.data))
         dispatch(initializeEditorState(result.data.notes))
+        mixpanel.track('Updated notes')
       }).catch((error) => {
         errorHandler(dispatch, error, updateBookFailure(error))
       })

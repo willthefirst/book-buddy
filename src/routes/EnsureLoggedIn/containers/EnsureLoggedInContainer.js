@@ -10,6 +10,8 @@ import {
 } from "layouts/CoreLayout/modules/coreLayout";
 import axios from "axios";
 import APP_SETTINGS from "config";
+import mixpanel from 'mixpanel-browser';
+
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -22,6 +24,7 @@ const mapDispatchToProps = dispatch => {
         .get(`${APP_SETTINGS.API_BASE}/auth/meFromToken`, applyAuthToken())
         .then(result => {
           dispatch(authSuccess(result.data));
+          mixpanel.identify(result.data.user._id)
           browserHistory.push(redirectUrl);
         })
         .catch(error => {

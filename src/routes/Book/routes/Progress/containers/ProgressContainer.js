@@ -5,6 +5,7 @@ import { errorHandler, applyAuthToken } from 'util/common'
 import Progress from '../components/Progress'
 import APP_SETTINGS from 'config'
 import moment from 'moment'
+import mixpanel from 'mixpanel-browser';
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -29,6 +30,8 @@ const mapDispatchToProps = (dispatch) => {
             dailies: result.data
           }
           dispatch(updateBookSuccess(update))
+          mixpanel.track("Added a daily");
+          mixpanel.people.increment("dailies");
         }).catch((error) => {
           errorHandler(dispatch, error, updateBookFailure)
         })

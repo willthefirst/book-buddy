@@ -17,6 +17,7 @@ import axios from 'axios'
 import APP_SETTINGS from 'config'
 import moment from 'moment'
 import { createSelector } from 'reselect'
+import mixpanel from 'mixpanel-browser';
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -62,7 +63,9 @@ const mapDispatchToProps = (dispatch) => {
       // If daily doesn't exists, create it
       axios.post(`${APP_SETTINGS.API_BASE}/dailies`, newDaily, applyAuthToken())
       .then((result) => {
-        dispatch(fetchDailiesSuccess(result.data))
+        dispatch(fetchDailiesSuccess(result.data)),
+        mixpanel.track("Added a daily");
+        mixpanel.people.increment("dailies");
       }).catch((error) => {
         errorHandler(dispatch, error, fetchDailiesFailure)
       })
