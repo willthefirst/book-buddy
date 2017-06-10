@@ -75,14 +75,11 @@ Edit at Your Own Risk
 // Environment
 // ------------------------------------
 // N.B.: globals added here must _also_ be added to .eslintrc
+console.log(config.env);
 config.globals = {
   'process.env'  : {
     'NODE_ENV' : JSON.stringify(config.env),
-    'GBOOKS_API_KEY' : JSON.stringify('AIzaSyAzUuOWIhtbMnfX_vPyR_7QyEXXtdP5F_Q'),
-    'MIXPANEL_TOKEN': (
-      (JSON.stringify(config.env) === 'production') ? JSON.stringify('ebfe41d30f955d190e7c14dbbb2181ca') : JSON.stringify('ef6e8738947feecf11daba6a1b2f5fcc')
-    )
-
+    'GBOOKS_API_KEY' : JSON.stringify('AIzaSyAzUuOWIhtbMnfX_vPyR_7QyEXXtdP5F_Q')
   },
   'NODE_ENV'     : config.env,
   '__DEV__'      : config.env === 'development',

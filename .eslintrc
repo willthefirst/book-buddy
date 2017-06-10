@@ -17,8 +17,7 @@
     "__TEST__"     : false,
     "__PROD__"     : false,
     "__COVERAGE__" : false,
-    "GBOOKS_API_KEY" : false,
-    "MIXPANEL_TOKEN" : false
+    "GBOOKS_API_KEY" : false
   },
   "rules": {
     "key-spacing"          : 0,

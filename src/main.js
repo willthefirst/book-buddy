@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import createStore from './store/createStore'
 import AppContainer from './containers/AppContainer'
 import mixpanel from 'mixpanel-browser';
+import ReactDOMServer from 'react-dom/server'
 
 // ========================================================
 // Store Instantiation
@@ -10,8 +11,14 @@ import mixpanel from 'mixpanel-browser';
 const initialState = window.___INITIAL_STATE__
 const store = createStore(initialState)
 
-// Mixpanel Initialization
-mixpanel.init(process.env.MIXPANEL_TOKEN);
+// ========================================================
+// Mixpanel Inititialization
+// ========================================================
+if (__PROD__) {
+  mixpanel.init('ebfe41d30f955d190e7c14dbbb2181ca');
+} else {
+  mixpanel.init('ef6e8738947feecf11daba6a1b2f5fcc');
+}
 
 // ========================================================
 // Render Setup
