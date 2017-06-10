@@ -75,7 +75,6 @@ Edit at Your Own Risk
 // Environment
 // ------------------------------------
 // N.B.: globals added here must _also_ be added to .eslintrc
-console.log(config.env);
 config.globals = {
   'process.env'  : {
     'NODE_ENV' : JSON.stringify(config.env),

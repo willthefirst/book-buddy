@@ -23,7 +23,7 @@ class Welcome extends Component {
       }(document, 'script', 'gfycat-js'))}
         <Row>
           <Col xs={12} className="lead">
-            <h1><strong>BookBuddy</strong> helps you read <u>better</u>.</h1>
+            <h1><strong><span className='text-success'>B</span>ook<span className='text-success'>B</span>uddy</strong> helps you read <u><span className='text-success'>b</span>etter</u>.</h1>
           </Col>
         </Row>
         <Row className='bottom-space'>

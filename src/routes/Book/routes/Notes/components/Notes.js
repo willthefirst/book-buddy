@@ -4,10 +4,18 @@ import LaddaButton, { L, SLIDE_DOWN } from 'react-ladda'
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
 import './Notes.scss'
 
-// #todo: customize text editor: https://jpuri.github.io/react-draft-wysiwyg/#/docs
-// also https://github.com/jpuri/react-draft-wysiwyg/blob/master/docs/src/components/Demo/index.js
-
 export class Notes extends Component {
+  // Need to load in notes both when component mounts and when it will receive a new state. #todo: sloppy, but needed fix for weird note loading issue
+  componentWillMount() {
+    this.props.initializeEditor(this.props.initialNotes);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.initialNotes && this.props.initialNotes !== nextProps.initialNotes) {
+      this.props.initializeEditor(nextProps.initialNotes);
+    }
+  }
+
   render () {
     const { updateBookNotes, onEditorStateChange, editorState, bookId } = this.props
 

@@ -10,6 +10,10 @@ import Notes from '../components/Notes'
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    initializeEditor: function(initialNotes) {
+      dispatch(initializeEditorState(initialNotes))
+    },
+
     // For the editor to manage it's own state
     onEditorStateChange: function (editorState) {
       dispatch(updateEditorState(editorState))
@@ -31,6 +35,7 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(updateBookRequest())
       axios.put(`${APP_SETTINGS.API_BASE}/book/${bookId}`, update, applyAuthToken()).then((result) => {
         dispatch(updateBookSuccess(result.data))
+        console.log('Calling initEditorState from NotesContainer.' );
         dispatch(initializeEditorState(result.data.notes))
         mixpanel.track('Updated notes')
       }).catch((error) => {
@@ -45,7 +50,8 @@ const mapStateToProps = (state) => {
     editorState: state.editor,
     bookId: state.activeBook.data._id,
     loading: state.activeBook.loading,
-    errorMessage: state.activeBook.error
+    errorMessage: state.activeBook.error,
+    initialNotes: state.activeBook.data.notes
   }
 }
 
