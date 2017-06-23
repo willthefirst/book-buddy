@@ -5,12 +5,6 @@ import { Link } from "react-router";
 import { browserHistory } from "react-router";
 
 class Welcome extends Component {
-  componentWillMount() {
-    if (this.props.isLoggedIn) {
-      browserHistory.push('/daily')
-    }
-  }
-
   render() {
     return (
       <div className="full-width text-center">
@@ -23,7 +17,7 @@ class Welcome extends Component {
       }(document, 'script', 'gfycat-js'))}
         <Row>
           <Col xs={12} className="lead">
-            <h1><strong>BookBuddy</strong> helps you read you <u className='text-success'>better</u>.</h1>
+            <h1><strong>BookBuddy</strong> helps you read <u className='text-success'>better</u>.</h1>
             <p className='lead'>This project helps you maintain good reading habits, by encouraging you to read more regularly and efficiently.<br/>Track your daily progress, take notes, and plan what you're reading next.</p>
           </Col>
         </Row>
