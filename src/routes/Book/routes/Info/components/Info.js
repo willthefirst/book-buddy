@@ -9,28 +9,60 @@ const Info = (props) => {
   // #todo: understand the handleSubmit thing here
   return (
     <Form onSubmit={handleSubmit((values) => { props.updateBook(values) })} horizontal>
-      <Row style={{ marginBottom: 12 }}>
-        <Col className='control-label' xs={12} sm={2}>
-          Status
+      <Row>
+        <Col xs={12}>
+          <p className="bg-info">
+            Use this page to keep track this book's details.
+          </p>
         </Col>
-        <Col xs={12} sm={10}>
+      </Row>
+      <br/>
+      <Row style={{ marginBottom: 12 }}>
+        <Col className='control-label' xs={12} sm={4}>
+          Where are you with this book?
+        </Col>
+        <Col xs={12} sm={8}>
           <Field className='form-control' name='status' component='select' placeholder='Status'>
-            <option value='queue'>Queue</option>
-            <option value='current'>Current</option>
-            <option value='finished'>Finished</option>
+            <option value='queue'>I plan on reading it.</option>
+            <option value='current'>I'm currently reading it.</option>
+            <option value='finished'>I've finished it!</option>
           </Field>
         </Col>
       </Row>
       <Row style={{ marginBottom: 12 }}>
-        <Col className='control-label' xs={12} sm={2}>
-          Total Pages
+        <Col className='control-label' xs={12} sm={4}>
+          Why this book?
         </Col>
-        <Col xs={12} sm={10}>
+        <Col xs={12} sm={8}>
+          <Field className='form-control' name='reason' component='textarea' placeholder='Sarah recommended it when we were talking about great page-turners.'>
+          </Field>
+        </Col>
+      </Row>
+      <Row style={{ marginBottom: 12 }}>
+        <Col className='control-label' xs={12} sm={4}>
+          How many pages total?
+        </Col>
+        <Col xs={12} sm={8}>
           <Field className='form-control' name='totalPages' component='input' type='number' placeholder='0' />
         </Col>
       </Row>
+      <Row style={{ marginBottom: 12 }}>
+        <Col className='control-label' xs={12} sm={4}>
+          How would you rate this book?
+        </Col>
+        <Col xs={12} sm={8}>
+          <Field className='form-control' name='rating' component='select' value='0'>
+            <option value='5'>😃 Absolutely loved it.</option>
+            <option value='4'>🙂 It was pretty good.</option>
+            <option value='3'>😒 Decent.</option>
+            <option value='2'>😖 Ehh, it was a struggle.</option>
+            <option value='1'>😖 Not worth finishing.</option>
+            <option value='0'>🤔 Haven't decided.</option>
+          </Field>
+        </Col>
+      </Row>
       <Row>
-        <Col smOffset={2} xs={12} sm={10}>
+        <Col smOffset={4} xs={12} sm={8}>
           <LaddaButton
             loading={props.loading}
             className='btn btn-primary'

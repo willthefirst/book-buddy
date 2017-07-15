@@ -35,6 +35,11 @@ body {
   width: 100%;
 }
 
+// Boostrap modifications
+p[class^='bg-'] {
+  padding: 15px;
+}
+
 // Book thumbnail
 
 .book-thumb--shadow {
